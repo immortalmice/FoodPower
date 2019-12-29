@@ -1,0 +1,16 @@
+[
+{
+  "modid": "foodpower",
+  "name": "Food Power",
+  "description": "Food will give you power.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Immortalmice"],
+  "credits": "Pudding, donut, and all sweet thing.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
