@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
-import com.github.immortalmice.foodpower.common.CommonProxy;
+import com.github.immortalmice.foodpower.proxy.common.CommonProxy;
 
 @Mod(modid = FoodPower.MODID, name = FoodPower.NAME, version = FoodPower.VERSION)
 public class FoodPower{
@@ -21,8 +21,8 @@ public class FoodPower{
     @Instance(FoodPower.MODID)
     public static FoodPower instance;
 
-    @SidedProxy(clientSide = "com.github.immortalmice.foodpower.client.ClientProxy",
-        serverSide = "com.github.immortalmice.foodpower.common.CommonProxy")
+    @SidedProxy(clientSide = "com.github.immortalmice.foodpower.proxy.client.ClientProxy",
+        serverSide = "com.github.immortalmice.foodpower.proxy.common.CommonProxy")
     public static CommonProxy proxy;
 
     @EventHandler
