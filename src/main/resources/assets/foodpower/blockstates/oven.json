@@ -1,0 +1,7 @@
+{
+	"variants":{
+		"normal": {
+			"model": "foodpower:oven_model",
+		}
+	}
+}
