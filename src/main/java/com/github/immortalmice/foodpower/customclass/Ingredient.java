@@ -1,17 +1,20 @@
 package com.github.immortalmice.foodpower.customclass;
 
-import com.github.immortalmice.foodpower.baseclass.FoodItemBase;
-import com.github.immortalmice.foodpower.lists.CreativeTabList;
-import com.github.immortalmice.foodpower.lists.IngredientList;
+import net.minecraft.item.ItemFood;
 
-public class Ingredient extends FoodItemBase{
+import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
+import com.github.immortalmice.foodpower.lists.Ingredients;
+
+public class Ingredient extends ItemFood{
 	public Ingredient(String name, int amount, float saturation){
-		super(amount, saturation);
+		/** Can wolf eat my sweetie? NO WAY!*/
+		super(amount, saturation, false);
 
 		this.setTranslationKey(name);
         this.setRegistryName(name);
-        this.setCreativeTab(CreativeTabList.ingredientTab);
+        this.setCreativeTab(FPCreativeTabs.ingredientTab);
 
-        IngredientList.list.add(this);
+        /** Add to ingredient list, and regist it later */
+        Ingredients.list.add(this);
 	}
 }

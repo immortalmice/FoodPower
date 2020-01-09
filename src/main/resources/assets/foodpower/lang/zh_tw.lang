@@ -1,3 +1,6 @@
 itemGroup.ingredients=食材原料
+itemGroup.kitchenAppliance=廚房器材
 
 item.butter.name=奶油
+
+tile.oven.name=烤箱

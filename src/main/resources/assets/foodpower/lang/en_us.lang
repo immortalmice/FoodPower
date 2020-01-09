@@ -1,3 +1,6 @@
 itemGroup.ingredients=ingredients
+itemGroup.kitchenAppliance=kitchenAppliance
 
 item.butter.name=butter
+
+tile.oven.name=oven
