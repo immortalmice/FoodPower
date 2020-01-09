@@ -39,9 +39,18 @@ public class RegistryHandler{
 
     /** Regist mod item model */
     @SubscribeEvent
-    public static void onModelReg(ModelRegistryEvent event) {
+    public static void onModelRegister(ModelRegistryEvent event) {
+    	/** Item models */
     	for(int i = 0; i <= Ingredients.list.size()-1; i ++){
     		Item item = Ingredients.list.get(i);
+    		ModelResourceLocation marl = new ModelResourceLocation(item.getRegistryName(), "inventory");
+        	ModelLoader.setCustomModelResourceLocation(item, 0, marl);
+    	}
+
+    	/** Block in item form models */
+    	for(int i = 0; i <= KitchenAppliances.list.size()-1; i ++){
+    		Block block = KitchenAppliances.list.get(i);
+    		Item item = Item.getItemFromBlock(block);
     		ModelResourceLocation marl = new ModelResourceLocation(item.getRegistryName(), "inventory");
         	ModelLoader.setCustomModelResourceLocation(item, 0, marl);
     	}
