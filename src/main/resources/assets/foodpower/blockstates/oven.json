@@ -1,7 +1,17 @@
 {
-	"variants":{
-		"normal": {
-			"model": "foodpower:oven_model"
+	"forge_marker": 1, 
+	"defaults": {
+		"model": "foodpower:oven_model"
+	},
+	"variants": {
+		"normal": [{}],
+		"inventory": [{}],
+		"facing": {
+			"up": {},
+			"north": {},
+			"east": {"y": 90}, 
+			"south": {"y": 180}, 
+			"west": {"y": 270}
 		}
 	}
 }
