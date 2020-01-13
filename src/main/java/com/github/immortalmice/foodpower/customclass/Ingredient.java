@@ -8,7 +8,7 @@ public class Ingredient extends ItemFoodBase{
 	public Ingredient(String name, int amount, float saturation){
 		super(name, amount, saturation);
 
-        this.setCreativeTab(FPCreativeTabs.ingredientTab);
+        this.setCreativeTab(FPCreativeTabs.ingredientAndSeedTab);
 
         /** Add to ingredient list, and regist it later */
         Ingredients.list.add(this);

@@ -1,5 +1,7 @@
-itemGroup.ingredients=ingredients
-itemGroup.kitchenAppliance=kitchenAppliance
+itemGroup.ingredientsAndSeeds=Ingredients And Seeds
+itemGroup.kitchenAppliance=Kitchen Appliance
+
+
 
 item.butter.name=Butter
 item.orange.name=Orange
@@ -24,6 +26,15 @@ item.corn.name=Corn
 item.cream.name=Cream
 item.dirty_food.name=Dirty Food
 
+item.mint_seed.name=Mint Seed
+item.tomato_seed.name=Tomato Seed
+item.rice_seed.name=Rice Seed
+item.chili_seed.name=Chili Seed
+item.vegetable_seed.name=Vegetable Seed
+item.corn_seed.name=Corn Seed
+
+
+
 tile.oven.name=Oven
 tile.juicer.name=Juicer
 tile.revolving_cake_stand.name=Revolving Cake Stand
@@ -35,3 +46,10 @@ tile.electric_stove.name=Electric Stove
 tile.shaker.name=Shaker
 tile.chopping_board.name=Chopping Board
 tile.universal_stand.name=Universal Stand
+
+tile.mint_crop.name=Mint Crop
+tile.tomato_crop.name=Tomato Crop
+tile.rice_crop.name=Rice Crop
+tile.chili_crop.name=Chili Crop
+tile.vegetable_crop.name=Vegetable Crop
+tile.corn_crop.name=Cron Crop

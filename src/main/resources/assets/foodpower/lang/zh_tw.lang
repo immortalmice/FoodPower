@@ -1,5 +1,7 @@
-itemGroup.ingredients=食材原料
+itemGroup.ingredientsAndSeeds=食材原料和作物種子
 itemGroup.kitchenAppliance=廚房器材
+
+
 
 item.butter.name=奶油
 item.orange.name=橘子
@@ -24,6 +26,15 @@ item.corn.name=玉米
 item.cream.name=鮮奶油
 item.dirty_food.name=髒掉的食物
 
+item.mint_seed.name=薄荷種子
+item.tomato_seed.name=番茄種子
+item.rice_seed.name=米種子
+item.chili_seed.name=辣椒種子
+item.vegetable_seed.name=蔬菜種子
+item.corn_seed.name=玉米種子
+
+
+
 tile.oven.name=烤箱
 tile.juicer.name=榨汁機
 tile.revolving_cake_stand.name=蛋糕轉盤架
@@ -35,3 +46,10 @@ tile.electric_stove.name=電子爐
 tile.shaker.name=雪克機
 tile.chopping_board.name=砧板
 tile.universal_stand.name=萬用台
+
+tile.mint_crop.name=薄荷作物
+tile.tomato_crop.name=番茄作物
+tile.rice_crop.name=米作物
+tile.chili_crop.name=辣椒作物
+tile.vegetable_crop.name=蔬菜作物
+tile.corn_crop.name=玉米作物

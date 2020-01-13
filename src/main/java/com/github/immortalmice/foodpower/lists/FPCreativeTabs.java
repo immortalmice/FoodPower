@@ -9,7 +9,7 @@ import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 
 /** All Food Power's creativetabs list below.*/
 public class FPCreativeTabs{
-	public static final CreativeTabs ingredientTab = (new CreativeTabs("ingredients"){
+	public static final CreativeTabs ingredientAndSeedTab = (new CreativeTabs("ingredientsAndSeeds"){
 		@Override
 		public ItemStack createIcon(){
 			return new ItemStack(Ingredients.BUTTER);
