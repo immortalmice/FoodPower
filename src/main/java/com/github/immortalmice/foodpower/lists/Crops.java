@@ -15,6 +15,7 @@ public class Crops{
 	public static final CropSeed TOMAMTO_SEED = new CropSeed("tomato", Ingredients.TOMATO);
 	public static final CropSeed RICE_SEED = new CropSeed("rice", Ingredients.RICE);
 	public static final CropSeed CHILI_SEED = new CropSeed("chili", Ingredients.CHILI);
-	public static final CropSeed VEGETABLE_SEED = new CropSeed("vegetable", Ingredients.VEGETABLE);
+	public static final CropSeed SPINACH_SEED = new CropSeed("spinach", Ingredients.SPINACH);
+	public static final CropSeed CABBAGE_SEED = new CropSeed("cabbage", Ingredients.CABBAGE);
 	public static final CropSeed CORN_SEED = new CropSeed("corn", Ingredients.CORN);
 }

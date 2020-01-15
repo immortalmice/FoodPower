@@ -26,7 +26,8 @@ public class Ingredients{
 	public static final Ingredient RICE = new Ingredient("rice", 1, 0.1f);
 	public static final Ingredient CHEESE = new Ingredient("cheese", 1, 0.1f);
 	public static final Ingredient CHILI = new Ingredient("chili", 1, 0.1f);
-	public static final Ingredient VEGETABLE = new Ingredient("vegetable", 1, 0.1f);
+	public static final Ingredient SPINACH = new Ingredient("spinach", 1, 0.1f);
+	public static final Ingredient CABBAGE = new Ingredient("cabbage", 1, 0.1f);
 	public static final Ingredient FLOUR = new Ingredient("flour", 1, 0.1f);
 	public static final Ingredient CORN = new Ingredient("corn", 1, 0.1f);
 	public static final Ingredient CREAM = new Ingredient("cream", 1, 0.1f);

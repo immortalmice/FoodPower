@@ -20,7 +20,8 @@ item.oil.name=油
 item.rice.name=米
 item.cheese.name=起司
 item.chili.name=辣椒
-item.vegetable.name=蔬菜
+item.spinach.name=菠菜
+item.cabbage.name=高麗菜
 item.flour.name=麵粉
 item.corn.name=玉米
 item.cream.name=鮮奶油
@@ -30,7 +31,8 @@ item.mint_seed.name=薄荷種子
 item.tomato_seed.name=番茄種子
 item.rice_seed.name=米種子
 item.chili_seed.name=辣椒種子
-item.vegetable_seed.name=蔬菜種子
+item.spinach_seed.name=菠菜
+item.cabbage_seed.name=高麗菜
 item.corn_seed.name=玉米種子
 
 

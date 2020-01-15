@@ -20,7 +20,8 @@ item.oil.name=Oil
 item.rice.name=Rice
 item.cheese.name=Cheese
 item.chili.name=Chili
-item.vegetable.name=Vegetable
+item.spinach.name=Spinach
+item.cabbage.name=Cabbage
 item.flour.name=Flour
 item.corn.name=Corn
 item.cream.name=Cream
@@ -30,7 +31,8 @@ item.mint_seed.name=Mint Seed
 item.tomato_seed.name=Tomato Seed
 item.rice_seed.name=Rice Seed
 item.chili_seed.name=Chili Seed
-item.vegetable_seed.name=Vegetable Seed
+item.spinach_seed.name=Spinach Seed
+item.cabbage_seed.name=Cabbage Seed
 item.corn_seed.name=Corn Seed
 
 
