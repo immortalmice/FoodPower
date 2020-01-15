@@ -27,7 +27,7 @@ public class BlockRotatableBase extends Block{
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state){
-		return true;
+		return false;
 	}
 
 	@Override

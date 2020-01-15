@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:kitchenappliance",
+	"result": {"item": "foodpower:refrigerator"},
+	"pattern": [
+		"III",
+		"ISI",
+		"III"
+	],
+	"key": {
+		"I": {"item": "minecraft:iron_ingot", "data": 0},
+		"S": {"item": "minecraft:snow", "data": 0}
+	}
+}
