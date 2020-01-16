@@ -3,8 +3,6 @@ package com.github.immortalmice.foodpower.lists;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.item.ItemBlock;
-
 import com.github.immortalmice.foodpower.customclass.tree.TreeSaplingBush;
 import com.github.immortalmice.foodpower.customclass.tree.TreeLeave;
 import com.github.immortalmice.foodpower.lists.Ingredients;
