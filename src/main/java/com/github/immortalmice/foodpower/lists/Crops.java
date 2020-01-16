@@ -11,11 +11,11 @@ public class Crops{
 	public static final List<CropSeed> seedList = new ArrayList<CropSeed>();
 	public static final List<CropBlock> blockList = new ArrayList<CropBlock>();
 
-	public static final CropSeed MINT_SEED = new CropSeed("mint", Ingredients.MINT);
-	public static final CropSeed TOMAMTO_SEED = new CropSeed("tomato", Ingredients.TOMATO);
-	public static final CropSeed RICE_SEED = new CropSeed("rice", Ingredients.RICE);
-	public static final CropSeed CHILI_SEED = new CropSeed("chili", Ingredients.CHILI);
-	public static final CropSeed SPINACH_SEED = new CropSeed("spinach", Ingredients.SPINACH);
-	public static final CropSeed CABBAGE_SEED = new CropSeed("cabbage", Ingredients.CABBAGE);
-	public static final CropSeed CORN_SEED = new CropSeed("corn", Ingredients.CORN);
+	public static final CropSeed MINT = new CropSeed("mint", Ingredients.MINT);
+	public static final CropSeed TOMAMTO = new CropSeed("tomato", Ingredients.TOMATO);
+	public static final CropSeed RICE = new CropSeed("rice", Ingredients.RICE);
+	public static final CropSeed CHILI = new CropSeed("chili", Ingredients.CHILI);
+	public static final CropSeed SPINACH = new CropSeed("spinach", Ingredients.SPINACH);
+	public static final CropSeed CABBAGE = new CropSeed("cabbage", Ingredients.CABBAGE);
+	public static final CropSeed CORN = new CropSeed("corn", Ingredients.CORN);
 }

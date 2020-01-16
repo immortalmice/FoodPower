@@ -55,3 +55,15 @@ tile.rice_crop.name=Rice Crop
 tile.chili_crop.name=Chili Crop
 tile.vegetable_crop.name=Vegetable Crop
 tile.corn_crop.name=Cron Crop
+
+tile.orange_leave.name=Orange Leaves
+tile.kiwi_leave.name=Kiwi Leaves
+tile.papaya_leave.name=Papaya Leaves
+tile.mango_leave.name=Mango Leaves
+tile.lemon_leave.name=Lemon Leaves
+
+tile.orange_sapling.name=Orange Sapling
+tile.kiwi_sapling.name=Kiwi Sapling
+tile.papaya_sapling.name=Papaya Sapling
+tile.mango_sapling.name=Mango Sapling
+tile.lemon_sapling.name=Lemon Sapling

@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
+import com.github.immortalmice.foodpower.lists.Trees;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler{
@@ -28,6 +29,8 @@ public class RegistryHandler{
 
     	/** ItemBlocks */
     	registItemBlockArrayList(KitchenAppliances.list, event);
+        registItemBlockArrayList(Trees.leaveList, event);
+        registItemBlockArrayList(Trees.saplingBushList, event);
     }
 
 	/** Regist mod blocks */
@@ -35,6 +38,8 @@ public class RegistryHandler{
     public static void onBlockRegister(RegistryEvent.Register<Block> event){
     	event.getRegistry().registerAll(KitchenAppliances.list.toArray(new Block[0]));
     	event.getRegistry().registerAll(Crops.blockList.toArray(new Block[0]));
+        event.getRegistry().registerAll(Trees.leaveList.toArray(new Block[0]));
+        event.getRegistry().registerAll(Trees.saplingBushList.toArray(new Block[0]));
     }
 
     /** Regist mod item model */
@@ -47,6 +52,8 @@ public class RegistryHandler{
     	/** Block in item form models */
     	registItemBlockModelArrayList(KitchenAppliances.list);
     	registItemBlockModelArrayList(Crops.blockList);
+        registItemBlockModelArrayList(Trees.leaveList);
+        registItemBlockModelArrayList(Trees.saplingBushList);
     }
 
     /** Helper To Regist All ArrayList */

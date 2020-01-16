@@ -16,7 +16,7 @@ public class KitchenAppliance extends BlockRotatableBase{
 		this.setHardness(1.5f);
 		this.setSoundType(SoundType.METAL);
 
-        this.setCreativeTab(FPCreativeTabs.kitchenApplianceTab);
+        this.setCreativeTab(FPCreativeTabs.BLOCK_TAB);
 
         /** Add to kitchen appliances list, and regist it later */
         KitchenAppliances.list.add(this);

@@ -55,3 +55,15 @@ tile.rice_crop.name=米作物
 tile.chili_crop.name=辣椒作物
 tile.vegetable_crop.name=蔬菜作物
 tile.corn_crop.name=玉米作物
+
+tile.orange_leave.name=橘子樹葉
+tile.kiwi_leave.name=奇異果樹葉
+tile.papaya_leave.name=木瓜樹葉
+tile.mango_leave.name=芒果樹葉
+tile.lemon_leave.name=檸檬樹葉
+
+tile.orange_sapling.name=橘子樹苗
+tile.kiwi_sapling.name=奇異果樹苗
+tile.papaya_sapling.name=木瓜樹苗
+tile.mango_sapling.name=芒果樹苗
+tile.lemon_sapling.name=檸檬樹苗

@@ -16,7 +16,7 @@ public class CropSeed extends ItemSeeds{
 		this.setTranslationKey(name.concat("_seed"));
         this.setRegistryName(name.concat("_seed"));
 
-        this.setCreativeTab(FPCreativeTabs.ingredientAndSeedTab);
+        this.setCreativeTab(FPCreativeTabs.ITEM_TAB);
 
         Crops.seedList.add(this);
 	}
