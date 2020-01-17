@@ -6,7 +6,7 @@
 		"age=3": {"model": "foodpower:tomato_crop_stage1"}, 
 		"age=4": {"model": "foodpower:tomato_crop_stage2"},
 		"age=5": {"model": "foodpower:tomato_crop_stage2"}, 
-		"age=6": {"model": "foodpower:tomato_crop_stage3"},
+		"age=6": {"model": "foodpower:tomato_crop_stage2"},
 		"age=7": {"model": "foodpower:tomato_crop_stage3"}
 	}
 }
