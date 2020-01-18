@@ -1,6 +1,5 @@
 package com.github.immortalmice.foodpower.baseclass;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.BlockStateContainer;
@@ -12,17 +11,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
-public class BlockRotatableBase extends Block{
+import com.github.immortalmice.foodpower.baseclass.BlockBase;
+
+public class BlockRotatableBase extends BlockBase{
 	public static IProperty<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 
-	public BlockRotatableBase(String name, Material material){
-		super(material);
+	public BlockRotatableBase(String name, Material material, boolean addToOtherList){
+		super(name, material, addToOtherList);
 
 		IBlockState iBlockState = this.blockState.getBaseState();
 		iBlockState.withProperty(FACING, EnumFacing.NORTH);
 		this.setDefaultState(iBlockState);
-		this.setTranslationKey(name);
-        this.setRegistryName(name);
 	}
 
 	@Override

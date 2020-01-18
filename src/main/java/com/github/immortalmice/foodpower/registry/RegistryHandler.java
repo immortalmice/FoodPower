@@ -16,6 +16,9 @@ import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.Trees;
+import com.github.immortalmice.foodpower.lists.OtherItems;
+import com.github.immortalmice.foodpower.lists.OtherBlocks;
+import com.github.immortalmice.foodpower.lists.OtherItemBlocks;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler{
@@ -25,12 +28,14 @@ public class RegistryHandler{
     public static void onItemRegister(RegistryEvent.Register<Item> event){
     	/** Regular items */
     	event.getRegistry().registerAll(Ingredients.list.toArray(new Item[0]));
-    	event.getRegistry().registerAll(Crops.seedList.toArray(new Item[0]));
+        event.getRegistry().registerAll(Crops.seedList.toArray(new Item[0]));
+        event.getRegistry().registerAll(OtherItems.list.toArray(new Item[0]));
 
     	/** ItemBlocks */
     	registItemBlockArrayList(KitchenAppliances.list, event);
         registItemBlockArrayList(Trees.leaveList, event);
         registItemBlockArrayList(Trees.saplingBushList, event);
+        registItemBlockArrayList(OtherItemBlocks.list, event);
     }
 
 	/** Regist mod blocks */
@@ -40,6 +45,8 @@ public class RegistryHandler{
     	event.getRegistry().registerAll(Crops.blockList.toArray(new Block[0]));
         event.getRegistry().registerAll(Trees.leaveList.toArray(new Block[0]));
         event.getRegistry().registerAll(Trees.saplingBushList.toArray(new Block[0]));
+        event.getRegistry().registerAll(OtherBlocks.list.toArray(new Block[0]));
+        event.getRegistry().registerAll(OtherItemBlocks.list.toArray(new Block[0]));
     }
 
     /** Regist mod item model */
@@ -48,12 +55,14 @@ public class RegistryHandler{
     	/** Item models */
     	registItemModelArrayList(Ingredients.list);
     	registItemModelArrayList(Crops.seedList);
+        registItemModelArrayList(OtherItems.list);
 
     	/** Block in item form models */
     	registItemBlockModelArrayList(KitchenAppliances.list);
     	registItemBlockModelArrayList(Crops.blockList);
         registItemBlockModelArrayList(Trees.leaveList);
         registItemBlockModelArrayList(Trees.saplingBushList);
+        registItemBlockModelArrayList(OtherItemBlocks.list);
     }
 
     /** Helper To Regist All ArrayList */

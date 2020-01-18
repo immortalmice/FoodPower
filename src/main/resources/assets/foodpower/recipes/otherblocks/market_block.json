@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:others",
+	"result": {"item": "foodpower:market_block"},
+	"pattern": [
+		"LPL",
+		"PEP",
+		"LPL"
+	],
+	"key": {
+		"L": {"item": "minecraft:log", "data": 32767},
+		"P": {"item": "minecraft:planks", "data": 32767},
+		"E": {"item": "minecraft:emerald", "data": 0}
+	}
+}

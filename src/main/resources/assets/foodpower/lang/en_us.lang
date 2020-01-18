@@ -1,8 +1,8 @@
-itemGroup.ingredientsAndSeeds=Ingredients And Seeds
-itemGroup.kitchenAppliance=Kitchen Appliance
+#Creative Tabs
+itemGroup.items=Food Power Items
+itemGroup.blocks=Food Power Blocks
 
-
-
+#Ingredients
 item.butter.name=Butter
 item.orange.name=Orange
 item.kiwi.name=Kiwi
@@ -27,6 +27,7 @@ item.corn.name=Corn
 item.cream.name=Cream
 item.dirty_food.name=Dirty Food
 
+#Crop Seeds
 item.mint_seed.name=Mint Seed
 item.tomato_seed.name=Tomato Seed
 item.rice_seed.name=Rice Seed
@@ -36,7 +37,7 @@ item.cabbage_seed.name=Cabbage Seed
 item.corn_seed.name=Corn Seed
 
 
-
+#Kitchen Appliances
 tile.oven.name=Oven
 tile.juicer.name=Juicer
 tile.revolving_cake_stand.name=Revolving Cake Stand
@@ -49,6 +50,7 @@ tile.shaker.name=Shaker
 tile.chopping_board.name=Chopping Board
 tile.universal_stand.name=Universal Stand
 
+#Crop Block
 tile.mint_crop.name=Mint Crop
 tile.tomato_crop.name=Tomato Crop
 tile.rice_crop.name=Rice Crop
@@ -56,14 +58,19 @@ tile.chili_crop.name=Chili Crop
 tile.vegetable_crop.name=Vegetable Crop
 tile.corn_crop.name=Cron Crop
 
+#Leaves
 tile.orange_leave.name=Orange Leaves
 tile.kiwi_leave.name=Kiwi Leaves
 tile.papaya_leave.name=Papaya Leaves
 tile.mango_leave.name=Mango Leaves
 tile.lemon_leave.name=Lemon Leaves
 
+#Sapling Block & Item
 tile.orange_sapling.name=Orange Sapling
 tile.kiwi_sapling.name=Kiwi Sapling
 tile.papaya_sapling.name=Papaya Sapling
 tile.mango_sapling.name=Mango Sapling
 tile.lemon_sapling.name=Lemon Sapling
+
+#Other Block & Item
+tile.market_block.name=Market Block

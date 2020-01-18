@@ -1,8 +1,8 @@
-itemGroup.ingredientsAndSeeds=食材原料和作物種子
-itemGroup.kitchenAppliance=廚房器材
+#創造模式分頁
+itemGroup.items=Food Power物品
+itemGroup.blocks=Food Power方塊
 
-
-
+#原料
 item.butter.name=奶油
 item.orange.name=橘子
 item.kiwi.name=奇異果
@@ -27,6 +27,7 @@ item.corn.name=玉米
 item.cream.name=鮮奶油
 item.dirty_food.name=髒掉的食物
 
+#作物種子
 item.mint_seed.name=薄荷種子
 item.tomato_seed.name=番茄種子
 item.rice_seed.name=米種子
@@ -35,8 +36,7 @@ item.spinach_seed.name=菠菜
 item.cabbage_seed.name=高麗菜
 item.corn_seed.name=玉米種子
 
-
-
+#廚房用具
 tile.oven.name=烤箱
 tile.juicer.name=榨汁機
 tile.revolving_cake_stand.name=蛋糕轉盤架
@@ -49,6 +49,7 @@ tile.shaker.name=雪克機
 tile.chopping_board.name=砧板
 tile.universal_stand.name=萬用台
 
+#作物方塊
 tile.mint_crop.name=薄荷作物
 tile.tomato_crop.name=番茄作物
 tile.rice_crop.name=米作物
@@ -56,14 +57,19 @@ tile.chili_crop.name=辣椒作物
 tile.vegetable_crop.name=蔬菜作物
 tile.corn_crop.name=玉米作物
 
+#樹葉
 tile.orange_leave.name=橘子樹葉
 tile.kiwi_leave.name=奇異果樹葉
 tile.papaya_leave.name=木瓜樹葉
 tile.mango_leave.name=芒果樹葉
 tile.lemon_leave.name=檸檬樹葉
 
+#樹苗方塊&物品
 tile.orange_sapling.name=橘子樹苗
 tile.kiwi_sapling.name=奇異果樹苗
 tile.papaya_sapling.name=木瓜樹苗
 tile.mango_sapling.name=芒果樹苗
 tile.lemon_sapling.name=檸檬樹苗
+
+#其他方塊&物品
+tile.market_block.name=市場方塊
