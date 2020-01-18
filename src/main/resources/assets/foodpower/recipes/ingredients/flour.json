@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "foopower:ingredients",
+	"result": {
+		"item": "foodpower:flour",
+		"count": 2
+	},
+	"ingredients": [
+        {"item": "minecraft:wheat", "data": 0}
+    ]
+}
