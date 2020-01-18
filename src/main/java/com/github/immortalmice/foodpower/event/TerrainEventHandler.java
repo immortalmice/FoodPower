@@ -7,7 +7,6 @@ import net.minecraft.init.Biomes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -16,22 +15,25 @@ import com.github.immortalmice.foodpower.lists.Trees;
 
 public class TerrainEventHandler{
 	public TerrainEventHandler(){
-		MinecraftForge.TERRAIN_GEN_BUS.register(this);
+		MinecraftForge.TERRAIN_GEN_BUS.register(TerrainEventHandler.class);
 	}
 	/** Terrain Gen Events */
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SubscribeEvent
 	public static void onDecorate(DecorateBiomeEvent.Decorate event){
-		World world = event.getWorld();
-		BlockPos pos = event.getPlacementPos();
-		Biome biome = world.getBiomeForCoordsBody(pos);
-		Random rand = event.getRand();
-
-		System.out.print("Biome:");
-		System.out.println(biome);
-
 		/** Generate Mod Tree in Biome */
-		if(biome == Biomes.FOREST){
-			if (rand.nextDouble() > 0.1) return;
+		if(event.getType() == DecorateBiomeEvent.Decorate.EventType.TREE){
+			Random rand = event.getRand();
+			if (rand.nextDouble() > 0.5) return;
+
+			World world = event.getWorld();
+			BlockPos pos = event.getChunkPos().getBlock(0, 0, 0);
+			if(pos == null){
+				System.out.println("Skipped a null position");
+				return;
+			}
+
+			Biome biome = world.getBiomeForCoordsBody(pos);
+
 			int x = rand.nextInt(16) + 8;
 			int y = rand.nextInt(16) + 8;
 
