@@ -31,6 +31,4 @@ public class Ingredients{
 	public static final Ingredient FLOUR = new Ingredient("flour", 1, 0.1f);
 	public static final Ingredient CORN = new Ingredient("corn", 1, 0.1f);
 	public static final Ingredient CREAM = new Ingredient("cream", 1, 0.1f);
-
-	public static final Ingredient DIRTY_FOOD = new Ingredient("dirty_food", 1, 0.1f);
 }

@@ -23,6 +23,10 @@ public class BlockRotatableBase extends BlockBase{
 		iBlockState.withProperty(FACING, EnumFacing.NORTH);
 		this.setDefaultState(iBlockState);
 	}
+	/** Constructor Overload, Add To Other List If Not Specify */
+	public BlockRotatableBase(String name, Material material){
+		this(name, material, true);
+	}
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state){

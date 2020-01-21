@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.registry;
+package com.github.immortalmice.foodpower.handlers;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.Trees;
-import com.github.immortalmice.foodpower.lists.OtherItems;
-import com.github.immortalmice.foodpower.lists.OtherBlocks;
-import com.github.immortalmice.foodpower.lists.OtherItemBlocks;
+import com.github.immortalmice.foodpower.lists.other.OtherItems;
+import com.github.immortalmice.foodpower.lists.other.OtherBlocks;
+import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler{
