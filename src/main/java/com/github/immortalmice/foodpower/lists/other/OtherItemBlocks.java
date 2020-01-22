@@ -27,7 +27,7 @@ public class OtherItemBlocks{
 			float hitX, float hitY, float hitZ){
 			if(!playerIn.isSneaking()){
 				if(!worldIn.isRemote){
-					playerIn.openGui(FoodPower.instance, GUIs.MARKET.getId(), worldIn, blockPosIn.getX(), blockPosIn.getY(), blockPosIn.getZ());
+					playerIn.openGui(FoodPower.instance, GUIs.MARKET.id, worldIn, blockPosIn.getX(), blockPosIn.getY(), blockPosIn.getZ());
 				}
 				return true;
 			}
