@@ -79,7 +79,7 @@ public class TreeLeave extends BlockLeaves{
     @Override
     protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance){
         if (worldIn.rand.nextInt(16) == 0){
-        	EntityPlayer closestPlayer = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), Integer.MAX_VALUE, false);
+        	EntityPlayer closestPlayer = worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 30, false);
         	if(closestPlayer != null){
         		if(closestPlayer.inventory.getFirstEmptyStack() != -1){
         			closestPlayer.inventory.addItemStackToInventory(new ItemStack(dropItem));
