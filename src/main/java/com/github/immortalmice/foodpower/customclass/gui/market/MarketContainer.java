@@ -4,15 +4,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.lists.Trees;
+import com.github.immortalmice.foodpower.lists.Crops;
 
 public class MarketContainer extends ModContainer{
-	private SlotItemHandler emeraldSlot;
+	protected int index;
+	protected SlotItemHandler emeraldSlot;
 	public MarketContainer(EntityPlayer player){
 		super(player);
+
+		index = 0;
 		items = new ItemStackHandler(2);
 		this.addSlotToContainer(emeraldSlot = new SlotItemHandler(items, 0, 89, 20){
 			@Override
@@ -22,10 +27,9 @@ public class MarketContainer extends ModContainer{
 			@Override
 			public void onSlotChanged(){
 				ItemStack stack = this.getStack();
+				MarketContainer.this.items.setStackInSlot(1, ItemStack.EMPTY);
 				if(!stack.isEmpty()){
-					MarketContainer.this.items.setStackInSlot(1, new ItemStack(Trees.ORANGE));
-				}else{
-					MarketContainer.this.items.setStackInSlot(1, ItemStack.EMPTY);
+					MarketContainer.this.items.setStackInSlot(1, new ItemStack(getItem()));
 				}
 			}
 		});
@@ -53,6 +57,23 @@ public class MarketContainer extends ModContainer{
 			}else{
 				playerIn.dropItem(items.getStackInSlot(0), false);
 			}
+		}
+	}
+
+	public Item getItem(){
+		int treeSize = Trees.saplingBushList.size();
+		int cropSize = Crops.seedList.size();
+		if(index < 0){
+			index += treeSize + cropSize;
+		}else if(index > treeSize + cropSize){
+			index -= treeSize + cropSize;
+		}
+		if(index >= 0 && index <= treeSize -1){
+			return Item.getItemFromBlock(Trees.saplingBushList.get(index));
+		}else if(index >= treeSize && index <= treeSize + cropSize -1){
+			return Crops.seedList.get(index - treeSize);
+		}else{
+			return Items.AIR;
 		}
 	}
 }
