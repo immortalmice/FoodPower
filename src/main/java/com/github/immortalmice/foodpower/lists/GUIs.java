@@ -4,38 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.github.immortalmice.foodpower.customclass.gui.GuiPack;
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
 import com.github.immortalmice.foodpower.customclass.gui.market.MarketContainer;
-import com.github.immortalmice.foodpower.customclass.gui.market.MarketGuiContainer;
 
 public class GUIs{
 	public static List<GuiPack> list = new ArrayList<GuiPack>();
 
-	public static GuiPack MARKET = new GuiPack(MarketContainer.class);
+	public static GuiPack MARKET = new GuiPack(MarketContainer.class, GUIs.checkClassExist("MarketGuiContainer", "market"));
 
-	/** Use static statement to add GuiPacks to list and get id without hard code */
-	static{
+	/** If ClassNotFound, It may on ther serverside */
+	@SuppressWarnings("unchecked")
+	private static Class<? extends ModGuiContainer> checkClassExist(String className, String folderName){
 		try{
-			GUIs.setModGuiContainer();
-		}catch(NoSuchMethodError e){
-			/** Is on server, skip setModGuiContainer */
+			String str = "com.github.immortalmice.foodpower.customclass.gui." + folderName + "." + className;
+			return (Class<? extends ModGuiContainer>) Class.forName(str);
+		}catch(ClassNotFoundException e){
+			return null;
 		}
-		/** Add to list */
-		GUIs.add(GUIs.MARKET);
-	}
-	/** Add to list and assign id without hard code */
-	private static void add(GuiPack pack){
-		pack.id = list.size();
-		list.add(pack);
-	}
-	@SideOnly(Side.CLIENT)
-	private static void setModGuiContainer(){
-		MARKET.setModGuiContainer(MarketGuiContainer.class);
 	}
 
 	/** Get a new Container instance by id */

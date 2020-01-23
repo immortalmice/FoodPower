@@ -1,11 +1,13 @@
 package com.github.immortalmice.foodpower.customclass.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ModContainer extends Container{
+	protected ItemStackHandler items;
 	public ModContainer(EntityPlayer player){
 		super();
 

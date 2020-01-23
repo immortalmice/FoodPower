@@ -10,13 +10,11 @@ import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.lists.Trees;
 
 public class MarketContainer extends ModContainer{
-	private ItemStackHandler items = new ItemStackHandler(2);
-	private SlotItemHandler SLOT0;
-	private SlotItemHandler SLOT1;
+	private SlotItemHandler emeraldSlot;
 	public MarketContainer(EntityPlayer player){
 		super(player);
-
-		this.addSlotToContainer(SLOT0 = new SlotItemHandler(items, 0, 89, 20){
+		items = new ItemStackHandler(2);
+		this.addSlotToContainer(emeraldSlot = new SlotItemHandler(items, 0, 89, 20){
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return stack != null && stack.getItem() == Items.EMERALD && super.isItemValid(stack);
@@ -31,7 +29,7 @@ public class MarketContainer extends ModContainer{
 				}
 			}
 		});
-		this.addSlotToContainer(SLOT1 = new SlotItemHandler(items, 1, 137, 20){
+		this.addSlotToContainer(new SlotItemHandler(items, 1, 137, 20){
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return false;
@@ -40,7 +38,7 @@ public class MarketContainer extends ModContainer{
 			public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack){
 				ItemStack thisItemStack = MarketContainer.this.items.getStackInSlot(0);
 				thisItemStack.setCount(thisItemStack.getCount() - stack.getCount());
-				SLOT0.onSlotChanged();
+				emeraldSlot.onSlotChanged();
 				return stack;
 			}
 		});
