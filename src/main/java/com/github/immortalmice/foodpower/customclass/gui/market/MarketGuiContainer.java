@@ -6,10 +6,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.tileentity.TileEntity;
 
 import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.gui.Button;
+import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
 
 @SideOnly(Side.CLIENT)
 public class MarketGuiContainer extends ModGuiContainer{
@@ -48,14 +50,18 @@ public class MarketGuiContainer extends ModGuiContainer{
     protected void actionPerformed(GuiButton button) throws IOException{
     	if(this.inventorySlots instanceof MarketContainer){
     		MarketContainer container = (MarketContainer)inventorySlots;
-    		switch(button.id){
-	    		case BUTTON_LEFT:
-	    			container.index--;
-	    			break;
-	    		case BUTTON_RIGHT:
-	    			container.index++;
-	    			break;
-	    	}
+    		TileEntity tile = container.world.getTileEntity(container.pos);
+    		if(tile instanceof MarketTileEntity){
+    			switch(button.id){
+		    		case BUTTON_LEFT:
+		    			((MarketTileEntity)tile).decreaseIndex();
+		    			break;
+		    		case BUTTON_RIGHT:
+		    			((MarketTileEntity)tile).increaseIndex();
+		    			break;
+		    	}
+    		}
+    		
 	    	container.emeraldSlot.onSlotChanged();
     	}
     }

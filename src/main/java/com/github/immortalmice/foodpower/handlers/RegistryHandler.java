@@ -19,6 +19,8 @@ import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.lists.other.OtherItems;
 import com.github.immortalmice.foodpower.lists.other.OtherBlocks;
 import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
+import com.github.immortalmice.foodpower.lists.TileEntitys;
+import com.github.immortalmice.foodpower.customclass.tileentity.TileEntityPack;
 
 @Mod.EventBusSubscriber
 public class RegistryHandler{
@@ -41,12 +43,15 @@ public class RegistryHandler{
 	/** Regist mod blocks */
     @SubscribeEvent
     public static void onBlockRegister(RegistryEvent.Register<Block> event){
+        /** Blocks */
     	event.getRegistry().registerAll(KitchenAppliances.list.toArray(new Block[0]));
     	event.getRegistry().registerAll(Crops.blockList.toArray(new Block[0]));
         event.getRegistry().registerAll(Trees.leaveList.toArray(new Block[0]));
         event.getRegistry().registerAll(Trees.saplingBushList.toArray(new Block[0]));
         event.getRegistry().registerAll(OtherBlocks.list.toArray(new Block[0]));
         event.getRegistry().registerAll(OtherItemBlocks.list.toArray(new Block[0]));
+        /** TileEntitys */
+        registTileEntitysArrayList(TileEntitys.list);
     }
 
     /** Regist mod item model */
@@ -88,5 +93,10 @@ public class RegistryHandler{
     		ModelResourceLocation marl = new ModelResourceLocation(item.getRegistryName(), "inventory");
         	ModelLoader.setCustomModelResourceLocation(item, 0, marl);
     	}
+    }
+    private static void registTileEntitysArrayList(List<? extends TileEntityPack> arrayList){
+        for(int i = 0; i <= arrayList.size()-1; i ++){
+            arrayList.get(i).registThis();
+        }
     }
 }

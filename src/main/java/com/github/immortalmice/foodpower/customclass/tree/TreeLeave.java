@@ -3,7 +3,7 @@ package com.github.immortalmice.foodpower.customclass.tree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.lang.NoSuchMethodError;
+import java.lang.NoClassDefFoundError;
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.BlockLeaves;
@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
 
 import com.github.immortalmice.foodpower.customclass.tree.TreeSaplingBush;
 import com.github.immortalmice.foodpower.lists.Trees;
@@ -39,20 +40,19 @@ public class TreeLeave extends BlockLeaves{
 		this.dropItem = dropItemIn;
 
         try{
-            this.setGraphicsLevel(true);
-        }catch(NoSuchMethodError e){
-            System.out.println("?");
+            this.setGraphicsLevel(Minecraft.getMinecraft().gameSettings.fancyGraphics);
+        }catch(NoClassDefFoundError e){
             /** Function not exist, maybe in server, skip */
         }
 
 		Trees.leaveList.add(this);
 	}
-
-    
-    public boolean isOpaqueCube(){
+/*
+    @Override
+    public boolean isOpaqueCube(IBlockState state){
         return false;
     }
-
+*/
 	@Override
 	public BlockPlanks.EnumType getWoodType(int meta){
 		return BlockPlanks.EnumType.OAK;
