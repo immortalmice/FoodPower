@@ -6,6 +6,9 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.inventory.IContainerListener;
 
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.lists.Trees;
@@ -59,13 +62,31 @@ public class MarketContainer extends ModContainer{
 			}
 		}
 	}
-
+/*
+	@SideOnly(Side.SERVER)
+	@Override
+	public void detectAndSendChanges(){
+		super.detectAndSendChanges();
+		for(IContainerListener i : this.listeners){
+			i.sendWindowProperty(this, 0, this.index);
+		}
+	}
+	@SideOnly(Side.CLIENT)
+	@Override
+    public void updateProgressBar(int id, int data){
+    	super.updateProgressBar(id, data);
+    	switch(id){
+    		case 0:
+    			this.index = data;
+    	}
+    }
+*/
 	public Item getItem(){
 		int treeSize = Trees.saplingBushList.size();
 		int cropSize = Crops.seedList.size();
 		if(index < 0){
 			index += treeSize + cropSize;
-		}else if(index > treeSize + cropSize){
+		}else if(index > treeSize + cropSize - 1){
 			index -= treeSize + cropSize;
 		}
 		if(index >= 0 && index <= treeSize -1){

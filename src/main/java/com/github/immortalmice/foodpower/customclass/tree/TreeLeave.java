@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.customclass.tree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.lang.NoSuchMethodError;
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.BlockLeaves;
@@ -37,8 +38,20 @@ public class TreeLeave extends BlockLeaves{
 		this.sapling = saplingIn;
 		this.dropItem = dropItemIn;
 
+        try{
+            this.setGraphicsLevel(true);
+        }catch(NoSuchMethodError e){
+            System.out.println("?");
+            /** Function not exist, maybe in server, skip */
+        }
+
 		Trees.leaveList.add(this);
 	}
+
+    @Override
+    public boolean isOpaqueCube(){
+        return false;
+    }
 
 	@Override
 	public BlockPlanks.EnumType getWoodType(int meta){

@@ -56,7 +56,6 @@ public class MarketGuiContainer extends ModGuiContainer{
 	    			container.index++;
 	    			break;
 	    	}
-	    	container.detectAndSendChanges();
 	    	container.emeraldSlot.onSlotChanged();
     	}
     }
