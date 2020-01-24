@@ -1,0 +1,6 @@
+{
+	"parent": "block/cross",
+	"textures": {
+		"cross": "foodpower:blocks/orange_sapling"
+	}
+}
