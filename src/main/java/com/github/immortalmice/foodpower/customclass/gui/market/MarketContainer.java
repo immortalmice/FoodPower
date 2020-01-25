@@ -12,7 +12,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
-import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
 import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.lists.Crops;
 
@@ -28,17 +27,14 @@ public class MarketContainer extends ModContainer{
 
 		items = new ItemStackHandler(2);
 		this.addSlotToContainer(emeraldSlot = new SlotItemHandler(items, 0, 89, 20){
+			/** Can trade with nether star? Hey, I only want EMERALD */
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return stack != null && stack.getItem() == Items.EMERALD && super.isItemValid(stack);
 			}
 			@Override
 			public void onSlotChanged(){
-				ItemStack stack = this.getStack();
-				MarketContainer.this.items.setStackInSlot(1, ItemStack.EMPTY);
-				if(!stack.isEmpty()){
-					MarketContainer.this.items.setStackInSlot(1, new ItemStack(getItem()));
-				}
+				MarketContainer.this.refreshGood();
 			}
 		});
 		this.addSlotToContainer(new SlotItemHandler(items, 1, 137, 20){
@@ -46,16 +42,23 @@ public class MarketContainer extends ModContainer{
 			public boolean isItemValid(ItemStack stack){
 				return false;
 			}
+			/** One Emerald, One Sapling */
 			@Override
 			public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack){
-				ItemStack thisItemStack = MarketContainer.this.items.getStackInSlot(0);
-				thisItemStack.setCount(thisItemStack.getCount() - 1);
-				emeraldSlot.onSlotChanged();
+				ItemStack emeraldItemStack = MarketContainer.this.items.getStackInSlot(0);
+				emeraldItemStack.setCount(emeraldItemStack.getCount() - 1);
+				MarketContainer.this.refreshGood();
 				return stack;
+			}
+			/** I REALLY don't want implement ITickable on this simple, troublesome market block.  */
+			@Override
+			public ItemStack getStack(){
+				MarketContainer.this.refreshGood();
+				return super.getStack();
 			}
 		});
 	}
-
+	/** No this override, market will be conscienceless, you can try :) */
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn){
 		super.onContainerClosed(playerIn);
@@ -67,71 +70,49 @@ public class MarketContainer extends ModContainer{
 			}
 		}
 	}
+	/** Hope not crash again PLEASE.... */
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int fromSlot){
-		ItemStack previous = null;
-		System.out.println(fromSlot);
-		System.out.println(inventorySlots.size());
+		ItemStack previous = ItemStack.EMPTY;
 		Slot slot = (Slot) this.inventorySlots.get(fromSlot);
 
-		if (slot != null && slot.getHasStack()){
+		if(slot != null && slot.getHasStack() && !slot.getStack().isEmpty()){
 			ItemStack current = slot.getStack();
 			previous = current.copy();
 			// Custom behaviour //
-			if (fromSlot < 36){
+			if(fromSlot < 36){
 				// From TE Inventory to Player Inventory
 				if (!this.mergeItemStack(current, 36, 38, true))
-				    return null;
+				    return ItemStack.EMPTY;
 			}else if(fromSlot == 37){
 				Slot emerald = this.inventorySlots.get(37);
 				if(emerald != null && slot.getHasStack()){
 					int amount = emerald.getStack().getCount();
 					current.setCount(amount);
 					if(!this.mergeItemStack(current, 0, 36, false))
-						return null;
+						return ItemStack.EMPTY;
 				}
 			}else{
 					// From Player Inventory to TE Inventory
 				if (!this.mergeItemStack(current, 0, 36, false))
-				    return null;
+				    return ItemStack.EMPTY;
 			}
 			// Custom behaviour //
-			if (current.getCount() == 0)
+			if (current.isEmpty() && current.getCount() == 0)
 				slot.putStack(ItemStack.EMPTY);
 			else
 				slot.onSlotChanged();
 
 			if (current.getCount() == previous.getCount())
-				return null;
+				return ItemStack.EMPTY;
 			slot.onTake(entityPlayer, current);
 		}
 		return previous;
 	}
-/*
-	@SideOnly(Side.SERVER)
-	@Override
-	public void detectAndSendChanges(){
-		super.detectAndSendChanges();
-		for(IContainerListener i : this.listeners){
-			i.sendWindowProperty(this, 0, this.index);
-		}
-	}
-	@SideOnly(Side.CLIENT)
-	@Override
-    public void updateProgressBar(int id, int data){
-    	super.updateProgressBar(id, data);
-    	switch(id){
-    		case 0:
-    			this.index = data;
-    	}
-    }
-*/
+	/** Get Index Form NBT, And Return Right Item */
 	public Item getItem(){
 		TileEntity tile = this.world.getTileEntity(pos);
-		int index = 0;
-		if(tile instanceof MarketTileEntity){
-			index = ((MarketTileEntity)tile).getIndex();
-		}
+		int index = tile.getUpdateTag().getInteger("index");
 
 		int treeSize = Trees.saplingBushList.size();
 		int cropSize = Crops.seedList.size();
@@ -142,6 +123,15 @@ public class MarketContainer extends ModContainer{
 			return Crops.seedList.get(index - treeSize);
 		}else{
 			return Items.AIR;
+		}
+	}
+	/** No Emerald, No Sapling */
+	public void refreshGood(){
+		ItemStack stack = emeraldSlot.getStack();
+		if(!stack.isEmpty()){
+			MarketContainer.this.items.setStackInSlot(1, new ItemStack(getItem()));
+		}else{
+			MarketContainer.this.items.setStackInSlot(1, ItemStack.EMPTY);
 		}
 	}
 }

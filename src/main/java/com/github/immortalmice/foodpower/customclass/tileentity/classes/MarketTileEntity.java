@@ -29,7 +29,7 @@ public class MarketTileEntity extends TileEntityBase{
 	public void handleUpdateTag(NBTTagCompound tag){
 		this.readFromNBT(tag);
 	}
-
+	/** Increase and cycle index */
 	public void increaseIndex(){
 		this.index++;
 
@@ -39,7 +39,7 @@ public class MarketTileEntity extends TileEntityBase{
 			this.index -= treeSize + cropSize;
 		}
 	}
-
+	/** Decrease and cycle index */
 	public void decreaseIndex(){
 		this.index--;
 
@@ -48,9 +48,5 @@ public class MarketTileEntity extends TileEntityBase{
 		if(this.index < 0){
 			this.index += treeSize + cropSize;
 		}
-	}
-
-	public int getIndex(){
-		return this.index;
 	}
 }
