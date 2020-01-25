@@ -1,0 +1,13 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"check_decay": {
+			"true": {"model": "foodpwer:kiwi_leave_model"},
+			"false": {"model": "foodpwer:kiwi_leave_model"}
+		},
+		"decayable": {
+			"true": {"model": "foodpwer:kiwi_leave_model"},
+			"false": {"model": "foodpwer:kiwi_leave_model"}
+		}
+	}
+}

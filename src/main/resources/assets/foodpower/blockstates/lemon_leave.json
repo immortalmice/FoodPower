@@ -1,0 +1,13 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"check_decay": {
+			"true": {"model": "foodpower:lemon_leave_model"},
+			"false": {"model": "foodpower:lemon_leave_model"}
+		},
+		"decayable": {
+			"true": {"model": "foodpower:lemon_leave_model"},
+			"false": {"model": "foodpower:lemon_leave_model"}
+		}
+	}
+}

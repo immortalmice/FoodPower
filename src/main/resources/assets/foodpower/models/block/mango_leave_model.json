@@ -1,0 +1,6 @@
+{
+	"parent": "block/leaves",
+	"textures": {
+		"all": "foodpower:blocks/mango_leave"
+	}
+}
