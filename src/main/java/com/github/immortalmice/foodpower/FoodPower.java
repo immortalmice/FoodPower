@@ -3,12 +3,12 @@ package com.github.immortalmice.foodpower;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
-
 import net.minecraftforge.fml.common.SidedProxy;
-
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import com.github.immortalmice.foodpower.proxy.common.CommonProxy;
 
@@ -24,6 +24,8 @@ public class FoodPower{
     @SidedProxy(clientSide = "com.github.immortalmice.foodpower.proxy.client.ClientProxy",
         serverSide = "com.github.immortalmice.foodpower.proxy.common.CommonProxy")
     public static CommonProxy proxy;
+
+    public static SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(FoodPower.MODID);
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event){

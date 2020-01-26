@@ -40,7 +40,7 @@ public class ModGuiContainer extends GuiContainer{
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		this.renderHoveredToolTip(mouseX, mouseY);
 	}
-
+	/** textureFileName will be overwrite in constructor of subClass */
 	private ResourceLocation getTexture(){
 		String path = FoodPower.MODID + ":textures/gui/container/" + this.textureFileName + ".png";
 		return new ResourceLocation(path);
