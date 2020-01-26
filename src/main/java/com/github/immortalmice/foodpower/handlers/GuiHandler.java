@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.lists.GUIs;
+import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 
 public class GuiHandler implements IGuiHandler{
 	public GuiHandler(){
@@ -16,7 +17,11 @@ public class GuiHandler implements IGuiHandler{
 
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z){
-		return GUIs.getContainerById(id, player, world, new BlockPos(x, y, z));
+		ModContainer instance = GUIs.getContainerById(id, player, world, new BlockPos(x, y, z));
+		if(instance != null){
+			GUIs.containerLoadedList.add(instance);
+		}
+		return instance;
 	}
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z){

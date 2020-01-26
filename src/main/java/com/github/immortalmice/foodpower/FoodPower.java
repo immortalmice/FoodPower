@@ -7,10 +7,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import com.github.immortalmice.foodpower.proxy.common.CommonProxy;
+import com.github.immortalmice.foodpower.lists.GUIs;
 
 @Mod(modid = FoodPower.MODID, name = FoodPower.NAME, version = FoodPower.VERSION)
 public class FoodPower{
@@ -42,4 +44,8 @@ public class FoodPower{
         proxy.postInit(event);
     }
 
+    @EventHandler
+    public void onServerStopping(FMLServerStoppingEvent event){
+        GUIs.closeAllLoadedContainer();
+    }
 }

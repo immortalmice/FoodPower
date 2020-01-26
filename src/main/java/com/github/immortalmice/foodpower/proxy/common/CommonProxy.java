@@ -7,6 +7,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.event.TerrainEventHandler;
+import com.github.immortalmice.foodpower.event.NormalEventHandler;
 import com.github.immortalmice.foodpower.handlers.GuiHandler;
 import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.customclass.message.TileEntityNBTMessage;
@@ -17,6 +18,7 @@ public class CommonProxy{
 	}
 
 	public void init(FMLInitializationEvent event){
+        new NormalEventHandler();
         new TerrainEventHandler();
         new GuiHandler();
 

@@ -14,15 +14,16 @@ import com.github.immortalmice.foodpower.customclass.gui.market.MarketContainer;
 
 public class GUIs{
 	public static List<GuiPack> list = new ArrayList<GuiPack>();
+	public static List<ModContainer> containerLoadedList = new ArrayList<ModContainer>();
 
 	public static GuiPack MARKET = new GuiPack(MarketContainer.class, GUIs.checkClassExist("MarketGuiContainer", "market"));
 
-	/** If ClassNotFound, It may on ther serverside */
+	/** If ClassNotFound, It may on the serverside */
 	@SuppressWarnings("unchecked")
-	private static Class<? extends ModGuiContainer> checkClassExist(String className, String folderName){
+	private static Class<ModGuiContainer> checkClassExist(String className, String folderName){
 		try{
 			String str = "com.github.immortalmice.foodpower.customclass.gui." + folderName + "." + className;
-			return (Class<? extends ModGuiContainer>) Class.forName(str);
+			return (Class<ModGuiContainer>) Class.forName(str);
 		}catch(ClassNotFoundException e){
 			return null;
 		}
@@ -35,5 +36,25 @@ public class GUIs{
 	/** Get a new GuiContainer instance by id */
 	public static ModGuiContainer getGuiContainerById(int idIn, EntityPlayer playerIn, World worldIn, BlockPos pos){
 		return list.get(idIn).getGuiContainer(playerIn, worldIn, pos);
+	}
+
+	public static void closeAllLoadedContainer(){
+		while(!containerLoadedList.isEmpty()){
+			if(containerLoadedList.get(0) != null){
+				containerLoadedList.get(0).onContainerClosed();
+			}else{
+				containerLoadedList.remove(0);
+			}
+		}
+	}
+
+	public static void closePlayerContainer(EntityPlayer playerIn){
+		for(int i = containerLoadedList.size()-1; i >= 0; i --){
+			ModContainer el = containerLoadedList.get(i);
+			if(el.getPlayer().getName() == playerIn.getName()){
+				System.out.println("Same");
+				el.onContainerClosed();
+			}
+		}
 	}
 }
