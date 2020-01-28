@@ -2,6 +2,8 @@
 itemGroup.items=Food Power Items
 itemGroup.blocks=Food Power Blocks
 
+#=======================ITEM=======================
+
 #Ingredients
 item.butter.name=Butter
 item.orange.name=Orange
@@ -25,7 +27,52 @@ item.cabbage.name=Cabbage
 item.flour.name=Flour
 item.corn.name=Corn
 item.cream.name=Cream
-item.dirty_food.name=Dirty Food
+
+#Vanilla Ingredients
+item.apple.name=Apple
+item.melon.name=Melon
+item.pumpkin.name=Pumpkin
+item.carrot.name=Carrot
+item.potato.name=Potato
+item.beetroot.name=Beetroot
+item.brown_mushroom.name=Brown Mushroom
+item.red_mushroom.name=Red Mushroom
+item.egg.name=Egg
+item.milk_bucket.name=Milk
+item.porkchop.name=Porkchop
+item.beef.name=Beef
+item.chicken.name=Chicken
+item.mutton.name=Mutton
+item.chorus_fruit.name=Chorus Fruit
+item.dye.name=Cocoa Bean
+item.sugar.name=Sugar
+item.water_bucket.name=Bucket
+item.nether_wart.name=Nether Wart
+
+#Cooked Foods
+item.cake.name=Cake
+item.pizza.name=Pizza
+item.sandwich.name=Sandwich
+item.ice_cream.name=Ice Cream
+item.fried_rice.name=Fried Rice
+item.noodle_soup.name=Noodle Soup
+item.honey_toast.name=Honey Toast
+item.salad.name=Salad
+item.juice.name=Juice
+
+item.batter.name=Batter
+item.cake_base.name=Cake Base
+item.flat_dough.name=Flat Dough
+item.raw_pizza.name=Raw Pizza
+item.cooked_pizza.name=Cooked Pizza
+item.raw_juice.name=Raw Juice
+item.mixed_juice.name=Mixed Juice
+item.ice_cream_base.name=Ice Cream Base
+item.toast.name=Toast
+item.toast_slice.name=Toast Slice
+item.cooked_rice.name=Cooked Rice
+item.noodle.name=Noodle
+item.ice.name=Ice
 
 #Crop Seeds
 item.mint_seed.name=Mint Seed
@@ -36,6 +83,10 @@ item.spinach_seed.name=Spinach Seed
 item.cabbage_seed.name=Cabbage Seed
 item.corn_seed.name=Corn Seed
 
+#Other Items
+item.dirty_food.name=Dirty Food
+
+#=======================BLOCK=======================
 
 #Kitchen Appliances
 tile.oven.name=Oven

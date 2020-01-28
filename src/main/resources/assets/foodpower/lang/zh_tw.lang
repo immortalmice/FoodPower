@@ -2,6 +2,8 @@
 itemGroup.items=Food Power物品
 itemGroup.blocks=Food Power方塊
 
+#=======================物品=======================
+
 #原料
 item.butter.name=奶油
 item.orange.name=橘子
@@ -25,7 +27,52 @@ item.cabbage.name=高麗菜
 item.flour.name=麵粉
 item.corn.name=玉米
 item.cream.name=鮮奶油
-item.dirty_food.name=髒掉的食物
+
+#原版原料
+item.apple.name=蘋果
+item.melon.name=西瓜
+item.pumpkin.name=南瓜
+item.carrot.name=紅蘿蔔
+item.potato.name=馬鈴薯
+item.beetroot.name=甜菜根
+item.brown_mushroom.name=棕色香菇
+item.red_mushroom.name=紅色香菇
+item.egg.name=蛋
+item.milk_bucket.name=牛奶
+item.porkchop.name=生豬肉
+item.beef.name=生牛肉
+item.chicken.name=生雞肉
+item.mutton.name=生羊肉
+item.chorus_fruit.name=歌萊果
+item.dye.name=可可豆
+item.sugar.name=糖
+item.water_bucket.name=水
+item.nether_wart.name=地域疙瘩
+
+#烹煮後食物
+item.cake.name=蛋糕
+item.pizza.name=披薩
+item.sandwich.name=三明治
+item.ice_cream.name=冰淇淋
+item.fried_rice.name=炒飯
+item.noodle_soup.name=湯麵
+item.honey_toast.name=蜜糖吐司
+item.salad.name=沙拉
+item.juice.name=果汁
+
+item.batter.name=麵糊
+item.cake_base.name=蛋糕基底
+item.flat_dough.name=麵皮
+item.raw_pizza.name=生披薩
+item.cooked_pizza.name=熟披薩
+item.raw_juice.name=原汁
+item.mixed_juice.name=混和果汁
+item.ice_cream_base.name=冰淇淋基底
+item.toast.name=吐司
+item.toast_slice.name=吐司片
+item.cooked_rice.name=飯
+item.noodle.name=麵條
+item.ice.name=冰塊
 
 #作物種子
 item.mint_seed.name=薄荷種子
@@ -35,6 +82,11 @@ item.chili_seed.name=辣椒種子
 item.spinach_seed.name=菠菜
 item.cabbage_seed.name=高麗菜
 item.corn_seed.name=玉米種子
+
+#其他物品
+item.dirty_food.name=髒掉的食物
+
+#=======================方塊=======================
 
 #廚房用具
 tile.oven.name=烤箱
