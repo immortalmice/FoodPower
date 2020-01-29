@@ -85,6 +85,7 @@ item.corn_seed.name=Corn Seed
 
 #Other Items
 item.dirty_food.name=Dirty Food
+item.recipe_scroll.name=RecipeScroll
 
 #=======================BLOCK=======================
 
@@ -124,4 +125,18 @@ tile.mango_sapling.name=Mango Sapling
 tile.lemon_sapling.name=Lemon Sapling
 
 #Other Block & Item
-tile.market_block.name=Market Block
+tile.market.name=Market
+tile.recipe_table.name=Recipe Table
+
+#=======================Custom=======================
+
+#Cooking Pattern
+pattern.cake.name=Cake
+pattern.pizza.name=Pizza
+pattern.sandwich.name=Sandwich
+pattern.ice_cream.name=Ice Cream
+pattern.fired_rice.name=Fried Rice
+pattern.noodle_soup.name=Noodle Soup
+pattern.honey_toast.name=Honey Toast
+pattern.salad.name=Salad
+pattern.juice.name=Juice

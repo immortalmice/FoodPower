@@ -12,7 +12,7 @@ import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 public class CookingPatterns{
 	public static List<CookingPattern> list = new ArrayList<CookingPattern>();
 
-	public static CookingPattern CAKE = new CookingPattern(Ingredients.CAKE, new CookingStep[]{
+	public static CookingPattern CAKE = new CookingPattern("cake", Ingredients.CAKE, new CookingStep[]{
 		new CookingStep(KitchenAppliances.UNIVERSAL_STATION, Ingredients.BATTER, new Ingredient[]{
 			Ingredients.FLOUR, Ingredients.EGG, Ingredients.BUTTER, Ingredients.SUGAR, Ingredients.EMPTY
 		}),
@@ -23,7 +23,7 @@ public class CookingPatterns{
 			Ingredients.CAKE_BASE, Ingredients.CREAM, Ingredients.EMPTY
 		})
 	});
-	public static CookingPattern PIZZA = new CookingPattern(Ingredients.PIZZA, new CookingStep[]{
+	public static CookingPattern PIZZA = new CookingPattern("pizza", Ingredients.PIZZA, new CookingStep[]{
 		new CookingStep(KitchenAppliances.CHOPPING_BOARD, Ingredients.FLAT_DOUGH, new Ingredient[]{
 			Ingredients.DOUGH
 		}),
@@ -37,7 +37,7 @@ public class CookingPatterns{
 			Ingredients.COOKED_PIZZA
 		})
 	});
-	public static CookingPattern SANDWICH = new CookingPattern(Ingredients.SANDWICH, new CookingStep[]{
+	public static CookingPattern SANDWICH = new CookingPattern("sandwich", Ingredients.SANDWICH, new CookingStep[]{
 		new CookingStep(KitchenAppliances.OVEN, Ingredients.TOAST, new Ingredient[]{
 			Ingredients.DOUGH
 		}),
@@ -48,7 +48,7 @@ public class CookingPatterns{
 			Ingredients.TOAST_SLICE, Ingredients.EMPTY, Ingredients.EMPTY, Ingredients.EMPTY
 		})
 	});
-	public static CookingPattern ICE_CREAM = new CookingPattern(Ingredients.ICE_CREAM, new CookingStep[]{
+	public static CookingPattern ICE_CREAM = new CookingPattern("ice_cream", Ingredients.ICE_CREAM, new CookingStep[]{
 		new CookingStep(KitchenAppliances.JUICER, Ingredients.RAW_JUICE, new Ingredient[]{
 			Ingredients.EMPTY
 		}),
@@ -62,7 +62,7 @@ public class CookingPatterns{
 			Ingredients.ICE_CREAM_BASE, Ingredients.EMPTY
 		})
 	});
-	public static CookingPattern FRIED_RICE = new CookingPattern(Ingredients.FRIED_RICE, new CookingStep[]{
+	public static CookingPattern FRIED_RICE = new CookingPattern("fried_rice", Ingredients.FRIED_RICE, new CookingStep[]{
 		new CookingStep(KitchenAppliances.ELECTRIC_POT, Ingredients.COOKED_RICE, new Ingredient[]{
 			Ingredients.RICE, Ingredients.WATER_BUCKET
 		}),
@@ -70,7 +70,7 @@ public class CookingPatterns{
 			Ingredients.COOKED_RICE, Ingredients.SALT, Ingredients.SAUCE, Ingredients.EMPTY, Ingredients.EMPTY
 		})
 	});
-	public static CookingPattern NOODLE_SOUP = new CookingPattern(Ingredients.NOODLE_SOUP, new CookingStep[]{
+	public static CookingPattern NOODLE_SOUP = new CookingPattern("noodle_soup", Ingredients.NOODLE_SOUP, new CookingStep[]{
 		new CookingStep(KitchenAppliances.CHOPPING_BOARD, Ingredients.FLAT_DOUGH, new Ingredient[]{
 			Ingredients.DOUGH
 		}),
@@ -81,7 +81,7 @@ public class CookingPatterns{
 			Ingredients.WATER_BUCKET, Ingredients.SALT, Ingredients.EMPTY, Ingredients.EMPTY
 		})
 	});
-	public static CookingPattern HONEY_TOAST = new CookingPattern(Ingredients.HONEY_TOAST, new CookingStep[]{
+	public static CookingPattern HONEY_TOAST = new CookingPattern("honey_toast", Ingredients.HONEY_TOAST, new CookingStep[]{
 		new CookingStep(KitchenAppliances.OVEN, Ingredients.TOAST, new Ingredient[]{
 			Ingredients.DOUGH
 		}),
@@ -89,12 +89,12 @@ public class CookingPatterns{
 			Ingredients.TOAST, Ingredients.SUGAR, Ingredients.CREAM, Ingredients.EMPTY, Ingredients.EMPTY
 		})
 	});
-	public static CookingPattern SALAD = new CookingPattern(Ingredients.SALAD, new CookingStep[]{
+	public static CookingPattern SALAD = new CookingPattern("salad", Ingredients.SALAD, new CookingStep[]{
 		new CookingStep(KitchenAppliances.UNIVERSAL_STATION, Ingredients.SALAD, new Ingredient[]{
 			Ingredients.EMPTY, Ingredients.EMPTY, Ingredients.EMPTY
 		})
 	});
-	public static CookingPattern JUICE = new CookingPattern(Ingredients.JUICE, new CookingStep[]{
+	public static CookingPattern JUICE = new CookingPattern("juice", Ingredients.JUICE, new CookingStep[]{
 		new CookingStep(KitchenAppliances.JUICER, Ingredients.RAW_JUICE, new Ingredient[]{
 			Ingredients.EMPTY, Ingredients.EMPTY
 		}),

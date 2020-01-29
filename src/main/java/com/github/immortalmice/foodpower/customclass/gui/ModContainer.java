@@ -11,17 +11,18 @@ import com.github.immortalmice.foodpower.lists.GUIs;
 public class ModContainer extends Container{
 	protected ItemStackHandler items;
 	protected EntityPlayer player;
-	public ModContainer(EntityPlayer playerIn){
+	/** Offset is used in slot position */
+	public ModContainer(EntityPlayer playerIn, int offset){
 		super();
 		this.player = playerIn;
 		/** Player Inventory Slots */
 		for (int i = 0; i < 3; ++i){
             for (int j = 0; j < 9; ++j){
-                this.addSlotToContainer(new Slot(this.player.inventory, j + i * 9 + 9, 8 + j * 18, 51 + i * 18));
+                this.addSlotToContainer(new Slot(this.player.inventory, j + i * 9 + 9, 8 + j * 18, offset + i * 18));
             }
         }
         for (int i = 0; i < 9; ++i){
-            this.addSlotToContainer(new Slot(this.player.inventory, i, 8 + i * 18, 109));
+            this.addSlotToContainer(new Slot(this.player.inventory, i, 8 + i * 18, offset + 58));
         }
 	}
 

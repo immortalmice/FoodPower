@@ -16,16 +16,12 @@ import com.github.immortalmice.foodpower.baseclass.BlockBase;
 public class BlockRotatableBase extends BlockBase{
 	public static IProperty<EnumFacing> FACING = PropertyEnum.<EnumFacing>create("facing", EnumFacing.class);
 
-	public BlockRotatableBase(String name, Material material, boolean addToOtherList){
-		super(name, material, addToOtherList);
+	public BlockRotatableBase(String name, Material material){
+		super(name, material);
 
 		IBlockState iBlockState = this.blockState.getBaseState();
 		iBlockState.withProperty(FACING, EnumFacing.NORTH);
 		this.setDefaultState(iBlockState);
-	}
-	/** Constructor Overload, Add To Other List If Not Specify */
-	public BlockRotatableBase(String name, Material material){
-		this(name, material, true);
 	}
 
 	@Override

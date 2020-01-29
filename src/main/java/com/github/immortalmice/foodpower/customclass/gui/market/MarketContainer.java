@@ -1,8 +1,8 @@
 package com.github.immortalmice.foodpower.customclass.gui.market;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,11 +16,13 @@ import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.lists.Crops;
 
 public class MarketContainer extends ModContainer{
+
 	protected World world; 
 	protected BlockPos pos;
 	protected SlotItemHandler emeraldSlot;
+
 	public MarketContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
-		super(playerIn);
+		super(playerIn, 51);
 
 		world = worldIn;
 		pos = posIn;

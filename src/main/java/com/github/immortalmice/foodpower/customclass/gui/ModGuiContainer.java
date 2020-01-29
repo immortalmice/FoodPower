@@ -12,11 +12,11 @@ import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 @SideOnly(Side.CLIENT)
 public class ModGuiContainer extends GuiContainer{
 	protected String textureFileName = "default";
-	public ModGuiContainer(ModContainer inventorySlotsIn){
+	public ModGuiContainer(ModContainer inventorySlotsIn, int[] sizeIn){
 		super(inventorySlotsIn);
 		
-		this.xSize = 176;
-        this.ySize = 133;
+		this.xSize = sizeIn[0];
+        this.ySize = sizeIn[1];
 	}
 
 	@Override

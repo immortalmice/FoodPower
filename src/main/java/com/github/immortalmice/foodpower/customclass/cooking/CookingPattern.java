@@ -11,12 +11,18 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 public class CookingPattern{
 	private List<CookingStep> steps;
 	private CookedFood result;
+	private String name;
 
-	public CookingPattern(CookedFood resultIn, CookingStep stepsIn[]){
+	public CookingPattern(String nameIn, CookedFood resultIn, CookingStep stepsIn[]){
+		
+		this.name = nameIn;
 		this.result = resultIn;
 		this.steps = new ArrayList<CookingStep>(Arrays.asList(stepsIn));
 
 		CookingPatterns.list.add(this);
 	}
 
+	public String getName(){
+		return this.name;
+	}
 }

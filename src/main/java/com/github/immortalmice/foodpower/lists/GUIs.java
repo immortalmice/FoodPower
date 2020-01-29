@@ -11,12 +11,14 @@ import com.github.immortalmice.foodpower.customclass.gui.GuiPack;
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
 import com.github.immortalmice.foodpower.customclass.gui.market.MarketContainer;
+import com.github.immortalmice.foodpower.customclass.gui.recipetable.RecipeTableContainer;
 
 public class GUIs{
 	public static List<GuiPack> list = new ArrayList<GuiPack>();
 	public static List<ModContainer> containerLoadedList = new ArrayList<ModContainer>();
 
 	public static GuiPack MARKET = new GuiPack(MarketContainer.class, GUIs.checkClassExist("MarketGuiContainer", "market"));
+	public static GuiPack RECIPE_TABLE = new GuiPack(RecipeTableContainer.class, GUIs.checkClassExist("RecipeTableGuiContainer", "recipetable"));
 
 	/** If ClassNotFound, It may on the serverside */
 	@SuppressWarnings("unchecked")

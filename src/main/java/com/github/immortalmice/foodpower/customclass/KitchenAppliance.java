@@ -8,7 +8,7 @@ import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 
 public class KitchenAppliance extends BlockRotatableBase{
 	public KitchenAppliance(String name){
-		super(name, Material.IRON, false);
+		super(name, Material.IRON);
 
 		/** How dare you use stone pickaxe break this holy things */
 		this.setHarvestLevel("pickaxe", 2);
