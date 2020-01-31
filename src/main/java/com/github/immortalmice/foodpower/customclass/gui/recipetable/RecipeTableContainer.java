@@ -24,7 +24,7 @@ public class RecipeTableContainer extends ModContainer{
 		items = new ItemStackHandler(1);
 
 		this.addSlotToContainer(new SlotItemHandler(items, 0, 151, 115){
-			/** Only Recipe Scroll Here */
+			/** Only Recipe Scroll Accepted Here */
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return stack != null 

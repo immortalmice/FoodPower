@@ -27,7 +27,7 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-
+		/** Render name of the pattern */
 		String patternName = I18n.format("pattern." + CookingPatterns.list.get(0).getName() + ".name");
 		this.fontRenderer.drawString(patternName, (this.xSize - this.fontRenderer.getStringWidth(patternName)) / 2, 20, 0x404040);
 	}

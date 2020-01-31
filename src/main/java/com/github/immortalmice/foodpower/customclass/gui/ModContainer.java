@@ -11,7 +11,7 @@ import com.github.immortalmice.foodpower.lists.GUIs;
 public class ModContainer extends Container{
 	protected ItemStackHandler items;
 	protected EntityPlayer player;
-	/** Offset is used in slot position */
+	/** Offset is used in setting slot position */
 	public ModContainer(EntityPlayer playerIn, int offset){
 		super();
 		this.player = playerIn;

@@ -22,6 +22,7 @@ public class RecipeTable extends BlockRotatableBase{
 		OtherItemBlocks.list.add(this);
 	}
 
+	/** Open the GUI */
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos blockPosIn, 
 		IBlockState blockStateIn, EntityPlayer playerIn, EnumHand hand, EnumFacing sideIn, 

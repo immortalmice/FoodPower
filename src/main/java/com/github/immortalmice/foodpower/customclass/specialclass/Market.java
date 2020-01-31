@@ -21,6 +21,7 @@ public class Market extends BlockRotatableBase{
 
 		OtherItemBlocks.list.add(this);
 	}
+	/** Open th GUI */
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos blockPosIn, 
 		IBlockState blockStateIn, EntityPlayer playerIn, EnumHand hand, EnumFacing sideIn, 
