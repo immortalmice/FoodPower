@@ -25,4 +25,7 @@ public class CookingStep{
 			this.AddIngredient(ingredientsIn[i]);
 		}
 	}
+	public List<Ingredient> getIngredients(){
+		return this.ingredients;
+	}
 }

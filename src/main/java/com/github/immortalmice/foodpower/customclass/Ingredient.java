@@ -9,8 +9,8 @@ import com.github.immortalmice.foodpower.lists.Ingredients;
 
 public class Ingredient extends ItemFoodBase{
 	/** For Mod Ingredients */
-	public Ingredient(String name, int amount, float saturation){
-		super(name, amount, saturation);
+	public Ingredient(String nameIn, int amount, float saturation){
+		super(nameIn, amount, saturation);
 
         /** Add to ingredient list, and regist it later */
         Ingredients.list.add(this);

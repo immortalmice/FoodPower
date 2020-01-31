@@ -1,6 +1,7 @@
 package com.github.immortalmice.foodpower.customclass.gui.recipetable;
 
 import java.io.IOException;
+import java.util.List;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -8,6 +9,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.gui.GuiButton;
 
 import com.github.immortalmice.foodpower.FoodPower;
+import com.github.immortalmice.foodpower.customclass.Ingredient;
 import com.github.immortalmice.foodpower.customclass.message.RecipeTableMessage;
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
@@ -36,6 +38,16 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 		/** Render name of the pattern */
 		String patternName = I18n.format("pattern." + CookingPatterns.list.get(this.getIndex()).getName() + ".name");
 		this.fontRenderer.drawString(patternName, (this.xSize - this.fontRenderer.getStringWidth(patternName)) / 2, 20, 0x404040);
+
+		if(this.inventorySlots instanceof RecipeTableContainer){
+    		RecipeTableContainer container = (RecipeTableContainer)this.inventorySlots;
+			List<Ingredient> ingredientList = container.getIngredients();
+			for(int i = 0; i <= ingredientList.size()-1; i ++){
+				String ingredientName = I18n.format(ingredientList.get(i).getTranslationKey() + ".name");
+				this.fontRenderer.drawString(ingredientName, 30, 20 * i + 45, 0x404040);
+			}
+			container.updateSlot();
+		}
 	}
 	@Override
 	public void initGui(){
@@ -45,16 +57,18 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 		this.buttonList.add(new Button(BUTTON_LEFT, offsetX + 20, offsetY + 15, 10, 15, "", 38, 19));
 		this.buttonList.add(new Button(BUTTON_RIGHT, offsetX + this.xSize - 30, offsetY + 15, 10, 15, "", 38, 0));	
 	}
+	/** Send Message To server on clicked */
 	@Override
     protected void actionPerformed(GuiButton button) throws IOException{
     	if(this.inventorySlots instanceof RecipeTableContainer){
+    		RecipeTableContainer container = (RecipeTableContainer)this.inventorySlots;
     		RecipeTableMessage message;
 	    	switch(button.id){
 	    		case BUTTON_LEFT:
-	    			message = new RecipeTableMessage("Decrease Index", ((RecipeTableContainer)this.inventorySlots).pos);
+	    			message = new RecipeTableMessage("Decrease Index", container.pos);
 	    			break;
 	    		case BUTTON_RIGHT:
-	    			message = new RecipeTableMessage("Increase Index", ((RecipeTableContainer)this.inventorySlots).pos);
+	    			message = new RecipeTableMessage("Increase Index", container.pos);
 	    			break;
 	    		default:
 	    			message = new RecipeTableMessage();

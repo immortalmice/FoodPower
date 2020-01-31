@@ -18,6 +18,7 @@ public class RecipeTableTileEntity extends TileEntityBase{
 		return super.writeToNBT(tag);
 	}
 
+	/** Increase and cycle index */
 	public void increaseIndex(){
 		this.index++;
 

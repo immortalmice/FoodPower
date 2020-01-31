@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import net.minecraft.client.Minecraft;
 
 public class MessageHandlerBase{
+	/** Check is Server or Client and return world */
 	public static World getWorld(MessageContext ctx){
 		switch(ctx.side){
 			case SERVER:

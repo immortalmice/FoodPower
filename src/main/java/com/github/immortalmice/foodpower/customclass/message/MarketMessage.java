@@ -27,7 +27,7 @@ public class MarketMessage implements IMessage{
 		this.pos = posIn;
 	}
 
-	/** X, Y, Z, NBT */
+	/** X, Y, Z, Message */
 	@Override
 	public void fromBytes(ByteBuf buf){
 		int x = ByteBufUtils.readVarInt(buf, 5);
@@ -49,7 +49,7 @@ public class MarketMessage implements IMessage{
 	}
 
 	public static class Handler extends MessageHandlerBase implements IMessageHandler<MarketMessage, IMessage>{
-		/** Update block's NBT at the position */
+		/** Control MarketTileEntity at the position */
 		@Override
 		public IMessage onMessage(MarketMessage message, MessageContext ctx){
 			World world = Handler.getWorld(ctx);

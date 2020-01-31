@@ -12,7 +12,7 @@ public class ItemFoodBase extends ItemFood{
 	public ItemFoodBase(String name, int amount, float saturation){
 		/** Can wolf eat my sweetie? NO WAY!*/
 		super(amount, saturation, false);
-		
+
 		this.setTranslationKey(name);
         this.setRegistryName(name);
         this.setCreativeTab(FPCreativeTabs.ITEM_TAB);

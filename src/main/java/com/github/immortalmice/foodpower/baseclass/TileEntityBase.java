@@ -10,6 +10,7 @@ public class TileEntityBase extends TileEntity{
 		super();
 	}
 	
+	/** Sync NBT Tag between client & server */
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
