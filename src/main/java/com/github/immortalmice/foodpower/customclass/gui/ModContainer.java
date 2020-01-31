@@ -1,7 +1,6 @@
 package com.github.immortalmice.foodpower.customclass.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -9,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import com.github.immortalmice.foodpower.lists.GUIs;
 
 public class ModContainer extends Container{
-	protected ItemStackHandler items;
 	protected EntityPlayer player;
 	/** Offset is used in setting slot position */
 	public ModContainer(EntityPlayer playerIn, int offset){

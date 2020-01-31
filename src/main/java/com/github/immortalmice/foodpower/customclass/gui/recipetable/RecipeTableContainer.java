@@ -8,20 +8,24 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.item.ItemStack;
 
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
+import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
 import com.github.immortalmice.foodpower.lists.other.OtherItems;
 
 public class RecipeTableContainer extends ModContainer{
 
 	protected World world; 
 	protected BlockPos pos;
+	protected ItemStackHandler items;
+	protected RecipeTableTileEntity tileEntity;
 
 	public RecipeTableContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
 		super(playerIn, 138);
 		
-		world = worldIn;
-		pos = posIn;
+		this.world = worldIn;
+		this.pos = posIn;
+		this.tileEntity = (RecipeTableTileEntity)worldIn.getTileEntity(this.pos);
 
-		items = new ItemStackHandler(1);
+		this.items = new ItemStackHandler(1);
 
 		this.addSlotToContainer(new SlotItemHandler(items, 0, 151, 115){
 			/** Only Recipe Scroll Accepted Here */
@@ -33,4 +37,7 @@ public class RecipeTableContainer extends ModContainer{
 			}
 		});
 	}
+    public int getIndex(){
+    	return tileEntity.getIndex();
+    }
 }

@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.inventory.Slot;
-import net.minecraft.tileentity.TileEntity;
 
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
+import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
 import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.lists.Crops;
 
@@ -19,13 +19,16 @@ public class MarketContainer extends ModContainer{
 
 	protected World world; 
 	protected BlockPos pos;
+	protected ItemStackHandler items;
 	protected SlotItemHandler emeraldSlot;
+	protected MarketTileEntity tileEntity;
 
 	public MarketContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
 		super(playerIn, 51);
 
 		world = worldIn;
 		pos = posIn;
+		this.tileEntity = (MarketTileEntity)worldIn.getTileEntity(this.pos);
 
 		items = new ItemStackHandler(2);
 		this.addSlotToContainer(emeraldSlot = new SlotItemHandler(items, 0, 89, 20){
@@ -113,8 +116,7 @@ public class MarketContainer extends ModContainer{
 	}
 	/** Get Index Form NBT, And Return Right Item */
 	public Item getItem(){
-		TileEntity tile = this.world.getTileEntity(pos);
-		int index = tile.getUpdateTag().getInteger("index");
+		int index = this.tileEntity.getIndex();
 
 		int treeSize = Trees.saplingBushList.size();
 		int cropSize = Crops.seedList.size();

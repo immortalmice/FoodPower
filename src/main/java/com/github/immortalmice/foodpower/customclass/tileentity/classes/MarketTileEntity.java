@@ -19,16 +19,6 @@ public class MarketTileEntity extends TileEntityBase{
 		tag.setInteger("index", this.index);
 		return super.writeToNBT(tag);
 	}
-	@Override
-	public NBTTagCompound getUpdateTag(){
-		NBTTagCompound nbt = new NBTTagCompound();
-        this.writeToNBT(nbt);
-        return nbt;
-	}
-	@Override
-	public void handleUpdateTag(NBTTagCompound tag){
-		this.readFromNBT(tag);
-	}
 	/** Increase and cycle index */
 	public void increaseIndex(){
 		this.index++;
@@ -48,5 +38,8 @@ public class MarketTileEntity extends TileEntityBase{
 		if(this.index < 0){
 			this.index += treeSize + cropSize;
 		}
+	}
+	public int getIndex(){
+		return this.index;
 	}
 }

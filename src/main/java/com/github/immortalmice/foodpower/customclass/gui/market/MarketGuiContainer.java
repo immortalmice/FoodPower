@@ -7,14 +7,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.tileentity.TileEntity;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.gui.Button;
-import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
-import com.github.immortalmice.foodpower.customclass.message.TileEntityNBTMessage;
+import com.github.immortalmice.foodpower.customclass.message.MarketMessage;
 
 @SideOnly(Side.CLIENT)
 public class MarketGuiContainer extends ModGuiContainer{
@@ -54,23 +52,19 @@ public class MarketGuiContainer extends ModGuiContainer{
 	@Override
     protected void actionPerformed(GuiButton button) throws IOException{
     	if(this.inventorySlots instanceof MarketContainer){
-    		MarketContainer container = (MarketContainer)inventorySlots;
-    		/** Get tileEntity of Market Block */
-    		TileEntity tile = container.world.getTileEntity(container.pos);
-    		if(tile instanceof MarketTileEntity){
-    			MarketTileEntity tileMarket = (MarketTileEntity)tile;
-    			switch(button.id){
-		    		case BUTTON_LEFT:
-		    			tileMarket.decreaseIndex();
-		    			break;
-		    		case BUTTON_RIGHT:
-		    			tileMarket.increaseIndex();
-		    			break;
-		    	}
-		    	/** Send Package To Server To Update index */
-    			FoodPower.network.sendToServer(new TileEntityNBTMessage(container.pos, tileMarket.getUpdateTag()));
-    		}
-	    	container.emeraldSlot.onSlotChanged();
+    		MarketMessage message;
+	    	switch(button.id){
+	    		case BUTTON_LEFT:
+	    			message = new MarketMessage("Decrease Index", ((MarketContainer)this.inventorySlots).pos);
+	    			break;
+	    		case BUTTON_RIGHT:
+	    			message = new MarketMessage("Increase Index", ((MarketContainer)this.inventorySlots).pos);
+	    			break;
+	    		default:
+	    			message = new MarketMessage();
+	    	}
+	    	FoodPower.network.sendToServer(message);
+	    	((MarketContainer)this.inventorySlots).emeraldSlot.onSlotChanged();
     	}
     }
 }

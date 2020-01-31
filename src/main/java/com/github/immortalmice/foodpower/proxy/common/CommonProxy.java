@@ -10,11 +10,13 @@ import com.github.immortalmice.foodpower.event.TerrainEventHandler;
 import com.github.immortalmice.foodpower.event.NormalEventHandler;
 import com.github.immortalmice.foodpower.handlers.GuiHandler;
 import com.github.immortalmice.foodpower.lists.Crops;
-import com.github.immortalmice.foodpower.customclass.message.TileEntityNBTMessage;
+import com.github.immortalmice.foodpower.customclass.message.MarketMessage;
+import com.github.immortalmice.foodpower.customclass.message.RecipeTableMessage;
 
 public class CommonProxy{
 	public void preInit(FMLPreInitializationEvent event){
-		FoodPower.network.registerMessage(TileEntityNBTMessage.Handler.class, TileEntityNBTMessage.class, 0, Side.SERVER);
+		FoodPower.network.registerMessage(MarketMessage.Handler.class, MarketMessage.class, 0, Side.SERVER);
+		FoodPower.network.registerMessage(RecipeTableMessage.Handler.class, RecipeTableMessage.class, 1, Side.SERVER);
 	}
 
 	public void init(FMLInitializationEvent event){
