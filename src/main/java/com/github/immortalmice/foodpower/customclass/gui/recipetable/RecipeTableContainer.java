@@ -43,10 +43,10 @@ public class RecipeTableContainer extends ModContainer{
 			}
 		});
 
-		this.forceUpdateSlot();
+		this.updateSlot();
 	}
 	/** Dynamic ingredient slots */
-	private void forceUpdateSlot(){
+	private void updateSlot(){
 		this.inventorySlots = this.inventorySlots.subList(0, 37);
 
 		List<Ingredient> ingredientList = this.getIngredients();
@@ -55,10 +55,10 @@ public class RecipeTableContainer extends ModContainer{
 			this.addSlotToContainer(new SlotItemHandler(ingredients, i, 10, 20 * i + 40));
 		}
 	}
-	public void updateSlot(){
+	public void tryUpdateSlot(){
 		if(this.getIndex() != this.lastIndex){
 			this.lastIndex = this.getIndex();
-			this.forceUpdateSlot();
+			this.updateSlot();
 		}
 	}
 	/** Get ingreidient list of current pattern */

@@ -46,7 +46,7 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 				String ingredientName = I18n.format(ingredientList.get(i).getTranslationKey() + ".name");
 				this.fontRenderer.drawString(ingredientName, 30, 20 * i + 45, 0x404040);
 			}
-			container.updateSlot();
+			container.tryUpdateSlot();
 		}
 	}
 	@Override
