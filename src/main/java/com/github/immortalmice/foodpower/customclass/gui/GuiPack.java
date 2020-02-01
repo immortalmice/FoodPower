@@ -36,7 +36,7 @@ public class GuiPack{
 		try{
 			return mc.getDeclaredConstructor(mcArg).newInstance(player, world, pos);
 		}catch(Exception e){
-			return new ModContainer(player, 51);
+			return new ModContainer(player, new int[]{8, 51});
 		}
 	}
 	/** Instant a new GuiContainer and return */
@@ -45,7 +45,7 @@ public class GuiPack{
 		try{
 			return mgc.getDeclaredConstructor(mgcArg).newInstance(mc.getDeclaredConstructor(mcArg).newInstance(player, world, pos));
 		}catch(Exception e){
-			return new ModGuiContainer(new ModContainer(player, 51), new int[]{176, 133});
+			return new ModGuiContainer(new ModContainer(player, new int[]{8, 51}), new int[]{176, 133});
 		}
 	}
 }

@@ -25,7 +25,7 @@ public class RecipeTableContainer extends ModContainer{
 	private int lastIndex = 0;
 
 	public RecipeTableContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
-		super(playerIn, 138);
+		super(playerIn, new int[]{45, 145});
 		
 		this.world = worldIn;
 		this.pos = posIn;
@@ -33,7 +33,7 @@ public class RecipeTableContainer extends ModContainer{
 
 		this.scroll = new ItemStackHandler(1);
 
-		this.addSlotToContainer(new SlotItemHandler(scroll, 0, 151, 115){
+		this.addSlotToContainer(new SlotItemHandler(scroll, 0, 182, 71){
 			/** Only Recipe Scroll Accepted Here */
 			@Override
 			public boolean isItemValid(ItemStack stack){
@@ -43,7 +43,7 @@ public class RecipeTableContainer extends ModContainer{
 			}
 		});
 
-		this.updateSlot();
+		//this.updateSlot();
 	}
 	/** Dynamic ingredient slots */
 	private void updateSlot(){

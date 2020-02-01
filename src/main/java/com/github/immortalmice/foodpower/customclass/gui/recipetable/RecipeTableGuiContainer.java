@@ -38,7 +38,7 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 		/** Render name of the pattern */
 		String patternName = I18n.format("pattern." + CookingPatterns.list.get(this.getIndex()).getName() + ".name");
 		this.fontRenderer.drawString(patternName, (this.xSize - this.fontRenderer.getStringWidth(patternName)) / 2, 20, 0x404040);
-
+		/*
 		if(this.inventorySlots instanceof RecipeTableContainer){
     		RecipeTableContainer container = (RecipeTableContainer)this.inventorySlots;
 			List<Ingredient> ingredientList = container.getIngredients();
@@ -46,8 +46,9 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 				String ingredientName = I18n.format(ingredientList.get(i).getTranslationKey() + ".name");
 				this.fontRenderer.drawString(ingredientName, 30, 20 * i + 45, 0x404040);
 			}
-			container.tryUpdateSlot();
+			//container.tryUpdateSlot();
 		}
+		*/
 	}
 	@Override
 	public void initGui(){

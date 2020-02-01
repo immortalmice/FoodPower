@@ -24,7 +24,7 @@ public class MarketContainer extends ModContainer{
 	protected MarketTileEntity tileEntity;
 
 	public MarketContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
-		super(playerIn, 51);
+		super(playerIn, new int[]{8, 51});
 
 		world = worldIn;
 		pos = posIn;
