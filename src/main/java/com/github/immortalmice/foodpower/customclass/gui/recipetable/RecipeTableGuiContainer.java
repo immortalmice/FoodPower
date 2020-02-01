@@ -23,7 +23,7 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 	private final int BUTTON_RIGHT = 1;
 
 	public RecipeTableGuiContainer(ModContainer inventorySlotsIn){
-		super(inventorySlotsIn, new int[]{176, 220});
+		super(inventorySlotsIn, new int[]{256, 256});
 
 		this.textureFileName = "recipe_table";
 	}
