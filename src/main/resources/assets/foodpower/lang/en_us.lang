@@ -130,6 +130,9 @@ tile.recipe_table.name=Recipe Table
 
 #=======================Custom=======================
 
+#General
+general.food_type.name=Food Type
+
 #Cooking Pattern
 pattern.cake.name=Cake
 pattern.pizza.name=Pizza
@@ -140,3 +143,11 @@ pattern.noodle_soup.name=Noodle Soup
 pattern.honey_toast.name=Honey Toast
 pattern.salad.name=Salad
 pattern.juice.name=Juice
+
+#Food Type
+food_type.none.name=None
+food_type.fruit.name=Fruit
+food_type.meat.name=Meat
+food_type.vegetable.name=Vegetable
+food_type.sweet.name=Sweet
+food_type.seasoning.name=Seasoning
