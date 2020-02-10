@@ -35,6 +35,7 @@ public class RegistryHandler{
         event.getRegistry().registerAll(Ingredients.list.toArray(new Item[0]));
         event.getRegistry().registerAll(Ingredients.vanillaList.toArray(new Item[0]));
         event.getRegistry().registerAll(Ingredients.cookedFoodList.toArray(new Item[0]));
+        event.getRegistry().registerAll(Ingredients.mealFoodList.toArray(new Item[0]));
         event.getRegistry().registerAll(Crops.seedList.toArray(new Item[0]));
         event.getRegistry().registerAll(OtherItems.list.toArray(new Item[0]));
 

@@ -13,8 +13,16 @@ import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
 public class CookedFood extends Ingredient{
+	private int scrollId;
+
+	public CookedFood(String nameIn, int id){
+		super(nameIn);
+		this.scrollId = id;
+		/* To Do */
+	}
+	/* For a empty CookedFood */
 	public CookedFood(String name){
-		super(name);
+		this(name, -1);
 		
 		/** Add to ingredient list, and regist it later */
 		Ingredients.cookedFoodList.add(this);

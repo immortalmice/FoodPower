@@ -27,8 +27,15 @@ public class CookingPattern{
 		CookingPatterns.list.add(this);
 	}
 
+	public CookingPattern(){
+		this.name = "EMPTY PATTERN";
+	}
+
 	public String getName(){
 		return this.name;
+	}
+	public boolean isNotEmpty(){
+		return this.name != "EMPTY PATTERN";
 	}
 	/* Filter ingrients need to display on recipe table or not */
 	public void init(){

@@ -93,6 +93,10 @@ public class RecipeTableContainer extends ModContainer{
     			break;
     	}
     }
+    @Override
+	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int fromSlot){
+		return ItemStack.EMPTY;
+	}
 
 	/** Get ingreidient list of current pattern */
 	public List<Ingredient> getIngredients(){

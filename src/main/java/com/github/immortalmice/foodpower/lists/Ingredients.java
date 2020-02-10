@@ -10,6 +10,7 @@ import net.minecraft.item.ItemFood;
 
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
+import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 /** All the ingredient need to be registed will list below. */
@@ -17,6 +18,7 @@ public class Ingredients{
 	public static final List<Ingredient> list = new ArrayList<Ingredient>();
 	public static final List<Ingredient> vanillaList = new ArrayList<Ingredient>();
 	public static final List<CookedFood> cookedFoodList = new ArrayList<CookedFood>();
+	public static final List<Meal> mealFoodList = new ArrayList<Meal>();
 
 	/** Mod Ingrediant */
 	public static final Ingredient BUTTER = new Ingredient("butter", 1, 0.1f, FoodTypes.NONE);
@@ -64,15 +66,15 @@ public class Ingredients{
 	public static final Ingredient NETHER_WART = new Ingredient("nether_wart", Items.NETHER_WART, FoodTypes.VEGETABLE);
 
 	/** CookedFoods */
-	public static final CookedFood CAKE = new CookedFood("cake");
-	public static final CookedFood PIZZA = new CookedFood("pizza");
-	public static final CookedFood SANDWICH = new CookedFood("sandwich");
-	public static final CookedFood ICE_CREAM = new CookedFood("ice_cream");
-	public static final CookedFood FRIED_RICE = new CookedFood("fried_rice");
-	public static final CookedFood NOODLE_SOUP = new CookedFood("noodle_soup");
-	public static final CookedFood HONEY_TOAST = new CookedFood("honey_toast");
-	public static final CookedFood SALAD = new CookedFood("salad");
-	public static final CookedFood JUICE = new CookedFood("juice");
+	public static final Meal CAKE = new Meal("cake");
+	public static final Meal PIZZA = new Meal("pizza");
+	public static final Meal SANDWICH = new Meal("sandwich");
+	public static final Meal ICE_CREAM = new Meal("ice_cream");
+	public static final Meal FRIED_RICE = new Meal("fried_rice");
+	public static final Meal NOODLE_SOUP = new Meal("noodle_soup");
+	public static final Meal HONEY_TOAST = new Meal("honey_toast");
+	public static final Meal SALAD = new Meal("salad");
+	public static final Meal JUICE = new Meal("juice");
 
 	public static final CookedFood BATTER = new CookedFood("batter");
 	public static final CookedFood CAKE_BASE = new CookedFood("cake_base");
