@@ -145,9 +145,9 @@ pattern.salad.name=沙拉
 pattern.juice.name=果汁
 
 #食物種類
-food_type.none.name=無
-food_type.fruit.name=水果
-food_type.meat.name=肉
-food_type.vegetable.name=蔬菜
-food_type.sweet.name=甜食
-food_type.seasoning.name=醬料
+food_type.none.name=§7無
+food_type.fruit.name=§e水果
+food_type.meat.name=§4肉
+food_type.vegetable.name=§a蔬菜
+food_type.sweet.name=§d甜食
+food_type.seasoning.name=§9醬料

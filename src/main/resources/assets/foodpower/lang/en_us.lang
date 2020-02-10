@@ -145,9 +145,9 @@ pattern.salad.name=Salad
 pattern.juice.name=Juice
 
 #Food Type
-food_type.none.name=None
-food_type.fruit.name=Fruit
-food_type.meat.name=Meat
-food_type.vegetable.name=Vegetable
-food_type.sweet.name=Sweet
-food_type.seasoning.name=Seasoning
+food_type.none.name=§7None
+food_type.fruit.name=§eFruit
+food_type.meat.name=§4Meat
+food_type.vegetable.name=§aVegetable
+food_type.sweet.name=§dSweet
+food_type.seasoning.name=§9Seasoning

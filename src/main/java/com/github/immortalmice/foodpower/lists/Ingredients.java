@@ -63,7 +63,6 @@ public class Ingredients{
 	public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", Items.WATER_BUCKET, FoodTypes.NONE);
 	public static final Ingredient NETHER_WART = new Ingredient("nether_wart", Items.NETHER_WART, FoodTypes.VEGETABLE);
 
-
 	/** CookedFoods */
 	public static final CookedFood CAKE = new CookedFood("cake");
 	public static final CookedFood PIZZA = new CookedFood("pizza");
