@@ -1,14 +1,12 @@
-package com.github.immortalmice.foodpower.customclass;
+package com.github.immortalmice.foodpower.customclass.food;
 
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 public class FoodType{
-	private int index;
 	private String name;
 
 	public FoodType(String nameIn){
 		this.name = nameIn;
-		this.index = FoodTypes.list.size();
 
 		FoodTypes.list.add(this);
 	}

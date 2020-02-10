@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
-import com.github.immortalmice.foodpower.customclass.Ingredient;
+import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 
 public class CookingStep{
 	private KitchenAppliance equipment;
@@ -14,15 +14,15 @@ public class CookingStep{
 	public CookingStep(KitchenAppliance equipmentIn, Ingredient resultIn, Ingredient ingredientsIn[]){
 		this.equipment = equipmentIn;
 		this.result = resultIn;
-		this.AddIngredientAll(ingredientsIn);
+		this.addIngredientAll(ingredientsIn);
 	}
 
-	private void AddIngredient(Ingredient ingredientIn){
+	private void addIngredient(Ingredient ingredientIn){
 		this.ingredients.add(ingredientIn);
 	}
-	private void AddIngredientAll(Ingredient ingredientsIn[]){
+	private void addIngredientAll(Ingredient ingredientsIn[]){
 		for(int i = 0; i <= ingredientsIn.length-1; i ++){
-			this.AddIngredient(ingredientsIn[i]);
+			this.addIngredient(ingredientsIn[i]);
 		}
 	}
 	public List<Ingredient> getIngredients(){

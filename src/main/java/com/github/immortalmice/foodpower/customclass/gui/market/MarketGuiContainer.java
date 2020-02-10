@@ -65,7 +65,6 @@ public class MarketGuiContainer extends ModGuiContainer{
 	    			message = new MarketMessage();
 	    	}
 	    	FoodPower.network.sendToServer(message);
-	    	((MarketContainer)this.inventorySlots).emeraldSlot.onSlotChanged();
     	}
     }
 }

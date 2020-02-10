@@ -8,8 +8,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 
-import com.github.immortalmice.foodpower.customclass.Ingredient;
-import com.github.immortalmice.foodpower.customclass.CookedFood;
+import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 /** All the ingredient need to be registed will list below. */

@@ -6,14 +6,13 @@ import java.util.List;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
-import com.github.immortalmice.foodpower.customclass.Ingredient;
+import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 
 public class CookingPatterns{
 	public static List<CookingPattern> list = new ArrayList<CookingPattern>();
 
-	// 2 custom ingredient
 	public static CookingPattern CAKE = new CookingPattern("cake", Ingredients.CAKE, new CookingStep[]{
 		new CookingStep(KitchenAppliances.UNIVERSAL_STATION, Ingredients.BATTER, new Ingredient[]{
 			Ingredients.FLOUR, Ingredients.EGG, Ingredients.BUTTER, Ingredients.SUGAR, new Ingredient(FoodTypes.SWEET)
@@ -25,7 +24,7 @@ public class CookingPatterns{
 			Ingredients.CAKE_BASE, Ingredients.CREAM, new Ingredient(FoodTypes.FRUIT)
 		})
 	});
-	// 2 custom ingredient
+	
 	public static CookingPattern PIZZA = new CookingPattern("pizza", Ingredients.PIZZA, new CookingStep[]{
 		new CookingStep(KitchenAppliances.CHOPPING_BOARD, Ingredients.FLAT_DOUGH, new Ingredient[]{
 			Ingredients.DOUGH
@@ -40,7 +39,7 @@ public class CookingPatterns{
 			Ingredients.COOKED_PIZZA
 		})
 	});
-	// 3 custom ingredient
+	
 	public static CookingPattern SANDWICH = new CookingPattern("sandwich", Ingredients.SANDWICH, new CookingStep[]{
 		new CookingStep(KitchenAppliances.OVEN, Ingredients.TOAST, new Ingredient[]{
 			Ingredients.DOUGH
@@ -52,7 +51,7 @@ public class CookingPatterns{
 			Ingredients.TOAST_SLICE, new Ingredient(FoodTypes.MEAT), new Ingredient(FoodTypes.VEGETABLE), new Ingredient(FoodTypes.FRUIT)
 		})
 	});
-	// 2 custom ingredient
+	
 	public static CookingPattern ICE_CREAM = new CookingPattern("ice_cream", Ingredients.ICE_CREAM, new CookingStep[]{
 		new CookingStep(KitchenAppliances.JUICER, Ingredients.RAW_JUICE, new Ingredient[]{
 			new Ingredient(FoodTypes.FRUIT)
@@ -67,7 +66,7 @@ public class CookingPatterns{
 			Ingredients.ICE_CREAM_BASE, new Ingredient(FoodTypes.SWEET)
 		})
 	});
-	// 2 custom ingredient
+	
 	public static CookingPattern FRIED_RICE = new CookingPattern("fried_rice", Ingredients.FRIED_RICE, new CookingStep[]{
 		new CookingStep(KitchenAppliances.ELECTRIC_POT, Ingredients.COOKED_RICE, new Ingredient[]{
 			Ingredients.RICE, Ingredients.WATER_BUCKET
@@ -76,7 +75,7 @@ public class CookingPatterns{
 			Ingredients.COOKED_RICE, Ingredients.SALT, Ingredients.SAUCE, Ingredients.OIL, new Ingredient(FoodTypes.MEAT), new Ingredient(FoodTypes.VEGETABLE)
 		})
 	});
-	// 2 custom ingredient
+	
 	public static CookingPattern NOODLE_SOUP = new CookingPattern("noodle_soup", Ingredients.NOODLE_SOUP, new CookingStep[]{
 		new CookingStep(KitchenAppliances.CHOPPING_BOARD, Ingredients.FLAT_DOUGH, new Ingredient[]{
 			Ingredients.DOUGH
@@ -88,7 +87,7 @@ public class CookingPatterns{
 			Ingredients.WATER_BUCKET, Ingredients.SALT, Ingredients.OIL, new Ingredient(FoodTypes.MEAT), new Ingredient(FoodTypes.VEGETABLE)
 		})
 	});
-	// 2 custom ingredient
+	
 	public static CookingPattern HONEY_TOAST = new CookingPattern("honey_toast", Ingredients.HONEY_TOAST, new CookingStep[]{
 		new CookingStep(KitchenAppliances.OVEN, Ingredients.TOAST, new Ingredient[]{
 			Ingredients.DOUGH
@@ -97,13 +96,13 @@ public class CookingPatterns{
 			Ingredients.TOAST, Ingredients.SUGAR, Ingredients.CREAM, new Ingredient(FoodTypes.FRUIT), new Ingredient(FoodTypes.SWEET)
 		})
 	});
-	// 3 custom ingredient
+	
 	public static CookingPattern SALAD = new CookingPattern("salad", Ingredients.SALAD, new CookingStep[]{
 		new CookingStep(KitchenAppliances.UNIVERSAL_STATION, Ingredients.SALAD, new Ingredient[]{
 			new Ingredient(FoodTypes.VEGETABLE), new Ingredient(FoodTypes.MEAT), new Ingredient(FoodTypes.SEASONING)
 		})
 	});
-	// 2 custom ingredient
+	
 	public static CookingPattern JUICE = new CookingPattern("juice", Ingredients.JUICE, new CookingStep[]{
 		new CookingStep(KitchenAppliances.JUICER, Ingredients.RAW_JUICE, new Ingredient[]{
 			new Ingredient(FoodTypes.FRUIT), new Ingredient(FoodTypes.FRUIT)

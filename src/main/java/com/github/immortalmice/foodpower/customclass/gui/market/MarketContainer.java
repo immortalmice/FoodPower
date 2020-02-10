@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
@@ -22,6 +24,7 @@ public class MarketContainer extends ModContainer{
 	protected ItemStackHandler items;
 	protected SlotItemHandler emeraldSlot;
 	protected MarketTileEntity tileEntity;
+	private int index = 0;
 
 	public MarketContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
 		super(playerIn, new int[]{8, 51});
@@ -35,7 +38,9 @@ public class MarketContainer extends ModContainer{
 			/** Can trade with nether star? Hey, I only want EMERALD */
 			@Override
 			public boolean isItemValid(ItemStack stack){
-				return stack != null && stack.getItem() == Items.EMERALD && super.isItemValid(stack);
+				return stack != null 
+					&& stack.getItem() == Items.EMERALD 
+					&& super.isItemValid(stack);
 			}
 			@Override
 			public void onSlotChanged(){
@@ -55,14 +60,35 @@ public class MarketContainer extends ModContainer{
 				MarketContainer.this.refreshGood();
 				return stack;
 			}
-			/** I REALLY don't want implement ITickable on this simple, troublesome market block.  */
-			@Override
-			public ItemStack getStack(){
-				MarketContainer.this.refreshGood();
-				return super.getStack();
-			}
 		});
 	}
+	/* Detect Index Change Or Not */
+	@Override
+	public void detectAndSendChanges(){
+		super.detectAndSendChanges();
+
+		int tileIndex = this.tileEntity.getIndex();
+		if(this.index != tileIndex){
+			for(int i = 0; i <= this.listeners.size()-1; i ++){
+				this.listeners.get(i).sendWindowProperty(this, 0, tileIndex);
+			}
+			this.index = tileIndex;
+		}
+		this.refreshGood();
+	}
+	/* Update Index On Server Message */
+	@SideOnly(Side.CLIENT)
+    @Override
+    public void updateProgressBar(int id, int data){
+    	super.updateProgressBar(id, data);
+
+    	switch(id){
+    		case 0:
+    			this.index = data;
+    			this.refreshGood();
+    			break;
+    	}
+    }
 	/** No this override, market will be conscienceless, you can try :) */
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn){
@@ -116,15 +142,13 @@ public class MarketContainer extends ModContainer{
 	}
 	/** Get Index Form NBT, And Return Right Item */
 	public Item getItem(){
-		int index = this.tileEntity.getIndex();
-
 		int treeSize = Trees.saplingBushList.size();
 		int cropSize = Crops.seedList.size();
 
-		if(index >= 0 && index <= treeSize -1){
-			return Item.getItemFromBlock(Trees.saplingBushList.get(index));
-		}else if(index >= treeSize && index <= treeSize + cropSize -1){
-			return Crops.seedList.get(index - treeSize);
+		if(this.index >= 0 && this.index <= treeSize -1){
+			return Item.getItemFromBlock(Trees.saplingBushList.get(this.index));
+		}else if(this.index >= treeSize && this.index <= treeSize + cropSize -1){
+			return Crops.seedList.get(this.index - treeSize);
 		}else{
 			return Items.AIR;
 		}
