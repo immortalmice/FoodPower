@@ -1,18 +1,21 @@
 {
-	"parent": "block/block",
 	"textures": {
-		"particle": "foodpower:blocks/juicer_side"
+		"particle": "foodpower:blocks/juicer_side",
+		"top": "foodpower:blocks/juicer_top",
+		"side": "foodpower:blocks/juicer_side"
 	},
 	"elements": [
 		{
 			"from": [3, 2 ,3],
 			"to": [13, 16, 13],
 			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "foodpower:blocks/juicer_top"},
-				"north": {"uv": [0, 0, 16, 16], "texture": "foodpower:blocks/juicer_side"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "foodpower:blocks/juicer_side"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "foodpower:blocks/juicer_side"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "foodpower:blocks/juicer_side"}
+				"up": {"uv": [0, 0, 16, 16], "texture": "#top"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#top"},
+				"north": {"uv": [0, 0, 16, 16], "texture": "#side"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#side"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#side"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#side"}
 			}
-		}]
+		}
+	]
 }
