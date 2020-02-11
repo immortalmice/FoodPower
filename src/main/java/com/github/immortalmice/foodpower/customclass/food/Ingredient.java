@@ -60,6 +60,10 @@ public class Ingredient extends ItemFoodBase{
 		return this.foodType == a.foodType;
 	}
 
+	public FoodType getFoodType(){
+		return this.foodType;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){

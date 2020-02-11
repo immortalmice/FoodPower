@@ -26,6 +26,9 @@ public class RecipeTableContainer extends ModContainer{
 	protected RecipeTableTileEntity tileEntity;
 	private int index = 0;
 
+	private final int RADIUS = 40;
+	private final int[] CENTER = {90, 80};
+
 	public RecipeTableContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
 		super(playerIn, new int[]{45, 145});
 		
@@ -106,5 +109,13 @@ public class RecipeTableContainer extends ModContainer{
 
 	public int getIndex(){
     	return this.index;
+    }
+
+    public int getRadius(){
+    	return this.RADIUS;
+    }
+
+    public int[] getCenter(){
+    	return this.CENTER;
     }
 }
