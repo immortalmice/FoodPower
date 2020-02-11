@@ -60,6 +60,10 @@ public class Ingredient extends ItemFoodBase{
 		return this.foodType == a.foodType;
 	}
 
+    public boolean isEmpty(){
+    	return this.name == "empty";
+    }
+
 	public FoodType getFoodType(){
 		return this.foodType;
 	}

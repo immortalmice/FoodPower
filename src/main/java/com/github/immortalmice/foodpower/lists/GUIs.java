@@ -54,7 +54,6 @@ public class GUIs{
 		for(int i = containerLoadedList.size()-1; i >= 0; i --){
 			ModContainer el = containerLoadedList.get(i);
 			if(el.getPlayer().getName() == playerIn.getName()){
-				System.out.println("Same");
 				el.onContainerClosed();
 			}
 		}

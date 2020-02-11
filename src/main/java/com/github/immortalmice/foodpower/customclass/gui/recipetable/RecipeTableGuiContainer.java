@@ -2,7 +2,6 @@ package com.github.immortalmice.foodpower.customclass.gui.recipetable;
 
 import java.io.IOException;
 import java.util.List;
-import java.lang.Math;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,23 +43,18 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 		List<Ingredient> currentIngredients = container.getIngredients();
 
 		/* Make A Slot Circle With N Slots */
-		float angle = 360 / currentIngredients.size();
+		int[][] slotPos = container.getSlotPos();	
+		this.mc.getTextureManager().bindTexture(this.getSlotTexture());
+
 		for(int i = 0; i <= currentIngredients.size()-1; i ++){
-			Ingredient ingredient = currentIngredients.get(i);
-
-			this.mc.getTextureManager().bindTexture(this.getSlotTexture(ingredient.getFoodType()));
-
+			Ingredient ingredient = currentIngredients.get(i); 
 			int[] slotPosInTexture = this.getSlotPosInTexture(ingredient.getFoodType());
-			float[] slotPostInGui = {
-				(float)(container.getCenter()[0] + container.getRadius() * Math.cos((angle * i - 90) * Math.PI / 180)),
-				(float)(container.getCenter()[1] + container.getRadius() * Math.sin((angle * i - 90) * Math.PI / 180))
-			};
 			
 			this.drawTexturedModalRect(
-				offsetX + slotPostInGui[0] - 9, offsetY + slotPostInGui[1] - 9
+				offsetX + slotPos[i][0] - 9, offsetY + slotPos[i][1] - 9
 				, slotPosInTexture[0], slotPosInTexture[1]
 				, 18, 18);
-		}
+		}	
 	}
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
@@ -96,10 +90,11 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
     	}
     }
 
-    private ResourceLocation getSlotTexture(FoodType foodType){
+    private ResourceLocation getSlotTexture(){
     	String path = FoodPower.MODID + ":textures/gui/container/ingredient_block.png";
     	return new ResourceLocation(path);
     }
+    /* Used in getting the position of texture with the type */
     private int[] getSlotPosInTexture(FoodType foodType){
     	String name = foodType.getName();
 
