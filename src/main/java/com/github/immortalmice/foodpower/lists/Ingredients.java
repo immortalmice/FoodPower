@@ -60,7 +60,7 @@ public class Ingredients{
 	public static final Ingredient CHICKEN = new Ingredient("chicken", (ItemFood)Items.CHICKEN, FoodTypes.MEAT);
 	public static final Ingredient MUTTON = new Ingredient("mutton", (ItemFood)Items.MUTTON, FoodTypes.MEAT);
 	public static final Ingredient CHORUS_FRUIT = new Ingredient("chorus_fruit", (ItemFood)Items.CHORUS_FRUIT, FoodTypes.FRUIT);
-	public static final Ingredient COCOA = new Ingredient("dye", Items.DYE, FoodTypes.SWEET);
+	public static final Ingredient COCOA = new Ingredient("dye_brown", Items.DYE, FoodTypes.SWEET);
 	public static final Ingredient SUGAR = new Ingredient("sugar", Items.SUGAR, FoodTypes.NONE);
 	public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", Items.WATER_BUCKET, FoodTypes.NONE);
 	public static final Ingredient NETHER_WART = new Ingredient("nether_wart", Items.NETHER_WART, FoodTypes.VEGETABLE);

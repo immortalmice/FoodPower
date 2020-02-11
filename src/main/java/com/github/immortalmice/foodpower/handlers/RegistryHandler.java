@@ -102,7 +102,7 @@ public class RegistryHandler{
             Item item = arrayList.get(i);
             String path = item.getRegistryName().getPath();
             ModelResourceLocation marl = new ModelResourceLocation(new ResourceLocation("Minecraft", path), "inventory");
-            ModelLoader.setCustomModelResourceLocation(item, path == "dye" ? 3 : 0, marl);
+            ModelLoader.setCustomModelResourceLocation(item, 0, marl);
         }
     }
     private static void registItemBlockModelArrayList(List<? extends Block> arrayList){
