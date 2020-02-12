@@ -1,4 +1,5 @@
-{
+{	
+	"parent": "block/block",
 	"textures": {
 		"particle": "foodpower:blocks/juicer_side",
 		"top": "foodpower:blocks/juicer_top",
