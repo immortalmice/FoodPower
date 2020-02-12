@@ -28,6 +28,8 @@ public class MarketTileEntity extends TileEntityBase{
 		if(this.index > treeSize + cropSize - 1){
 			this.index -= treeSize + cropSize;
 		}
+
+		this.markDirty();
 	}
 	/** Decrease and cycle index */
 	public void decreaseIndex(){
@@ -38,6 +40,8 @@ public class MarketTileEntity extends TileEntityBase{
 		if(this.index < 0){
 			this.index += treeSize + cropSize;
 		}
+
+		this.markDirty();
 	}
 	public int getIndex(){
 		return this.index;

@@ -25,6 +25,8 @@ public class RecipeTableTileEntity extends TileEntityBase{
 		if(this.index > CookingPatterns.list.size() - 1){
 			this.index -= CookingPatterns.list.size();
 		}
+		
+		this.markDirty();
 	}
 	/** Decrease and cycle index */
 	public void decreaseIndex(){
@@ -33,6 +35,8 @@ public class RecipeTableTileEntity extends TileEntityBase{
 		if(this.index < 0){
 			this.index += CookingPatterns.list.size();
 		}
+		
+		this.markDirty();
 	}
 	public int getIndex(){
 		return this.index;
