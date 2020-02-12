@@ -47,12 +47,7 @@ public class TreeLeave extends BlockLeaves{
 
 		Trees.leaveList.add(this);
 	}
-/*
-    @Override
-    public boolean isOpaqueCube(IBlockState state){
-        return false;
-    }
-*/
+    
 	@Override
 	public BlockPlanks.EnumType getWoodType(int meta){
 		return BlockPlanks.EnumType.OAK;
