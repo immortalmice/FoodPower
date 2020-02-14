@@ -50,4 +50,8 @@ public class CookingPattern{
 	public List<Ingredient> getIngredients(){
 		return ingredientList;
 	}
+
+	public Ingredient getResult(){
+		return this.result;
+	}
 }

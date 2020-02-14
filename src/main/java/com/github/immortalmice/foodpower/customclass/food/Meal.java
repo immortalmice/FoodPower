@@ -6,7 +6,7 @@ import com.github.immortalmice.foodpower.lists.Ingredients;
 public class Meal extends CookedFood{
 	/* For a empty Meal */
 	public Meal(String nameIn){
-		super(nameIn, -1);
+		super(nameIn);
 
 		Ingredients.mealFoodList.add(this);
 	}

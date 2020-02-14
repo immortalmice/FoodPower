@@ -28,4 +28,11 @@ public class CookingStep{
 	public List<Ingredient> getIngredients(){
 		return this.ingredients;
 	}
+
+	public KitchenAppliance getEquipment(){
+		return this.equipment;
+	}
+	public Ingredient getResult(){
+		return this.result;
+	}
 }
