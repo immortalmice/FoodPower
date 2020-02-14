@@ -73,8 +73,8 @@ public class MarketContainer extends ModContainer{
 				this.listeners.get(i).sendWindowProperty(this, 0, tileIndex);
 			}
 			this.index = tileIndex;
+			this.refreshGood();
 		}
-		this.refreshGood();
 	}
 	/* Update Index On Server Message */
 	@SideOnly(Side.CLIENT)

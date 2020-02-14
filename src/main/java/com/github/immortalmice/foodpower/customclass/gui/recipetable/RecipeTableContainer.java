@@ -112,21 +112,18 @@ public class RecipeTableContainer extends ModContainer{
 		return ItemStack.EMPTY;
 	}
 
+	/* Click on slot to regist the ingredient to it */
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer playerIn){
-		if(slotId <= 37){
-			return super.slotClick(slotId, dragType, clickTypeIn, playerIn);
-		}else{
-			if(dragType != 0){
-				Slot slot = this.getSlot(slotId);
-				if(slot instanceof RecipeTableSlot){
-					RecipeTableSlot currentSlot = (RecipeTableSlot) slot;
-					ItemStack result = currentSlot.tryRegistIngrediant(playerIn.inventory.getItemStack());
-					this.putStackInSlot(slotId, result);
-				}
+		if(slotId >= 38 && slotId <= this.ingredientsSlot.getSlots() + 37){
+			Slot slot = this.getSlot(slotId);
+			if(slot instanceof RecipeTableSlot){
+				RecipeTableSlot currentSlot = (RecipeTableSlot) slot;
+				currentSlot.tryRegistIngrediant(playerIn.inventory.getItemStack());
 			}
+			return ItemStack.EMPTY;
 		}
-		return ItemStack.EMPTY;
+		return super.slotClick(slotId, dragType, clickTypeIn, playerIn);
 	}
 
 	/** Get ingreidient list of current pattern */
