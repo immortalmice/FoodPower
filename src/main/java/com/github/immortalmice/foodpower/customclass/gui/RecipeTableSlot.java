@@ -8,16 +8,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.gui.recipetable.RecipeTableContainer;
 
 /* Custom Slot, Design for Slots in Recipe Table */
 public class RecipeTableSlot extends SlotItemHandler{
 	private Ingredient ingredient;
+	private RecipeTableContainer container;
 	public RecipeTableSlot(ItemStackHandler itemStackHandlerIn, int idIn
 							, int x, int y
-							, Ingredient ingredientIn){
+							, Ingredient ingredientIn
+							, RecipeTableContainer containerIn){
 		super(itemStackHandlerIn, idIn, x, y);
 
 		this.ingredient = ingredientIn;
+		this.container = containerIn;
 
 		if(!this.ingredient.isEmpty()){
 			this.putStack(new ItemStack(this.ingredient, 1));
@@ -26,6 +30,11 @@ public class RecipeTableSlot extends SlotItemHandler{
 	@Override
 	public boolean canTakeStack(EntityPlayer playerIn){
 		return false;
+	}
+
+	@Override
+	public void onSlotChanged(){
+		container.refreshScroll();
 	}
 
 	public void tryRegistIngrediant(ItemStack hold){

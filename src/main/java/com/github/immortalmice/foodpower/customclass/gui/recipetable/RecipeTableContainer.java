@@ -1,5 +1,6 @@
 package com.github.immortalmice.foodpower.customclass.gui.recipetable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
 
@@ -19,6 +20,7 @@ import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.gui.RecipeTableSlot;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
@@ -51,6 +53,10 @@ public class RecipeTableContainer extends ModContainer{
 					&& stack.getItem() == Items.WRITABLE_BOOK 
 					&& super.isItemValid(stack);
 			}
+			@Override
+			public void onSlotChanged(){
+				RecipeTableContainer.this.refreshScroll();
+			}
 		});
 
 		this.addSlotToContainer(new SlotItemHandler(scrollSlot, 0, 182, 71){
@@ -59,11 +65,16 @@ public class RecipeTableContainer extends ModContainer{
 			public boolean isItemValid(ItemStack stack){
 				return false;
 			}
+			@Override
+			public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack){
+				RecipeTableContainer.this.bookSlot.setStackInSlot(0, ItemStack.EMPTY);
+				return stack;
+			}
 		});
 
 		this.updateSlot();
 	}
-	/** Dynamic ingredient slots */
+	/* Dynamic ingredient slots */
 	private void updateSlot(){
 		this.inventorySlots = this.inventorySlots.subList(0, 38);
 
@@ -75,8 +86,38 @@ public class RecipeTableContainer extends ModContainer{
 		for(int i = 0; i <= ingredientList.size()-1; i ++){
 			this.addSlotToContainer(new RecipeTableSlot(ingredientsSlot, i
 				, slotPos[i][0] - 8, slotPos[i][1] - 8
-				, ingredientList.get(i)));
+				, ingredientList.get(i), this));
 		}
+		this.refreshScroll();
+	}
+
+	/* Update Scroll in slot */
+	public void refreshScroll(){
+		if(bookSlot.getStackInSlot(0).getItem() == Items.WRITABLE_BOOK
+			&& !this.hasEmptyIngredientSlot()){
+			ItemStack scroll = RecipeScroll.create(CookingPatterns.list.get(this.index)
+				, this.getStackInIngredientSlots());
+			scrollSlot.setStackInSlot(0, scroll);
+		}else{
+			scrollSlot.setStackInSlot(0, ItemStack.EMPTY);
+		}
+	}
+
+	private boolean hasEmptyIngredientSlot(){
+		for(int i = 0; i <= ingredientsSlot.getSlots()-1; i ++){
+			if(ingredientsSlot.getStackInSlot(i).isEmpty()){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private List<ItemStack> getStackInIngredientSlots(){
+		List<ItemStack> ingredientsList = new ArrayList<ItemStack>();
+		for(int i = 0; i <= ingredientsSlot.getSlots()-1; i ++){
+			ingredientsList.add(ingredientsSlot.getStackInSlot(i));
+		}
+		return ingredientsList;
 	}
 
 	/* Detect Index Change Or Not */
@@ -107,9 +148,22 @@ public class RecipeTableContainer extends ModContainer{
     			break;
     	}
     }
+
     @Override
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int fromSlot){
 		return ItemStack.EMPTY;
+	}
+
+	@Override
+	public void onContainerClosed(EntityPlayer playerIn){
+		super.onContainerClosed(playerIn);
+		if(playerIn.isServerWorld()){
+			if(playerIn.inventory.getFirstEmptyStack() != -1){
+				playerIn.inventory.addItemStackToInventory(bookSlot.getStackInSlot(0));
+			}else{
+				playerIn.dropItem(bookSlot.getStackInSlot(0), false);
+			}
+		}
 	}
 
 	/* Click on slot to regist the ingredient to it */

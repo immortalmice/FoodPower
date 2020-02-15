@@ -68,6 +68,10 @@ public class Ingredient extends ItemFoodBase{
 		return this.foodType;
 	}
 
+	public String getName(){
+		return this.name;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){

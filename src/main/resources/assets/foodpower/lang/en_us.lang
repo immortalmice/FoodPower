@@ -132,6 +132,10 @@ tile.recipe_table.name=Recipe Table
 
 #General
 general.food_type.name=Food Type
+general.cooking_pattern.name=Cooking Pattern
+general.ingredient.name=Ingredient
+general.ingredients.name=Ingredients
+general.none.name=None
 
 #Cooking Pattern
 pattern.cake.name=Cake

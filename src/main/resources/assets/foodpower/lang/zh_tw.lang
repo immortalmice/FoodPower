@@ -132,6 +132,10 @@ tile.recipe_table.name=食譜桌
 
 #全域名字
 general.food_type.name=食物種類
+general.cooking_pattern.name=料理樣板
+general.ingredient.name=食材
+general.ingredients.name=食材
+general.none.name=無
 
 #食譜樣板
 pattern.cake.name=蛋糕
