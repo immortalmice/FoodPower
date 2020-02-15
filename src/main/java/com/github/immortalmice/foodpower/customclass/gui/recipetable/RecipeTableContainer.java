@@ -30,7 +30,9 @@ public class RecipeTableContainer extends ModContainer{
 	protected BlockPos pos;
 	protected ItemStackHandler scrollSlot, bookSlot, ingredientsSlot;
 	protected RecipeTableTileEntity tileEntity;
+
 	private int index = 0;
+	private String inputText = "";
 
 	private final int RADIUS = 40;
 	private final int[] CENTER = {90, 80};
@@ -46,7 +48,7 @@ public class RecipeTableContainer extends ModContainer{
 		this.scrollSlot = new ItemStackHandler(1);
 
 		this.addSlotToContainer(new SlotItemHandler(bookSlot, 0, 83, 72){
-			/** Only Recipe Scroll Accepted Here */
+			/** Only Writable Book Accepted Here */
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return stack != null 
@@ -60,7 +62,6 @@ public class RecipeTableContainer extends ModContainer{
 		});
 
 		this.addSlotToContainer(new SlotItemHandler(scrollSlot, 0, 182, 71){
-			/** Only Recipe Scroll Accepted Here */
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return false;
@@ -95,8 +96,12 @@ public class RecipeTableContainer extends ModContainer{
 	public void refreshScroll(){
 		if(bookSlot.getStackInSlot(0).getItem() == Items.WRITABLE_BOOK
 			&& !this.hasEmptyIngredientSlot()){
-			ItemStack scroll = RecipeScroll.create(CookingPatterns.list.get(this.index)
-				, this.getStackInIngredientSlots());
+
+			ItemStack scroll = RecipeScroll.create(
+				  CookingPatterns.list.get(this.index)
+				, this.getStacksInIngredientSlots()
+				, this.inputText);
+
 			scrollSlot.setStackInSlot(0, scroll);
 		}else{
 			scrollSlot.setStackInSlot(0, ItemStack.EMPTY);
@@ -112,7 +117,7 @@ public class RecipeTableContainer extends ModContainer{
 		return false;
 	}
 
-	private List<ItemStack> getStackInIngredientSlots(){
+	private List<ItemStack> getStacksInIngredientSlots(){
 		List<ItemStack> ingredientsList = new ArrayList<ItemStack>();
 		for(int i = 0; i <= ingredientsSlot.getSlots()-1; i ++){
 			ingredientsList.add(ingredientsSlot.getStackInSlot(i));
@@ -120,7 +125,7 @@ public class RecipeTableContainer extends ModContainer{
 		return ingredientsList;
 	}
 
-	/* Detect Index Change Or Not */
+	/* Detect Index and inputText Change Or Not */
 	@Override
 	public void detectAndSendChanges(){
 		super.detectAndSendChanges();
@@ -133,9 +138,18 @@ public class RecipeTableContainer extends ModContainer{
 			this.index = tileIndex;
 			this.updateSlot();
 		}
+
+		String tileInputText = this.tileEntity.getInputText();
+		if(this.inputText != tileInputText){
+			for(int i = 0; i <= this.listeners.size()-1; i ++){
+				this.listeners.get(i).sendWindowProperty(this, 1, -1);
+			}
+			this.inputText = tileInputText;
+			this.refreshScroll();
+		}
 	}
 
-	/* Update Index On Server Message */
+	/* Update Index and inputText On Server Message */
 	@SideOnly(Side.CLIENT)
     @Override
     public void updateProgressBar(int id, int data){
@@ -145,6 +159,10 @@ public class RecipeTableContainer extends ModContainer{
     		case 0:
     			this.index = data;
     			this.updateSlot();
+    			break;
+    		case 1:
+    			this.inputText = this.tileEntity.getInputText();
+    			this.refreshScroll();
     			break;
     	}
     }

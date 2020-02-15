@@ -16,10 +16,11 @@ import com.github.immortalmice.foodpower.baseclass.MessageHandlerBase;
 
 /** Used to trasfer RecipeTable data to update */
 public class RecipeTableMessage implements IMessage{
-	private String message;
+	private String action, message;
 	private BlockPos pos;
 
-	public RecipeTableMessage(String messageIn, BlockPos posIn){
+	public RecipeTableMessage(String actionIn, String messageIn, BlockPos posIn){
+		this.action = actionIn;
 		this.message = messageIn;
 		this.pos = posIn;
 	}
@@ -34,6 +35,7 @@ public class RecipeTableMessage implements IMessage{
 		int y = ByteBufUtils.readVarInt(buf, 5);
 		int z = ByteBufUtils.readVarInt(buf, 5);
 		this.pos = new BlockPos(x, y, z);
+		this.action = ByteBufUtils.readUTF8String(buf);
 		this.message = ByteBufUtils.readUTF8String(buf);
 	}
 	@Override
@@ -41,11 +43,16 @@ public class RecipeTableMessage implements IMessage{
 		ByteBufUtils.writeVarInt(buf, this.pos.getX(), 5);
 		ByteBufUtils.writeVarInt(buf, this.pos.getY(), 5);
 		ByteBufUtils.writeVarInt(buf, this.pos.getZ(), 5);
+		ByteBufUtils.writeUTF8String(buf, this.action);
 		ByteBufUtils.writeUTF8String(buf, this.message);
 	}
 
 	public String getMessage(){
-		return message;
+		return this.message;
+	}
+
+	public String getAction(){
+		return this.action;
 	}
 
 	public static class Handler extends MessageHandlerBase implements IMessageHandler<RecipeTableMessage, IMessage>{
@@ -56,15 +63,23 @@ public class RecipeTableMessage implements IMessage{
 			if(world != null){
 				TileEntity tile = world.getTileEntity(message.pos);
 				if(tile instanceof RecipeTableTileEntity){
-					switch(message.getMessage()){
-						case "Decrease Index":
-							((RecipeTableTileEntity) tile).decreaseIndex();
+					switch(message.getAction()){
+						case "Set Index":
+							switch(message.getMessage()){
+								case "Decrease":
+									((RecipeTableTileEntity) tile).decreaseIndex();
+									break;
+								case "Increase":
+									((RecipeTableTileEntity) tile).increaseIndex();
+									break;
+								default:
+							}
 							break;
-						case "Increase Index":
-							((RecipeTableTileEntity) tile).increaseIndex();
+						case "Set InputText":
+							((RecipeTableTileEntity) tile).setInputText(message.getMessage());
 							break;
-						default:
 					}
+					
 				}
 				IBlockState blockState = world.getBlockState(message.pos);
 				world.notifyBlockUpdate(message.pos, blockState, blockState, Constants.BlockFlags.SEND_TO_CLIENTS);

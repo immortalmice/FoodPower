@@ -135,6 +135,7 @@ general.food_type.name=Food Type
 general.cooking_pattern.name=Cooking Pattern
 general.ingredient.name=Ingredient
 general.ingredients.name=Ingredients
+general.level.name=Level
 general.none.name=None
 
 #Cooking Pattern

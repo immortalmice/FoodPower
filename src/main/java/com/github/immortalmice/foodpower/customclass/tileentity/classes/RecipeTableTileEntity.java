@@ -7,14 +7,18 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 public class RecipeTableTileEntity extends TileEntityBase{
 	private int index = 0;
+	private String inputText = "Unknown Recipe";
+
 	@Override
 	public void readFromNBT(NBTTagCompound tag){
 		super.readFromNBT(tag);
 		this.index = tag.getInteger("index");
+		this.inputText = tag.getString("inputText");
 	}
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag){
 		tag.setInteger("index", this.index);
+		tag.setString("inputText", this.inputText);
 		return super.writeToNBT(tag);
 	}
 
@@ -38,7 +42,18 @@ public class RecipeTableTileEntity extends TileEntityBase{
 		
 		this.markDirty();
 	}
+
+	public void setInputText(String str){
+		this.inputText = str;
+
+		this.markDirty();
+	}
+
 	public int getIndex(){
 		return this.index;
+	}
+
+	public String getInputText(){
+		return this.inputText;
 	}
 }

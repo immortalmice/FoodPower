@@ -71,7 +71,7 @@ public class Ingredient extends ItemFoodBase{
 	public String getName(){
 		return this.name;
 	}
-
+	/* Show FoodType on tooltip */
 	@SideOnly(Side.CLIENT)
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){

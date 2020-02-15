@@ -17,6 +17,7 @@ public class CookedFood extends Ingredient{
 	public CookedFood(String name){
 		super(name);
 		
+		this.setMaxStackSize(1);
 		/** Add to ingredient list, and regist it later */
 		Ingredients.cookedFoodList.add(this);
 	}
