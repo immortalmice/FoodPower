@@ -136,6 +136,7 @@ general.cooking_pattern.name=Cooking Pattern
 general.ingredient.name=Ingredient
 general.ingredients.name=Ingredients
 general.level.name=Level
+general.unknown_recipe.name=Unknown Recipe
 general.none.name=None
 
 #Cooking Pattern

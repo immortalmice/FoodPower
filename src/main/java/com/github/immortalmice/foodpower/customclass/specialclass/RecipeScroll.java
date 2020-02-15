@@ -83,6 +83,6 @@ public class RecipeScroll extends ItemBase{
 
     		return stack.getTagCompound().getString("displayName");
     	}
-    	return "Unknown Recipe";
+    	return I18n.format("general.unknown_recipe.name");
     }
 }

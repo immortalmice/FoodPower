@@ -136,6 +136,7 @@ general.cooking_pattern.name=料理樣板
 general.ingredient.name=食材
 general.ingredients.name=食材
 general.level.name=等級
+general.unknown_recipe.name=未命名的食譜
 general.none.name=無
 
 #食譜樣板
