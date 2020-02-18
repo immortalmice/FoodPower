@@ -20,36 +20,39 @@ import com.github.immortalmice.foodpower.lists.FoodTypes;
 public class Ingredient extends ItemFoodBase{
 	private String name;
 	private FoodType foodType;
+	/* baseAmount is the value that this ingredient needed per food in level 1 */
+	private double baseAmount;
 	/** For Mod Ingredients */
-	public Ingredient(String nameIn, int amount, float saturation, FoodType ftIn){
+	public Ingredient(String nameIn, int amount, float saturation, FoodType ftIn, double amountIn){
 		super(nameIn, amount, saturation);
 
 		this.name = nameIn;
 		this.foodType = ftIn;
+		this.baseAmount = amountIn;
 
         /** Add to ingredient list, and regist it later */
         Ingredients.list.add(this);
 	}
 	/** For Vanilla Ingredient is Food */
-	public Ingredient(String nameIn, ItemFood itemIn, FoodType ftIn){
-		this(nameIn, itemIn.getHealAmount(ItemStack.EMPTY), itemIn.getSaturationModifier(ItemStack.EMPTY), ftIn);
+	public Ingredient(String nameIn, ItemFood itemIn, FoodType ftIn, double amountIn){
+		this(nameIn, itemIn.getHealAmount(ItemStack.EMPTY), itemIn.getSaturationModifier(ItemStack.EMPTY), ftIn, amountIn);
 
 		/** Add to ingredient list, and regist it later */
 		Ingredients.vanillaList.add(this);
 	}
 	/** For Vanilla Ingredient not Food */
-	public Ingredient(String nameIn, Item itemIn, FoodType ftIn){
-		this(nameIn, 0, 0.0f, ftIn);
+	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, double amountIn){
+		this(nameIn, 0, 0.0f, ftIn, amountIn);
 
 		Ingredients.vanillaList.add(this);
 	}
 	/** For CookedFoods */
 	public Ingredient(String nameIn){
-		this(nameIn, 2, 0.4f, FoodTypes.NONE);
+		this(nameIn, 2, 0.4f, FoodTypes.NONE, 1);
 	}
 	/** For Empty (Use In Present A Food With That Type) */
 	public Ingredient(FoodType ftIn){
-		this("empty", 0, 0.0f, ftIn);
+		this("empty", 0, 0.0f, ftIn, 1);
 	}
 
 	public boolean isEqual(Ingredient a){
@@ -70,6 +73,10 @@ public class Ingredient extends ItemFoodBase{
 
 	public String getName(){
 		return this.name;
+	}
+
+	public double getBaseAmount(){
+		return this.baseAmount;
 	}
 	/* Show FoodType on tooltip */
 	@SideOnly(Side.CLIENT)

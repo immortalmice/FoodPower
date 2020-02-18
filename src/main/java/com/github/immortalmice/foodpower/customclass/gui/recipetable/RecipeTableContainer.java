@@ -69,6 +69,8 @@ public class RecipeTableContainer extends ModContainer{
 			@Override
 			public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack){
 				RecipeTableContainer.this.bookSlot.setStackInSlot(0, ItemStack.EMPTY);
+				/* Init the amount needed in recipe, and rarity */
+				RecipeScroll.initStack(stack, RecipeTableContainer.this.world.rand);
 				return stack;
 			}
 		});

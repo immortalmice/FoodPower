@@ -1,6 +1,8 @@
 package com.github.immortalmice.foodpower.customclass.specialclass;
 
 import java.util.List;
+import java.util.Random;
+import java.lang.Math;
 import javax.annotation.Nullable;
 
 import net.minecraft.item.ItemStack;
@@ -11,10 +13,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.entity.player.EntityPlayer;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.lists.Ingredients;
+import com.github.immortalmice.foodpower.lists.GUIs;
 import com.github.immortalmice.foodpower.lists.other.OtherItems;
 
 public class RecipeScroll extends ItemBase{
@@ -22,6 +31,8 @@ public class RecipeScroll extends ItemBase{
 		super("recipe_scroll");
 
 		this.setMaxStackSize(1);
+        this.setHasSubtypes(true);
+        this.setMaxDamage(0);
 
 		OtherItems.list.add(this);
 	}
@@ -39,7 +50,7 @@ public class RecipeScroll extends ItemBase{
 		for(int i = 0; i <= listIn.size()-1; i ++){
 			NBTTagCompound element = new NBTTagCompound();
 			element.setString("name", ((Ingredient)listIn.get(i).getItem()).getName());
-			element.setInteger("count", listIn.get(i).getCount());
+			element.setInteger("level", listIn.get(i).getCount());
 			tagList.appendTag(element);
 		}
 		nbt.setTag("ingredients", tagList);
@@ -47,6 +58,26 @@ public class RecipeScroll extends ItemBase{
 		result.setTagCompound(nbt);
 		return result;
 	}
+
+    public static void initStack(ItemStack stack, Random rand){
+        NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+
+        if(nbt.hasKey("rarity")) return;
+
+        int rarity = rand.nextInt(4);
+        stack.setItemDamage(rarity);
+        nbt.setInteger("rarity", rarity);
+
+        if(nbt.hasKey("ingredients")){
+            NBTTagList list = (NBTTagList)nbt.getTag("ingredients");
+            for(int i = 0; i <= list.tagCount()-1; i ++){
+                NBTTagCompound element = (NBTTagCompound)list.get(i);
+                Ingredient ingrdient = Ingredients.getIngredientByName(element.getString("name"));
+                int amount = (int) Math.ceil(ingrdient.getBaseAmount() * 64 * Math.pow(2, element.getInteger("level") - 1) * (rand.nextFloat() * 0.2 + 0.9));
+                element.setInteger("amount", amount);
+            }
+        }
+    }
 
 	/* Add information about pattern and ingrdient to tooltip */
 	@SideOnly(Side.CLIENT)
@@ -69,12 +100,15 @@ public class RecipeScroll extends ItemBase{
     		for(int i = 0; i <= list.tagCount()-1; i ++){
     			NBTTagCompound element = list.getCompoundTagAt(i);
     			String ingredientStr = I18n.format("item." + element.getString("name") + ".name");
-    			ingredientStr += "(" + I18n.format("general.level.name") + element.getInteger("count") + ")";
+    			ingredientStr += " [" + I18n.format("general.level.name") + element.getInteger("level") + "]";
+                if(element.hasKey("amount"))
+                    ingredientStr += " (" + element.getInteger("amount") + ")";
     			tooltip.add("  " + ingredientStr);
     		}
     	}
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public String getItemStackDisplayName(ItemStack stack){
     	if(stack.hasTagCompound() 
@@ -84,5 +118,15 @@ public class RecipeScroll extends ItemBase{
     		return stack.getTagCompound().getString("displayName");
     	}
     	return I18n.format("general.unknown_recipe.name");
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
+        /* Only Open Gui in client side */
+        if(worldIn.isRemote){
+            BlockPos pos = playerIn.getPosition();
+            playerIn.openGui(FoodPower.instance, GUIs.RECIPE_SCROLL.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+        }
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

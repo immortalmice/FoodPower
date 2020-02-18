@@ -1,5 +1,7 @@
 package com.github.immortalmice.foodpower.customclass.gui;
 
+import net.minecraft.world.World;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -14,6 +16,8 @@ public class ModContainer extends Container{
 		super();
 		this.player = playerIn;
 		/** Player Inventory Slots */
+		if(offset[0] == -1 && offset[1] == -1)
+			return;
 		int slotSize = 18;
 		for (int i = 0; i < 3; ++i){
             for (int j = 0; j < 9; ++j){
@@ -23,6 +27,9 @@ public class ModContainer extends Container{
         for (int i = 0; i < 9; ++i){
             this.addSlotToContainer(new Slot(this.player.inventory, i, offset[0] + i * 18, offset[1] + 3 * slotSize + 6));
         }
+	}
+	public ModContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
+		this(playerIn, new int[]{-1, -1});
 	}
 
 	@Override

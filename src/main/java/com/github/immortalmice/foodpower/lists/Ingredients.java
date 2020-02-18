@@ -21,49 +21,49 @@ public class Ingredients{
 	public static final List<Meal> mealFoodList = new ArrayList<Meal>();
 
 	/** Mod Ingrediant */
-	public static final Ingredient BUTTER = new Ingredient("butter", 1, 0.1f, FoodTypes.NONE);
-	public static final Ingredient ORANGE = new Ingredient("orange", 1, 0.1f, FoodTypes.FRUIT);
-	public static final Ingredient KIWI = new Ingredient("kiwi", 1, 0.1f, FoodTypes.FRUIT);
-	public static final Ingredient PAPAYA = new Ingredient("papaya", 1, 0.1f, FoodTypes.FRUIT);
-	public static final Ingredient MANGO = new Ingredient("mango", 1, 0.1f, FoodTypes.FRUIT);
-	public static final Ingredient LEMON = new Ingredient("lemon", 1, 0.1f, FoodTypes.FRUIT);
-	public static final Ingredient MINT = new Ingredient("mint", 1, 0.1f, FoodTypes.SWEET);
-	public static final Ingredient FERMENTED_ENDEREYE = new Ingredient("fermented_endereye", 1, 0.1f, FoodTypes.SWEET);
-	public static final Ingredient DOUGH = new Ingredient("dough", 1, 0.1f, FoodTypes.NONE);
-	public static final Ingredient TOMATO = new Ingredient("tomato", 1, 0.1f, FoodTypes.VEGETABLE);
-	public static final Ingredient KETCHUP = new Ingredient("ketchup", 1, 0.1f, FoodTypes.SEASONING);
-	public static final Ingredient SAUCE = new Ingredient("sauce", 1, 0.1f, FoodTypes.SEASONING);
-	public static final Ingredient SALT = new Ingredient("salt", 1, 0.1f, FoodTypes.NONE);
-	public static final Ingredient OIL = new Ingredient("oil", 1, 0.1f, FoodTypes.NONE);
-	public static final Ingredient RICE = new Ingredient("rice", 1, 0.1f, FoodTypes.NONE);
-	public static final Ingredient CHEESE = new Ingredient("cheese", 1, 0.1f, FoodTypes.NONE);
-	public static final Ingredient CHILI = new Ingredient("chili", 1, 0.1f, FoodTypes.VEGETABLE);
-	public static final Ingredient SPINACH = new Ingredient("spinach", 1, 0.1f, FoodTypes.VEGETABLE);
-	public static final Ingredient CABBAGE = new Ingredient("cabbage", 1, 0.1f, FoodTypes.VEGETABLE);
-	public static final Ingredient FLOUR = new Ingredient("flour", 1, 0.1f, FoodTypes.NONE);
-	public static final Ingredient CORN = new Ingredient("corn", 1, 0.1f, FoodTypes.VEGETABLE);
-	public static final Ingredient CREAM = new Ingredient("cream", 1, 0.1f, FoodTypes.NONE);
+	public static final Ingredient BUTTER = new Ingredient("butter", 1, 0.1f, FoodTypes.NONE, 1);
+	public static final Ingredient ORANGE = new Ingredient("orange", 1, 0.1f, FoodTypes.FRUIT, 1);
+	public static final Ingredient KIWI = new Ingredient("kiwi", 1, 0.1f, FoodTypes.FRUIT, 1);
+	public static final Ingredient PAPAYA = new Ingredient("papaya", 1, 0.1f, FoodTypes.FRUIT, 1);
+	public static final Ingredient MANGO = new Ingredient("mango", 1, 0.1f, FoodTypes.FRUIT, 1);
+	public static final Ingredient LEMON = new Ingredient("lemon", 1, 0.1f, FoodTypes.FRUIT, 1);
+	public static final Ingredient MINT = new Ingredient("mint", 1, 0.1f, FoodTypes.SWEET, 1.8);
+	public static final Ingredient FERMENTED_ENDEREYE = new Ingredient("fermented_endereye", 1, 0.1f, FoodTypes.SWEET, 1);
+	public static final Ingredient DOUGH = new Ingredient("dough", 1, 0.1f, FoodTypes.NONE, 1.2);
+	public static final Ingredient TOMATO = new Ingredient("tomato", 1, 0.1f, FoodTypes.VEGETABLE, 1.1);
+	public static final Ingredient KETCHUP = new Ingredient("ketchup", 1, 0.1f, FoodTypes.SEASONING, 0.8);
+	public static final Ingredient SAUCE = new Ingredient("sauce", 1, 0.1f, FoodTypes.SEASONING, 0.8);
+	public static final Ingredient SALT = new Ingredient("salt", 1, 0.1f, FoodTypes.NONE, 2);
+	public static final Ingredient OIL = new Ingredient("oil", 1, 0.1f, FoodTypes.NONE, 0.8);
+	public static final Ingredient RICE = new Ingredient("rice", 1, 0.1f, FoodTypes.NONE, 2.2);
+	public static final Ingredient CHEESE = new Ingredient("cheese", 1, 0.1f, FoodTypes.NONE, 1.2);
+	public static final Ingredient CHILI = new Ingredient("chili", 1, 0.1f, FoodTypes.VEGETABLE, 0.8);
+	public static final Ingredient SPINACH = new Ingredient("spinach", 1, 0.1f, FoodTypes.VEGETABLE, 1);
+	public static final Ingredient CABBAGE = new Ingredient("cabbage", 1, 0.1f, FoodTypes.VEGETABLE, 1);
+	public static final Ingredient FLOUR = new Ingredient("flour", 1, 0.1f, FoodTypes.NONE, 0.8);
+	public static final Ingredient CORN = new Ingredient("corn", 1, 0.1f, FoodTypes.VEGETABLE, 1);
+	public static final Ingredient CREAM = new Ingredient("cream", 1, 0.1f, FoodTypes.NONE, 1.2);
 
 	/** Vanilla Ingrediant */
-	public static final Ingredient APPLE = new Ingredient("apple", (ItemFood)Items.APPLE, FoodTypes.FRUIT);
-	public static final Ingredient MELON = new Ingredient("melon", (ItemFood)Items.MELON, FoodTypes.FRUIT);
-	public static final Ingredient PUMPKIN = new Ingredient("pumpkin", Item.getItemFromBlock(Blocks.PUMPKIN), FoodTypes.VEGETABLE);
-	public static final Ingredient CARROT = new Ingredient("carrot", (ItemFood)Items.CARROT, FoodTypes.VEGETABLE);
-	public static final Ingredient POTATO = new Ingredient("potato", (ItemFood)Items.POTATO, FoodTypes.VEGETABLE);
-	public static final Ingredient BEETROOT = new Ingredient("beetroot", (ItemFood)Items.BEETROOT, FoodTypes.VEGETABLE);
-	public static final Ingredient BROWN_MUSHROOM = new Ingredient("brown_mushroom", Item.getItemFromBlock(Blocks.BROWN_MUSHROOM), FoodTypes.VEGETABLE);
-	public static final Ingredient RED_MUSHROOM = new Ingredient("red_mushroom", Item.getItemFromBlock(Blocks.RED_MUSHROOM), FoodTypes.VEGETABLE);
-	public static final Ingredient EGG = new Ingredient("egg", Items.EGG, FoodTypes.NONE);
-	public static final Ingredient MILK_BUCKET = new Ingredient("milk_bucket", Items.MILK_BUCKET, FoodTypes.NONE);
-	public static final Ingredient PORKCHOP = new Ingredient("porkchop", (ItemFood)Items.PORKCHOP, FoodTypes.MEAT);
-	public static final Ingredient BEEF = new Ingredient("beef", (ItemFood)Items.BEEF, FoodTypes.MEAT);
-	public static final Ingredient CHICKEN = new Ingredient("chicken", (ItemFood)Items.CHICKEN, FoodTypes.MEAT);
-	public static final Ingredient MUTTON = new Ingredient("mutton", (ItemFood)Items.MUTTON, FoodTypes.MEAT);
-	public static final Ingredient CHORUS_FRUIT = new Ingredient("chorus_fruit", (ItemFood)Items.CHORUS_FRUIT, FoodTypes.FRUIT);
-	public static final Ingredient COCOA = new Ingredient("dye_brown", Items.DYE, FoodTypes.SWEET);
-	public static final Ingredient SUGAR = new Ingredient("sugar", Items.SUGAR, FoodTypes.NONE);
-	public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", Items.WATER_BUCKET, FoodTypes.NONE);
-	public static final Ingredient NETHER_WART = new Ingredient("nether_wart", Items.NETHER_WART, FoodTypes.VEGETABLE);
+	public static final Ingredient APPLE = new Ingredient("apple", (ItemFood)Items.APPLE, FoodTypes.FRUIT, 1);
+	public static final Ingredient MELON = new Ingredient("melon", (ItemFood)Items.MELON, FoodTypes.FRUIT, 1);
+	public static final Ingredient PUMPKIN = new Ingredient("pumpkin", Item.getItemFromBlock(Blocks.PUMPKIN), FoodTypes.VEGETABLE, 0.8);
+	public static final Ingredient CARROT = new Ingredient("carrot", (ItemFood)Items.CARROT, FoodTypes.VEGETABLE, 1.2);
+	public static final Ingredient POTATO = new Ingredient("potato", (ItemFood)Items.POTATO, FoodTypes.VEGETABLE, 1.2);
+	public static final Ingredient BEETROOT = new Ingredient("beetroot", (ItemFood)Items.BEETROOT, FoodTypes.VEGETABLE, 1.2);
+	public static final Ingredient BROWN_MUSHROOM = new Ingredient("brown_mushroom", Item.getItemFromBlock(Blocks.BROWN_MUSHROOM), FoodTypes.VEGETABLE, 1.4);
+	public static final Ingredient RED_MUSHROOM = new Ingredient("red_mushroom", Item.getItemFromBlock(Blocks.RED_MUSHROOM), FoodTypes.VEGETABLE, 1.4);
+	public static final Ingredient EGG = new Ingredient("egg", Items.EGG, FoodTypes.NONE, 1);
+	public static final Ingredient MILK_BUCKET = new Ingredient("milk_bucket", Items.MILK_BUCKET, FoodTypes.NONE, 0.6);
+	public static final Ingredient PORKCHOP = new Ingredient("porkchop", (ItemFood)Items.PORKCHOP, FoodTypes.MEAT, 1);
+	public static final Ingredient BEEF = new Ingredient("beef", (ItemFood)Items.BEEF, FoodTypes.MEAT, 1);
+	public static final Ingredient CHICKEN = new Ingredient("chicken", (ItemFood)Items.CHICKEN, FoodTypes.MEAT, 1);
+	public static final Ingredient MUTTON = new Ingredient("mutton", (ItemFood)Items.MUTTON, FoodTypes.MEAT, 1);
+	public static final Ingredient CHORUS_FRUIT = new Ingredient("chorus_fruit", (ItemFood)Items.CHORUS_FRUIT, FoodTypes.FRUIT, 1);
+	public static final Ingredient COCOA = new Ingredient("dye_brown", Items.DYE, FoodTypes.SWEET, 2);
+	public static final Ingredient SUGAR = new Ingredient("sugar", Items.SUGAR, FoodTypes.NONE, 2);
+	public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", Items.WATER_BUCKET, FoodTypes.NONE, 0.6);
+	public static final Ingredient NETHER_WART = new Ingredient("nether_wart", Items.NETHER_WART, FoodTypes.VEGETABLE, 1.2);
 
 	/** CookedFoods */
 	public static final Meal CAKE = new Meal("cake");
@@ -89,4 +89,24 @@ public class Ingredients{
 	public static final CookedFood COOKED_RICE = new CookedFood("cooked_rice");
 	public static final CookedFood NOODLE = new CookedFood("noodle");
 	public static final CookedFood ICE = new CookedFood("ice");
+
+	public static Ingredient getIngredientByName(String nameIn){
+		for(Ingredient ingredient : list){
+			if(ingredient.getName() == nameIn)
+				return ingredient;
+		}
+		for(Ingredient ingredient : vanillaList){
+			if(ingredient.getName() == nameIn)
+				return ingredient;
+		}
+		for(Ingredient ingredient : cookedFoodList){
+			if(ingredient.getName() == nameIn)
+				return ingredient;
+		}
+		for(Ingredient ingredient : mealFoodList){
+			if(ingredient.getName() == nameIn)
+				return ingredient;
+		}
+		return new Ingredient(FoodTypes.NONE);
+	}
 }

@@ -19,6 +19,7 @@ public class GUIs{
 
 	public static GuiPack MARKET = new GuiPack(MarketContainer.class, GUIs.checkClassExist("MarketGuiContainer", "market"));
 	public static GuiPack RECIPE_TABLE = new GuiPack(RecipeTableContainer.class, GUIs.checkClassExist("RecipeTableGuiContainer", "recipetable"));
+	public static GuiPack RECIPE_SCROLL = new GuiPack(ModContainer.class, GUIs.checkClassExist("RecipeScrollGuiContainer", "recipescroll"));
 
 	/** If ClassNotFound, It may on the serverside */
 	@SuppressWarnings("unchecked")
