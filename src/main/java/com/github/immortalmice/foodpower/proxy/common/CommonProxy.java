@@ -10,8 +10,8 @@ import com.github.immortalmice.foodpower.event.TerrainEventHandler;
 import com.github.immortalmice.foodpower.event.NormalEventHandler;
 import com.github.immortalmice.foodpower.handlers.GuiHandler;
 import com.github.immortalmice.foodpower.lists.Crops;
-import com.github.immortalmice.foodpower.customclass.message.MarketMessage;
-import com.github.immortalmice.foodpower.customclass.message.RecipeTableMessage;
+import com.github.immortalmice.foodpower.customclass.message.classes.MarketMessage;
+import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
 
 public class CommonProxy{
 	public void preInit(FMLPreInitializationEvent event){

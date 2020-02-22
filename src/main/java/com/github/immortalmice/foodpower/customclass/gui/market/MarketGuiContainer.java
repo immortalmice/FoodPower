@@ -12,7 +12,7 @@ import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.gui.Button;
-import com.github.immortalmice.foodpower.customclass.message.MarketMessage;
+import com.github.immortalmice.foodpower.customclass.message.classes.MarketMessage;
 
 @SideOnly(Side.CLIENT)
 public class MarketGuiContainer extends ModGuiContainer{

@@ -68,15 +68,22 @@ public class RecipeScroll extends ItemBase{
         stack.setItemDamage(rarity);
         nbt.setInteger("rarity", rarity);
 
+        nbt.setDouble("random", rand.nextFloat() * 0.2 + 0.9);
+        nbt.setInteger("output_amount", 1);
+
         if(nbt.hasKey("ingredients")){
             NBTTagList list = (NBTTagList)nbt.getTag("ingredients");
             for(int i = 0; i <= list.tagCount()-1; i ++){
                 NBTTagCompound element = (NBTTagCompound)list.get(i);
-                Ingredient ingrdient = Ingredients.getIngredientByName(element.getString("name"));
-                int amount = (int) Math.ceil(ingrdient.getBaseAmount() * 64 * Math.pow(2, element.getInteger("level") - 1) * (rand.nextFloat() * 0.2 + 0.9));
+                int amount = RecipeScroll.calcuAmount(element.getString("name"), nbt.getInteger("output_amount"), element.getInteger("level"), nbt.getDouble("random"));
                 element.setInteger("amount", amount);
             }
         }
+    }
+
+    private static int calcuAmount(String ingredientName, int outputAmount, int level, Double rand){
+        Ingredient ingrdient = Ingredients.getIngredientByName(ingredientName);
+        return (int) Math.ceil(ingrdient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand);
     }
 
 	/* Add information about pattern and ingrdient to tooltip */

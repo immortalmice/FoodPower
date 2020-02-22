@@ -68,7 +68,6 @@ public class RegistryHandler{
     	registItemModelArrayList(Ingredients.list);
         registItemModelArrayList(Ingredients.cookedFoodList);
     	registItemModelArrayList(Crops.seedList);
-        registItemModelArrayList(OtherItems.list);
 
         /** Vanilla Item Model */
         registItemVanillaModelArrayList(Ingredients.vanillaList);
@@ -78,7 +77,10 @@ public class RegistryHandler{
     	registItemBlockModelArrayList(Crops.blockList);
         registItemBlockModelArrayList(Trees.leaveList);
         registItemBlockModelArrayList(Trees.saplingBushList);
-        registItemBlockModelArrayList(OtherItemBlocks.list);
+
+        /** Others */
+        OtherItems.registModel();
+        OtherItemBlocks.registModel();
     }
 
     /** Helper To Regist All ArrayList */

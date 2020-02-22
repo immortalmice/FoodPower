@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
-import com.github.immortalmice.foodpower.customclass.message.RecipeTableMessage;
+import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
 import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
 import com.github.immortalmice.foodpower.customclass.gui.Button;
@@ -80,6 +80,7 @@ public class RecipeTableGuiContainer extends ModGuiContainer{
 		this.buttonList.add(new Button(BUTTON_RIGHT, offsetX + this.xSize - 30, offsetY + 15, 10, 15, "", 38, 0));
 
 		this.textBox = new GuiTextField(2, this.fontRenderer, offsetX + 130, offsetY + 120, 70, 15);
+		this.textBox.setText(this.container.getInputText());
 		//this.textBox.setEnableBackgroundDrawing(false);
 	}
 	/* Send Message To server on clicked */

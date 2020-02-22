@@ -226,4 +226,8 @@ public class RecipeTableContainer extends ModContainer{
 	public int getIndex(){
     	return this.index;
     }
+
+    public String getInputText(){
+    	return this.tileEntity.getInputText();
+    }
 }

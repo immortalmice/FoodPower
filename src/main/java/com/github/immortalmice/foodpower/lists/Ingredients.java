@@ -62,7 +62,7 @@ public class Ingredients{
 	public static final Ingredient CHORUS_FRUIT = new Ingredient("chorus_fruit", (ItemFood)Items.CHORUS_FRUIT, FoodTypes.FRUIT, 1);
 	public static final Ingredient COCOA = new Ingredient("dye_brown", Items.DYE, FoodTypes.SWEET, 2);
 	public static final Ingredient SUGAR = new Ingredient("sugar", Items.SUGAR, FoodTypes.NONE, 2);
-	public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", Items.WATER_BUCKET, FoodTypes.NONE, 0.6);
+	public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", Items.WATER_BUCKET, FoodTypes.NONE, 2);
 	public static final Ingredient NETHER_WART = new Ingredient("nether_wart", Items.NETHER_WART, FoodTypes.VEGETABLE, 1.2);
 
 	/** CookedFoods */
