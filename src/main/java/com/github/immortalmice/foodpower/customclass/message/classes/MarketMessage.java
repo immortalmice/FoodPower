@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraft.block.state.IBlockState;
 
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
-import com.github.immortalmice.foodpower.baseclass.MessageHandlerBase;
 
 /** Used to trasfer Market data to update */
 public class MarketMessage implements IMessage{
@@ -48,11 +47,12 @@ public class MarketMessage implements IMessage{
 		return message;
 	}
 
-	public static class Handler extends MessageHandlerBase implements IMessageHandler<MarketMessage, IMessage>{
+	public static class Handler implements IMessageHandler<MarketMessage, IMessage>{
 		/** Control MarketTileEntity at the position */
 		@Override
 		public IMessage onMessage(MarketMessage message, MessageContext ctx){
-			World world = Handler.getWorld(ctx);
+			/* Detect it's in client or server, and get the world */
+			World world = ctx.getServerHandler().player.getServerWorld();
 			if(world != null){
 				TileEntity tile = world.getTileEntity(message.pos);
 				if(tile instanceof MarketTileEntity){

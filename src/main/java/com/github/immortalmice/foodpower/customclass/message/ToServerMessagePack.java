@@ -1,10 +1,13 @@
 package com.github.immortalmice.foodpower.customclass.message;
 
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.lists.Messages;
 
+/* Use in store Message Classes and regist them when needed */
 public class ToServerMessagePack<T extends IMessage>{
 	Class<T> iMessageClass;
 	Class<? extends IMessageHandler<T, IMessage>> handlerClass;
@@ -16,11 +19,7 @@ public class ToServerMessagePack<T extends IMessage>{
 		Messages.sendToServerList.add(this);
 	}
 
-	public Class<T> getIMessageClass(){
-		return iMessageClass;
-	}
-
-	public Class<? extends IMessageHandler<T, IMessage>> getHandlerClass(){
-		return handlerClass;
+	public void registThis(int discriminator){
+		FoodPower.network.registerMessage(this.handlerClass, this.iMessageClass, discriminator, Side.SERVER);
 	}
 }

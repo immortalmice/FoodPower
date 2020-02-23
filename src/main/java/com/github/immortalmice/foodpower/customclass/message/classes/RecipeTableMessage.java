@@ -12,7 +12,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.state.IBlockState;
 
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
-import com.github.immortalmice.foodpower.baseclass.MessageHandlerBase;
 
 /** Used to trasfer RecipeTable data to update */
 public class RecipeTableMessage implements IMessage{
@@ -55,11 +54,11 @@ public class RecipeTableMessage implements IMessage{
 		return this.action;
 	}
 
-	public static class Handler extends MessageHandlerBase implements IMessageHandler<RecipeTableMessage, IMessage>{
+	public static class Handler implements IMessageHandler<RecipeTableMessage, IMessage>{
 		/** Control RecipeTableTileEntity at the position */
 		@Override
 		public IMessage onMessage(RecipeTableMessage message, MessageContext ctx){
-			World world = Handler.getWorld(ctx);
+			World world = ctx.getServerHandler().player.getServerWorld();
 			if(world != null){
 				TileEntity tile = world.getTileEntity(message.pos);
 				if(tile instanceof RecipeTableTileEntity){
