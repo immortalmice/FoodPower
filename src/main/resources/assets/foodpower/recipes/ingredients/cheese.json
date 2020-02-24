@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:crafting_shapeless",
-	"group": "foopower:ingredients",
-	"result": {"item": "foodpower:cheese"},
-	"ingredients": [
-        {"item": "minecraft:milk_bucket", "data": 0}
-    ]
-}

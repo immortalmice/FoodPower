@@ -1,6 +1,0 @@
-{
-	"parent": "block/crop", 
-	"textures": {
-		"crop": "foodpower:blocks/mint_crop_stage0"
-	}
-}

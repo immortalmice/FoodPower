@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"stage=0": {"model":"foodpower:mango_sapling_model"},
-		"stage=1": {"model":"foodpower:mango_sapling_model"}
-	}
-}

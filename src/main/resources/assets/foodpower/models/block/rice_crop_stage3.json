@@ -1,6 +1,0 @@
-{
-	"parent": "block/crop", 
-	"textures": {
-		"crop": "foodpower:blocks/rice_crop_stage3"
-	}
-}

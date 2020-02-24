@@ -1,6 +1,0 @@
-{
-	"parent": "block/crop", 
-	"textures": {
-		"crop": "foodpower:blocks/cabbage_crop_stage0"
-	}
-}
