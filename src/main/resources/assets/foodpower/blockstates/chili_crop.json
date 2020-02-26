@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"age=0": {"model": "foodpower:chili_crop_stage0"},
+		"age=1": {"model": "foodpower:chili_crop_stage0"}, 
+		"age=2": {"model": "foodpower:chili_crop_stage1"},
+		"age=3": {"model": "foodpower:chili_crop_stage1"}, 
+		"age=4": {"model": "foodpower:chili_crop_stage2"},
+		"age=5": {"model": "foodpower:chili_crop_stage2"}, 
+		"age=6": {"model": "foodpower:chili_crop_stage2"},
+		"age=7": {"model": "foodpower:chili_crop_stage3"}
+	}
+}

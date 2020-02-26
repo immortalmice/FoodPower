@@ -3,12 +3,18 @@ package com.github.immortalmice.foodpower.lists;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.DeferredRegister;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 
 /** All the ingredient need to be registed will list below. */
 public class KitchenAppliances{
+	public static final DeferredRegister<Block> REGISTER = new DeferredRegister<Block>(ForgeRegistries.BLOCKS, FoodPower.MODID);
+
 	public static final List<KitchenAppliance> list = new ArrayList<KitchenAppliance>();
 
 	/* Constructor: name, bounding block */

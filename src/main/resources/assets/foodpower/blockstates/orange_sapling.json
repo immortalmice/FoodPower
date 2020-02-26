@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"stage=0": {"model":"foodpower:orange_sapling_model"},
+		"stage=1": {"model":"foodpower:orange_sapling_model"}
+	}
+}

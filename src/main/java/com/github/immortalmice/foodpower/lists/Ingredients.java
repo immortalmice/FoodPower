@@ -3,11 +3,13 @@ package com.github.immortalmice.foodpower.lists;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.init.Items;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
+import net.minecraft.item.Items;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.DeferredRegister;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
@@ -15,8 +17,9 @@ import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 /** All the ingredient need to be registed will list below. */
 public class Ingredients{
+	public static final DeferredRegister<Item> REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
+
 	public static final List<Ingredient> list = new ArrayList<Ingredient>();
-	public static final List<Ingredient> vanillaList = new ArrayList<Ingredient>();
 	public static final List<CookedFood> cookedFoodList = new ArrayList<CookedFood>();
 	public static final List<Meal> mealFoodList = new ArrayList<Meal>();
 
@@ -45,22 +48,22 @@ public class Ingredients{
 	public static final Ingredient CREAM = new Ingredient("cream", 1, 0.1f, FoodTypes.NONE, 1.2);
 
 	/** Vanilla Ingrediant */
-	public static final Ingredient APPLE = new Ingredient("apple", (ItemFood)Items.APPLE, FoodTypes.FRUIT, 1);
-	public static final Ingredient MELON = new Ingredient("melon", (ItemFood)Items.MELON, FoodTypes.FRUIT, 1);
-	public static final Ingredient PUMPKIN = new Ingredient("pumpkin", Item.getItemFromBlock(Blocks.PUMPKIN), FoodTypes.VEGETABLE, 0.8);
-	public static final Ingredient CARROT = new Ingredient("carrot", (ItemFood)Items.CARROT, FoodTypes.VEGETABLE, 1.2);
-	public static final Ingredient POTATO = new Ingredient("potato", (ItemFood)Items.POTATO, FoodTypes.VEGETABLE, 1.2);
-	public static final Ingredient BEETROOT = new Ingredient("beetroot", (ItemFood)Items.BEETROOT, FoodTypes.VEGETABLE, 1.2);
-	public static final Ingredient BROWN_MUSHROOM = new Ingredient("brown_mushroom", Item.getItemFromBlock(Blocks.BROWN_MUSHROOM), FoodTypes.VEGETABLE, 1.4);
-	public static final Ingredient RED_MUSHROOM = new Ingredient("red_mushroom", Item.getItemFromBlock(Blocks.RED_MUSHROOM), FoodTypes.VEGETABLE, 1.4);
+	public static final Ingredient APPLE = new Ingredient("apple", Items.APPLE, FoodTypes.FRUIT, 1);
+	public static final Ingredient MELON = new Ingredient("melon", Items.MELON, FoodTypes.FRUIT, 1);
+	public static final Ingredient PUMPKIN = new Ingredient("pumpkin", Blocks.PUMPKIN.asItem(), FoodTypes.VEGETABLE, 0.8);
+	public static final Ingredient CARROT = new Ingredient("carrot", Items.CARROT, FoodTypes.VEGETABLE, 1.2);
+	public static final Ingredient POTATO = new Ingredient("potato", Items.POTATO, FoodTypes.VEGETABLE, 1.2);
+	public static final Ingredient BEETROOT = new Ingredient("beetroot", Items.BEETROOT, FoodTypes.VEGETABLE, 1.2);
+	public static final Ingredient BROWN_MUSHROOM = new Ingredient("brown_mushroom", Blocks.BROWN_MUSHROOM.asItem(), FoodTypes.VEGETABLE, 1.4);
+	public static final Ingredient RED_MUSHROOM = new Ingredient("red_mushroom", Blocks.RED_MUSHROOM.asItem(), FoodTypes.VEGETABLE, 1.4);
 	public static final Ingredient EGG = new Ingredient("egg", Items.EGG, FoodTypes.NONE, 1);
 	public static final Ingredient MILK_BUCKET = new Ingredient("milk_bucket", Items.MILK_BUCKET, FoodTypes.NONE, 0.6);
-	public static final Ingredient PORKCHOP = new Ingredient("porkchop", (ItemFood)Items.PORKCHOP, FoodTypes.MEAT, 1);
-	public static final Ingredient BEEF = new Ingredient("beef", (ItemFood)Items.BEEF, FoodTypes.MEAT, 1);
-	public static final Ingredient CHICKEN = new Ingredient("chicken", (ItemFood)Items.CHICKEN, FoodTypes.MEAT, 1);
-	public static final Ingredient MUTTON = new Ingredient("mutton", (ItemFood)Items.MUTTON, FoodTypes.MEAT, 1);
-	public static final Ingredient CHORUS_FRUIT = new Ingredient("chorus_fruit", (ItemFood)Items.CHORUS_FRUIT, FoodTypes.FRUIT, 1);
-	public static final Ingredient COCOA = new Ingredient("dye_brown", Items.DYE, FoodTypes.SWEET, 2);
+	public static final Ingredient PORKCHOP = new Ingredient("porkchop", Items.PORKCHOP, FoodTypes.MEAT, 1);
+	public static final Ingredient BEEF = new Ingredient("beef", Items.BEEF, FoodTypes.MEAT, 1);
+	public static final Ingredient CHICKEN = new Ingredient("chicken", Items.CHICKEN, FoodTypes.MEAT, 1);
+	public static final Ingredient MUTTON = new Ingredient("mutton", Items.MUTTON, FoodTypes.MEAT, 1);
+	public static final Ingredient CHORUS_FRUIT = new Ingredient("chorus_fruit", Items.CHORUS_FRUIT, FoodTypes.FRUIT, 1);
+	public static final Ingredient COCOA = new Ingredient("cocoa_beans", Items.COCOA_BEANS, FoodTypes.SWEET, 2);
 	public static final Ingredient SUGAR = new Ingredient("sugar", Items.SUGAR, FoodTypes.NONE, 2);
 	public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", Items.WATER_BUCKET, FoodTypes.NONE, 2);
 	public static final Ingredient NETHER_WART = new Ingredient("nether_wart", Items.NETHER_WART, FoodTypes.VEGETABLE, 1.2);
@@ -92,19 +95,15 @@ public class Ingredients{
 
 	public static Ingredient getIngredientByName(String nameIn){
 		for(Ingredient ingredient : list){
-			if(ingredient.getName() == nameIn)
-				return ingredient;
-		}
-		for(Ingredient ingredient : vanillaList){
-			if(ingredient.getName() == nameIn)
+			if(ingredient.getFPName() == nameIn)
 				return ingredient;
 		}
 		for(Ingredient ingredient : cookedFoodList){
-			if(ingredient.getName() == nameIn)
+			if(ingredient.getFPName() == nameIn)
 				return ingredient;
 		}
 		for(Ingredient ingredient : mealFoodList){
-			if(ingredient.getName() == nameIn)
+			if(ingredient.getFPName() == nameIn)
 				return ingredient;
 		}
 		return new Ingredient(FoodTypes.NONE);

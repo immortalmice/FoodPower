@@ -29,11 +29,12 @@ public class KitchenAppliance extends BlockBase{
 
         /** Add to kitchen appliances list, and regist it later */
         KitchenAppliances.list.add(this);
+        /** Regist it to game using DeferredRegister */
+        KitchenAppliances.REGISTER.register(this.getFPName(), () -> this);
 	}
 
 	
 	/** How dare you use stone pickaxe break this holy things */
-
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context){
     	return this.blockAABB;

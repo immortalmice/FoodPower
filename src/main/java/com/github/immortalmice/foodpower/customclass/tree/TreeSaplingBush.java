@@ -2,7 +2,7 @@ package com.github.immortalmice.foodpower.customclass.tree;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockBush;
+import net.minecraft.block.SaplingBlock;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +21,7 @@ import com.github.immortalmice.foodpower.customclass.tree.TreeGenerator;
 import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
 
-public class TreeSaplingBush extends BlockBush implements IGrowable{
+public class TreeSaplingBush extends SaplingBlock implements IGrowable{
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 	private TreeLeave treeLeave;
 

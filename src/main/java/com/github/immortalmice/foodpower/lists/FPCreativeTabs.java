@@ -1,6 +1,5 @@
 package com.github.immortalmice.foodpower.lists;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -18,7 +17,7 @@ public class FPCreativeTabs{
 	public static final ItemGroup BLOCK_TAB = (new ItemGroup("blocks"){
 		@Override
 		public ItemStack createIcon(){
-			return new ItemStack(Item.getItemFromBlock(KitchenAppliances.OVEN));
+			return new ItemStack(KitchenAppliances.OVEN.asItem());
 		}
 	});
 }

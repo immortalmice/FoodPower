@@ -16,6 +16,10 @@ public class ItemBase extends Item{
 	public ItemBase(String nameIn){
 		this(nameIn, new Item.Properties().group(FPCreativeTabs.ITEM_TAB));
 	}
+
+	public String getFPName(){
+		return this.name;
+	}
 	
 	@Override
 	public String getTranslationKey(){

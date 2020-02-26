@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:kitchenappliance",
+	"result": {"item": "foodpower:universal_stand"},
+	"pattern": [
+		"SSS",
+		"BEB",
+		"BBB"
+	],
+	"key": {
+		"S": {"item": "minecraft:stone_slab", "data": 4},
+		"E": {"item": "minecraft:ender_pearl", "data": 0},
+		"B": {"item": "minecraft:brick_block", "data": 0}
+	}
+}

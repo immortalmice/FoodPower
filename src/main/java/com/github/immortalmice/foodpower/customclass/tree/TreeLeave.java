@@ -6,7 +6,7 @@ import java.util.Random;
 import java.lang.NoClassDefFoundError;
 import javax.annotation.Nonnull;
 
-import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.BlockStateContainer;
@@ -23,7 +23,7 @@ import com.github.immortalmice.foodpower.customclass.tree.TreeSaplingBush;
 import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
 
-public class TreeLeave extends BlockLeaves{
+public class TreeLeave extends LeavesBlock{
 	private TreeSaplingBush sapling;
 	private Item dropItem;
 	public TreeLeave(String nameIn, TreeSaplingBush saplingIn, Item dropItemIn){

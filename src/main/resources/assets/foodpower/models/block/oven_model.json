@@ -1,0 +1,12 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"particle": "foodpower:blocks/oven_side",
+		"up": "foodpower:blocks/oven_top",
+		"down": "foodpower:blocks/oven_bottom",
+		"north": "foodpower:blocks/oven_front",
+		"east": "foodpower:blocks/oven_side",
+		"west": "foodpower:blocks/oven_side",
+		"south": "foodpower:blocks/oven_back"
+	}
+}

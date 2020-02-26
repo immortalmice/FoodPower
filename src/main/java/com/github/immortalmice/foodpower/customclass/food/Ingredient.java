@@ -5,48 +5,52 @@ import javax.annotation.Nullable;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemFood;
 import net.minecraft.world.World;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
+import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
+import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 public class Ingredient extends ItemFoodBase{
-	private String name;
 	private FoodType foodType;
 	/* baseAmount is the value that this ingredient needed per food in level 1 */
 	private double baseAmount;
 	/** For Mod Ingredients */
-	public Ingredient(String nameIn, int amount, float saturation, FoodType ftIn, double amountIn){
-		super(nameIn, amount, saturation);
+	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, double amountIn){
+		super(nameIn, healing, saturation);
 
-		this.name = nameIn;
 		this.foodType = ftIn;
 		this.baseAmount = amountIn;
 
-        /** Add to ingredient list, and regist it later */
-        Ingredients.list.add(this);
-	}
-	/** For Vanilla Ingredient is Food */
-	public Ingredient(String nameIn, ItemFood itemIn, FoodType ftIn, double amountIn){
-		this(nameIn, itemIn.getHealAmount(ItemStack.EMPTY), itemIn.getSaturationModifier(ItemStack.EMPTY), ftIn, amountIn);
+        /** Add to corresponding ingredients list */
+        if(this instanceof Meal){
+        	Ingredients.mealFoodList.add((Meal) this);
+        }else if(this instanceof CookedFood){
+        	Ingredients.cookedFoodList.add((CookedFood) this);
+        }else{
+        	Ingredients.list.add(this);
+        }
 
-		/** Add to ingredient list, and regist it later */
-		Ingredients.vanillaList.add(this);
+        /** Regist it to game using DeferredRegister */
+        Ingredients.REGISTER.register(this.getFPName(), () -> this);
 	}
-	/** For Vanilla Ingredient not Food */
+	/** For Vanilla Ingredient Food or not Food */
 	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, double amountIn){
-		this(nameIn, 0, 0.0f, ftIn, amountIn);
-
-		Ingredients.vanillaList.add(this);
+		this(nameIn
+			, itemIn.isFood() ? itemIn.getFood().getHealing() : 0
+			, itemIn.isFood() ? itemIn.getFood().getSaturation() : 0.0f
+			, ftIn, amountIn);
 	}
-	/** For CookedFoods */
+	/** For CookedFoods & Meals */
 	public Ingredient(String nameIn){
 		this(nameIn, 2, 0.4f, FoodTypes.NONE, 1);
 	}
@@ -56,7 +60,7 @@ public class Ingredient extends ItemFoodBase{
 	}
 
 	public boolean isEqual(Ingredient a){
-		return this.name == a.name;
+		return this.getFPName() == a.getFPName();
 	}
 
 	public boolean isTypeEqual(Ingredient a){
@@ -64,27 +68,24 @@ public class Ingredient extends ItemFoodBase{
 	}
 
     public boolean isEmpty(){
-    	return this.name == "empty";
+    	return this.getFPName() == "empty";
     }
 
 	public FoodType getFoodType(){
 		return this.foodType;
 	}
 
-	public String getName(){
-		return this.name;
-	}
-
 	public double getBaseAmount(){
 		return this.baseAmount;
 	}
 	/* Show FoodType on tooltip */
-	@SideOnly(Side.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
 
-    	String foodTypeName = I18n.format("food_type." + this.foodType.getName() + ".name");
-    	tooltip.add(I18n.format("general.food_type.name") + " : " + foodTypeName);
+    	String foodTypeName = new TranslationTextComponent("general.food_type.name").getUnformattedComponentText();
+    	String foodType = new TranslationTextComponent("food_type." + this.foodType.getName() + ".name").getUnformattedComponentText();
+    	tooltip.add(new StringTextComponent(foodTypeName + " : " + foodType));
     }
 }

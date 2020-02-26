@@ -11,6 +11,7 @@ import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
 public class BlockBase extends HorizontalBlock{
 	private String name;
 	private BlockItem item;
+
 	public BlockBase(String nameIn, Block.Properties propertiesIn){
 		super(propertiesIn);
 
@@ -30,5 +31,9 @@ public class BlockBase extends HorizontalBlock{
 
 	public BlockItem getBlockItem(){
 		return this.item;
+	}
+
+	public String getFPName(){
+		return this.name;
 	}
 }

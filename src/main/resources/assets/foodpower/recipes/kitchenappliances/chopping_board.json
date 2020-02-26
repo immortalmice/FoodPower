@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:kitchenappliance",
+	"result": {"item": "foodpower:chopping_board"},
+	"pattern": [
+		"   ",
+		"SSS",
+		"WWW"
+	],
+	"key": {
+		"S": {"item": "minecraft:wooden_slab", "data": 32767},
+		"W": {"item": "minecraft:log", "data": 32767}
+	}
+}

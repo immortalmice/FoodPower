@@ -1,0 +1,6 @@
+{
+	"parent": "block/crop", 
+	"textures": {
+		"crop": "foodpower:blocks/tomato_crop_stage0"
+	}
+}

@@ -1,0 +1,51 @@
+{
+	"pools" : [
+		{
+			"rools" : 1,
+			"conditions" : [
+				{
+					"condition" : "random_chance",
+					"chance" : 0.125
+				}
+			],
+			"entries" : [
+				{
+					"type" : "item",
+					"name" : "foodpower:mint_seed",
+					"weight" : 1,
+					"quality" : 1.0
+				},{
+					"type" : "item",
+					"name" : "foodpower:tomato_seed",
+					"weight" : 1,
+					"quality" : 1.0
+				},{
+					"type" : "item",
+					"name" : "foodpower:rice_seed",
+					"weight" : 1,
+					"quality" : 1.0
+				},{
+					"type" : "item",
+					"name" : "foodpower:chili_seed",
+					"weight" : 1,
+					"quality" : 1.0
+				},{
+					"type" : "item",
+					"name" : "foodpower:spinach_seed",
+					"weight" : 1,
+					"quality" : 1.0
+				},{
+					"type" : "item",
+					"name" : "foodpower:cabbage_seed",
+					"weight" : 1,
+					"quality" : 1.0
+				},{
+					"type" : "item",
+					"name" : "foodpower:corn_seed",
+					"weight" : 1,
+					"quality" : 1.0
+				}
+			]
+		}
+	]
+}
