@@ -22,7 +22,7 @@ public class GuiPack{
 	public GuiPack(Class<? extends ModContainer> mcIn,@Nullable Class<? extends ModGuiContainer> mgcIn){
 		mc = mcIn;
 		mgc = mgcIn;
-		/** Add to GUIs list */
+		/* Add to GUIs list */
 		id = GUIs.list.size();
 		GUIs.list.add(this);
 	}
@@ -31,7 +31,7 @@ public class GuiPack{
 		return id;
 	}
 
-	/** Instant a new Container and return */
+	/* Instant a new Container and return */
 	public ModContainer getContainer(EntityPlayer player, World world, BlockPos pos){
 		try{
 			return mc.getDeclaredConstructor(mcArg).newInstance(player, world, pos);
@@ -39,7 +39,7 @@ public class GuiPack{
 			return new ModContainer(player, new int[]{8, 51});
 		}
 	}
-	/** Instant a new GuiContainer and return */
+	/* Instant a new GuiContainer and return */
 	@SideOnly(Side.CLIENT)
 	public ModGuiContainer getGuiContainer(EntityPlayer player, World world, BlockPos pos){
 		try{

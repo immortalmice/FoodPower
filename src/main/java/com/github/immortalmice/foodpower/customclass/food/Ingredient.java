@@ -31,7 +31,7 @@ public class Ingredient extends ItemFoodBase{
 		this.foodType = ftIn;
 		this.baseAmount = amountIn;
 
-        /** Add to corresponding ingredients list */
+        /* Add to corresponding ingredients list */
         if(this instanceof Meal){
         	Ingredients.mealFoodList.add((Meal) this);
         }else if(this instanceof CookedFood){
@@ -40,21 +40,21 @@ public class Ingredient extends ItemFoodBase{
         	Ingredients.list.add(this);
         }
 
-        /** Regist it to game using DeferredRegister */
+        /* Regist it to game using DeferredRegister */
         Ingredients.REGISTER.register(this.getFPName(), () -> this);
 	}
-	/** For Vanilla Ingredient Food or not Food */
+	/* For Vanilla Ingredient Food or not Food */
 	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, double amountIn){
 		this(nameIn
 			, itemIn.isFood() ? itemIn.getFood().getHealing() : 0
 			, itemIn.isFood() ? itemIn.getFood().getSaturation() : 0.0f
 			, ftIn, amountIn);
 	}
-	/** For CookedFoods & Meals */
+	/* For CookedFoods & Meals */
 	public Ingredient(String nameIn){
 		this(nameIn, 2, 0.4f, FoodTypes.NONE, 1);
 	}
-	/** For Empty (Use In Present A Food With That Type) */
+	/* For Empty (Use In Present A Food With That Type) */
 	public Ingredient(FoodType ftIn){
 		this("empty", 0, 0.0f, ftIn, 1);
 	}

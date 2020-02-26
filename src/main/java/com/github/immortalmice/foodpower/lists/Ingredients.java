@@ -15,7 +15,7 @@ import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
-/** All the ingredient need to be registed will list below. */
+/* All the ingredient need to be registed will list below. */
 public class Ingredients{
 	public static final DeferredRegister<Item> REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
 
@@ -23,7 +23,7 @@ public class Ingredients{
 	public static final List<CookedFood> cookedFoodList = new ArrayList<CookedFood>();
 	public static final List<Meal> mealFoodList = new ArrayList<Meal>();
 
-	/** Mod Ingrediant */
+	/* Mod Ingrediant */
 	public static final Ingredient BUTTER = new Ingredient("butter", 1, 0.1f, FoodTypes.NONE, 1);
 	public static final Ingredient ORANGE = new Ingredient("orange", 1, 0.1f, FoodTypes.FRUIT, 1);
 	public static final Ingredient KIWI = new Ingredient("kiwi", 1, 0.1f, FoodTypes.FRUIT, 1);
@@ -47,7 +47,7 @@ public class Ingredients{
 	public static final Ingredient CORN = new Ingredient("corn", 1, 0.1f, FoodTypes.VEGETABLE, 1);
 	public static final Ingredient CREAM = new Ingredient("cream", 1, 0.1f, FoodTypes.NONE, 1.2);
 
-	/** Vanilla Ingrediant */
+	/* Vanilla Ingrediant */
 	public static final Ingredient APPLE = new Ingredient("apple", Items.APPLE, FoodTypes.FRUIT, 1);
 	public static final Ingredient MELON = new Ingredient("melon", Items.MELON, FoodTypes.FRUIT, 1);
 	public static final Ingredient PUMPKIN = new Ingredient("pumpkin", Blocks.PUMPKIN.asItem(), FoodTypes.VEGETABLE, 0.8);
@@ -68,7 +68,7 @@ public class Ingredients{
 	public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", Items.WATER_BUCKET, FoodTypes.NONE, 2);
 	public static final Ingredient NETHER_WART = new Ingredient("nether_wart", Items.NETHER_WART, FoodTypes.VEGETABLE, 1.2);
 
-	/** CookedFoods */
+	/* CookedFoods */
 	public static final Meal CAKE = new Meal("cake");
 	public static final Meal PIZZA = new Meal("pizza");
 	public static final Meal SANDWICH = new Meal("sandwich");

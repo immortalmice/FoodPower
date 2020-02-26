@@ -33,7 +33,7 @@ public class MarketGuiContainer extends ModGuiContainer{
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		/** Draw Icon & name with good */
+		/* Draw Icon & name with good */
 		if(this.inventorySlots instanceof MarketContainer){
 			ItemStack item = new ItemStack(((MarketContainer)inventorySlots).getItem());
 			this.itemRender.renderItemAndEffectIntoGUI(item, 35, 15);
@@ -49,7 +49,7 @@ public class MarketGuiContainer extends ModGuiContainer{
 		this.buttonList.add(new Button(BUTTON_LEFT, offsetX + 20, offsetY + 15, 10, 15, "", 38, 19));
 		this.buttonList.add(new Button(BUTTON_RIGHT, offsetX + 60, offsetY + 15, 10, 15, "", 38, 0));
 	}
-	/** Send Message To server on clicked */
+	/* Send Message To server on clicked */
 	@Override
     protected void actionPerformed(GuiButton button) throws IOException{
     	if(this.inventorySlots instanceof MarketContainer){

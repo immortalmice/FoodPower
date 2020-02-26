@@ -48,7 +48,7 @@ public class RecipeTableContainer extends ModContainer{
 		this.scrollSlot = new ItemStackHandler(1);
 
 		this.addSlotToContainer(new SlotItemHandler(bookSlot, 0, 83, 72){
-			/** Only Writable Book Accepted Here */
+			/* Only Writable Book Accepted Here */
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return stack != null 
@@ -200,7 +200,7 @@ public class RecipeTableContainer extends ModContainer{
 		return super.slotClick(slotId, dragType, clickTypeIn, playerIn);
 	}
 
-	/** Get ingreidient list of current pattern */
+	/* Get ingreidient list of current pattern */
 	public List<Ingredient> getIngredients(){
 		CookingPattern currentPattern = CookingPatterns.list.get(this.index);
 		return currentPattern.getIngredients();

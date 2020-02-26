@@ -11,7 +11,7 @@ public class TileEntityBase extends TileEntity{
 		super(tileEntityTypeIn);
 	}
 	
-	/** Sync NBT Tag between client & server */
+	/* Sync NBT Tag between client & server */
 	@Override
 	public SUpdateTileEntityPacket getUpdatePacket() {
 		CompoundNBT nbt = new CompoundNBT();

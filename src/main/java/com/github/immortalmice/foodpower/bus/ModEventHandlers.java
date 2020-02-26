@@ -1,10 +1,13 @@
-package com.github.immortalmice.foodpower.event;
+package com.github.immortalmice.foodpower.bus;
 
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import com.github.immortalmice.foodpower.bus.ForgeEventHandlers;
+import com.github.immortalmice.foodpower.handlers.BiomeAddTreeHandler;
 
 public class ModEventHandlers{
 	private static final IEventBus BUS = FMLJavaModLoadingContext.get().getModEventBus();
@@ -17,7 +20,8 @@ public class ModEventHandlers{
 
 	@SubscribeEvent
 	public static void onCommonSetup(FMLCommonSetupEvent event){
-
+		ForgeEventHandlers.registAllEvent();
+		BiomeAddTreeHandler.setup();
 	}
 
 	@SubscribeEvent

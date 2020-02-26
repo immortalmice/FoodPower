@@ -2,7 +2,7 @@ package com.github.immortalmice.foodpower;
 
 import net.minecraftforge.fml.common.Mod;
 
-import com.github.immortalmice.foodpower.event.ModEventHandlers;
+import com.github.immortalmice.foodpower.bus.ModEventHandlers;
 
 @Mod(FoodPower.MODID)
 public class FoodPower{

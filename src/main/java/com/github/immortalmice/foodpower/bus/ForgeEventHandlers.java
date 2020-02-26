@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.event;
+package com.github.immortalmice.foodpower.bus;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
@@ -19,8 +19,9 @@ public class ForgeEventHandlers{
 	}
 
 	@SubscribeEvent
-	public static void onLootLoad(LootTableLoadEvent event) {
-		if (event.getName().equals(new ResourceLocation("minecraft", "grass"))) {
+	public static void onLootLoad(LootTableLoadEvent event){
+		ResourceLocation eventResourceLocation = event.getName();
+		if(eventResourceLocation.equals(new ResourceLocation("minecraft", "grass"))) {
 			event.getTable().addPool(
 				LootPool.builder().addEntry(
 					TableLootEntry.builder(

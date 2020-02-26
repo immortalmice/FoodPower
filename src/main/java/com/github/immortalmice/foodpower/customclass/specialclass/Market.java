@@ -1,45 +1,39 @@
 package com.github.immortalmice.foodpower.customclass.specialclass;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.tileentity.TileEntity;
-import com.github.immortalmice.foodpower.baseclass.BlockRotatableBase;
+import net.minecraft.util.math.BlockRayTraceResult;
 
-import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.lists.GUIs;
-import com.github.immortalmice.foodpower.lists.TileEntitys;
+import com.github.immortalmice.foodpower.baseclass.BlockBase;
 import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
 
-public class Market extends BlockRotatableBase{
+public class Market extends BlockBase{
 	public Market(){
 		super("market", Material.ROCK);
 
 		OtherItemBlocks.list.add(this);
 	}
-	/** Open th GUI */
+	/* Open the GUI */
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos blockPosIn, 
-		IBlockState blockStateIn, EntityPlayer playerIn, EnumHand hand, EnumFacing sideIn, 
-		float hitX, float hitY, float hitZ){
-		if(!playerIn.isSneaking()){
+	public ActionResultType func_225533_a_(BlockState stateIn, World worldIn
+		, BlockPos posIn, PlayerEntity playerIn
+		, Hand handIn, BlockRayTraceResult resultIn){
+		
+		if(!playerIn.func_225608_bj_()){
 			if(!worldIn.isRemote){
-				playerIn.openGui(FoodPower.instance, GUIs.MARKET.getId(), worldIn, blockPosIn.getX(), blockPosIn.getY(), blockPosIn.getZ());
+				playerIn.openContainer(stateIn.getContainer(worldIn, posIn));
 			}
-			return true;
+			return ActionResultType.SUCCESS;
 		}
-		return false;
+		return ActionResultType.PASS;
 	}
 	@Override
-	public boolean hasTileEntity(IBlockState state){
+	public boolean hasTileEntity(BlockState state){
 		return true;
-	}
-	@Override
-	public TileEntity createTileEntity(World world, IBlockState state){
-		return TileEntitys.MARKET.getTileEntity();
 	}
 }

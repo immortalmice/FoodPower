@@ -37,7 +37,7 @@ public class CropBlock extends CropsBlock{
         this.setRegistryName(nameIn.concat("_crop"));
         
         Crops.blockList.add(this);
-        /** Regist it to game using DeferredRegister */
+        /* Regist it to game using DeferredRegister */
         Crops.BLOCK_REGISTER.register(this.getFPName(), () -> this);
 	}
 

@@ -35,7 +35,7 @@ public class MarketContainer extends ModContainer{
 
 		items = new ItemStackHandler(2);
 		this.addSlotToContainer(emeraldSlot = new SlotItemHandler(items, 0, 89, 20){
-			/** Can trade with nether star? Hey, I only want EMERALD */
+			/* Can trade with nether star? Hey, I only want EMERALD */
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return stack != null 
@@ -52,7 +52,7 @@ public class MarketContainer extends ModContainer{
 			public boolean isItemValid(ItemStack stack){
 				return false;
 			}
-			/** One Emerald, One Sapling */
+			/* One Emerald, One Sapling */
 			@Override
 			public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack){
 				ItemStack emeraldItemStack = MarketContainer.this.items.getStackInSlot(0);
@@ -89,7 +89,7 @@ public class MarketContainer extends ModContainer{
     			break;
     	}
     }
-	/** No this override, market will be conscienceless, you can try :) */
+	/* No this override, market will be conscienceless, you can try :) */
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn){
 		super.onContainerClosed(playerIn);
@@ -101,7 +101,7 @@ public class MarketContainer extends ModContainer{
 			}
 		}
 	}
-	/** Hope not crash again PLEASE.... */
+	/* Hope not crash again PLEASE.... */
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int fromSlot){
 		ItemStack previous = ItemStack.EMPTY;
@@ -110,7 +110,7 @@ public class MarketContainer extends ModContainer{
 		if(slot != null && slot.getHasStack() && !slot.getStack().isEmpty()){
 			ItemStack current = slot.getStack();
 			previous = current.copy();
-			// Custom behaviour //
+			// Custom behaviour
 			if(fromSlot < 36){
 				// From TE Inventory to Player Inventory
 				if (!this.mergeItemStack(current, 36, 38, true))
@@ -128,7 +128,7 @@ public class MarketContainer extends ModContainer{
 				if (!this.mergeItemStack(current, 0, 36, false))
 				    return ItemStack.EMPTY;
 			}
-			// Custom behaviour //
+			// Custom behaviour
 			if (current.isEmpty() && current.getCount() == 0)
 				slot.putStack(ItemStack.EMPTY);
 			else
@@ -140,7 +140,7 @@ public class MarketContainer extends ModContainer{
 		}
 		return previous;
 	}
-	/** Get Index Form NBT, And Return Right Item */
+	/* Get Index Form NBT, And Return Right Item */
 	public Item getItem(){
 		int treeSize = Trees.saplingBushList.size();
 		int cropSize = Crops.seedList.size();
@@ -153,7 +153,7 @@ public class MarketContainer extends ModContainer{
 			return Items.AIR;
 		}
 	}
-	/** No Emerald, No Sapling */
+	/* No Emerald, No Sapling */
 	public void refreshGood(){
 		ItemStack stack = emeraldSlot.getStack();
 		if(!stack.isEmpty()){

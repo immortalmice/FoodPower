@@ -11,11 +11,11 @@ import com.github.immortalmice.foodpower.lists.GUIs;
 
 public class ModContainer extends Container{
 	protected EntityPlayer player;
-	/** Offset is used in setting slot position */
+	/* Offset is used in setting slot position */
 	public ModContainer(EntityPlayer playerIn, int[] offset){
 		super();
 		this.player = playerIn;
-		/** Player Inventory Slots */
+		/* Player Inventory Slots */
 		if(offset[0] == -1 && offset[1] == -1)
 			return;
 		int slotSize = 18;

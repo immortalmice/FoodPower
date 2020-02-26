@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.block.Block;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.DeferredRegister;
 
@@ -37,11 +35,5 @@ public class Crops{
 			}
 		}
 		return Crops.MINT;
-	}
-
-	public static void registSeeds(){
-		for(int i = 0; i <= seedList.size()-1; i ++){
-			MinecraftForge.addGrassSeed(new ItemStack(seedList.get(i)), 10);
-		}
 	}
 }

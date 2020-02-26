@@ -21,7 +21,7 @@ public class GUIs{
 	public static GuiPack RECIPE_TABLE = new GuiPack(RecipeTableContainer.class, GUIs.checkClassExist("RecipeTableGuiContainer", "recipetable"));
 	public static GuiPack RECIPE_SCROLL = new GuiPack(ModContainer.class, GUIs.checkClassExist("RecipeScrollGuiContainer", "recipescroll"));
 
-	/** If ClassNotFound, It may on the serverside */
+	/* If ClassNotFound, It may on the serverside */
 	@SuppressWarnings("unchecked")
 	private static Class<ModGuiContainer> checkClassExist(String className, String folderName){
 		try{
@@ -32,11 +32,11 @@ public class GUIs{
 		}
 	}
 
-	/** Get a new Container instance by id */
+	/* Get a new Container instance by id */
 	public static ModContainer getContainerById(int idIn, EntityPlayer playerIn, World worldIn, BlockPos pos){
 		return list.get(idIn).getContainer(playerIn, worldIn, pos);
 	}
-	/** Get a new GuiContainer instance by id */
+	/* Get a new GuiContainer instance by id */
 	public static ModGuiContainer getGuiContainerById(int idIn, EntityPlayer playerIn, World worldIn, BlockPos pos){
 		return list.get(idIn).getGuiContainer(playerIn, worldIn, pos);
 	}

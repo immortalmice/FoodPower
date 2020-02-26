@@ -12,7 +12,7 @@ import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
 @SideOnly(Side.CLIENT)
 public class ModGuiContainer extends GuiContainer{
 	protected String textureFileName = "default";
-	/** Set GUI x, y size */
+	/* Set GUI x, y size */
 	public ModGuiContainer(ModContainer inventorySlotsIn, int[] sizeIn){
 		super(inventorySlotsIn);
 		
@@ -41,7 +41,7 @@ public class ModGuiContainer extends GuiContainer{
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		this.renderHoveredToolTip(mouseX, mouseY);
 	}
-	/** textureFileName will be overwrite in constructor of subClass */
+	/* textureFileName will be overwrite in constructor of subClass */
 	private ResourceLocation getTexture(){
 		String path = FoodPower.MODID + ":textures/gui/container/" + this.textureFileName + ".png";
 		return new ResourceLocation(path);

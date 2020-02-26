@@ -11,7 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 
-/** All the ingredient need to be registed will list below. */
+/* All the ingredient need to be registed will list below. */
 public class KitchenAppliances{
 	public static final DeferredRegister<Block> REGISTER = new DeferredRegister<Block>(ForgeRegistries.BLOCKS, FoodPower.MODID);
 

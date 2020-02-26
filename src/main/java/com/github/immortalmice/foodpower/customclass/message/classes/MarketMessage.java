@@ -13,7 +13,7 @@ import net.minecraft.block.state.IBlockState;
 
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
 
-/** Used to trasfer Market data to update */
+/* Used to trasfer Market data to update */
 public class MarketMessage implements IMessage{
 	private String message;
 	private BlockPos pos;
@@ -26,7 +26,7 @@ public class MarketMessage implements IMessage{
 		this.pos = posIn;
 	}
 
-	/** X, Y, Z, Message */
+	/* X, Y, Z, Message */
 	@Override
 	public void fromBytes(ByteBuf buf){
 		int x = ByteBufUtils.readVarInt(buf, 5);
@@ -48,7 +48,7 @@ public class MarketMessage implements IMessage{
 	}
 
 	public static class Handler implements IMessageHandler<MarketMessage, IMessage>{
-		/** Control MarketTileEntity at the position */
+		/* Control MarketTileEntity at the position */
 		@Override
 		public IMessage onMessage(MarketMessage message, MessageContext ctx){
 			/* Detect it's in client or server, and get the world */

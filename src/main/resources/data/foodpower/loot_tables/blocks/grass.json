@@ -1,7 +1,7 @@
 {
 	"pools" : [
 		{
-			"rools" : 1,
+			"rolls" : 1,
 			"conditions" : [
 				{
 					"condition" : "random_chance",

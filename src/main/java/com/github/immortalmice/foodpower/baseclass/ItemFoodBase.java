@@ -8,13 +8,13 @@ import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
 
 public class ItemFoodBase extends ItemBase{
 	public ItemFoodBase(String name, int hunger, float saturation){
-		/** Can wolf eat my sweetie? NO WAY!*/
+		/* Can wolf eat my sweetie? NO WAY!*/
 		super(name, new Item.Properties()
 			.group(FPCreativeTabs.ITEM_TAB)
 			.food(new Food.Builder().saturation(saturation).hunger(hunger).build()));
 	}
 
-	/** Three Second Rule! */
+	/* Three Second Rule! */
 	/*
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem){
