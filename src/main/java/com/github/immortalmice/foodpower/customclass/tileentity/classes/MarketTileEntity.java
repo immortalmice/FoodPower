@@ -9,6 +9,10 @@ import com.github.immortalmice.foodpower.lists.Crops;
 public class MarketTileEntity extends TileEntityBase{
 	private int index = 0;
 
+	public MarketTileEntity(){
+		super();
+	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound tag){
 		super.readFromNBT(tag);
