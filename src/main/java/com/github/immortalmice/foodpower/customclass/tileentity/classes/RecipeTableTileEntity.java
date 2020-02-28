@@ -1,25 +1,30 @@
 package com.github.immortalmice.foodpower.customclass.tileentity.classes;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
+import com.github.immortalmice.foodpower.lists.TileEntitys;
 
 public class RecipeTableTileEntity extends TileEntityBase{
 	private int index = 0;
 	private String inputText = "Unknown Recipe";
 
+	public RecipeTableTileEntity(){
+		super(TileEntitys.RECIPE_TABLE.getTileEntityType());
+	}
+
 	@Override
-	public void readFromNBT(NBTTagCompound tag){
-		super.readFromNBT(tag);
-		this.index = tag.getInteger("index");
+	public void read(CompoundNBT tag){
+		super.read(tag);
+		this.index = tag.getInt("index");
 		this.inputText = tag.getString("inputText");
 	}
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag){
-		tag.setInteger("index", this.index);
-		tag.setString("inputText", this.inputText);
-		return super.writeToNBT(tag);
+	public CompoundNBT write(CompoundNBT tag){
+		tag.putInt("index", this.index);
+		tag.putString("inputText", this.inputText);
+		return super.write(tag);
 	}
 
 	/* Increase and cycle index */

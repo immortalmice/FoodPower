@@ -8,14 +8,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.tileentity.TileEntity;
-import com.github.immortalmice.foodpower.baseclass.BlockRotatableBase;
 
+import com.github.immortalmice.foodpower.baseclass.BlockBase;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.lists.GUIs;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
 
-public class RecipeTable extends BlockRotatableBase{
+public class RecipeTable extends BlockBase{
 	public RecipeTable(){
 		super("recipe_table", Material.ROCK);
 

@@ -1,27 +1,28 @@
 package com.github.immortalmice.foodpower.customclass.tileentity.classes;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
 import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.lists.Crops;
+import com.github.immortalmice.foodpower.lists.TileEntitys;
 
 public class MarketTileEntity extends TileEntityBase{
 	private int index = 0;
 
 	public MarketTileEntity(){
-		super();
+		super(TileEntitys.MARKET.getTileEntityType());
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag){
-		super.readFromNBT(tag);
-		this.index = tag.getInteger("index");
+	public void read(CompoundNBT tag){
+		super.read(tag);
+		this.index = tag.getInt("index");
 	}
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag){
-		tag.setInteger("index", this.index);
-		return super.writeToNBT(tag);
+	public CompoundNBT write(CompoundNBT tag){
+		tag.putInt("index", this.index);
+		return super.write(tag);
 	}
 	/* Increase and cycle index */
 	public void increaseIndex(){

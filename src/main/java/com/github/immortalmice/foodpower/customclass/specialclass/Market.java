@@ -1,5 +1,7 @@
 package com.github.immortalmice.foodpower.customclass.specialclass;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,8 +34,15 @@ public class Market extends BlockBase{
 		}
 		return ActionResultType.PASS;
 	}
+
 	@Override
 	public boolean hasTileEntity(BlockState state){
 		return true;
+	}
+
+	@Nullable
+	@Override
+	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos){
+
 	}
 }

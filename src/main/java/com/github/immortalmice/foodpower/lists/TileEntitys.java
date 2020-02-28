@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.DeferredRegister;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
-import com.github.immortalmice.foodpower.customclass.tileentity.MarketTileEntity;
-import com.github.immortalmice.foodpower.customclass.tileentity.RecipeTableTileEntity;
+import com.github.immortalmice.foodpower.customclass.tileentity.TileEntityPack;
+import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
+import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
 import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
 
 public class TileEntitys{
-	public static final List<? extends TileEntityBase> list = new ArrayList<TileEntityBase>();
+	public static final DeferredRegister<TileEntityType<?>> REGISTER = new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, FoodPower.MODID);
 
-	public static final TileEntityType.Builder<MarketTileEntity> MARKET = TileEntityType.Builder.create(MarketTileEntity::new, OtherItemBlocks.MARKET_BLOCK);
-	public static final TileEntityType.Builder<RecipeTableTileEntity> RECIPE_TABLE = TileEntityType.Builder.create(RecipeTableTileEntity::new, OtherItemBlocks.RECIPE_TABLE);
+	public static final List<TileEntityPack<? extends TileEntityBase>> list = new ArrayList<TileEntityPack<? extends TileEntityBase>>();
+
+	public static final TileEntityPack<MarketTileEntity> MARKET = new TileEntityPack<MarketTileEntity>("market", MarketTileEntity::new, OtherItemBlocks.MARKET_BLOCK);
+	public static final TileEntityPack<RecipeTableTileEntity> RECIPE_TABLE = new TileEntityPack<RecipeTableTileEntity>("recipe_table", RecipeTableTileEntity::new, OtherItemBlocks.RECIPE_TABLE);
 }
