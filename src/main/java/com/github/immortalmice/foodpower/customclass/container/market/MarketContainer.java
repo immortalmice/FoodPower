@@ -1,23 +1,28 @@
-package com.github.immortalmice.foodpower.customclass.gui.market;
+package com.github.immortalmice.foodpower.customclass.container.market;
+
+import javax.annotation.Nullable;
 
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.inventory.Slot;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
+import com.github.immortalmice.foodpower.baseclass.ContainerBase;
+import com.github.immortalmice.foodpower.customclass.container.market.MarketScreen;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
 import com.github.immortalmice.foodpower.lists.Trees;
+import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Crops;
 
-public class MarketContainer extends ModContainer{
+public class MarketContainer extends ContainerBase{
 
 	protected World world; 
 	protected BlockPos pos;
@@ -25,6 +30,10 @@ public class MarketContainer extends ModContainer{
 	protected SlotItemHandler emeraldSlot;
 	protected MarketTileEntity tileEntity;
 	private int index = 0;
+
+	public MarketContainer(int windowId, PlayerInventory inv){
+		super(Containers.MARKET.getContainerType(), windowId, new int[]{8, 51}, inv);
+	}
 
 	public MarketContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
 		super(playerIn, new int[]{8, 51});
@@ -140,6 +149,11 @@ public class MarketContainer extends ModContainer{
 		}
 		return previous;
 	}
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public static void registScreen(ContainerType<? extends ContainerBase> containerTypeIn){
+    	ScreenManager.registerFactory(containerTypeIn, MarketScreen::new);
+    }
 	/* Get Index Form NBT, And Return Right Item */
 	public Item getItem(){
 		int treeSize = Trees.saplingBushList.size();

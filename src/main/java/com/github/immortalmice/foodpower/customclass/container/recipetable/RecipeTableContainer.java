@@ -1,30 +1,36 @@
-package com.github.immortalmice.foodpower.customclass.gui.recipetable;
+package com.github.immortalmice.foodpower.customclass.container.recipetable;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nullable;
+
 import java.lang.Math;
 
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.init.Items;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
-import com.github.immortalmice.foodpower.customclass.gui.RecipeTableSlot;
+import com.github.immortalmice.foodpower.baseclass.ContainerBase;
+import com.github.immortalmice.foodpower.customclass.container.RecipeTableSlot;
+import com.github.immortalmice.foodpower.customclass.container.recipetable.RecipeTablScreen;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
+import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
-public class RecipeTableContainer extends ModContainer{
+public class RecipeTableContainer extends ContainerBase{
 
 	protected World world; 
 	protected BlockPos pos;
@@ -36,6 +42,10 @@ public class RecipeTableContainer extends ModContainer{
 
 	private final int RADIUS = 40;
 	private final int[] CENTER = {90, 80};
+
+	public RecipeTableContainer(int windowId, PlayerInventory inv){
+		super(Containers.RECIPE_TABLE.getContainerType(), windowId, new int[]{45, 145}, inv);
+	}
 
 	public RecipeTableContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
 		super(playerIn, new int[]{45, 145});
@@ -199,6 +209,12 @@ public class RecipeTableContainer extends ModContainer{
 		}
 		return super.slotClick(slotId, dragType, clickTypeIn, playerIn);
 	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public static void registScreen(ContainerType<? extends ContainerBase> containerTypeIn){
+    	ScreenManager.registerFactory(containerTypeIn, RecipeTablScreen::new);
+    }
 
 	/* Get ingreidient list of current pattern */
 	public List<Ingredient> getIngredients(){
