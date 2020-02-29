@@ -1,12 +1,13 @@
 package com.github.immortalmice.foodpower.customclass.specialclass;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -27,9 +28,12 @@ public class Market extends BlockBase{
 		, BlockPos posIn, PlayerEntity playerIn
 		, Hand handIn, BlockRayTraceResult resultIn){
 		
+		if(worldIn.isRemote) return ActionResultType.SUCCESS;
+
 		if(!playerIn.func_225608_bj_()){
-			if(!worldIn.isRemote){
-				playerIn.openContainer(stateIn.getContainer(worldIn, posIn));
+			TileEntity tileEntity = worldIn.getTileEntity(posIn);
+			if(tileEntity instanceof INamedContainerProvider){
+				NetworkHooks.openGui((ServerPlayerEntity)playerIn, (INamedContainerProvider) tileEntity, extraData -> {});
 			}
 			return ActionResultType.SUCCESS;
 		}
@@ -39,11 +43,5 @@ public class Market extends BlockBase{
 	@Override
 	public boolean hasTileEntity(BlockState state){
 		return true;
-	}
-
-	@Nullable
-	@Override
-	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos){
-
 	}
 }

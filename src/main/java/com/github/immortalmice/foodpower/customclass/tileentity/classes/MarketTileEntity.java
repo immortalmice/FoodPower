@@ -1,8 +1,14 @@
 package com.github.immortalmice.foodpower.customclass.tileentity.classes;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
+import com.github.immortalmice.foodpower.customclass.container.market.MarketContainer;
 import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
@@ -50,5 +56,15 @@ public class MarketTileEntity extends TileEntityBase{
 	}
 	public int getIndex(){
 		return this.index;
+	}
+
+	@Override
+	public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){
+		return new MarketContainer(windowId, playerInventory, player, this.getWorld(), this.getPos());
+	}
+
+	@Override
+	public ITextComponent getDisplayName() {
+		return new TranslationTextComponent("block.foodpower.market");
 	}
 }

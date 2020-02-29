@@ -2,11 +2,16 @@ package com.github.immortalmice.foodpower.baseclass;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 
-public class TileEntityBase extends TileEntity{
+public class TileEntityBase extends TileEntity implements INamedContainerProvider{
 	public TileEntityBase(TileEntityType<?> tileEntityTypeIn){
 		super(tileEntityTypeIn);
 	}
@@ -22,5 +27,15 @@ public class TileEntityBase extends TileEntity{
 	@Override
 	public void onDataPacket(NetworkManager manager, SUpdateTileEntityPacket packet) {
 	    this.read(packet.getNbtCompound());
+	}
+
+	@Override
+	public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player) {
+		return null;
+	}
+
+	@Override
+	public ITextComponent getDisplayName() {
+		return null;
 	}
 }

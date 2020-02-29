@@ -8,6 +8,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -17,7 +18,7 @@ import com.github.immortalmice.foodpower.lists.Containers;
 
 public class ContainerBase extends Container{
 	/* For Client Call */
-	public ContainerBase(int windowId, PlayerInventory inv){
+	public ContainerBase(int windowId, PlayerInventory inv, PacketBuffer extraData){
 		this(Containers.BASE.getContainerType(), windowId, new int[]{8, 51}, inv);
 	}
 	/* Offset is used in setting slot position */

@@ -4,16 +4,19 @@ import javax.annotation.Nullable;
 
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import io.netty.buffer.Unpooled;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.customclass.container.market.MarketScreen;
@@ -24,26 +27,26 @@ import com.github.immortalmice.foodpower.lists.Crops;
 
 public class MarketContainer extends ContainerBase{
 
-	protected World world; 
-	protected BlockPos pos;
 	protected ItemStackHandler items;
 	protected SlotItemHandler emeraldSlot;
 	protected MarketTileEntity tileEntity;
-	private int index = 0;
+	private static final ContainerType<MarketContainer> TYPE = Containers.MARKET.getContainerType();
 
-	public MarketContainer(int windowId, PlayerInventory inv){
-		super(Containers.MARKET.getContainerType(), windowId, new int[]{8, 51}, inv);
+	private IntReferenceHolder index = IntReferenceHolder.single();
+
+	public MarketContainer(int windowId, PlayerInventory inv, PacketBuffer extraData){
+		super(MarketContainer.TYPE, windowId, new int[]{8, 51}, inv);
 	}
 
-	public MarketContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
-		super(playerIn, new int[]{8, 51});
+	public MarketContainer(int windowId, PlayerInventory playerInventory
+		, PlayerEntity playerIn, World worldIn, BlockPos posIn){
 
-		world = worldIn;
-		pos = posIn;
-		this.tileEntity = (MarketTileEntity)worldIn.getTileEntity(this.pos);
+		this(windowId, playerInventory, new PacketBuffer(Unpooled.EMPTY_BUFFER));
+
+		this.tileEntity = (MarketTileEntity)worldIn.getTileEntity(posIn);
 
 		items = new ItemStackHandler(2);
-		this.addSlotToContainer(emeraldSlot = new SlotItemHandler(items, 0, 89, 20){
+		this.addSlot(emeraldSlot = new SlotItemHandler(items, 0, 89, 20){
 			/* Can trade with nether star? Hey, I only want EMERALD */
 			@Override
 			public boolean isItemValid(ItemStack stack){
@@ -56,20 +59,22 @@ public class MarketContainer extends ContainerBase{
 				MarketContainer.this.refreshGood();
 			}
 		});
-		this.addSlotToContainer(new SlotItemHandler(items, 1, 137, 20){
+		this.addSlot(new SlotItemHandler(items, 1, 137, 20){
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return false;
 			}
 			/* One Emerald, One Sapling */
 			@Override
-			public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack){
+			public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack){
 				ItemStack emeraldItemStack = MarketContainer.this.items.getStackInSlot(0);
 				emeraldItemStack.setCount(emeraldItemStack.getCount() - 1);
 				MarketContainer.this.refreshGood();
 				return stack;
 			}
 		});
+
+		this.trackInt(this.index).set(0);
 	}
 	/* Detect Index Change Or Not */
 	@Override

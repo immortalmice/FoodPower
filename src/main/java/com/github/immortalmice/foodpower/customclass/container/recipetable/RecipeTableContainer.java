@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Slot;
@@ -43,7 +44,7 @@ public class RecipeTableContainer extends ContainerBase{
 	private final int RADIUS = 40;
 	private final int[] CENTER = {90, 80};
 
-	public RecipeTableContainer(int windowId, PlayerInventory inv){
+	public RecipeTableContainer(int windowId, PlayerInventory inv, PacketBuffer extraData){
 		super(Containers.RECIPE_TABLE.getContainerType(), windowId, new int[]{45, 145}, inv);
 	}
 

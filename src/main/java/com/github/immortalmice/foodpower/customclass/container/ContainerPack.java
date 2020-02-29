@@ -1,6 +1,7 @@
 package com.github.immortalmice.foodpower.customclass.container;
 
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraftforge.fml.network.IContainerFactory;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.lists.Containers;
@@ -9,7 +10,7 @@ public class ContainerPack<T extends ContainerBase>{
 	private final String fpName;
 	private final ContainerType<T> containerType;
 
-	public ContainerPack(String nameIn, ContainerType.IFactory<T> factory){
+	public ContainerPack(String nameIn, IContainerFactory<T> factory){
 		containerType = new ContainerType<T>(factory);
 		this.fpName = nameIn;
 

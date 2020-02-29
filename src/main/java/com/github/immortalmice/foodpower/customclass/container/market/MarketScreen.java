@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.gui.market;
+package com.github.immortalmice.foodpower.customclass.container.market;
 
 import java.io.IOException;
 
@@ -9,13 +9,12 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
-import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
-import com.github.immortalmice.foodpower.customclass.gui.Button;
+import com.github.immortalmice.foodpower.baseclass.ScreenBase;
+import com.github.immortalmice.foodpower.customclass.container.Button;
 import com.github.immortalmice.foodpower.customclass.message.classes.MarketMessage;
 
 @SideOnly(Side.CLIENT)
-public class MarketGuiContainer extends ModGuiContainer{
+public class MarketScreen extends ScreenBase{
 	private final int BUTTON_LEFT = 0;
 	private final int BUTTON_RIGHT = 1;
 
