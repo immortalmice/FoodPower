@@ -25,8 +25,4 @@ public class ContainerPack<T extends ContainerBase>{
 	public ContainerType<T> getContainerType(){
 		return this.containerType;
 	}
-
-	public void registScreen(){
-		T.registScreen(this.getContainerType());
-	}
 }

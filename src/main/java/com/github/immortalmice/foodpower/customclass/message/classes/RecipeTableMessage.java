@@ -1,9 +1,6 @@
 package com.github.immortalmice.foodpower.customclass.message.classes;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.common.util.Constants;
 import net.minecraft.tileentity.TileEntity;
@@ -11,10 +8,11 @@ import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.state.IBlockState;
 
+import com.github.immortalmice.foodpower.baseclass.IMessageBase;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
 
 /* Used to trasfer RecipeTable data to update */
-public class RecipeTableMessage implements IMessage{
+public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	private String action, message;
 	private BlockPos pos;
 

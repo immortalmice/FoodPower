@@ -19,6 +19,5 @@ public class TileEntitys{
 
 	public static final List<TileEntityPack<? extends TileEntityBase>> list = new ArrayList<TileEntityPack<? extends TileEntityBase>>();
 
-	public static final TileEntityPack<MarketTileEntity> MARKET = new TileEntityPack<MarketTileEntity>("market", MarketTileEntity::new, OtherItemBlocks.MARKET_BLOCK);
 	public static final TileEntityPack<RecipeTableTileEntity> RECIPE_TABLE = new TileEntityPack<RecipeTableTileEntity>("recipe_table", RecipeTableTileEntity::new, OtherItemBlocks.RECIPE_TABLE);
 }

@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.container.recipetable;
+package com.github.immortalmice.foodpower.customclass.container.classes.recipetable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
-import com.github.immortalmice.foodpower.customclass.container.RecipeTableSlot;
-import com.github.immortalmice.foodpower.customclass.container.recipetable.RecipeTablScreen;
+import com.github.immortalmice.foodpower.customclass.container.util.RecipeTableSlot;
+import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTablScreen;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;

@@ -12,10 +12,10 @@ import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 @OnlyIn(Dist.CLIENT)
-public class ScreenBase extends ContainerScreen<ContainerBase>{
+public class ScreenBase<T extends ContainerBase> extends ContainerScreen<T>{
 	protected String textureFileName = "default";
 
-	public ScreenBase(ContainerBase containerIn, PlayerInventory inventoryIn, ITextComponent textIn){
+	public ScreenBase(T containerIn, PlayerInventory inventoryIn, ITextComponent textIn){
 		super(containerIn, inventoryIn, textIn);
 
 		this.xSize = 176;

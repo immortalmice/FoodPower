@@ -8,19 +8,8 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-import com.github.immortalmice.foodpower.baseclass.ScreenBase;
-import com.github.immortalmice.foodpower.lists.Containers;
-
-public class ContainerBase extends Container{
-	/* For Client Call */
-	public ContainerBase(int windowId, PlayerInventory inv, PacketBuffer extraData){
-		this(Containers.BASE.getContainerType(), windowId, new int[]{8, 51}, inv);
-	}
+public abstract class ContainerBase extends Container{
 	/* Offset is used in setting slot position */
 	public ContainerBase(@Nullable ContainerType<?> type, int id, int[] offset, PlayerInventory inventoryIn){
 		super(type, id);
@@ -44,12 +33,6 @@ public class ContainerBase extends Container{
 	}
 	@Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index){
-        return null;
-    }
-
-    /* Will be override in child class to spicify screen to regist */
-    @OnlyIn(Dist.CLIENT)
-    public static void registScreen(ContainerType<? extends ContainerBase> containerTypeIn){
-    	ScreenManager.registerFactory(containerTypeIn, ScreenBase::new);
+        return ItemStack.EMPTY;
     }
 }

@@ -1,75 +1,76 @@
 package com.github.immortalmice.foodpower.customclass.message.classes;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.common.util.Constants;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraft.block.state.IBlockState;
+import java.util.function.Supplier;
 
-import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
+
+import com.github.immortalmice.foodpower.FoodPower;
+import com.github.immortalmice.foodpower.baseclass.IMessageBase;
+import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketContainer;
 
 /* Used to trasfer Market data to update */
-public class MarketMessage implements IMessage{
+public class MarketMessage implements IMessageBase<MarketMessage>{
+	private int windowId;
 	private String message;
-	private BlockPos pos;
 
 	public MarketMessage(){
-
+		this(0, "");
 	}
-	public MarketMessage(String messageIn, BlockPos posIn){
+
+	public MarketMessage(int windowIdIn, String messageIn){
+		this.windowId = windowIdIn;
 		this.message = messageIn;
-		this.pos = posIn;
+	}
+	
+	@Override
+	public void encode(MarketMessage msg, PacketBuffer buf){
+		buf.writeInt(msg.getWindowId());
+		buf.writeString(msg.getMessage());
 	}
 
-	/* X, Y, Z, Message */
 	@Override
-	public void fromBytes(ByteBuf buf){
-		int x = ByteBufUtils.readVarInt(buf, 5);
-		int y = ByteBufUtils.readVarInt(buf, 5);
-		int z = ByteBufUtils.readVarInt(buf, 5);
-		this.pos = new BlockPos(x, y, z);
-		this.message = ByteBufUtils.readUTF8String(buf);
+	public MarketMessage decode(PacketBuffer buf){
+		this.windowId = buf.readInt();
+		this.message = buf.readString();
+		return this;
 	}
+
 	@Override
-	public void toBytes(ByteBuf buf){
-		ByteBufUtils.writeVarInt(buf, this.pos.getX(), 5);
-		ByteBufUtils.writeVarInt(buf, this.pos.getY(), 5);
-		ByteBufUtils.writeVarInt(buf, this.pos.getZ(), 5);
-		ByteBufUtils.writeUTF8String(buf, this.message);
+	public void handle(MarketMessage msg, Supplier<NetworkEvent.Context> ctx){
+		ServerPlayerEntity player = ctx.get().getSender();
+		if(player.openContainer instanceof MarketContainer){
+			MarketContainer container = (MarketContainer) player.openContainer;
+			if(container.getWindowId() == msg.getWindowId()){
+				switch(msg.getMessage()){
+					case "Decrease Index":
+						container.decreaseIndex();
+						break;
+					case "Increase Index":
+						container.increaseIndex();
+						break;
+					default:
+				}
+			}
+		}
+	}
+
+	@Override
+	public void registMessage(int i){
+		FoodPower.NETWORK.registerMessage(
+			i
+			, MarketMessage.class
+			, this::encode
+			, this::decode
+			, this::handle);
 	}
 
 	public String getMessage(){
 		return message;
 	}
 
-	public static class Handler implements IMessageHandler<MarketMessage, IMessage>{
-		/* Control MarketTileEntity at the position */
-		@Override
-		public IMessage onMessage(MarketMessage message, MessageContext ctx){
-			/* Detect it's in client or server, and get the world */
-			World world = ctx.getServerHandler().player.getServerWorld();
-			if(world != null){
-				TileEntity tile = world.getTileEntity(message.pos);
-				if(tile instanceof MarketTileEntity){
-					switch(message.getMessage()){
-						case "Decrease Index":
-							((MarketTileEntity) tile).decreaseIndex();
-							break;
-						case "Increase Index":
-							((MarketTileEntity) tile).increaseIndex();
-							break;
-						default:
-					}
-				}
-				IBlockState blockState = world.getBlockState(message.pos);
-				world.notifyBlockUpdate(message.pos, blockState, blockState, Constants.BlockFlags.SEND_TO_CLIENTS);
-			}
-			return null;
-		}
+	public int getWindowId(){
+		return this.windowId;
 	}
 } 

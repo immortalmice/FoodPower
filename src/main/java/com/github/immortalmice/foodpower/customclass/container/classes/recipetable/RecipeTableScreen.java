@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.gui.recipetable;
+package com.github.immortalmice.foodpower.customclass.container.classes.recipetable;
 
 import java.io.IOException;
 import java.util.List;
@@ -6,11 +6,15 @@ import java.util.List;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
 import com.github.immortalmice.foodpower.FoodPower;
+import com.github.immortalmice.foodpower.baseclass.ContainerBase;
+import com.github.immortalmice.foodpower.baseclass.ScreenBase;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
@@ -22,20 +26,19 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 @SideOnly(Side.CLIENT)
-public class RecipeTableGuiContainer extends ModGuiContainer{
+public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 	private final int BUTTON_LEFT = 0;
 	private final int BUTTON_RIGHT = 1;
 
 	private RecipeTableContainer container;
 	private GuiTextField textBox;
 
-	public RecipeTableGuiContainer(ModContainer inventorySlotsIn){
-		super(inventorySlotsIn, new int[]{256, 256});
+	public RecipeTableScreen(ContainerBase containerIn, PlayerInventory inventoryIn, ITextComponent textIn){
+		super(containerIn, inventoryIn, textIn);
 
-		if(inventorySlotsIn instanceof RecipeTableContainer){
-			this.container = (RecipeTableContainer) inventorySlotsIn;
-		}
 		this.textureFileName = "recipe_table";
+		this.xSize = 256;
+		this.ySize = 256;
 	}
 
 	@Override

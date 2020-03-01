@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.gui;
+package com.github.immortalmice.foodpower.customclass.container.util;
 
 import java.lang.Math;
 

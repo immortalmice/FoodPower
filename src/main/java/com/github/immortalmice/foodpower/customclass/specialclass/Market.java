@@ -3,6 +3,8 @@ package com.github.immortalmice.foodpower.customclass.specialclass;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -12,8 +14,11 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
+import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketContainer;
 import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
 
 public class Market extends BlockBase{
@@ -33,7 +38,16 @@ public class Market extends BlockBase{
 		if(!playerIn.func_225608_bj_()){
 			TileEntity tileEntity = worldIn.getTileEntity(posIn);
 			if(tileEntity instanceof INamedContainerProvider){
-				NetworkHooks.openGui((ServerPlayerEntity)playerIn, (INamedContainerProvider) tileEntity, extraData -> {});
+				NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
+					@Override
+					public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){
+						return new MarketContainer(windowId, playerInventory);
+					}
+					@Override
+					public ITextComponent getDisplayName(){
+						return new TranslationTextComponent("block.foodpower.market");
+					}
+				}, extraData -> {});
 			}
 			return ActionResultType.SUCCESS;
 		}
