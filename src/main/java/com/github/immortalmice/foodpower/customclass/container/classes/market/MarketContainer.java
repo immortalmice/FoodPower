@@ -137,6 +137,7 @@ public class MarketContainer extends ContainerBase{
 		if(this.index > MarketContainer.FULL_LIST_SIZE - 1){
 			this.index -= MarketContainer.FULL_LIST_SIZE;
 		}
+		this.refreshGood();
 	}
 	/* Decrease and cycle index */
 	public void decreaseIndex(){
@@ -144,6 +145,7 @@ public class MarketContainer extends ContainerBase{
 		if(this.index < 0){
 			this.index += MarketContainer.FULL_LIST_SIZE;
 		}
+		this.refreshGood();
 	}
 
 	/* Get Index Form NBT, And Return Right Item */

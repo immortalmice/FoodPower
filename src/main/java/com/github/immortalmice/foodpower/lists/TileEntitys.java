@@ -10,14 +10,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
 import com.github.immortalmice.foodpower.customclass.tileentity.TileEntityPack;
-import com.github.immortalmice.foodpower.customclass.tileentity.classes.MarketTileEntity;
-import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
-import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
 
 public class TileEntitys{
 	public static final DeferredRegister<TileEntityType<?>> REGISTER = new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, FoodPower.MODID);
 
 	public static final List<TileEntityPack<? extends TileEntityBase>> list = new ArrayList<TileEntityPack<? extends TileEntityBase>>();
-
-	public static final TileEntityPack<RecipeTableTileEntity> RECIPE_TABLE = new TileEntityPack<RecipeTableTileEntity>("recipe_table", RecipeTableTileEntity::new, OtherItemBlocks.RECIPE_TABLE);
 }

@@ -1,87 +1,89 @@
 package com.github.immortalmice.foodpower.customclass.message.classes;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.common.util.Constants;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.block.state.IBlockState;
+import java.util.function.Supplier;
 
+import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.PacketBuffer;
+
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.IMessageBase;
-import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
+import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableContainer;
 
 /* Used to trasfer RecipeTable data to update */
 public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	private String action, message;
-	private BlockPos pos;
+	private int windowId;
 
-	public RecipeTableMessage(String actionIn, String messageIn, BlockPos posIn){
+	public RecipeTableMessage(int windowidIn, String actionIn, String messageIn){
+		this.windowId = windowidIn;
 		this.action = actionIn;
 		this.message = messageIn;
-		this.pos = posIn;
 	}
 	public RecipeTableMessage(){
-
+		this(0, "", "");
 	}
 
-	/* X, Y, Z, Message */
 	@Override
-	public void fromBytes(ByteBuf buf){
-		int x = ByteBufUtils.readVarInt(buf, 5);
-		int y = ByteBufUtils.readVarInt(buf, 5);
-		int z = ByteBufUtils.readVarInt(buf, 5);
-		this.pos = new BlockPos(x, y, z);
-		this.action = ByteBufUtils.readUTF8String(buf);
-		this.message = ByteBufUtils.readUTF8String(buf);
-	}
-	@Override
-	public void toBytes(ByteBuf buf){
-		ByteBufUtils.writeVarInt(buf, this.pos.getX(), 5);
-		ByteBufUtils.writeVarInt(buf, this.pos.getY(), 5);
-		ByteBufUtils.writeVarInt(buf, this.pos.getZ(), 5);
-		ByteBufUtils.writeUTF8String(buf, this.action);
-		ByteBufUtils.writeUTF8String(buf, this.message);
+	public void encode(RecipeTableMessage msg, PacketBuffer buf){
+		buf.writeInt(msg.getWindowId());
+		buf.writeString(msg.getAction());
+		buf.writeString(msg.getMessage());
 	}
 
-	public String getMessage(){
-		return this.message;
+	@Override
+	public RecipeTableMessage decode(PacketBuffer buf){
+		this.windowId = buf.readInt();
+		this.action = buf.readString();
+		this.message = buf.readString();
+		return this;
+	}
+
+	@Override
+	public void handle(RecipeTableMessage msg, Supplier<NetworkEvent.Context> ctx){
+		ServerPlayerEntity player = ctx.get().getSender();
+		if(player.openContainer instanceof RecipeTableContainer){
+			RecipeTableContainer container = (RecipeTableContainer) player.openContainer;
+			if(container.getWindowId() == msg.getWindowId()){
+				switch(msg.getAction()){
+					case "Set Index":
+						switch(msg.getMessage()){
+							case "Decrease":
+								container.decreaseIndex();
+								break;
+							case "Increase":
+								container.increaseIndex();
+								break;
+							default:
+						}
+						break;
+					case "Set InputText":
+						container.setInputText(msg.getMessage());
+						break;
+				}
+			}
+		}
+	}
+
+	@Override
+	public void registMessage(int i) {
+		FoodPower.NETWORK.registerMessage(
+			i
+			, RecipeTableMessage.class
+			, this::encode
+			, this::decode
+			, this::handle);
+	}
+
+	public int getWindowId(){
+		return this.windowId;
 	}
 
 	public String getAction(){
 		return this.action;
 	}
 
-	public static class Handler implements IMessageHandler<RecipeTableMessage, IMessage>{
-		/* Control RecipeTableTileEntity at the position */
-		@Override
-		public IMessage onMessage(RecipeTableMessage message, MessageContext ctx){
-			World world = ctx.getServerHandler().player.getServerWorld();
-			if(world != null){
-				TileEntity tile = world.getTileEntity(message.pos);
-				if(tile instanceof RecipeTableTileEntity){
-					switch(message.getAction()){
-						case "Set Index":
-							switch(message.getMessage()){
-								case "Decrease":
-									((RecipeTableTileEntity) tile).decreaseIndex();
-									break;
-								case "Increase":
-									((RecipeTableTileEntity) tile).increaseIndex();
-									break;
-								default:
-							}
-							break;
-						case "Set InputText":
-							((RecipeTableTileEntity) tile).setInputText(message.getMessage());
-							break;
-					}
-					
-				}
-				IBlockState blockState = world.getBlockState(message.pos);
-				world.notifyBlockUpdate(message.pos, blockState, blockState, Constants.BlockFlags.SEND_TO_CLIENTS);
-			}
-			return null;
-		}
+	public String getMessage(){
+		return this.message;
 	}
 }

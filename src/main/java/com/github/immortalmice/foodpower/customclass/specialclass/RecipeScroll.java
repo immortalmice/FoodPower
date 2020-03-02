@@ -59,7 +59,8 @@ public class RecipeScroll extends ItemBase{
 		return result;
 	}
 
-    public static void initStack(ItemStack stack, Random rand){
+    public static void initStack(ItemStack stack){
+        Random rand = new Random();
         NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
 
         if(nbt.hasKey("rarity")) return;

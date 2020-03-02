@@ -138,6 +138,7 @@
     "general.foodpower.ingredients": "Ingredients",
     "general.foodpower.level": "Level",
     "general.foodpower.unknown_recipe": "Unknown Recipe",
+    "general.foodpower.recipe_name": "Recipe Name",
     "general.foodpower.none": "None",
 
     "_comment": "Cooking Pattern",

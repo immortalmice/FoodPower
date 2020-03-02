@@ -1,39 +1,29 @@
 package com.github.immortalmice.foodpower.customclass.container.classes.recipetable;
 
-import java.io.IOException;
 import java.util.List;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
-import com.github.immortalmice.foodpower.customclass.gui.ModContainer;
-import com.github.immortalmice.foodpower.customclass.gui.ModGuiContainer;
-import com.github.immortalmice.foodpower.customclass.gui.Button;
-import com.github.immortalmice.foodpower.customclass.gui.recipetable.RecipeTableContainer;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
-	private final int BUTTON_LEFT = 0;
-	private final int BUTTON_RIGHT = 1;
+	private TextFieldWidget textBox;
 
-	private RecipeTableContainer container;
-	private GuiTextField textBox;
-
-	public RecipeTableScreen(ContainerBase containerIn, PlayerInventory inventoryIn, ITextComponent textIn){
+	public RecipeTableScreen(RecipeTableContainer containerIn, PlayerInventory inventoryIn, ITextComponent textIn){
 		super(containerIn, inventoryIn, textIn);
 
 		this.textureFileName = "recipe_table";
@@ -50,13 +40,13 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 
 		/* Make A Slot Circle With N Slots */
 		int[][] slotPos = container.getSlotPos();	
-		this.mc.getTextureManager().bindTexture(this.getSlotTexture());
+		this.minecraft.getTextureManager().bindTexture(this.getSlotTexture());
 
 		for(int i = 0; i <= currentIngredients.size()-1; i ++){
 			Ingredient ingredient = currentIngredients.get(i); 
 			int[] slotPosInTexture = this.getSlotPosInTexture(ingredient.isEmpty() ? ingredient.getFoodType() : FoodTypes.NONE);
 			
-			this.drawTexturedModalRect(
+			this.blit(
 				offsetX + slotPos[i][0] - 9, offsetY + slotPos[i][1] - 9
 				, slotPosInTexture[0], slotPosInTexture[1]
 				, 18, 18);
@@ -66,63 +56,52 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		/* Render name of the pattern */
-		String patternName = I18n.format("pattern." + CookingPatterns.list.get(container.getIndex()).getName() + ".name");
-		this.fontRenderer.drawString(patternName, (this.xSize - this.fontRenderer.getStringWidth(patternName)) / 2, 20, 0x404040);
+		String patternName = I18n.format("pattern." + CookingPatterns.list.get(this.container.getIndex()).getName() + ".name");
+		this.font.drawString(patternName, (this.xSize - this.font.getStringWidth(patternName)) / 2, 20, 0x404040);
 	}
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks){
-		super.drawScreen(mouseX, mouseY, partialTicks);
-		this.textBox.drawTextBox();
+	public void render(int mouseX, int mouseY, float partialTicks){
+		super.render(mouseX, mouseY, partialTicks);
+		this.textBox.renderButton(mouseX, mouseY, partialTicks);
 	}
 	@Override
-	public void initGui(){
-		super.initGui();
+	public void init(){
+		super.init();
 
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		this.buttonList.add(new Button(BUTTON_LEFT, offsetX + 20, offsetY + 15, 10, 15, "", 38, 19));
-		this.buttonList.add(new Button(BUTTON_RIGHT, offsetX + this.xSize - 30, offsetY + 15, 10, 15, "", 38, 0));
+		this.addButton(new FPButton(offsetX + 20, offsetY + 15, 10, 15, 38, 19, "", (button) ->{
+			/* Send Message To server on clicked */
+			FoodPower.NETWORK.sendToServer(
+				new RecipeTableMessage(this.container.getWindowId()
+					, "Set Index"
+					, "Decrease"));
+		}));
+		this.addButton(new FPButton(offsetX + this.xSize - 30, offsetY + 15, 10, 15, 38, 0, "", (button) ->{
+			/* Send Message To server on clicked */
+			FoodPower.NETWORK.sendToServer(
+				new RecipeTableMessage(this.container.getWindowId()
+					, "Set Index"
+					, "Increase"));
+		}));
 
-		this.textBox = new GuiTextField(2, this.fontRenderer, offsetX + 130, offsetY + 120, 70, 15);
-		this.textBox.setText(this.container.getInputText());
+		this.textBox = new TextFieldWidget(this.font
+			, offsetX + 130, offsetY + 120
+			, 70, 15, I18n.format("general.foodpower.recipe_name"));
 		//this.textBox.setEnableBackgroundDrawing(false);
 	}
-	/* Send Message To server on clicked */
-	@Override
-    protected void actionPerformed(GuiButton button) throws IOException{
-    	if(this.inventorySlots instanceof RecipeTableContainer){
-    		RecipeTableMessage message;
-	    	switch(button.id){
-	    		case BUTTON_LEFT:
-	    			message = new RecipeTableMessage("Set Index", "Decrease", container.pos);
-	    			break;
-	    		case BUTTON_RIGHT:
-	    			message = new RecipeTableMessage("Set Index", "Increase", container.pos);
-	    			break;
-	    		default:
-	    			message = new RecipeTableMessage();
-	    	}
-	    	FoodPower.network.sendToServer(message);
-    	}
-    }
-    /* Click on Text Box to focus it, otherwise cancel focus on it */
+
+    /* Set Full name typed in To Server, Server will refresh recipeScroll with the name */
     @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException{
-    	int textBoxX = this.textBox.x, textBoxY = this.textBox.y;
-    	int textBoxWidth = this.textBox.width, textBoxHeigth = this.textBox.height;
-    	if(mouseX >= textBoxX && mouseX < textBoxX + textBoxWidth && mouseY >= textBoxY && mouseY < textBoxY + textBoxHeigth){
-    		this.textBox.setFocused(true);
-    	}else{
-    		this.textBox.setFocused(false);
-    	}
-    	super.mouseClicked(mouseX, mouseY, mouseButton);
-    }
-    /* Set Full name typed in To Server, Server will refresh recipeScroll with name */
-    @Override
-	protected void keyTyped(char typedChar, int keyCode) throws IOException{
-		if(this.textBox.textboxKeyTyped(typedChar, keyCode)){
-			FoodPower.network.sendToServer(new RecipeTableMessage("Set InputText", this.textBox.getText(), container.pos));
+	public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_){
+		if(this.textBox.isFocused()){
+			FoodPower.NETWORK.sendToServer(
+				new RecipeTableMessage(this.container.getWindowId()
+					, "Set InputText"
+					, this.textBox.getText())
+				);
+			return true;
 		}else{
-			super.keyTyped(typedChar, keyCode);
+			return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
 		}
 	}
 

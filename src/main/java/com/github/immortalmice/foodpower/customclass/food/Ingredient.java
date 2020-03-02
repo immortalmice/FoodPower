@@ -6,10 +6,10 @@ import javax.annotation.Nullable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -84,8 +84,8 @@ public class Ingredient extends ItemFoodBase{
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
 
-    	String foodTypeName = new TranslationTextComponent("general.food_type.name").getUnformattedComponentText();
-    	String foodType = new TranslationTextComponent("food_type." + this.foodType.getName() + ".name").getUnformattedComponentText();
+    	String foodTypeName = I18n.format("general.foodpower.food_type.name");
+    	String foodType = I18n.format("food_type.foodpower." + this.foodType.getName() + ".name");
     	tooltip.add(new StringTextComponent(foodTypeName + " : " + foodType));
     }
 }

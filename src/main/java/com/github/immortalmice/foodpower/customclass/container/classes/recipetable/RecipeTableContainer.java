@@ -2,63 +2,52 @@ package com.github.immortalmice.foodpower.customclass.container.classes.recipeta
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
 
 import java.lang.Math;
 
-import net.minecraft.world.World;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IntReferenceHolder;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Slot;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.customclass.container.util.RecipeTableSlot;
-import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTablScreen;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
-import com.github.immortalmice.foodpower.customclass.tileentity.classes.RecipeTableTileEntity;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 public class RecipeTableContainer extends ContainerBase{
 
-	protected World world; 
-	protected BlockPos pos;
 	protected ItemStackHandler scrollSlot, bookSlot, ingredientsSlot;
-	protected RecipeTableTileEntity tileEntity;
 
 	private int index = 0;
 	private String inputText = "";
+	private final int windowId;
 
-	private final int RADIUS = 40;
-	private final int[] CENTER = {90, 80};
+	private static final int RADIUS = 40;
+	private static final int[] CENTER = {90, 80};
+	private static final int PATTERN_LIST_SIZE = CookingPatterns.list.size();
 
 	public RecipeTableContainer(int windowId, PlayerInventory inv, PacketBuffer extraData){
-		super(Containers.RECIPE_TABLE.getContainerType(), windowId, new int[]{45, 145}, inv);
+		this(windowId, inv);
 	}
 
-	public RecipeTableContainer(EntityPlayer playerIn, World worldIn, BlockPos posIn){
-		super(playerIn, new int[]{45, 145});
-		
-		this.world = worldIn;
-		this.pos = posIn;
-		this.tileEntity = (RecipeTableTileEntity)worldIn.getTileEntity(this.pos);
+	public RecipeTableContainer(int windowIdIn, PlayerInventory playerInventory){
+		super(Containers.RECIPE_TABLE.getContainerType(), windowIdIn, new int[]{45, 145}, playerInventory);
 
+		this.windowId = windowIdIn;
 		this.bookSlot = new ItemStackHandler(1);
 		this.scrollSlot = new ItemStackHandler(1);
 
-		this.addSlotToContainer(new SlotItemHandler(bookSlot, 0, 83, 72){
+		this.addSlot(new SlotItemHandler(bookSlot, 0, 83, 72){
 			/* Only Writable Book Accepted Here */
 			@Override
 			public boolean isItemValid(ItemStack stack){
@@ -72,25 +61,37 @@ public class RecipeTableContainer extends ContainerBase{
 			}
 		});
 
-		this.addSlotToContainer(new SlotItemHandler(scrollSlot, 0, 182, 71){
+		this.addSlot(new SlotItemHandler(scrollSlot, 0, 182, 71){
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return false;
 			}
 			@Override
-			public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack){
+			public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack){
 				RecipeTableContainer.this.bookSlot.setStackInSlot(0, ItemStack.EMPTY);
 				/* Init the amount needed in recipe, and rarity */
-				RecipeScroll.initStack(stack, RecipeTableContainer.this.world.rand);
+				RecipeScroll.initStack(stack);
 				return stack;
 			}
 		});
 
-		this.updateSlot();
+		this.trackInt(new IntReferenceHolder(){
+			@Override
+			public int get(){
+				return RecipeTableContainer.this.index;
+			}
+			@Override
+			public void set(int value){
+				RecipeTableContainer.this.index = value;
+				RecipeTableContainer.this.updateSlot();
+			}
+		});
 	}
 	/* Dynamic ingredient slots */
 	private void updateSlot(){
-		this.inventorySlots = this.inventorySlots.subList(0, 38);
+		while(this.inventorySlots.size() > 38){
+			this.inventorySlots.remove(38);
+		}
 
 		List<Ingredient> ingredientList = this.getIngredients();
 		this.ingredientsSlot = new ItemStackHandler(ingredientList.size());
@@ -98,7 +99,7 @@ public class RecipeTableContainer extends ContainerBase{
 		/* Make A Slot Circle With N Slots */
 		int[][] slotPos = this.getSlotPos();
 		for(int i = 0; i <= ingredientList.size()-1; i ++){
-			this.addSlotToContainer(new RecipeTableSlot(ingredientsSlot, i
+			this.addSlot(new RecipeTableSlot(ingredientsSlot, i
 				, slotPos[i][0] - 8, slotPos[i][1] - 8
 				, ingredientList.get(i), this));
 		}
@@ -138,55 +139,13 @@ public class RecipeTableContainer extends ContainerBase{
 		return ingredientsList;
 	}
 
-	/* Detect Index and inputText Change Or Not */
-	@Override
-	public void detectAndSendChanges(){
-		super.detectAndSendChanges();
-
-		int tileIndex = this.tileEntity.getIndex();
-		if(this.index != tileIndex){
-			for(int i = 0; i <= this.listeners.size()-1; i ++){
-				this.listeners.get(i).sendWindowProperty(this, 0, tileIndex);
-			}
-			this.index = tileIndex;
-			this.updateSlot();
-		}
-
-		String tileInputText = this.tileEntity.getInputText();
-		if(this.inputText != tileInputText){
-			for(int i = 0; i <= this.listeners.size()-1; i ++){
-				this.listeners.get(i).sendWindowProperty(this, 1, -1);
-			}
-			this.inputText = tileInputText;
-			this.refreshScroll();
-		}
-	}
-
-	/* Update Index and inputText On Server Message */
-	@SideOnly(Side.CLIENT)
     @Override
-    public void updateProgressBar(int id, int data){
-    	super.updateProgressBar(id, data);
-
-    	switch(id){
-    		case 0:
-    			this.index = data;
-    			this.updateSlot();
-    			break;
-    		case 1:
-    			this.inputText = this.tileEntity.getInputText();
-    			this.refreshScroll();
-    			break;
-    	}
-    }
-
-    @Override
-	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int fromSlot){
+	public ItemStack transferStackInSlot(PlayerEntity entityPlayer, int fromSlot){
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn){
+	public void onContainerClosed(PlayerEntity playerIn){
 		super.onContainerClosed(playerIn);
 		if(playerIn.isServerWorld()){
 			if(playerIn.inventory.getFirstEmptyStack() != -1){
@@ -199,7 +158,7 @@ public class RecipeTableContainer extends ContainerBase{
 
 	/* Click on slot to regist the ingredient to it */
 	@Override
-	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer playerIn){
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity playerIn){
 		if(slotId >= 38 && slotId <= this.ingredientsSlot.getSlots() + 37){
 			Slot slot = this.getSlot(slotId);
 			if(slot instanceof RecipeTableSlot){
@@ -210,12 +169,6 @@ public class RecipeTableContainer extends ContainerBase{
 		}
 		return super.slotClick(slotId, dragType, clickTypeIn, playerIn);
 	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public static void registScreen(ContainerType<? extends ContainerBase> containerTypeIn){
-    	ScreenManager.registerFactory(containerTypeIn, RecipeTablScreen::new);
-    }
 
 	/* Get ingreidient list of current pattern */
 	public List<Ingredient> getIngredients(){
@@ -231,8 +184,8 @@ public class RecipeTableContainer extends ContainerBase{
 		for(int i = 0; i <= count-1; i ++){
 
 			int[] slotPostInGui = {
-				(int)(this.CENTER[0] + this.RADIUS * Math.cos((angle * i - 90) * Math.PI / 180)),
-				(int)(this.CENTER[1] + this.RADIUS * Math.sin((angle * i - 90) * Math.PI / 180))
+				(int)(RecipeTableContainer.CENTER[0] + RecipeTableContainer.RADIUS * Math.cos((angle * i - 90) * Math.PI / 180)),
+				(int)(RecipeTableContainer.CENTER[1] + RecipeTableContainer.RADIUS * Math.sin((angle * i - 90) * Math.PI / 180))
 			};
 
 			result[i] = slotPostInGui;
@@ -241,10 +194,36 @@ public class RecipeTableContainer extends ContainerBase{
 	}
 
 	public int getIndex(){
-    	return this.index;
-    }
+		return this.index;
+	}
 
-    public String getInputText(){
-    	return this.tileEntity.getInputText();
+	public int getWindowId(){
+		return this.windowId;
+	}
+
+	/* Increase and cycle index */
+	public void increaseIndex(){
+		this.index++;
+
+		if(this.index > RecipeTableContainer.PATTERN_LIST_SIZE - 1){
+			this.index -= RecipeTableContainer.PATTERN_LIST_SIZE;
+		}
+		
+		this.updateSlot();
+	}
+	/* Decrease and cycle index */
+	public void decreaseIndex(){
+		this.index--;
+
+		if(this.index < 0){
+			this.index += RecipeTableContainer.PATTERN_LIST_SIZE;
+		}
+		
+		this.updateSlot();
+	}
+
+    public void setInputText(String str){
+    	this.inputText = str;
+    	this.refreshScroll();
     }
 }

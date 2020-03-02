@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraft.util.ActionResultType;
@@ -36,26 +35,18 @@ public class Market extends BlockBase{
 		if(worldIn.isRemote) return ActionResultType.SUCCESS;
 
 		if(!playerIn.func_225608_bj_()){
-			TileEntity tileEntity = worldIn.getTileEntity(posIn);
-			if(tileEntity instanceof INamedContainerProvider){
-				NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
-					@Override
-					public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){
-						return new MarketContainer(windowId, playerInventory);
-					}
-					@Override
-					public ITextComponent getDisplayName(){
-						return new TranslationTextComponent("block.foodpower.market");
-					}
-				}, extraData -> {});
-			}
+			NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
+				@Override
+				public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){
+					return new MarketContainer(windowId, playerInventory);
+				}
+				@Override
+				public ITextComponent getDisplayName(){
+					return new TranslationTextComponent("block.foodpower.market");
+				}
+			}, extraData -> {});
 			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.PASS;
-	}
-
-	@Override
-	public boolean hasTileEntity(BlockState state){
-		return true;
 	}
 }
