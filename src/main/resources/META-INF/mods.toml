@@ -1,43 +1,25 @@
-# This is an example mods.toml file. It contains the data relating to the loading mods.
-# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
-# The overall format is standard TOML format, v0.5.0.
-# Note that there are a couple of TOML lists in this file.
-# Find more information on toml format here:  https://github.com/toml-lang/toml
-# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
-modLoader="javafml" #mandatory
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/immortalmice/FoodPower/issues"
 
-# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+[[mods]]
+	modId="foodpower"
+	version="1.0"
+	displayName="Food Power"
+	credits="Pudding, donut, and all sweet things."
+	authors="Immortalmice, YenHsinWu"
+	description='''Food will give you power.<3'''
 
-# A URL to refer people to when problems occur with this mod
-issueTrackerURL="" #optional
-
-# A list of mods - how many allowed here is determined by the individual mod loader
-[[mods]] #mandatory
-
-# The modid of the mod
-modId="foodpower" #mandatory
-
-# The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="${version}" #mandatory
-
- # A display name for the mod
-displayName="Food Power" #mandatory
-
-# A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="" #optional
-
-# A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="" #optional
-
-# A file name (in the root of the mod JAR) containing a logo for display
-logoFile="" #optional
-
-# A text field displayed in the mod UI
-credits="Pudding, donut, and all sweet things." #optional
-
-# A text field displayed in the mod UI
-authors="Immortalmice, YenHsinWu" #optional
-
-# The description text for the mod (multi line!) (#mandatory)
-description="Food will give you power."
+[[dependencies.foodpower]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31,)"
+    ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.foodpower]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"

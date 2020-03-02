@@ -6,6 +6,7 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import com.github.immortalmice.foodpower.bus.ModEventHandlers;
+import com.github.immortalmice.foodpower.handlers.RegistryHandler;
 
 @Mod(FoodPower.MODID)
 public class FoodPower{
@@ -14,7 +15,7 @@ public class FoodPower{
     public static final String VERSION = "0.1";
     public static final String PROTOCOL_VERSION = "1";
 
-    public static final FoodPower INSTANCE = new FoodPower();
+//    public static final FoodPower INSTANCE = new FoodPower();
     public static final SimpleChannel NETWORK = NetworkRegistry.newSimpleChannel(
     	new ResourceLocation(FoodPower.MODID, "main")
     	, () -> FoodPower.PROTOCOL_VERSION
@@ -22,7 +23,8 @@ public class FoodPower{
     	, FoodPower.PROTOCOL_VERSION::equals
     );
 
-    private FoodPower(){
+    public FoodPower(){
     	ModEventHandlers.registAllEvent();
+        RegistryHandler.registAll();
     }
 }

@@ -5,34 +5,37 @@ import java.util.Random;
 import java.lang.Math;
 import javax.annotation.Nullable;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 
-import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
+import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.Ingredients;
-import com.github.immortalmice.foodpower.lists.GUIs;
 import com.github.immortalmice.foodpower.lists.other.OtherItems;
 
 public class RecipeScroll extends ItemBase{
 	public RecipeScroll(){
-		super("recipe_scroll");
-
-		this.setMaxStackSize(1);
-        this.setHasSubtypes(true);
-        this.setMaxDamage(0);
+		super("recipe_scroll", new Item.Properties().maxStackSize(1));
 
 		OtherItems.list.add(this);
 	}
@@ -41,43 +44,42 @@ public class RecipeScroll extends ItemBase{
 	public static ItemStack create(CookingPattern patternIn, List<ItemStack> listIn, String nameIn){
 		ItemStack result = new ItemStack(OtherItems.RECIPE_SCROLL);
 
-		NBTTagCompound nbt = new NBTTagCompound();
+		CompoundNBT nbt = new CompoundNBT();
 
-		nbt.setString("pattern", patternIn.getName());
-		nbt.setString("displayName", nameIn);
+		nbt.putString("pattern", patternIn.getName());
+		nbt.putString("displayName", nameIn);
 
-		NBTTagList tagList = new NBTTagList();
+		ListNBT tagList = new ListNBT();
 		for(int i = 0; i <= listIn.size()-1; i ++){
-			NBTTagCompound element = new NBTTagCompound();
-			element.setString("name", ((Ingredient)listIn.get(i).getItem()).getName());
-			element.setInteger("level", listIn.get(i).getCount());
-			tagList.appendTag(element);
+			CompoundNBT element = new CompoundNBT();
+			element.putString("name", ((Ingredient)listIn.get(i).getItem()).getFPName());
+			element.putInt("level", listIn.get(i).getCount());
+			tagList.add(element);
 		}
-		nbt.setTag("ingredients", tagList);
+		nbt.put("ingredients", tagList);
 
-		result.setTagCompound(nbt);
+		result.setTag(nbt);
 		return result;
 	}
 
     public static void initStack(ItemStack stack){
         Random rand = new Random();
-        NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
+        CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
 
-        if(nbt.hasKey("rarity")) return;
+        if(nbt.contains("rarity")) return;
 
         int rarity = rand.nextInt(4);
-        stack.setItemDamage(rarity);
-        nbt.setInteger("rarity", rarity);
+        nbt.putInt("rarity", rarity);
 
-        nbt.setDouble("random", rand.nextFloat() * 0.2 + 0.9);
-        nbt.setInteger("output_amount", 1);
+        nbt.putDouble("random", rand.nextFloat() * 0.2 + 0.9);
+        nbt.putInt("output_amount", 1);
 
-        if(nbt.hasKey("ingredients")){
-            NBTTagList list = (NBTTagList)nbt.getTag("ingredients");
-            for(int i = 0; i <= list.tagCount()-1; i ++){
-                NBTTagCompound element = (NBTTagCompound)list.get(i);
-                int amount = RecipeScroll.calcuAmount(element.getString("name"), nbt.getInteger("output_amount"), element.getInteger("level"), nbt.getDouble("random"));
-                element.setInteger("amount", amount);
+        if(nbt.contains("ingredients")){
+            ListNBT list = (ListNBT)nbt.get("ingredients");
+            for(int i = 0; i <= list.size()-1; i ++){
+                CompoundNBT element = (CompoundNBT)list.get(i);
+                int amount = RecipeScroll.calcuAmount(element.getString("name"), nbt.getInt("output_amount"), element.getInt("level"), nbt.getDouble("random"));
+                element.putInt("amount", amount);
             }
         }
     }
@@ -88,53 +90,65 @@ public class RecipeScroll extends ItemBase{
     }
 
 	/* Add information about pattern and ingrdient to tooltip */
-	@SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
 	@Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn){
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
 
     	String patternStr = I18n.format("general.cooking_pattern.name") + ":";
-    	NBTTagCompound nbt = stack.hasTagCompound() ? stack.getTagCompound() : new NBTTagCompound();
-    	if(nbt.hasKey("pattern")){
+    	CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
+    	if(nbt.contains("pattern")){
     		patternStr += I18n.format("pattern." + nbt.getString("pattern") + ".name");
     	}else{
     		patternStr += I18n.format("general.none.name");
     	}
-    	tooltip.add(patternStr);
+    	tooltip.add(new StringTextComponent(patternStr));
 
-    	if(nbt.hasKey("ingredients")){
-    		tooltip.add(I18n.format("general.ingredients.name"));
-    		NBTTagList list = (NBTTagList)nbt.getTag("ingredients");
-    		for(int i = 0; i <= list.tagCount()-1; i ++){
-    			NBTTagCompound element = list.getCompoundTagAt(i);
+    	if(nbt.contains("ingredients")){
+    		tooltip.add(new TranslationTextComponent("general.ingredients.name"));
+    		ListNBT list = (ListNBT)nbt.get("ingredients");
+    		for(int i = 0; i <= list.size()-1; i ++){
+    			CompoundNBT element = (CompoundNBT) list.get(i);
     			String ingredientStr = I18n.format("item." + element.getString("name") + ".name");
-    			ingredientStr += " [" + I18n.format("general.level.name") + element.getInteger("level") + "]";
-                if(element.hasKey("amount"))
-                    ingredientStr += " (" + element.getInteger("amount") + ")";
-    			tooltip.add("  " + ingredientStr);
+    			ingredientStr += " [" + I18n.format("general.level.name") + element.getInt("level") + "]";
+                if(element.contains("amount"))
+                    ingredientStr += " (" + element.getInt("amount") + ")";
+    			tooltip.add(new StringTextComponent("  " + ingredientStr));
     		}
     	}
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
-    public String getItemStackDisplayName(ItemStack stack){
-    	if(stack.hasTagCompound() 
-    		&& stack.getTagCompound().hasKey("displayName") 
-    		&& !stack.getTagCompound().getString("displayName").isEmpty()){
+    public ITextComponent getDisplayName(ItemStack stack){
+    	if(stack.hasTag() 
+    		&& stack.getTag().contains("displayName") 
+    		&& !stack.getTag().getString("displayName").isEmpty()){
 
-    		return stack.getTagCompound().getString("displayName");
+    		return new StringTextComponent(stack.getTag().getString("displayName"));
     	}
-    	return I18n.format("general.unknown_recipe.name");
+    	return new TranslationTextComponent("general.unknown_recipe.name");
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
-        /* Only Open Gui in client side */
-        if(worldIn.isRemote){
-            BlockPos pos = playerIn.getPosition();
-            playerIn.openGui(FoodPower.instance, GUIs.RECIPE_SCROLL.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn){
+        ItemStack stack = playerIn.getHeldEquipment().iterator().next();
+        CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
+
+        /* ActionResultType.SUCCESS */
+        if(worldIn.isRemote) return ActionResult.func_226248_a_(stack);
+        NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
+            @Override
+            public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){
+                return new RecipeScrollContainer(windowId, playerInventory, nbt);
+            }
+            @Override
+            public ITextComponent getDisplayName(){
+                return new StringTextComponent("");
+            }
+        }, extraData -> {
+            extraData.writeCompoundTag(nbt);
+        });
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }
