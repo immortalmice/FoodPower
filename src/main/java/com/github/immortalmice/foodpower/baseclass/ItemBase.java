@@ -11,18 +11,12 @@ public class ItemBase extends Item{
 		super(propertiesIn);
 
 		this.name = nameIn;
-        this.setRegistryName(name);
 	}
 	public ItemBase(String nameIn){
 		this(nameIn, new Item.Properties().group(FPCreativeTabs.ITEM_TAB));
 	}
 
 	public String getFPName(){
-		return this.name;
-	}
-	
-	@Override
-	public String getTranslationKey(){
 		return this.name;
 	}
 }

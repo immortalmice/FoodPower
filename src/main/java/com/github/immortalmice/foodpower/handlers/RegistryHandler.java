@@ -15,13 +15,13 @@ public class RegistryHandler{
 
 	public static void registAll(){
 		RegistryHandler.registAllItem();
-		RegistryHandler.registAllBlock();
-		RegistryHandler.registAllContainer();
-		RegistryHandler.registAllTileEntityType();
+		//RegistryHandler.registAllBlock();
+		//RegistryHandler.registAllContainer();
+		//RegistryHandler.registAllTileEntityType();
 	}
 	public static void registAllItem(){
-		Ingredients.REGISTER.register(RegistryHandler.BUS);
-		Crops.ITEM_REGISTER.register(RegistryHandler.BUS);
+		Ingredients.getRegister().register(RegistryHandler.BUS);
+		//Crops.ITEM_REGISTER.register(RegistryHandler.BUS);
 	}
 	public static void registAllBlock(){
 		KitchenAppliances.REGISTER.register(RegistryHandler.BUS);

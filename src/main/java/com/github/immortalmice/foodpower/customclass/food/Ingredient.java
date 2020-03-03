@@ -14,10 +14,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
-import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
-import com.github.immortalmice.foodpower.customclass.food.CookedFood;
-import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 public class Ingredient extends ItemFoodBase{
@@ -30,18 +27,6 @@ public class Ingredient extends ItemFoodBase{
 
 		this.foodType = ftIn;
 		this.baseAmount = amountIn;
-
-        /* Add to corresponding ingredients list */
-        if(this instanceof Meal){
-        	Ingredients.mealFoodList.add((Meal) this);
-        }else if(this instanceof CookedFood){
-        	Ingredients.cookedFoodList.add((CookedFood) this);
-        }else{
-        	Ingredients.list.add(this);
-        }
-
-        /* Regist it to game using DeferredRegister */
-        Ingredients.REGISTER.register(this.getFPName(), () -> this);
 	}
 	/* For Vanilla Ingredient Food or not Food */
 	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, double amountIn){
@@ -84,8 +69,8 @@ public class Ingredient extends ItemFoodBase{
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
 
-    	String foodTypeName = I18n.format("general.foodpower.food_type.name");
-    	String foodType = I18n.format("food_type.foodpower." + this.foodType.getName() + ".name");
+    	String foodTypeName = I18n.format("general.foodpower.food_type");
+    	String foodType = I18n.format("food_type.foodpower." + this.foodType.getName());
     	tooltip.add(new StringTextComponent(foodTypeName + " : " + foodType));
     }
 }

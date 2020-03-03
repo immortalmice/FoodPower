@@ -16,17 +16,11 @@ public class BlockBase extends HorizontalBlock{
 		super(propertiesIn);
 
 		this.name = nameIn;
-        this.setRegistryName(nameIn);
         item = new BlockItem(this, new Item.Properties().group(FPCreativeTabs.BLOCK_TAB));
 	}
 
 	public BlockBase(String nameIn, Material material){
 		this(nameIn, Block.Properties.create(material));
-	}
-
-	@Override
-	public String getTranslationKey(){
-		return this.name;
 	}
 
 	public BlockItem getBlockItem(){

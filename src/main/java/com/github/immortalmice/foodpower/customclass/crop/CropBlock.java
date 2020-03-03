@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.crop.CropSeed;
 import com.github.immortalmice.foodpower.lists.Crops;
-import com.github.immortalmice.foodpower.lists.Ingredients;
 
 public class CropBlock extends CropsBlock{
 	private static final float SECOND_SEED_CHANCE = 0.25f;
@@ -32,13 +31,11 @@ public class CropBlock extends CropsBlock{
 
         this.name = nameIn.concat("_crop");
         this.seed = Crops.getSeed(nameIn.concat("_seed"));
-        this.crop = Ingredients.getIngredientByName(nameIn);
+        this.crop = cropIn;
 
         this.setRegistryName(nameIn.concat("_crop"));
         
         Crops.blockList.add(this);
-        /* Regist it to game using DeferredRegister */
-        Crops.BLOCK_REGISTER.register(this.getFPName(), () -> this);
 	}
 
 	@Override

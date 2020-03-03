@@ -20,8 +20,6 @@ public class CropSeed extends BlockNamedItem{
         this.setRegistryName(name.concat("_seed"));
 
         Crops.seedList.add(this);
-        /* Regist it to game using DeferredRegister */
-        Crops.ITEM_REGISTER.register(this.getFPName(), () -> this);
 	}
 
 	@Override

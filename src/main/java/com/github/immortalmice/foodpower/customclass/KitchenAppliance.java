@@ -35,9 +35,6 @@ public class KitchenAppliance extends BlockBase{
 
         /* Add to kitchen appliances list*/
         KitchenAppliances.list.add(this);
-
-        /* Regist it to game using DeferredRegister */
-        KitchenAppliances.REGISTER.register(this.getFPName(), () -> this);
 	}
 
 	

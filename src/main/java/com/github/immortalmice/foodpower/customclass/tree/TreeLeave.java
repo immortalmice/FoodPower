@@ -28,9 +28,6 @@ public class TreeLeave extends LeavesBlock{
         item = new BlockItem(this, new Item.Properties().group(FPCreativeTabs.BLOCK_TAB));
 
 		Trees.leaveList.add(this);
-
-        /* Regist it to game using DeferredRegister */
-        Trees.REGISTER.register(this.getFPName(), () -> this);
 	}
 
     public String getFPName(){
