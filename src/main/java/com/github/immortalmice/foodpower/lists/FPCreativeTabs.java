@@ -8,13 +8,13 @@ import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 
 /* All Food Power's creativetabs list below.*/
 public class FPCreativeTabs{
-	public static final ItemGroup ITEM_TAB = (new ItemGroup("items"){
+	public static final ItemGroup ITEM_TAB = (new ItemGroup("foodpower.items"){
 		@Override
 		public ItemStack createIcon(){
 			return new ItemStack(Ingredients.BUTTER);
 		}
 	});
-	public static final ItemGroup BLOCK_TAB = (new ItemGroup("blocks"){
+	public static final ItemGroup BLOCK_TAB = (new ItemGroup("foodpower.blocks"){
 		@Override
 		public ItemStack createIcon(){
 			return new ItemStack(KitchenAppliances.OVEN.asItem());

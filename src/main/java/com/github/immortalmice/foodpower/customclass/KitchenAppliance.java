@@ -15,7 +15,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
-import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
 
 public class KitchenAppliance extends BlockBase{
@@ -32,9 +31,6 @@ public class KitchenAppliance extends BlockBase{
 		this.blockAABB = VoxelShapes.create(blockAABBIn);
 
 		item = new BlockItem(this, new Item.Properties().group(FPCreativeTabs.BLOCK_TAB));
-
-        /* Add to kitchen appliances list*/
-        KitchenAppliances.list.add(this);
 	}
 
 	
