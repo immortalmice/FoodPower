@@ -1,17 +1,8 @@
 {
-	"forge_marker": 1, 
-	"defaults": {
-		"model": "foodpower:oven_model"
-	},
-	"variants": {
-		"normal": [{}],
-		"inventory": [{}],
-		"facing": {
-			"up": {},
-			"north": {},
-			"east": {"y": 90}, 
-			"south": {"y": 180}, 
-			"west": {"y": 270}
-		}
+	"variants":{
+		"facing=north": {"model": "foodpower:block/oven_model"},
+		"facing=east": {"model": "foodpower:block/oven_model", "y": 90},
+		"facing=south": {"model": "foodpower:block/oven_model", "y": 180},
+		"facing=west": {"model": "foodpower:block/oven_model", "y": 270}
 	}
 }
