@@ -11,7 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.crop.CropSeed;
 import com.github.immortalmice.foodpower.customclass.crop.CropBlock;
-import com.github.immortalmice.foodpower.lists.Ingredients;
+import com.github.immortalmice.foodpower.lists.Ingredients.Items;
 
 public class Crops{
 	public static final DeferredRegister<Item> ITEM_REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
@@ -20,13 +20,13 @@ public class Crops{
 	public static final List<CropSeed> seedList = new ArrayList<CropSeed>();
 	public static final List<CropBlock> blockList = new ArrayList<CropBlock>();
 
-	public static final CropSeed MINT = new CropSeed("mint", Ingredients.MINT);
-	public static final CropSeed TOMAMTO = new CropSeed("tomato", Ingredients.TOMATO);
-	public static final CropSeed RICE = new CropSeed("rice", Ingredients.RICE);
-	public static final CropSeed CHILI = new CropSeed("chili", Ingredients.CHILI);
-	public static final CropSeed SPINACH = new CropSeed("spinach", Ingredients.SPINACH);
-	public static final CropSeed CABBAGE = new CropSeed("cabbage", Ingredients.CABBAGE);
-	public static final CropSeed CORN = new CropSeed("corn", Ingredients.CORN);
+	public static final CropSeed MINT = new CropSeed("mint", Items.MINT);
+	public static final CropSeed TOMAMTO = new CropSeed("tomato", Items.TOMATO);
+	public static final CropSeed RICE = new CropSeed("rice", Items.RICE);
+	public static final CropSeed CHILI = new CropSeed("chili", Items.CHILI);
+	public static final CropSeed SPINACH = new CropSeed("spinach", Items.SPINACH);
+	public static final CropSeed CABBAGE = new CropSeed("cabbage", Items.CABBAGE);
+	public static final CropSeed CORN = new CropSeed("corn", Items.CORN);
 
 	public static CropSeed getSeed(String nameIn){
 		for(int i = 0; i <= Crops.seedList.size()-1; i ++){

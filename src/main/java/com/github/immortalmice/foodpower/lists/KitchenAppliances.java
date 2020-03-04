@@ -10,36 +10,42 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
+import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
 
 /* All the ingredient need to be registed will list below. */
+
 public class KitchenAppliances{
-	/* Constructor: name, bounding block */
-	public static final KitchenAppliance OVEN = new KitchenAppliance("oven", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance JUICER = new KitchenAppliance("juicer", new AxisAlignedBB(3.0D/16, 2.0D/16, 3.0D/16, 13.0D/16, 1.0D, 13.0D/16));
-	public static final KitchenAppliance REVOLVING_CAKE_STAND = new KitchenAppliance("revolving_cake_stand", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance REFRIGERATOR = new KitchenAppliance("refrigerator", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance ELECTRIC_POT = new KitchenAppliance("electric_pot", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance STOCKPOT = new KitchenAppliance("stockpot", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance FRYING_PAN = new KitchenAppliance("frying_pan", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance ELECRIC_STOVE = new KitchenAppliance("electric_stove", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance SHAKER = new KitchenAppliance("shaker", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance CHOPPING_BOARD = new KitchenAppliance("chopping_board", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
-	public static final KitchenAppliance UNIVERSAL_STATION = new KitchenAppliance("universal_stand", new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D));
+	
+	@ObjectHolder("foodpower")
+	public static class Blocks{
+		public static final KitchenAppliance OVEN = null;
+		public static final KitchenAppliance JUICER = null;
+		public static final KitchenAppliance REVOLVING_CAKE_STAND = null;
+		public static final KitchenAppliance REFRIGERATOR = null;
+		public static final KitchenAppliance ELECTRIC_POT = null;
+		public static final KitchenAppliance STOCKPOT = null;
+		public static final KitchenAppliance FRYING_PAN = null;
+		public static final KitchenAppliance ELECRIC_STOVE = null;
+		public static final KitchenAppliance SHAKER = null;
+		public static final KitchenAppliance CHOPPING_BOARD = null;
+		public static final KitchenAppliance UNIVERSAL_STATION = null;
 
-	static{
-		Field[] fields = KitchenAppliances.class.getFields();
-		for(Field field : fields){
-			try{
-				if(field.getType() == KitchenAppliance.class){
-					KitchenAppliancesList.list.add((KitchenAppliance)field.get(null));
+		static{
+			Field[] fields = KitchenAppliances.Blocks.class.getFields();
+			for(Field field : fields){
+				try{
+					if(field.getType() == KitchenAppliance.class){
+						KitchenAppliancesList.list.add((KitchenAppliance)field.get(null));
+					}
+				}catch(Exception e){
+
 				}
-			}catch(Exception e){
-
 			}
 		}
 	}
@@ -56,6 +62,7 @@ class KitchenAppliancesRegistry{
 	public static final DeferredRegister<Block> BLOCK_REGISTER = new DeferredRegister<Block>(ForgeRegistries.BLOCKS, FoodPower.MODID);
 	public static final DeferredRegister<Item> ITEM_REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
 
+	/* Constructor: name, bounding block */
 	public static final RegistryObject<Block> OBJ_BLOCK_OVEN = KitchenAppliancesRegistry.registerBlock("oven", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_JUICER = KitchenAppliancesRegistry.registerBlock("juicer", (str) -> new KitchenAppliance(str, new AxisAlignedBB(3.0D/16, 2.0D/16, 3.0D/16, 13.0D/16, 1.0D, 13.0D/16)));
 	public static final RegistryObject<Block> OBJ_BLOCK_REVOLVING_CAKE_STAND = KitchenAppliancesRegistry.registerBlock("revolving_cake_stand", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
