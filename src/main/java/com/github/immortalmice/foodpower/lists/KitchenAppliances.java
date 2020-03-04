@@ -35,19 +35,6 @@ public class KitchenAppliances{
 		public static final KitchenAppliance SHAKER = null;
 		public static final KitchenAppliance CHOPPING_BOARD = null;
 		public static final KitchenAppliance UNIVERSAL_STATION = null;
-
-		static{
-			Field[] fields = KitchenAppliances.Blocks.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.getType() == KitchenAppliance.class){
-						KitchenAppliancesList.list.add((KitchenAppliance)field.get(null));
-					}
-				}catch(Exception e){
-
-				}
-			}
-		}
 	}
 
 	public static DeferredRegister<Block> getBlockRegister(){
@@ -55,6 +42,23 @@ public class KitchenAppliances{
 	}
 	public static DeferredRegister<Item> getItemRegister(){
 		return KitchenAppliancesRegistry.ITEM_REGISTER;
+	}
+	
+	public static List<KitchenAppliance> getList(){
+		if(KitchenAppliancesList.list.size() == 0){
+			Field[] fields = KitchenAppliances.Blocks.class.getFields();
+			for(Field field : fields){
+				try{
+					if(field.getType() == KitchenAppliance.class && field.get(null) != null){
+						KitchenAppliancesList.list.add((KitchenAppliance)field.get(null));
+					}
+				}catch(Exception e){
+					KitchenAppliancesList.list.clear();
+					break;
+				}
+			}
+		}
+		return KitchenAppliancesList.list;
 	}
 }
 

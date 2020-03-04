@@ -10,6 +10,7 @@ import com.github.immortalmice.foodpower.bus.ForgeEventHandlers;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Messages;
 import com.github.immortalmice.foodpower.handlers.BiomeAddTreeHandler;
+import com.github.immortalmice.foodpower.handlers.RenderHandler;
 
 public class ModEventHandlers{
 	private static final IEventBus BUS = FMLJavaModLoadingContext.get().getModEventBus();
@@ -30,5 +31,6 @@ public class ModEventHandlers{
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event){
 		Containers.registAllScreen();
+		RenderHandler.setup();
 	}
 }
