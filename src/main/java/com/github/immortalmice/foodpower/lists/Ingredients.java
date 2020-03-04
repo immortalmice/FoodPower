@@ -20,92 +20,95 @@ import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 /* All the ingredient need to be registed will list below. */
-@ObjectHolder("foodpower")
+
 public class Ingredients{
 
-	public static final Ingredient BUTTER = null;
-	public static final Ingredient ORANGE = null;
-	public static final Ingredient KIWI = null;
-	public static final Ingredient PAPAYA = null;
-	public static final Ingredient MANGO = null;
-	public static final Ingredient LEMON = null;
-	public static final Ingredient MINT = null;
-	public static final Ingredient FERMENTED_ENDEREYE = null;
-	public static final Ingredient DOUGH = null;
-	public static final Ingredient TOMATO = null;
-	public static final Ingredient KETCHUP = null;
-	public static final Ingredient SAUCE = null;
-	public static final Ingredient SALT = null;
-	public static final Ingredient OIL = null;
-	public static final Ingredient RICE = null;
-	public static final Ingredient CHEESE = null;
-	public static final Ingredient CHILI = null;
-	public static final Ingredient SPINACH = null;
-	public static final Ingredient CABBAGE = null;
-	public static final Ingredient FLOUR = null;
-	public static final Ingredient CORN = null;
-	public static final Ingredient CREAM = null;
+	@ObjectHolder("foodpower")
+	public static class Items{
+		public static final Ingredient BUTTER = null;
+		public static final Ingredient ORANGE = null;
+		public static final Ingredient KIWI = null;
+		public static final Ingredient PAPAYA = null;
+		public static final Ingredient MANGO = null;
+		public static final Ingredient LEMON = null;
+		public static final Ingredient MINT = null;
+		public static final Ingredient FERMENTED_ENDEREYE = null;
+		public static final Ingredient DOUGH = null;
+		public static final Ingredient TOMATO = null;
+		public static final Ingredient KETCHUP = null;
+		public static final Ingredient SAUCE = null;
+		public static final Ingredient SALT = null;
+		public static final Ingredient OIL = null;
+		public static final Ingredient RICE = null;
+		public static final Ingredient CHEESE = null;
+		public static final Ingredient CHILI = null;
+		public static final Ingredient SPINACH = null;
+		public static final Ingredient CABBAGE = null;
+		public static final Ingredient FLOUR = null;
+		public static final Ingredient CORN = null;
+		public static final Ingredient CREAM = null;
 
-	/* Vanilla Ingrediant */
-	public static final Ingredient APPLE = null;
-	public static final Ingredient MELON = null;
-	public static final Ingredient PUMPKIN = null;
-	public static final Ingredient CARROT = null;
-	public static final Ingredient POTATO = null;
-	public static final Ingredient BEETROOT = null;
-	public static final Ingredient BROWN_MUSHROOM = null;
-	public static final Ingredient RED_MUSHROOM = null;
-	public static final Ingredient EGG = null;
-	public static final Ingredient MILK_BUCKET = null;
-	public static final Ingredient PORKCHOP = null;
-	public static final Ingredient BEEF = null;
-	public static final Ingredient CHICKEN = null;
-	public static final Ingredient MUTTON = null;
-	public static final Ingredient CHORUS_FRUIT = null;
-	public static final Ingredient COCOA = null;
-	public static final Ingredient SUGAR = null;
-	public static final Ingredient WATER_BUCKET = null;
-	public static final Ingredient NETHER_WART = null;
+		/* Vanilla Ingrediant */
+		public static final Ingredient APPLE = null;
+		public static final Ingredient MELON = null;
+		public static final Ingredient PUMPKIN = null;
+		public static final Ingredient CARROT = null;
+		public static final Ingredient POTATO = null;
+		public static final Ingredient BEETROOT = null;
+		public static final Ingredient BROWN_MUSHROOM = null;
+		public static final Ingredient RED_MUSHROOM = null;
+		public static final Ingredient EGG = null;
+		public static final Ingredient MILK_BUCKET = null;
+		public static final Ingredient PORKCHOP = null;
+		public static final Ingredient BEEF = null;
+		public static final Ingredient CHICKEN = null;
+		public static final Ingredient MUTTON = null;
+		public static final Ingredient CHORUS_FRUIT = null;
+		public static final Ingredient COCOA = null;
+		public static final Ingredient SUGAR = null;
+		public static final Ingredient WATER_BUCKET = null;
+		public static final Ingredient NETHER_WART = null;
 
-	/* CookedFoods */
-	public static final CookedFood BATTER = null;
-	public static final CookedFood CAKE_BASE = null;
-	public static final CookedFood FLAT_DOUGH = null;
-	public static final CookedFood RAW_PIZZA = null;
-	public static final CookedFood COOKED_PIZZA = null;
-	public static final CookedFood RAW_JUICE = null;
-	public static final CookedFood MIXED_JUICE = null;
-	public static final CookedFood ICE_CREAM_BASE = null;
-	public static final CookedFood TOAST = null;
-	public static final CookedFood TOAST_SLICE = null;
-	public static final CookedFood COOKED_RICE = null;
-	public static final CookedFood NOODLE = null;
-	public static final CookedFood ICE = null;
-	
-	/* Meals */
-	public static final Meal CAKE = null;
-	public static final Meal PIZZA = null;
-	public static final Meal SANDWICH = null;
-	public static final Meal ICE_CREAM = null;
-	public static final Meal FRIED_RICE = null;
-	public static final Meal NOODLE_SOUP = null;
-	public static final Meal HONEY_TOAST = null;
-	public static final Meal SALAD = null;
-	public static final Meal JUICE = null;
+		/* CookedFoods */
+		public static final CookedFood BATTER = null;
+		public static final CookedFood CAKE_BASE = null;
+		public static final CookedFood FLAT_DOUGH = null;
+		public static final CookedFood RAW_PIZZA = null;
+		public static final CookedFood COOKED_PIZZA = null;
+		public static final CookedFood RAW_JUICE = null;
+		public static final CookedFood MIXED_JUICE = null;
+		public static final CookedFood ICE_CREAM_BASE = null;
+		public static final CookedFood TOAST = null;
+		public static final CookedFood TOAST_SLICE = null;
+		public static final CookedFood COOKED_RICE = null;
+		public static final CookedFood NOODLE = null;
+		public static final CookedFood ICE = null;
+		
+		/* Meals */
+		public static final Meal CAKE = null;
+		public static final Meal PIZZA = null;
+		public static final Meal SANDWICH = null;
+		public static final Meal ICE_CREAM = null;
+		public static final Meal FRIED_RICE = null;
+		public static final Meal NOODLE_SOUP = null;
+		public static final Meal HONEY_TOAST = null;
+		public static final Meal SALAD = null;
+		public static final Meal JUICE = null;
 
-	static{
-		Field[] fields = Ingredients.class.getFields();
-		for(Field field : fields){
-			try{
-				if(field.getType() == Ingredient.class){
-					IngredientList.list.add((Ingredient)field.get(null));
-				}else if(field.getType() == CookedFood.class){
-					IngredientList.list.add((CookedFood)field.get(null));
-				}else if(field.getType() == Meal.class){
-					IngredientList.list.add((Meal)field.get(null));
+		static{
+			Field[] fields = Ingredients.Items.class.getFields();
+			for(Field field : fields){
+				try{
+					if(field.getType() == Ingredient.class){
+						IngredientList.list.add((Ingredient)field.get(null));
+					}else if(field.getType() == CookedFood.class){
+						IngredientList.list.add((CookedFood)field.get(null));
+					}else if(field.getType() == Meal.class){
+						IngredientList.list.add((Meal)field.get(null));
+					}
+				}catch(Exception e){
+
 				}
-			}catch(Exception e){
-
 			}
 		}
 	}
