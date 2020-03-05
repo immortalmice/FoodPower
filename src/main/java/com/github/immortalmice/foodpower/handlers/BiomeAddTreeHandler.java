@@ -4,6 +4,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 
+import java.util.Collection;
+
 import com.github.immortalmice.foodpower.customclass.tree.FPTree;
 import com.github.immortalmice.foodpower.lists.Trees;
 
@@ -17,7 +19,9 @@ public class BiomeAddTreeHandler{
 	};
 
 	public static void setup(){
-		for(Biome biome : ForgeRegistries.BIOMES){
+		Trees.setup();
+		Collection<Biome> biomes = ForgeRegistries.BIOMES.getValues();
+		for(Biome biome : biomes){
 			switch(biome.getCategory()){
 				case FOREST:
 				case TAIGA:

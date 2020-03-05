@@ -5,15 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.item.BlockItem;
-
-import com.github.immortalmice.foodpower.lists.Trees;
-import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
 
 public class TreeLeave extends LeavesBlock{
     private String fpName;
-    private Item item;
 
 	public TreeLeave(String nameIn){
         super(Block.Properties.create(Material.LEAVES)
@@ -22,25 +16,10 @@ public class TreeLeave extends LeavesBlock{
             .tickRandomly()
             .variableOpacity());
 
-        this.fpName = nameIn.concat("_leave");
-        this.setRegistryName(this.getFPName());
-
-        item = new BlockItem(this, new Item.Properties().group(FPCreativeTabs.BLOCK_TAB));
-
-		Trees.leaveList.add(this);
+        this.fpName = nameIn;
 	}
 
     public String getFPName(){
         return this.fpName;
-    }
-
-    @Override
-    public String getTranslationKey(){
-        return this.getFPName();
-    }
-
-    @Override
-    public Item asItem(){
-        return this.item;
     }
 }

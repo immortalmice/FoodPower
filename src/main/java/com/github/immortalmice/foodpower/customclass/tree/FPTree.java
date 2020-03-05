@@ -11,18 +11,19 @@ import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraftforge.common.IPlantable;
 
-import com.github.immortalmice.foodpower.lists.Trees;
-
 public class FPTree extends Tree{
-	TreeSaplingBush sapling;
-	TreeLeave leave;
-	ConfiguredFeature<TreeFeatureConfig, ?> configuredFeature = null;
+	private String name;
+	private TreeSaplingBush sapling;
+	private TreeLeave leave;
+	private ConfiguredFeature<TreeFeatureConfig, ?> configuredFeature = null;
 
 	public FPTree(String nameIn){
-		this.sapling = new TreeSaplingBush(nameIn, this);
-		this.leave = new TreeLeave(nameIn);
+		this.name = nameIn;
+	}
 
-		Trees.list.add(this);
+	public void setLeaveAndSapling(TreeLeave leaveIn, TreeSaplingBush saplingIn){
+		this.leave = leaveIn;
+		this.sapling = saplingIn;
 	}
 
 	@Override
@@ -46,5 +47,9 @@ public class FPTree extends Tree{
 
 	public ConfiguredFeature<TreeFeatureConfig, ?> getConfiguredFeature(){
 		return this.func_225546_b_(new Random(), false);
+	}
+
+	public String getFPName(){
+		return this.name;
 	}
 }
