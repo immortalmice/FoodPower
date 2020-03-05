@@ -22,11 +22,11 @@ public class RegistryHandler{
 	public static void registAllItem(){
 		Ingredients.getRegister().register(RegistryHandler.BUS);
 		KitchenAppliances.getItemRegister().register(RegistryHandler.BUS);
-		//Crops.ITEM_REGISTER.register(RegistryHandler.BUS);
+		Crops.getItemRegister().register(RegistryHandler.BUS);
 	}
 	public static void registAllBlock(){
 		KitchenAppliances.getBlockRegister().register(RegistryHandler.BUS);
-		//Crops.BLOCK_REGISTER.register(RegistryHandler.BUS);
+		Crops.getBlockRegister().register(RegistryHandler.BUS);
 		//Trees.REGISTER.register(RegistryHandler.BUS);
 	}
 	public static void registAllContainer(){

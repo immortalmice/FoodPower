@@ -37,6 +37,10 @@ public class KitchenAppliances{
 		public static final KitchenAppliance UNIVERSAL_STATION = null;
 	}
 
+	private static class Lists{
+		public static final List<KitchenAppliance> list = new ArrayList<KitchenAppliance>();
+	}
+
 	public static DeferredRegister<Block> getBlockRegister(){
 		return KitchenAppliancesRegistry.BLOCK_REGISTER;
 	}
@@ -45,20 +49,24 @@ public class KitchenAppliances{
 	}
 	
 	public static List<KitchenAppliance> getList(){
-		if(KitchenAppliancesList.list.size() == 0){
+		if(KitchenAppliances.Lists.list.isEmpty()){
 			Field[] fields = KitchenAppliances.Blocks.class.getFields();
 			for(Field field : fields){
 				try{
-					if(field.getType() == KitchenAppliance.class && field.get(null) != null){
-						KitchenAppliancesList.list.add((KitchenAppliance)field.get(null));
+					if(field.getType() == KitchenAppliance.class){
+						if(field.get(null) != null){
+							KitchenAppliances.Lists.list.add((KitchenAppliance)field.get(null));
+						}else{
+							throw new Exception();
+						}
 					}
 				}catch(Exception e){
-					KitchenAppliancesList.list.clear();
+					KitchenAppliances.Lists.list.clear();
 					break;
 				}
 			}
 		}
-		return KitchenAppliancesList.list;
+		return KitchenAppliances.Lists.list;
 	}
 }
 
@@ -97,8 +105,4 @@ class KitchenAppliancesRegistry{
 	private static RegistryObject<Item> registerItem(String name, Function<String, Item> fun){
 		return KitchenAppliancesRegistry.ITEM_REGISTER.register(name, () -> fun.apply(name));
 	}
-}
-
-class KitchenAppliancesList{
-	public static final List<KitchenAppliance> list = new ArrayList<KitchenAppliance>();
 }

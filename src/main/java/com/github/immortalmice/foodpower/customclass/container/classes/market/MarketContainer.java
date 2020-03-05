@@ -24,7 +24,7 @@ public class MarketContainer extends ContainerBase{
 
 	private static final ContainerType<MarketContainer> TYPE = Containers.MARKET.getContainerType();
 	private static final int TREE_LIST_SIZE = Trees.saplingBushList.size();
-	private static final int CROP_LIST_SIZE = Crops.seedList.size();
+	private static final int CROP_LIST_SIZE = Crops.getItemList().size();
 	private static final int FULL_LIST_SIZE = MarketContainer.TREE_LIST_SIZE + MarketContainer.CROP_LIST_SIZE;
 
 	private final int windowId;
@@ -156,7 +156,7 @@ public class MarketContainer extends ContainerBase{
 		}else if(this.index >= MarketContainer.TREE_LIST_SIZE 
 			&& this.index <= MarketContainer.FULL_LIST_SIZE -1){
 
-			return Crops.seedList.get(this.index - MarketContainer.TREE_LIST_SIZE);
+			return Crops.getItemList().get(this.index - MarketContainer.TREE_LIST_SIZE);
 		}else{
 			return Items.AIR;
 		}

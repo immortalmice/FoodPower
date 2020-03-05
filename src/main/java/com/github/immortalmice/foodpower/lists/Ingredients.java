@@ -96,21 +96,14 @@ public class Ingredients{
 		public static final Meal JUICE = null;
 
 		static{
-			Field[] fields = Ingredients.Items.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.getType() == Ingredient.class){
-						IngredientList.list.add((Ingredient)field.get(null));
-					}else if(field.getType() == CookedFood.class){
-						IngredientList.list.add((CookedFood)field.get(null));
-					}else if(field.getType() == Meal.class){
-						IngredientList.list.add((Meal)field.get(null));
-					}
-				}catch(Exception e){
-
-				}
-			}
+			
 		}
+	}
+
+	private static class Lists{
+		public static final List<Ingredient> list = new ArrayList<Ingredient>();
+		public static final List<CookedFood> cookedFoodList = new ArrayList<CookedFood>();
+		public static final List<Meal> mealList = new ArrayList<Meal>();
 	}
 
 	public static DeferredRegister<Item> getRegister(){
@@ -118,21 +111,67 @@ public class Ingredients{
 	}
 
 	public static Ingredient getIngredientByName(String nameIn){
-		for(Ingredient ingredient : IngredientList.list){
+		for(Ingredient ingredient : Ingredients.Lists.list){
 			if(ingredient.getFPName() == nameIn)
 				return ingredient;
 		}
-		for(Ingredient ingredient : IngredientList.cookedFoodList){
+		for(Ingredient ingredient : Ingredients.Lists.cookedFoodList){
 			if(ingredient.getFPName() == nameIn)
 				return ingredient;
 		}
-		for(Ingredient ingredient : IngredientList.mealFoodList){
+		for(Ingredient ingredient : Ingredients.Lists.mealList){
 			if(ingredient.getFPName() == nameIn)
 				return ingredient;
 		}
 		return new Ingredient(FoodTypes.NONE);
 	}
 
+	private static void setList(){
+		if(Ingredients.Lists.list.isEmpty()
+			|| Ingredients.Lists.cookedFoodList.isEmpty()
+			|| Ingredients.Lists.mealList.isEmpty()){
+
+			Ingredients.Lists.list.clear();
+			Ingredients.Lists.cookedFoodList.clear();
+			Ingredients.Lists.mealList.clear();
+
+			Field[] fields = Ingredients.Items.class.getFields();
+			for(Field field : fields){
+				try{
+					if(field.get(null) != null){
+						if(field.getType() == Meal.class){
+							Ingredients.Lists.mealList.add((Meal)field.get(null));
+						}else if(field.getType() == CookedFood.class){
+							Ingredients.Lists.cookedFoodList.add((CookedFood)field.get(null));
+						}else if(field.getType() == Ingredient.class){
+							Ingredients.Lists.list.add((Ingredient)field.get(null));
+						}
+					}else if(field.getType() == Meal.class
+							|| field.getType() == CookedFood.class
+							|| field.getType() == Ingredient.class){
+
+						throw new Exception();
+					}
+				}catch(Exception e){
+
+				}
+			}
+
+		}
+	}
+
+	public static List<Ingredient> getIngredientList(){
+		Ingredients.setList();
+		return Ingredients.Lists.list;
+	}
+	public static List<CookedFood> getCookedFoodList(){
+		Ingredients.setList();
+		return Ingredients.Lists.cookedFoodList;
+	}
+	public static List<Meal> getMealList(){
+		Ingredients.setList();
+		return Ingredients.Lists.mealList;
+	}
 
 }
 
@@ -213,10 +252,4 @@ class IngredientRegistry{
 	private static RegistryObject<Item> register(String name, Function<String, Item> fun){
 		return IngredientRegistry.REGISTER.register(name, () -> fun.apply(name));
 	}
-}
-
-class IngredientList{
-	public static final List<Ingredient> list = new ArrayList<Ingredient>();
-	public static final List<CookedFood> cookedFoodList = new ArrayList<CookedFood>();
-	public static final List<Meal> mealFoodList = new ArrayList<Meal>();
 }

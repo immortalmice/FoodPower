@@ -80,8 +80,8 @@
     "item.foodpower.tomato_seed": "番茄種子",
     "item.foodpower.rice_seed": "米種子",
     "item.foodpower.chili_seed": "辣椒種子",
-    "item.foodpower.spinach_seed": "菠菜",
-    "item.foodpower.cabbage_seed": "高麗菜",
+    "item.foodpower.spinach_seed": "菠菜種子",
+    "item.foodpower.cabbage_seed": "高麗菜種子",
     "item.foodpower.corn_seed": "玉米種子",
 
     "_comment": "其他物品",
