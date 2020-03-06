@@ -34,8 +34,8 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	@Override
 	public RecipeTableMessage decode(PacketBuffer buf){
 		this.windowId = buf.readInt();
-		this.action = buf.readString();
-		this.message = buf.readString();
+		this.action = buf.readString(32767);
+		this.message = buf.readString(32767);
 		return this;
 	}
 

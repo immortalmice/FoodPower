@@ -8,10 +8,10 @@ import com.github.immortalmice.foodpower.lists.Containers;
 
 public class ContainerPack<T extends ContainerBase>{
 	private final String fpName;
-	private final ContainerType<T> containerType;
+	private final IContainerFactory<T> factory;
 
-	public ContainerPack(String nameIn, IContainerFactory<T> factory){
-		containerType = new ContainerType<T>(factory);
+	public ContainerPack(String nameIn, IContainerFactory<T> factoryIn){
+		this.factory = factoryIn;
 		this.fpName = nameIn;
 
 		Containers.list.add(this);
@@ -23,6 +23,6 @@ public class ContainerPack<T extends ContainerBase>{
 	}
 
 	public ContainerType<T> getContainerType(){
-		return this.containerType;
+		return new ContainerType<T>(factory);
 	}
 }

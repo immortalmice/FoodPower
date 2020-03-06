@@ -9,7 +9,6 @@ import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
@@ -22,7 +21,6 @@ public class MarketContainer extends ContainerBase{
 	protected ItemStackHandler items;
 	protected SlotItemHandler emeraldSlot;
 
-	private static final ContainerType<MarketContainer> TYPE = Containers.MARKET.getContainerType();
 	private static final int TREE_LIST_SIZE = Trees.getSaplingList().size();
 	private static final int CROP_LIST_SIZE = Crops.getItemList().size();
 	private static final int FULL_LIST_SIZE = MarketContainer.TREE_LIST_SIZE + MarketContainer.CROP_LIST_SIZE;
@@ -35,7 +33,7 @@ public class MarketContainer extends ContainerBase{
 	}
 
 	public MarketContainer(int windowIdIn, PlayerInventory playerInventory){
-		super(MarketContainer.TYPE, windowIdIn, new int[]{8, 51}, playerInventory);
+		super(Containers.ContainerTypes.MARKET, windowIdIn, new int[]{8, 51}, playerInventory);
 
 		this.windowId = windowIdIn;
 		items = new ItemStackHandler(2);

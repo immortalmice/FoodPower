@@ -93,22 +93,22 @@ public class RecipeScroll extends ItemBase{
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
 
-    	String patternStr = I18n.format("general.cooking_pattern.name") + ":";
+    	String patternStr = I18n.format("general.foodpower.cooking_pattern") + ":";
     	CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
     	if(nbt.contains("pattern")){
-    		patternStr += I18n.format("pattern." + nbt.getString("pattern") + ".name");
+    		patternStr += I18n.format("pattern.foodpower." + nbt.getString("pattern"));
     	}else{
-    		patternStr += I18n.format("general.none.name");
+    		patternStr += I18n.format("general.foodpower.none");
     	}
     	tooltip.add(new StringTextComponent(patternStr));
 
     	if(nbt.contains("ingredients")){
-    		tooltip.add(new TranslationTextComponent("general.ingredients.name"));
+    		tooltip.add(new TranslationTextComponent("general.foodpower.ingredients"));
     		ListNBT list = (ListNBT)nbt.get("ingredients");
     		for(int i = 0; i <= list.size()-1; i ++){
     			CompoundNBT element = (CompoundNBT) list.get(i);
-    			String ingredientStr = I18n.format("item." + element.getString("name") + ".name");
-    			ingredientStr += " [" + I18n.format("general.level.name") + element.getInt("level") + "]";
+    			String ingredientStr = I18n.format("item.foodpower." + element.getString("name"));
+    			ingredientStr += " [" + I18n.format("general.foodpower.level") + element.getInt("level") + "]";
                 if(element.contains("amount"))
                     ingredientStr += " (" + element.getInt("amount") + ")";
     			tooltip.add(new StringTextComponent("  " + ingredientStr));
@@ -125,7 +125,7 @@ public class RecipeScroll extends ItemBase{
 
     		return new StringTextComponent(stack.getTag().getString("displayName"));
     	}
-    	return new TranslationTextComponent("general.unknown_recipe.name");
+    	return new TranslationTextComponent("general.foodpower.unknown_recipe");
     }
 
     @Override

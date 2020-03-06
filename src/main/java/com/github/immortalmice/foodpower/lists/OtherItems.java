@@ -58,7 +58,7 @@ class OtherItemsRegistry{
 	public static final DeferredRegister<Item> REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
 
 	public static final RegistryObject<Item> OBJ_DIRTY_FOOD = OtherItemsRegistry.register("dirty_food", () -> new DirtyFood());
-	public static final RegistryObject<Item> OBJ_RECIPE_SCROLL = OtherItemsRegistry.register("recipe_scroll", () -> new DirtyFood());
+	public static final RegistryObject<Item> OBJ_RECIPE_SCROLL = OtherItemsRegistry.register("recipe_scroll", () -> new RecipeScroll());
 
 	private static RegistryObject<Item> register(String name, Supplier<Item> sup){
 		return OtherItemsRegistry.REGISTER.register(name, sup);

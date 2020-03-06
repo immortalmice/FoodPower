@@ -35,7 +35,7 @@ public class MarketScreen extends ScreenBase<MarketContainer>{
 		/* Draw Icon & name with good */
 		ItemStack item = new ItemStack(this.getContainer().getItem());
 		this.itemRenderer.renderItemAndEffectIntoGUI(item, 35, 15);
-		String itemName = I18n.format(item.getItem().getTranslationKey() + ".name");
+		String itemName = I18n.format(item.getItem().getTranslationKey());
 		this.font.drawString(itemName, 45 - (this.font.getStringWidth(itemName) / 2), 35, 0x404040);
 	}
 	@Override

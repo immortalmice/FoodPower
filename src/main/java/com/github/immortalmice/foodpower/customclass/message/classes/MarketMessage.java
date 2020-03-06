@@ -33,7 +33,7 @@ public class MarketMessage implements IMessageBase<MarketMessage>{
 	@Override
 	public MarketMessage decode(PacketBuffer buf){
 		this.windowId = buf.readInt();
-		this.message = buf.readString();
+		this.message = buf.readString(32767);
 		return this;
 	}
 

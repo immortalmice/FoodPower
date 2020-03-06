@@ -41,7 +41,7 @@ public class RecipeTableContainer extends ContainerBase{
 	}
 
 	public RecipeTableContainer(int windowIdIn, PlayerInventory playerInventory){
-		super(Containers.RECIPE_TABLE.getContainerType(), windowIdIn, new int[]{45, 145}, playerInventory);
+		super(Containers.ContainerTypes.RECIPE_TABLE, windowIdIn, new int[]{45, 145}, playerInventory);
 
 		this.windowId = windowIdIn;
 		this.bookSlot = new ItemStackHandler(1);
@@ -86,6 +86,8 @@ public class RecipeTableContainer extends ContainerBase{
 				RecipeTableContainer.this.updateSlot();
 			}
 		});
+
+		updateSlot();
 	}
 	/* Dynamic ingredient slots */
 	private void updateSlot(){

@@ -56,11 +56,12 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		/* Render name of the pattern */
-		String patternName = I18n.format("pattern." + CookingPatterns.list.get(this.container.getIndex()).getName() + ".name");
+		String patternName = I18n.format("pattern.foodpower." + CookingPatterns.list.get(this.container.getIndex()).getName());
 		this.font.drawString(patternName, (this.xSize - this.font.getStringWidth(patternName)) / 2, 20, 0x404040);
 	}
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks){
+		this.renderBackground();
 		super.render(mouseX, mouseY, partialTicks);
 		this.textBox.renderButton(mouseX, mouseY, partialTicks);
 	}
@@ -87,22 +88,29 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		this.textBox = new TextFieldWidget(this.font
 			, offsetX + 130, offsetY + 120
 			, 70, 15, I18n.format("general.foodpower.recipe_name"));
-		//this.textBox.setEnableBackgroundDrawing(false);
-	}
-
-    /* Set Full name typed in To Server, Server will refresh recipeScroll with the name */
-    @Override
-	public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_){
-		if(this.textBox.isFocused()){
+		this.textBox.setCanLoseFocus(true);
+		this.textBox.changeFocus(true);
+		this.children.add(this.textBox);
+		this.textBox.func_212954_a((str) -> 
 			FoodPower.NETWORK.sendToServer(
 				new RecipeTableMessage(this.container.getWindowId()
 					, "Set InputText"
 					, this.textBox.getText())
-				);
-			return true;
-		}else{
+			));
+		this.func_212928_a(this.textBox);
+		//this.textBox.setEnableBackgroundDrawing(false);
+	}
+
+	/* Set Full name typed in To Server, Server will refresh recipeScroll with the name */
+    @Override
+	public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_){
+		if(p_keyPressed_1_ == 256) {
 			return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
 		}
+		if(this.textBox.isFocused()){
+			return this.textBox.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+		}
+		return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
 	}
 
     private ResourceLocation getSlotTexture(){

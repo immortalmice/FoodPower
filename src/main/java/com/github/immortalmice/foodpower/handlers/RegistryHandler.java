@@ -18,7 +18,7 @@ public class RegistryHandler{
 	public static void registAll(){
 		RegistryHandler.registAllItem();
 		RegistryHandler.registAllBlock();
-		//RegistryHandler.registAllContainer();
+		RegistryHandler.registAllContainer();
 		//RegistryHandler.registAllTileEntityType();
 	}
 	public static void registAllItem(){

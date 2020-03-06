@@ -68,7 +68,7 @@ public class Crops{
 
 	public static List<CropSeed> getItemList(){
 		if(Crops.Lists.itemList.isEmpty()){
-			Field[] fields = Crops.Blocks.class.getFields();
+			Field[] fields = Crops.Items.class.getFields();
 			for(Field field : fields){
 				try{
 					if(field.getType() == CropSeed.class){
