@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
-import com.github.immortalmice.foodpower.lists.OtherItems;
+import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 public class CookedFood extends Ingredient{
 	/* For a empty CookedFood */
@@ -38,7 +38,7 @@ public class CookedFood extends Ingredient{
             CompoundNBT compound = new CompoundNBT();
             entityItem.writeAdditional(compound);
             if(compound.getShort("Age") >= 20 * 3){
-                entityItem.setItem(new ItemStack(OtherItems.DIRTY_FOOD, entityItem.getItem().getCount()));
+                entityItem.setItem(new ItemStack(Items.DIRTY_FOOD, entityItem.getItem().getCount()));
             }
         }
         return false;

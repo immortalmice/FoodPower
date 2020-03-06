@@ -10,8 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
@@ -94,10 +94,6 @@ public class Ingredients{
 		public static final Meal HONEY_TOAST = null;
 		public static final Meal SALAD = null;
 		public static final Meal JUICE = null;
-
-		static{
-			
-		}
 	}
 
 	private static class Lists{
@@ -153,7 +149,9 @@ public class Ingredients{
 						throw new Exception();
 					}
 				}catch(Exception e){
-
+					Ingredients.Lists.list.clear();
+					Ingredients.Lists.cookedFoodList.clear();
+					Ingredients.Lists.mealList.clear();
 				}
 			}
 

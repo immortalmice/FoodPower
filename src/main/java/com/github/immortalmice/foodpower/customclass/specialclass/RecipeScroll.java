@@ -31,18 +31,16 @@ import com.github.immortalmice.foodpower.customclass.container.classes.recipescr
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.Ingredients;
-import com.github.immortalmice.foodpower.lists.OtherItems;
+import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 public class RecipeScroll extends ItemBase{
 	public RecipeScroll(){
 		super("recipe_scroll", new Item.Properties().maxStackSize(1));
-
-		OtherItems.list.add(this);
 	}
 
 	/* create a ItemStack and set NBTTags with given information */
 	public static ItemStack create(CookingPattern patternIn, List<ItemStack> listIn, String nameIn){
-		ItemStack result = new ItemStack(OtherItems.RECIPE_SCROLL);
+		ItemStack result = new ItemStack(Items.RECIPE_SCROLL);
 
 		CompoundNBT nbt = new CompoundNBT();
 
