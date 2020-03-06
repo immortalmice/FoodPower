@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.lists.other;
+package com.github.immortalmice.foodpower.lists;
 
 import java.util.ArrayList;
 import java.util.List;

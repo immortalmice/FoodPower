@@ -18,13 +18,13 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketContainer;
-import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
+import com.github.immortalmice.foodpower.lists.OtherBlocks;
 
 public class Market extends BlockBase{
 	public Market(){
 		super("market", Material.ROCK);
 
-		OtherItemBlocks.list.add(this);
+		OtherBlocks.list.add(this);
 	}
 	/* Open the GUI */
 	@Override

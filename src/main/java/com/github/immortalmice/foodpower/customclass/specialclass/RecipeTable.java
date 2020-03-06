@@ -18,13 +18,13 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableContainer;
-import com.github.immortalmice.foodpower.lists.other.OtherItemBlocks;
+import com.github.immortalmice.foodpower.lists.OtherBlocks;
 
 public class RecipeTable extends BlockBase{
 	public RecipeTable(){
 		super("recipe_table", Material.ROCK);
 
-		OtherItemBlocks.list.add(this);
+		OtherBlocks.list.add(this);
 	}
 
 	/* Open the GUI */

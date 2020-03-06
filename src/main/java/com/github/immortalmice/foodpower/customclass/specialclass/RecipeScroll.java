@@ -31,7 +31,7 @@ import com.github.immortalmice.foodpower.customclass.container.classes.recipescr
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.Ingredients;
-import com.github.immortalmice.foodpower.lists.other.OtherItems;
+import com.github.immortalmice.foodpower.lists.OtherItems;
 
 public class RecipeScroll extends ItemBase{
 	public RecipeScroll(){

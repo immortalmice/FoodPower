@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
-import com.github.immortalmice.foodpower.lists.other.OtherItems;
+import com.github.immortalmice.foodpower.lists.OtherItems;
 
 public class CookedFood extends Ingredient{
 	/* For a empty CookedFood */
