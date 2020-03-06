@@ -23,7 +23,7 @@ public class MarketContainer extends ContainerBase{
 	protected SlotItemHandler emeraldSlot;
 
 	private static final ContainerType<MarketContainer> TYPE = Containers.MARKET.getContainerType();
-	private static final int TREE_LIST_SIZE = Trees.saplingBushList.size();
+	private static final int TREE_LIST_SIZE = Trees.getSaplingList().size();
 	private static final int CROP_LIST_SIZE = Crops.getItemList().size();
 	private static final int FULL_LIST_SIZE = MarketContainer.TREE_LIST_SIZE + MarketContainer.CROP_LIST_SIZE;
 
@@ -151,7 +151,7 @@ public class MarketContainer extends ContainerBase{
 	/* Get Index Form NBT, And Return Right Item */
 	public Item getItem(){
 		if(this.index >= 0 && this.index <= MarketContainer.TREE_LIST_SIZE -1){
-			return Trees.saplingBushList.get(this.index).asItem();
+			return Trees.getSaplingList().get(this.index).asItem();
 
 		}else if(this.index >= MarketContainer.TREE_LIST_SIZE 
 			&& this.index <= MarketContainer.FULL_LIST_SIZE -1){
