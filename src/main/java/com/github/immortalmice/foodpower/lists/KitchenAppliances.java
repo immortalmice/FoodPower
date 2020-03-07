@@ -31,7 +31,7 @@ public class KitchenAppliances{
 		public static final KitchenAppliance ELECTRIC_POT = null;
 		public static final KitchenAppliance STOCKPOT = null;
 		public static final KitchenAppliance FRYING_PAN = null;
-		public static final KitchenAppliance ELECRIC_STOVE = null;
+		public static final KitchenAppliance ELECTRIC_STOVE = null;
 		public static final KitchenAppliance SHAKER = null;
 		public static final KitchenAppliance CHOPPING_BOARD = null;
 		public static final KitchenAppliance UNIVERSAL_STATION = null;
@@ -82,10 +82,10 @@ class KitchenAppliancesRegistry{
 	public static final RegistryObject<Block> OBJ_BLOCK_ELECTRIC_POT = KitchenAppliancesRegistry.registerBlock("electric_pot", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_STOCKPOT = KitchenAppliancesRegistry.registerBlock("stockpot", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_FRYING_PAN = KitchenAppliancesRegistry.registerBlock("frying_pan", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
-	public static final RegistryObject<Block> OBJ_BLOCK_ELECRIC_STOVE = KitchenAppliancesRegistry.registerBlock("electric_stove", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
+	public static final RegistryObject<Block> OBJ_BLOCK_ELECTRIC_STOVE = KitchenAppliancesRegistry.registerBlock("electric_stove", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_SHAKER = KitchenAppliancesRegistry.registerBlock("shaker", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_CHOPPING_BOARD = KitchenAppliancesRegistry.registerBlock("chopping_board", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
-	public static final RegistryObject<Block> OBJ_BLOCK_UNIVERSAL_STATION = KitchenAppliancesRegistry.registerBlock("universal_stand", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
+	public static final RegistryObject<Block> OBJ_BLOCK_UNIVERSAL_STATION = KitchenAppliancesRegistry.registerBlock("universal_station", (str) -> new KitchenAppliance(str, new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)));
 
 	public static final RegistryObject<Item> OBJ_ITEM_OVEN = KitchenAppliancesRegistry.registerItem("oven", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_OVEN.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
 	public static final RegistryObject<Item> OBJ_ITEM_JUICER = KitchenAppliancesRegistry.registerItem("juicer", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_JUICER.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
@@ -94,10 +94,10 @@ class KitchenAppliancesRegistry{
 	public static final RegistryObject<Item> OBJ_ITEM_ELECTRIC_POT = KitchenAppliancesRegistry.registerItem("electric_pot", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_ELECTRIC_POT.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
 	public static final RegistryObject<Item> OBJ_ITEM_STOCKPOT = KitchenAppliancesRegistry.registerItem("stockpot", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_STOCKPOT.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
 	public static final RegistryObject<Item> OBJ_ITEM_FRYING_PAN = KitchenAppliancesRegistry.registerItem("frying_pan", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_FRYING_PAN.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
-	public static final RegistryObject<Item> OBJ_ITEM_ELECRIC_STOVE = KitchenAppliancesRegistry.registerItem("electric_stove", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_ELECRIC_STOVE.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
+	public static final RegistryObject<Item> OBJ_ITEM_ELECTRIC_STOVE = KitchenAppliancesRegistry.registerItem("electric_stove", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_ELECTRIC_STOVE.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
 	public static final RegistryObject<Item> OBJ_ITEM_SHAKER = KitchenAppliancesRegistry.registerItem("shaker", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_SHAKER.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
 	public static final RegistryObject<Item> OBJ_ITEM_CHOPPING_BOARD = KitchenAppliancesRegistry.registerItem("chopping_board", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_CHOPPING_BOARD.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
-	public static final RegistryObject<Item> OBJ_ITEM_UNIVERSAL_STATION = KitchenAppliancesRegistry.registerItem("universal_stand", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_UNIVERSAL_STATION.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
+	public static final RegistryObject<Item> OBJ_ITEM_UNIVERSAL_STATION = KitchenAppliancesRegistry.registerItem("universal_station", (str) -> new BlockItem(KitchenAppliancesRegistry.OBJ_BLOCK_UNIVERSAL_STATION.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
 
 	private static RegistryObject<Block> registerBlock(String name, Function<String, Block> fun){
 		return KitchenAppliancesRegistry.BLOCK_REGISTER.register(name, () -> fun.apply(name));

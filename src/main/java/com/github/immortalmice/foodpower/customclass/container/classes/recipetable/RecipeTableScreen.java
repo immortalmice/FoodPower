@@ -91,12 +91,7 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		this.textBox.setCanLoseFocus(true);
 		this.textBox.changeFocus(true);
 		this.children.add(this.textBox);
-		this.textBox.func_212954_a((str) -> 
-			FoodPower.NETWORK.sendToServer(
-				new RecipeTableMessage(this.container.getWindowId()
-					, "Set InputText"
-					, this.textBox.getText())
-			));
+		this.textBox.func_212954_a((str) -> onTextChanged());
 		this.func_212928_a(this.textBox);
 		//this.textBox.setEnableBackgroundDrawing(false);
 	}
@@ -108,9 +103,18 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 			return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
 		}
 		if(this.textBox.isFocused()){
-			return this.textBox.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+			boolean returnBool = this.textBox.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+			return returnBool;
 		}
 		return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+	}
+	private void onTextChanged(){
+		this.getContainer().setInputText(this.textBox.getText());
+		FoodPower.NETWORK.sendToServer(
+			new RecipeTableMessage(this.container.getWindowId()
+				, "Set InputText"
+				, this.textBox.getText())
+		);
 	}
 
     private ResourceLocation getSlotTexture(){

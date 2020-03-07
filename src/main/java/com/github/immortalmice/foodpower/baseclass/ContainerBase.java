@@ -10,6 +10,7 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 public abstract class ContainerBase extends Container{
+	protected PlayerInventory playerInventory;
 	/* Offset is used in setting slot position */
 	public ContainerBase(@Nullable ContainerType<?> type, int id, int[] offset, PlayerInventory inventoryIn){
 		super(type, id);
@@ -25,6 +26,7 @@ public abstract class ContainerBase extends Container{
         for (int i = 0; i < 9; ++i){
             this.addSlot(new Slot(inventoryIn, i, offset[0] + i * 18, offset[1] + 3 * slotSize + 6));
         }
+        this.playerInventory = inventoryIn;
 	}
 
 	@Override

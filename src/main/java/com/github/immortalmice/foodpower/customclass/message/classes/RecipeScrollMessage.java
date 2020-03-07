@@ -47,19 +47,21 @@ public class RecipeScrollMessage implements IMessageBase<RecipeScrollMessage>{
 			if(container.getWindowId() == msg.getWindowId()){
 				if(player.getHeldEquipment().iterator().next().getItem() == Items.RECIPE_SCROLL){
 					ItemStack scroll = player.getHeldEquipment().iterator().next();
+					int finalAmount = 1;
 					switch(msg.getMessage()){
 						case "Set Amount Minus":
-							RecipeScroll.addOutputAmount(scroll, -1);
+							finalAmount = RecipeScroll.addOutputAmount(scroll, -1);
 							break;
 						case "Set Amount Add":
-							RecipeScroll.addOutputAmount(scroll, 1);
+							finalAmount = RecipeScroll.addOutputAmount(scroll, 1);
 							break;
 						default:
 					}
-					container.setNBT(scroll.getTag());
+					container.setAmount(finalAmount);
 				}
 			}
 		}
+		ctx.get().setPacketHandled(true);
 	}
 
 	@Override

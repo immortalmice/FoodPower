@@ -63,6 +63,7 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 				}
 			}
 		}
+		ctx.get().setPacketHandled(true);
 	}
 
 	@Override
