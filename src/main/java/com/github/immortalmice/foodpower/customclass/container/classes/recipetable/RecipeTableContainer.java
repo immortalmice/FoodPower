@@ -169,6 +169,7 @@ public class RecipeTableContainer extends ContainerBase{
 			}
 			return ItemStack.EMPTY;
 		}
+		this.refreshScroll();
 		return super.slotClick(slotId, dragType, clickTypeIn, playerIn);
 	}
 

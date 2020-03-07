@@ -87,6 +87,30 @@ public class RecipeScroll extends ItemBase{
         return (int) Math.ceil(ingrdient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand);
     }
 
+    private static void calcuAllAmount(ItemStack scroll){
+        CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
+        int ouputAmount = nbt.contains("output_amount") ? nbt.getInt("output_amount") : 0;
+
+        if(nbt.contains("ingredients")){
+            ListNBT list = (ListNBT)nbt.get("ingredients");
+            for(int i = 0; i <= list.size()-1; i ++){
+                CompoundNBT element = (CompoundNBT)list.get(i);
+                int amount = RecipeScroll.calcuAmount(element.getString("name"), ouputAmount, element.getInt("level"), nbt.getDouble("random"));
+                element.putInt("amount", amount);
+            }
+        }
+    }
+
+    public static void addOutputAmount(ItemStack scroll, int dif){
+        CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
+        int amount = (nbt.contains("output_amount") ? nbt.getInt("output_amount") : 0) + dif;
+        if(amount <= 0) amount += 64;
+        if(amount > 64) amount -= 64;
+
+        nbt.putInt("output_amount", amount);
+        RecipeScroll.calcuAllAmount(scroll);
+    }
+
 	/* Add information about pattern and ingrdient to tooltip */
     @OnlyIn(Dist.CLIENT)
 	@Override
