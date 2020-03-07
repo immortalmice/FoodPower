@@ -1,6 +1,6 @@
 {
 	"variants": {
-		"stage=0": {"model":"foodpower:lemon_sapling_model"},
-		"stage=1": {"model":"foodpower:lemon_sapling_model"}
+		"stage=0": {"model":"foodpower:block/lemon_sapling_model"},
+		"stage=1": {"model":"foodpower:block/lemon_sapling_model"}
 	}
 }
