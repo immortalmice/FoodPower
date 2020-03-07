@@ -1,0 +1,8 @@
+{
+	"variants":{
+		"facing=north": {"model": "foodpower:block/recipe_table_model"},
+		"facing=east": {"model": "foodpower:block/recipe_table_model", "y": 90},
+		"facing=south": {"model": "foodpower:block/recipe_table_model", "y": 180},
+		"facing=west": {"model": "foodpower:block/recipe_table_model", "y": 270}
+	}
+}
