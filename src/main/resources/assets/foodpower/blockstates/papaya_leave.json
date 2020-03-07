@@ -1,13 +1,5 @@
 {
-	"forge_marker": 1,
 	"variants": {
-		"check_decay": {
-			"true": {"model": "foodpower:papaya_leave_model"},
-			"false": {"model": "foodpower:papaya_leave_model"}
-		},
-		"decayable": {
-			"true": {"model": "foodpower:papaya_leave_model"},
-			"false": {"model": "foodpower:papaya_leave_model"}
-		}
+		"": {"model": "foodpower:block/papaya_leave_model"}
 	}
 }
