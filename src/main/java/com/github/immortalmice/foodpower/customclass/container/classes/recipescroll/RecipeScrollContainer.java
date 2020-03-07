@@ -22,4 +22,8 @@ public class RecipeScrollContainer extends ContainerBase{
 	public CompoundNBT getScrollTag(){
 		return this.nbt;
 	}
+
+	public int getWindowId(){
+		return this.windowId;
+	}
 }
