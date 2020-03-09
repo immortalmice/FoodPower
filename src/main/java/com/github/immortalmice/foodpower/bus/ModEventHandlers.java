@@ -9,7 +9,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import com.github.immortalmice.foodpower.bus.ForgeEventHandlers;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Messages;
-import com.github.immortalmice.foodpower.handlers.BiomeAddTreeHandler;
+import com.github.immortalmice.foodpower.handlers.BiomeHandler;
 import com.github.immortalmice.foodpower.handlers.RenderHandler;
 
 public class ModEventHandlers{
@@ -24,7 +24,7 @@ public class ModEventHandlers{
 	@SubscribeEvent
 	public static void onCommonSetup(FMLCommonSetupEvent event){
 		ForgeEventHandlers.registAllEvent();
-		BiomeAddTreeHandler.setup();
+		BiomeHandler.setup();
 		Messages.registAllMessage();
 	}
 

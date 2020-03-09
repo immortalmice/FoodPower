@@ -10,7 +10,7 @@ import com.github.immortalmice.foodpower.customclass.tree.FPTree;
 import com.github.immortalmice.foodpower.lists.Trees;
 
 /* Add Tree Features To Corresponding Biomes */
-public class BiomeAddTreeHandler{
+public class BiomeHandler{
 	private static final FPTree[] TREES_IN_WARM = new FPTree[]{
 		Trees.ORANGE, Trees.KIWI
 	};

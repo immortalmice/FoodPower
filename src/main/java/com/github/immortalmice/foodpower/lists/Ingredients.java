@@ -25,6 +25,7 @@ public class Ingredients{
 
 	@ObjectHolder("foodpower")
 	public static class Items{
+		/* Mod Ingrediant */
 		public static final Ingredient BUTTER = null;
 		public static final Ingredient ORANGE = null;
 		public static final Ingredient KIWI = null;
@@ -124,27 +125,36 @@ public class Ingredients{
 	}
 
 	private static void setList(){
-		Ingredients.Lists.list.clear();
-		Ingredients.Lists.cookedFoodList.clear();
-		Ingredients.Lists.mealList.clear();
+		if(Ingredients.Lists.list.isEmpty()
+			|| Ingredients.Lists.cookedFoodList.isEmpty()
+			|| Ingredients.Lists.mealList.isEmpty()){
 
-		Field[] fields = Ingredients.Items.class.getFields();
-		for(Field field : fields){
-			try{
-				if(field.get(null) != null){
-					if(field.getType() == Meal.class){
-						Ingredients.Lists.mealList.add((Meal)field.get(null));
-					}else if(field.getType() == CookedFood.class){
-						Ingredients.Lists.cookedFoodList.add((CookedFood)field.get(null));
-					}else if(field.getType() == Ingredient.class){
-						Ingredients.Lists.list.add((Ingredient)field.get(null));
+			Ingredients.Lists.list.clear();
+			Ingredients.Lists.cookedFoodList.clear();
+			Ingredients.Lists.mealList.clear();
+
+			Field[] fields = Ingredients.Items.class.getFields();
+			for(Field field : fields){
+				try{
+					if(field.get(null) != null){
+						if(field.getType() == Meal.class){
+							Ingredients.Lists.mealList.add((Meal)field.get(null));
+						}else if(field.getType() == CookedFood.class){
+							Ingredients.Lists.cookedFoodList.add((CookedFood)field.get(null));
+						}else if(field.getType() == Ingredient.class){
+							Ingredients.Lists.list.add((Ingredient)field.get(null));
+						}
+					}else if(field.getType() == Meal.class
+							|| field.getType() == CookedFood.class
+							|| field.getType() == Ingredient.class){
+
+						throw new Exception();
 					}
+				}catch(Exception e){
+
 				}
-			}catch(Exception e){
-				Ingredients.Lists.list.clear();
-				Ingredients.Lists.cookedFoodList.clear();
-				Ingredients.Lists.mealList.clear();
 			}
+
 		}
 	}
 
