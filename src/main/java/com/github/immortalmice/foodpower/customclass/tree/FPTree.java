@@ -35,10 +35,17 @@ public class FPTree extends Tree{
 					new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState())
 					, new SimpleBlockStateProvider(this.leave.getDefaultState())
 					, new BlobFoliagePlacer(2, 0)))
-			.func_225569_d_(4)
-			.func_227354_b_(2)
-			.func_227360_i_(3)
-			.func_227352_a_()
+			.func_225569_d_(4)//base height
+			.func_227354_b_(2)//height rand a
+			//.func_227355_c_()//height rand b
+			.func_227356_e_(2)//trunk height
+			.func_227357_f_(1)//trunk height random
+			//.func_227358_g_()//trunk top offset
+			//.func_227359_h_()//trunk top offset random
+			.func_227360_i_(3)//foliage height
+			//.func_227361_j_()//foliage height random
+			//.func_227362_k_()//max water depth
+			.func_227352_a_()//ignore vines
 			.setSapling((IPlantable) this.sapling)
 			.func_225568_b_());
 		}
