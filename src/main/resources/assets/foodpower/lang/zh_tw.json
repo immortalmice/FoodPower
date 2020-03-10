@@ -186,6 +186,7 @@
     "general.foodpower.level": "等級",
     "general.foodpower.unknown_recipe": "未命名的食譜",
     "general.foodpower.recipe_name": "食譜名稱",
+    "general.foodpower.give_food": "獲得料理成品",
     "general.foodpower.none": "無",
 
     "_comment": "食譜樣板",

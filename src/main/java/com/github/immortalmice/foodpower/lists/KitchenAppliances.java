@@ -37,6 +37,7 @@ public class KitchenAppliances{
 		public static final KitchenAppliance UNIVERSAL_STATION = null;
 	}
 
+	/* Construct lists when first time getList() called. */
 	private static class Lists{
 		public static final List<KitchenAppliance> list = new ArrayList<KitchenAppliance>();
 	}
@@ -48,6 +49,7 @@ public class KitchenAppliances{
 		return KitchenAppliancesRegistry.ITEM_REGISTER;
 	}
 	
+	/* If called before ObjectHolder worked, list will be empty */
 	public static List<KitchenAppliance> getList(){
 		if(KitchenAppliances.Lists.list.isEmpty()){
 			Field[] fields = KitchenAppliances.Blocks.class.getFields();

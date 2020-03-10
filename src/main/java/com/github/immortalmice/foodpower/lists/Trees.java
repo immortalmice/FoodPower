@@ -41,6 +41,7 @@ public class Trees{
 		public static final TreeSaplingBush LEMON_SAPLING = null;
 	}
 
+	/* Construct lists when first time setList() called. */
 	private static class Lists{
 		public static final List<FPTree> list = new ArrayList<FPTree>();
 		public static final List<TreeSaplingBush> saplingBushList = new ArrayList<TreeSaplingBush>();
@@ -55,6 +56,7 @@ public class Trees{
 		return TreeRegistry.ITEM_REGISTER;
 	}
 
+	/* If called before ObjectHolder worked, list will be empty */
 	private static void setList(){
 		if(Trees.Lists.list.isEmpty()){
 			Field[] fields = Trees.class.getFields();

@@ -60,6 +60,11 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 					case "Set InputText":
 						container.setInputText(msg.getMessage());
 						break;
+					case "Try Give Meal":
+						if(player.abilities.isCreativeMode){
+							player.addItemStackToInventory(container.getFinishedMeal(64));
+						}
+						break;
 				}
 			}
 		}

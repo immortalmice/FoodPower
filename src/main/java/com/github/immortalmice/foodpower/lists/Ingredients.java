@@ -97,6 +97,7 @@ public class Ingredients{
 		public static final Meal JUICE = null;
 	}
 
+	/* Construct lists when first time setList() called. */
 	private static class Lists{
 		public static final List<Ingredient> list = new ArrayList<Ingredient>();
 		public static final List<CookedFood> cookedFoodList = new ArrayList<CookedFood>();
@@ -124,6 +125,7 @@ public class Ingredients{
 		return new Ingredient(FoodTypes.NONE);
 	}
 
+	/* If called before ObjectHolder worked, list will be empty */
 	private static void setList(){
 		if(Ingredients.Lists.list.isEmpty()
 			|| Ingredients.Lists.cookedFoodList.isEmpty()

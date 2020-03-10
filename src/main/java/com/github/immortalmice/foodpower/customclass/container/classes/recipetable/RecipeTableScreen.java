@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.customclass.container.classes.recipeta
 import java.util.List;
 
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -94,6 +95,21 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		this.textBox.func_212954_a((str) -> onTextChanged());
 		this.func_212928_a(this.textBox);
 		//this.textBox.setEnableBackgroundDrawing(false);
+
+		if(this.container.isPlayerCreative()){
+			String giveFoodString =  I18n.format("general.foodpower.give_food");
+			int strWidth = this.font.getStringWidth(giveFoodString);
+
+			this.addButton(new Button(offsetX - strWidth - 20, offsetY + 20
+				, strWidth + 20, 10
+				, giveFoodString, (button) ->{
+					/* Send Message To server on clicked */
+					FoodPower.NETWORK.sendToServer(
+						new RecipeTableMessage(this.container.getWindowId()
+							, "Try Give Meal"
+							, ""));
+			}));
+		}
 	}
 
 	/* Set Full name typed in To Server, Server will refresh recipeScroll with the name */
