@@ -54,6 +54,7 @@ public class MarketMessage implements IMessageBase<MarketMessage>{
 				}
 			}
 		}
+		ctx.get().setPacketHandled(true);
 	}
 
 	@Override

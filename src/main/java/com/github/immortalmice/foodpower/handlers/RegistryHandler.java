@@ -5,6 +5,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Crops;
+import com.github.immortalmice.foodpower.lists.Effects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.OtherBlocks;
@@ -19,6 +20,7 @@ public class RegistryHandler{
 		RegistryHandler.registAllItem();
 		RegistryHandler.registAllBlock();
 		RegistryHandler.registAllContainer();
+		RegistryHandler.registAllEffect();
 		//RegistryHandler.registAllTileEntityType();
 	}
 	public static void registAllItem(){
@@ -37,6 +39,9 @@ public class RegistryHandler{
 	}
 	public static void registAllContainer(){
 		Containers.REGISTER.register(RegistryHandler.BUS);
+	}
+	public static void registAllEffect(){
+		Effects.getRegister().register(RegistryHandler.BUS);
 	}
 	public static void registAllTileEntityType(){
 		TileEntitys.REGISTER.register(RegistryHandler.BUS);

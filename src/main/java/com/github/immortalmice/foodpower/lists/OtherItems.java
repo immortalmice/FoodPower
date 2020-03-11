@@ -25,6 +25,7 @@ public class OtherItems{
 		public static final RecipeScroll RECIPE_SCROLL = null;	
 	}
 
+	/* Construct lists when first time getList() called. */
 	private static class Lists{
 		public static final List<ItemBase> list = new ArrayList<ItemBase>();
 	}
@@ -33,6 +34,7 @@ public class OtherItems{
 		return OtherItemsRegistry.REGISTER;
 	}
 
+	/* If called before ObjectHolder worked, list will be empty */
 	public static List<ItemBase> getList(){
 		if(OtherItems.Lists.list.isEmpty()){
 			Field[] fields = OtherItems.Items.class.getFields();

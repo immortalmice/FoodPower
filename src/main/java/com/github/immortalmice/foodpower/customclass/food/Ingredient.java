@@ -14,11 +14,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
+import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 public class Ingredient extends ItemFoodBase{
 	private FoodType foodType;
+	private FoodEffect effect;
 	/* baseAmount is the value that this ingredient needed per food in level 1 */
 	private double baseAmount;
 	/** For Mod Ingredients */
@@ -53,15 +55,23 @@ public class Ingredient extends ItemFoodBase{
 	}
 
     public boolean isEmpty(){
-    	return this.getFPName() == "empty";
+    	return this.getFPName().equals("empty");
     }
 
 	public FoodType getFoodType(){
 		return this.foodType;
 	}
 
+	public FoodEffect getEffect(){
+		return this.effect;
+	}
+
 	public double getBaseAmount(){
 		return this.baseAmount;
+	}
+
+	public void setEffect(FoodEffect effectIn){
+		this.effect = effectIn;
 	}
 	/* Show FoodType on tooltip */
 	@OnlyIn(Dist.CLIENT)

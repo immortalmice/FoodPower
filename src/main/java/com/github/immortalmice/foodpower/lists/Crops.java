@@ -40,11 +40,13 @@ public class Crops{
 		public static final CropSeed CORN_SEED = null;
 	}
 	
+	/* Construct lists when first time getBlockList(), getItemList() called. */
 	private static class Lists{
 		public static final List<CropBlock> blockList = new ArrayList<CropBlock>();
 		public static final List<CropSeed> itemList = new ArrayList<CropSeed>();
 	}
 
+	/* If called before ObjectHolder worked, list will be empty */
 	public static List<CropBlock> getBlockList(){
 		if(Crops.Lists.blockList.isEmpty()){
 			Field[] fields = Crops.Blocks.class.getFields();
@@ -66,6 +68,7 @@ public class Crops{
 		return Crops.Lists.blockList;
 	}
 
+	/* If called before ObjectHolder worked, list will be empty */
 	public static List<CropSeed> getItemList(){
 		if(Crops.Lists.itemList.isEmpty()){
 			Field[] fields = Crops.Items.class.getFields();

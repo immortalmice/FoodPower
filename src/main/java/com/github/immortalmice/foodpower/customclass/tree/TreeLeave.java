@@ -14,7 +14,8 @@ public class TreeLeave extends LeavesBlock{
             .hardnessAndResistance(0.2F)
             .sound(SoundType.PLANT)
             .tickRandomly()
-            .variableOpacity());
+            .variableOpacity()
+            .func_226896_b_());
 
         this.fpName = nameIn;
 	}

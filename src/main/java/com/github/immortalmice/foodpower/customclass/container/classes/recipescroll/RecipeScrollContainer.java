@@ -4,12 +4,14 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.IntReferenceHolder;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
+import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.lists.Containers;
 
 public class RecipeScrollContainer extends ContainerBase{
-	private CompoundNBT nbt;
+	private final CompoundNBT nbt;
 
 	public RecipeScrollContainer(int windowIdIn, PlayerInventory playerInventory, PacketBuffer extraData){
 		this(windowIdIn, playerInventory, extraData.readCompoundTag());
@@ -18,6 +20,18 @@ public class RecipeScrollContainer extends ContainerBase{
 		super(Containers.ContainerTypes.RECIPE_SCROLL, windowIdIn, new int[]{-1, -1}, playerInventory);
 
 		this.nbt = nbtIn;
+
+		/* nbtTrackInt be dirty when  */
+		this.trackInt(new IntReferenceHolder(){
+			@Override
+			public int get(){
+				return RecipeScrollContainer.this.getAmount();
+			}
+			@Override
+			public void set(int value){
+				RecipeScrollContainer.this.setAmount(value);
+			}
+		});
 	}
 
 	public CompoundNBT getScrollTag(){
@@ -34,8 +48,9 @@ public class RecipeScrollContainer extends ContainerBase{
 		return nbt.contains("output_amount") ? nbt.getInt("output_amount") : 1;
 	}
 
-	public void setNBT(CompoundNBT nbtIn){
-		this.nbt = nbtIn;
+	public void setAmount(int amountIn){
+		this.nbt.putInt("output_amount", amountIn);
+		RecipeScroll.calcuAllAmount(this.nbt);
 	}
 
 	public int getWindowId(){

@@ -25,6 +25,7 @@ public class OtherBlocks{
 		public static final RecipeTable RECIPE_TABLE = null;	
 	}
 
+	/* Construct lists when first time getList() called. */
 	private static class Lists{
 		public static final List<BlockBase> list = new ArrayList<BlockBase>();
 	}
@@ -36,6 +37,7 @@ public class OtherBlocks{
 		return OtherBlocksRegistry.ITEM_REGISTER;
 	}
 
+	/* If called before ObjectHolder worked, list will be empty */
 	public static List<BlockBase> getList(){
 		if(OtherBlocks.Lists.list.isEmpty()){
 			Field[] fields = OtherBlocks.Blocks.class.getFields();

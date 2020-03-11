@@ -20,6 +20,7 @@ import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.customclass.container.util.RecipeTableSlot;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
@@ -31,19 +32,21 @@ public class RecipeTableContainer extends ContainerBase{
 	private int index = 0;
 	private String inputText = "";
 	private final int windowId;
+	private boolean isCreative;
 
 	private static final int RADIUS = 40;
 	private static final int[] CENTER = {90, 80};
 	private static final int PATTERN_LIST_SIZE = CookingPatterns.list.size();
 
 	public RecipeTableContainer(int windowId, PlayerInventory inv, PacketBuffer extraData){
-		this(windowId, inv);
+		this(windowId, inv, extraData.readBoolean());
 	}
 
-	public RecipeTableContainer(int windowIdIn, PlayerInventory playerInventory){
+	public RecipeTableContainer(int windowIdIn, PlayerInventory playerInventory, boolean isCreativeIn){
 		super(Containers.ContainerTypes.RECIPE_TABLE, windowIdIn, new int[]{45, 145}, playerInventory);
 
 		this.windowId = windowIdIn;
+		this.isCreative = isCreativeIn;
 		this.bookSlot = new ItemStackHandler(1);
 		this.scrollSlot = new ItemStackHandler(1);
 
@@ -110,18 +113,7 @@ public class RecipeTableContainer extends ContainerBase{
 
 	/* Update Scroll in slot */
 	public void refreshScroll(){
-		if(bookSlot.getStackInSlot(0).getItem() == Items.WRITABLE_BOOK
-			&& !this.hasEmptyIngredientSlot()){
-
-			ItemStack scroll = RecipeScroll.create(
-				  CookingPatterns.list.get(this.index)
-				, this.getStacksInIngredientSlots()
-				, this.inputText);
-
-			scrollSlot.setStackInSlot(0, scroll);
-		}else{
-			scrollSlot.setStackInSlot(0, ItemStack.EMPTY);
-		}
+		scrollSlot.setStackInSlot(0, this.getScroll(false));
 	}
 
 	private boolean hasEmptyIngredientSlot(){
@@ -178,6 +170,20 @@ public class RecipeTableContainer extends ContainerBase{
 		CookingPattern currentPattern = CookingPatterns.list.get(this.index);
 		return currentPattern.getIngredients();
 	}
+
+	public ItemStack getScroll(boolean isUsedInMeal){
+		if(this.isVaildForScroll() || isUsedInMeal){
+			return RecipeScroll.create(
+					  CookingPatterns.list.get(this.index)
+					, this.getStacksInIngredientSlots()
+					, this.inputText);
+		}
+		return ItemStack.EMPTY;
+	}
+
+	public ItemStack getFinishedMeal(int amount){
+		return Meal.create(this.getScroll(true), amount);
+	}
 	/* Compute the coordinate list of circle */
 	public int[][] getSlotPos(){
 		int count = this.getIngredients().size();
@@ -202,6 +208,19 @@ public class RecipeTableContainer extends ContainerBase{
 
 	public int getWindowId(){
 		return this.windowId;
+	}
+
+	public boolean isPlayerCreative(){
+		return this.isCreative;
+	}
+
+	public boolean isVaildForMeal(){
+		return !this.hasEmptyIngredientSlot();
+	}
+
+	public boolean isVaildForScroll(){
+		return bookSlot.getStackInSlot(0).getItem() == Items.WRITABLE_BOOK 
+			&& this.isVaildForMeal();
 	}
 
 	/* Increase and cycle index */

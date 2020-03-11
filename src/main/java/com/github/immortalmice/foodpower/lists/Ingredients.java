@@ -25,6 +25,7 @@ public class Ingredients{
 
 	@ObjectHolder("foodpower")
 	public static class Items{
+		/* Mod Ingrediant */
 		public static final Ingredient BUTTER = null;
 		public static final Ingredient ORANGE = null;
 		public static final Ingredient KIWI = null;
@@ -64,7 +65,7 @@ public class Ingredients{
 		public static final Ingredient CHICKEN = null;
 		public static final Ingredient MUTTON = null;
 		public static final Ingredient CHORUS_FRUIT = null;
-		public static final Ingredient COCOA = null;
+		public static final Ingredient COCOA_BEANS = null;
 		public static final Ingredient SUGAR = null;
 		public static final Ingredient WATER_BUCKET = null;
 		public static final Ingredient NETHER_WART = null;
@@ -96,6 +97,7 @@ public class Ingredients{
 		public static final Meal JUICE = null;
 	}
 
+	/* Construct lists when first time setList() called. */
 	private static class Lists{
 		public static final List<Ingredient> list = new ArrayList<Ingredient>();
 		public static final List<CookedFood> cookedFoodList = new ArrayList<CookedFood>();
@@ -107,21 +109,23 @@ public class Ingredients{
 	}
 
 	public static Ingredient getIngredientByName(String nameIn){
+		Ingredients.setList();
 		for(Ingredient ingredient : Ingredients.Lists.list){
-			if(ingredient.getFPName() == nameIn)
+			if(ingredient.getFPName().equals(nameIn))
 				return ingredient;
 		}
 		for(Ingredient ingredient : Ingredients.Lists.cookedFoodList){
-			if(ingredient.getFPName() == nameIn)
+			if(ingredient.getFPName().equals(nameIn))
 				return ingredient;
 		}
 		for(Ingredient ingredient : Ingredients.Lists.mealList){
-			if(ingredient.getFPName() == nameIn)
+			if(ingredient.getFPName().equals(nameIn))
 				return ingredient;
 		}
 		return new Ingredient(FoodTypes.NONE);
 	}
 
+	/* If called before ObjectHolder worked, list will be empty */
 	private static void setList(){
 		if(Ingredients.Lists.list.isEmpty()
 			|| Ingredients.Lists.cookedFoodList.isEmpty()
@@ -149,9 +153,7 @@ public class Ingredients{
 						throw new Exception();
 					}
 				}catch(Exception e){
-					Ingredients.Lists.list.clear();
-					Ingredients.Lists.cookedFoodList.clear();
-					Ingredients.Lists.mealList.clear();
+
 				}
 			}
 
@@ -177,48 +179,48 @@ class IngredientRegistry{
 	public static final DeferredRegister<Item> REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
 
 	/* Mod Ingrediant */
-	public static final RegistryObject<Item> OBJ_BUTTER = IngredientRegistry.register("butter", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 1));
-	public static final RegistryObject<Item> OBJ_ORANGE = IngredientRegistry.register("orange", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 1));
+	public static final RegistryObject<Item> OBJ_BUTTER = IngredientRegistry.register("butter", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 1.1));
+	public static final RegistryObject<Item> OBJ_ORANGE = IngredientRegistry.register("orange", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 0.95));
 	public static final RegistryObject<Item> OBJ_KIWI = IngredientRegistry.register("kiwi", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 1));
-	public static final RegistryObject<Item> OBJ_PAPAYA = IngredientRegistry.register("papaya", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 1));
-	public static final RegistryObject<Item> OBJ_MANGO = IngredientRegistry.register("mango", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 1));
-	public static final RegistryObject<Item> OBJ_LEMON = IngredientRegistry.register("lemon", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 1));
-	public static final RegistryObject<Item> OBJ_MINT = IngredientRegistry.register("mint", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SWEET, 1.8));
-	public static final RegistryObject<Item> OBJ_FERMENTED_ENDEREYE = IngredientRegistry.register("fermented_endereye", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SWEET, 1));
+	public static final RegistryObject<Item> OBJ_PAPAYA = IngredientRegistry.register("papaya", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 0.9));
+	public static final RegistryObject<Item> OBJ_MANGO = IngredientRegistry.register("mango", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 1.05));
+	public static final RegistryObject<Item> OBJ_LEMON = IngredientRegistry.register("lemon", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, 1.1));
+	public static final RegistryObject<Item> OBJ_MINT = IngredientRegistry.register("mint", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SWEET, 1.9));
+	public static final RegistryObject<Item> OBJ_FERMENTED_ENDEREYE = IngredientRegistry.register("fermented_endereye", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SWEET, 0.9));
 	public static final RegistryObject<Item> OBJ_DOUGH = IngredientRegistry.register("dough", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 1.2));
 	public static final RegistryObject<Item> OBJ_TOMATO = IngredientRegistry.register("tomato", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, 1.1));
 	public static final RegistryObject<Item> OBJ_KETCHUP = IngredientRegistry.register("ketchup", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SEASONING, 0.8));
 	public static final RegistryObject<Item> OBJ_SAUCE = IngredientRegistry.register("sauce", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SEASONING, 0.8));
-	public static final RegistryObject<Item> OBJ_SALT = IngredientRegistry.register("salt", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 2));
+	public static final RegistryObject<Item> OBJ_SALT = IngredientRegistry.register("salt", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 2.1));
 	public static final RegistryObject<Item> OBJ_OIL = IngredientRegistry.register("oil", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 0.8));
 	public static final RegistryObject<Item> OBJ_RICE = IngredientRegistry.register("rice", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 2.2));
 	public static final RegistryObject<Item> OBJ_CHEESE = IngredientRegistry.register("cheese", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 1.2));
 	public static final RegistryObject<Item> OBJ_CHILI = IngredientRegistry.register("chili", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, 0.8));
-	public static final RegistryObject<Item> OBJ_SPINACH = IngredientRegistry.register("spinach", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, 1));
-	public static final RegistryObject<Item> OBJ_CABBAGE = IngredientRegistry.register("cabbage", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, 1));
+	public static final RegistryObject<Item> OBJ_SPINACH = IngredientRegistry.register("spinach", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, 1.2));
+	public static final RegistryObject<Item> OBJ_CABBAGE = IngredientRegistry.register("cabbage", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, 1.2));
 	public static final RegistryObject<Item> OBJ_FLOUR = IngredientRegistry.register("flour", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 0.8));
-	public static final RegistryObject<Item> OBJ_CORN = IngredientRegistry.register("corn", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, 1));
+	public static final RegistryObject<Item> OBJ_CORN = IngredientRegistry.register("corn", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, 0.95));
 	public static final RegistryObject<Item> OBJ_CREAM = IngredientRegistry.register("cream", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, 1.2));
 
 	/* Vanilla Ingrediant */
-	public static final RegistryObject<Item> OBJ_APPLE = IngredientRegistry.register("apple", (str) -> new Ingredient(str, Items.APPLE, FoodTypes.FRUIT, 1));
-	public static final RegistryObject<Item> OBJ_MELON = IngredientRegistry.register("melon", (str) -> new Ingredient(str, Items.MELON, FoodTypes.FRUIT, 1));
+	public static final RegistryObject<Item> OBJ_APPLE = IngredientRegistry.register("apple", (str) -> new Ingredient(str, Items.APPLE, FoodTypes.FRUIT, 1.25));
+	public static final RegistryObject<Item> OBJ_MELON = IngredientRegistry.register("melon", (str) -> new Ingredient(str, Items.MELON, FoodTypes.FRUIT, 0.85));
 	public static final RegistryObject<Item> OBJ_PUMPKIN = IngredientRegistry.register("pumpkin", (str) -> new Ingredient(str, Blocks.PUMPKIN.asItem(), FoodTypes.VEGETABLE, 0.8));
-	public static final RegistryObject<Item> OBJ_CARROT = IngredientRegistry.register("carrot", (str) -> new Ingredient(str, Items.CARROT, FoodTypes.VEGETABLE, 1.2));
-	public static final RegistryObject<Item> OBJ_POTATO = IngredientRegistry.register("potato", (str) -> new Ingredient(str, Items.POTATO, FoodTypes.VEGETABLE, 1.2));
+	public static final RegistryObject<Item> OBJ_CARROT = IngredientRegistry.register("carrot", (str) -> new Ingredient(str, Items.CARROT, FoodTypes.VEGETABLE, 1.25));
+	public static final RegistryObject<Item> OBJ_POTATO = IngredientRegistry.register("potato", (str) -> new Ingredient(str, Items.POTATO, FoodTypes.VEGETABLE, 1.25));
 	public static final RegistryObject<Item> OBJ_BEETROOT = IngredientRegistry.register("beetroot", (str) -> new Ingredient(str, Items.BEETROOT, FoodTypes.VEGETABLE, 1.2));
-	public static final RegistryObject<Item> OBJ_BROWN_MUSHROOM = IngredientRegistry.register("brown_mushroom", (str) -> new Ingredient(str, Blocks.BROWN_MUSHROOM.asItem(), FoodTypes.VEGETABLE, 1.4));
-	public static final RegistryObject<Item> OBJ_RED_MUSHROOM = IngredientRegistry.register("red_mushroom", (str) -> new Ingredient(str, Blocks.RED_MUSHROOM.asItem(), FoodTypes.VEGETABLE, 1.4));
-	public static final RegistryObject<Item> OBJ_EGG = IngredientRegistry.register("egg", (str) -> new Ingredient(str, Items.EGG, FoodTypes.NONE, 1));
+	public static final RegistryObject<Item> OBJ_BROWN_MUSHROOM = IngredientRegistry.register("brown_mushroom", (str) -> new Ingredient(str, Blocks.BROWN_MUSHROOM.asItem(), FoodTypes.VEGETABLE, 1.5));
+	public static final RegistryObject<Item> OBJ_RED_MUSHROOM = IngredientRegistry.register("red_mushroom", (str) -> new Ingredient(str, Blocks.RED_MUSHROOM.asItem(), FoodTypes.VEGETABLE, 1.5));
+	public static final RegistryObject<Item> OBJ_EGG = IngredientRegistry.register("egg", (str) -> new Ingredient(str, Items.EGG, FoodTypes.NONE, 1.1));
 	public static final RegistryObject<Item> OBJ_MILK_BUCKET = IngredientRegistry.register("milk_bucket", (str) -> new Ingredient(str, Items.MILK_BUCKET, FoodTypes.NONE, 0.6));
-	public static final RegistryObject<Item> OBJ_PORKCHOP = IngredientRegistry.register("porkchop", (str) -> new Ingredient(str, Items.PORKCHOP, FoodTypes.MEAT, 1));
-	public static final RegistryObject<Item> OBJ_BEEF = IngredientRegistry.register("beef", (str) -> new Ingredient(str, Items.BEEF, FoodTypes.MEAT, 1));
-	public static final RegistryObject<Item> OBJ_CHICKEN = IngredientRegistry.register("chicken", (str) -> new Ingredient(str, Items.CHICKEN, FoodTypes.MEAT, 1));
-	public static final RegistryObject<Item> OBJ_MUTTON = IngredientRegistry.register("mutton", (str) -> new Ingredient(str, Items.MUTTON, FoodTypes.MEAT, 1));
-	public static final RegistryObject<Item> OBJ_CHORUS_FRUIT = IngredientRegistry.register("chorus_fruit", (str) -> new Ingredient(str, Items.CHORUS_FRUIT, FoodTypes.FRUIT, 1));
-	public static final RegistryObject<Item> OBJ_COCOA = IngredientRegistry.register("cocoa_beans", (str) -> new Ingredient(str, Items.COCOA_BEANS, FoodTypes.SWEET, 2));
-	public static final RegistryObject<Item> OBJ_SUGAR = IngredientRegistry.register("sugar", (str) -> new Ingredient(str, Items.SUGAR, FoodTypes.NONE, 2));
-	public static final RegistryObject<Item> OBJ_WATER_BUCKET = IngredientRegistry.register("water_bucket", (str) -> new Ingredient(str, Items.WATER_BUCKET, FoodTypes.NONE, 2));
+	public static final RegistryObject<Item> OBJ_PORKCHOP = IngredientRegistry.register("porkchop", (str) -> new Ingredient(str, Items.PORKCHOP, FoodTypes.MEAT, 0.95));
+	public static final RegistryObject<Item> OBJ_BEEF = IngredientRegistry.register("beef", (str) -> new Ingredient(str, Items.BEEF, FoodTypes.MEAT, 0.9));
+	public static final RegistryObject<Item> OBJ_CHICKEN = IngredientRegistry.register("chicken", (str) -> new Ingredient(str, Items.CHICKEN, FoodTypes.MEAT, 1.2));
+	public static final RegistryObject<Item> OBJ_MUTTON = IngredientRegistry.register("mutton", (str) -> new Ingredient(str, Items.MUTTON, FoodTypes.MEAT, 0.95));
+	public static final RegistryObject<Item> OBJ_CHORUS_FRUIT = IngredientRegistry.register("chorus_fruit", (str) -> new Ingredient(str, Items.CHORUS_FRUIT, FoodTypes.FRUIT, 0.85));
+	public static final RegistryObject<Item> OBJ_COCOA_BEANS = IngredientRegistry.register("cocoa_beans", (str) -> new Ingredient(str, Items.COCOA_BEANS, FoodTypes.SWEET, 2.2));
+	public static final RegistryObject<Item> OBJ_SUGAR = IngredientRegistry.register("sugar", (str) -> new Ingredient(str, Items.SUGAR, FoodTypes.NONE, 2.5));
+	public static final RegistryObject<Item> OBJ_WATER_BUCKET = IngredientRegistry.register("water_bucket", (str) -> new Ingredient(str, Items.WATER_BUCKET, FoodTypes.NONE, 1.8));
 	public static final RegistryObject<Item> OBJ_NETHER_WART = IngredientRegistry.register("nether_wart", (str) -> new Ingredient(str, Items.NETHER_WART, FoodTypes.VEGETABLE, 1.2));
 
 	/* CookedFoods */

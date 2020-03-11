@@ -33,16 +33,19 @@ public class RecipeTable extends BlockBase{
 		if(worldIn.isRemote) return ActionResultType.SUCCESS;
 
 		if(!playerIn.func_225608_bj_()){
+			boolean isCreative = playerIn.abilities.isCreativeMode;
 			NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
 				@Override
 				public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){
-					return new RecipeTableContainer(windowId, playerInventory);
+					return new RecipeTableContainer(windowId, playerInventory, isCreative);
 				}
 				@Override
 				public ITextComponent getDisplayName(){
 					return new TranslationTextComponent("block.foodpower.recipe_table");
 				}
-			}, extraData -> {});
+			}, extraData -> {
+				extraData.writeBoolean(isCreative);
+			});
 			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.PASS;
