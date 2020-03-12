@@ -1,12 +1,16 @@
 package com.github.immortalmice.foodpower.bus;
 
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.bus.ForgeEventHandlers;
+import com.github.immortalmice.foodpower.customclass.model.meal.MealModelLoader;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Messages;
 import com.github.immortalmice.foodpower.handlers.BiomeHandler;
@@ -34,5 +38,6 @@ public class ModEventHandlers{
 	public static void onClientSetup(FMLClientSetupEvent event){
 		Containers.registAllScreen();
 		RenderHandler.setup();
+		ModelLoaderRegistry.registerLoader(new ResourceLocation(FoodPower.MODID, "meal"), MealModelLoader.INSTANCE);
 	}
 }
