@@ -37,4 +37,11 @@ public abstract class ContainerBase extends Container{
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index){
         return ItemStack.EMPTY;
     }
+    /* Check SlotID is in list range!!!! */
+    @Override
+    public void putStackInSlot(int slotID, ItemStack stack){
+    	if(slotID < this.inventorySlots.size() && slotID >= 0){
+    		super.putStackInSlot(slotID, stack);
+    	}
+    }
 }

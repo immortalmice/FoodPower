@@ -7,6 +7,7 @@ import java.util.function.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
+import com.google.gson.JsonArray;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.client.renderer.TransformationMatrix;
@@ -25,11 +26,21 @@ import net.minecraftforge.client.model.geometry.IModelGeometry;
 
 @SuppressWarnings("deprecation")
 public class MealModel implements IModelGeometry<MealModel>{
+	private String pathName, baseFilePath;
+	private JsonArray parts;
+
+	public MealModel(String pathNameIn, String baseFilePathIn, JsonArray partsIn){
+		this.pathName = pathNameIn;
+		this.baseFilePath = baseFilePathIn;
+		this.parts = partsIn;
+	}
 
 	@Override
 	public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery
 			, Function<Material, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform
 			, ItemOverrideList overrides, ResourceLocation modelLocation){
+
+		System.out.println(owner.resolveTexture("base"));
 
 		TransformationMatrix transform = modelTransform.func_225615_b_();
 		TextureAtlasSprite particle = spriteGetter.apply(owner.resolveTexture("particle"));
@@ -44,7 +55,8 @@ public class MealModel implements IModelGeometry<MealModel>{
 		, Set<Pair<String, String>> missingTextureErrors){
 
 		Set<Material> texs = Sets.newHashSet();
-		// TODO Auto-generated method stub
+
+		texs.add(owner.resolveTexture("base"));
 		return texs;
 	}
 	

@@ -69,6 +69,10 @@ public class Ingredients{
 		public static final Ingredient SUGAR = null;
 		public static final Ingredient WATER_BUCKET = null;
 		public static final Ingredient NETHER_WART = null;
+		public static final Ingredient HONEY_BOTTLE = null;
+		public static final Ingredient KELP = null;
+		public static final Ingredient RABBIT = null;
+		public static final Ingredient SWEET_BERRIES = null;
 
 		/* CookedFoods */
 		public static final CookedFood BATTER = null;
@@ -222,6 +226,10 @@ class IngredientRegistry{
 	public static final RegistryObject<Item> OBJ_SUGAR = IngredientRegistry.register("sugar", (str) -> new Ingredient(str, Items.SUGAR, FoodTypes.NONE, 2.5));
 	public static final RegistryObject<Item> OBJ_WATER_BUCKET = IngredientRegistry.register("water_bucket", (str) -> new Ingredient(str, Items.WATER_BUCKET, FoodTypes.NONE, 1.8));
 	public static final RegistryObject<Item> OBJ_NETHER_WART = IngredientRegistry.register("nether_wart", (str) -> new Ingredient(str, Items.NETHER_WART, FoodTypes.VEGETABLE, 1.2));
+	public static final RegistryObject<Item> OBJ_HONEY_BOTTLE = IngredientRegistry.register("honey_bottle", (str) -> new Ingredient(str, Items.field_226638_pX_, FoodTypes.SEASONING, 1.9));
+	public static final RegistryObject<Item> OBJ_KELP = IngredientRegistry.register("kelp", (str) -> new Ingredient(str, Items.KELP, FoodTypes.VEGETABLE, 1.75));
+	public static final RegistryObject<Item> OBJ_RABBIT = IngredientRegistry.register("rabbit", (str) -> new Ingredient(str, Items.RABBIT, FoodTypes.MEAT, 1.1));
+	public static final RegistryObject<Item> OBJ_SWEET_BERRIES = IngredientRegistry.register("sweet_berries", (str) -> new Ingredient(str, Items.SWEET_BERRIES, FoodTypes.FRUIT, 1.7));
 
 	/* CookedFoods */
 	public static final RegistryObject<Item> OBJ_BATTER = IngredientRegistry.register("batter", (str) -> new CookedFood(str));

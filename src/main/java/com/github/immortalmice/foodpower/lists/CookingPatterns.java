@@ -93,7 +93,7 @@ public class CookingPatterns{
 			Items.DOUGH
 		}),
 		new CookingStep(Blocks.UNIVERSAL_STATION, Items.HONEY_TOAST, new Ingredient[]{
-			Items.TOAST, Items.SUGAR, Items.CREAM, new Ingredient(FoodTypes.FRUIT), new Ingredient(FoodTypes.SWEET)
+			Items.TOAST, Items.HONEY_BOTTLE, Items.CREAM, new Ingredient(FoodTypes.FRUIT), new Ingredient(FoodTypes.SWEET)
 		})
 	});
 	

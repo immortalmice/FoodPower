@@ -49,6 +49,7 @@ public class RecipeTableContainer extends ContainerBase{
 		this.isCreative = isCreativeIn;
 		this.bookSlot = new ItemStackHandler(1);
 		this.scrollSlot = new ItemStackHandler(1);
+		this.ingredientsSlot = new ItemStackHandler(0);
 
 		this.addSlot(new SlotItemHandler(bookSlot, 0, 83, 72){
 			/* Only Writable Book Accepted Here */
@@ -99,7 +100,7 @@ public class RecipeTableContainer extends ContainerBase{
 		}
 
 		List<Ingredient> ingredientList = this.getIngredients();
-		this.ingredientsSlot = new ItemStackHandler(ingredientList.size());
+		this.ingredientsSlot.setSize(ingredientList.size());
 
 		/* Make A Slot Circle With N Slots */
 		int[][] slotPos = this.getSlotPos();

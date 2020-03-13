@@ -49,6 +49,10 @@
     "item.foodpower.sugar": "Sugar",
     "item.foodpower.water_bucket": "Water Bucket",
     "item.foodpower.nether_wart": "Nether Wart",
+    "item.foodpower.honey_bottle": "Honey",
+    "item.foodpower.kelp": "Kelp",
+    "item.foodpower.rabbit": "Rabbit Meat",
+    "item.foodpower.sweet_berries": "Sweet Berries",
 
     "_comment": "Cooked Foods",
     "item.foodpower.cake": "Cake",
@@ -175,6 +179,10 @@
     "effect.foodpower.sugar_power": "Sugar Power",
     "effect.foodpower.water_bucket_power": "Water Power",
     "effect.foodpower.nether_wart_power": "Nether Wart Power",
+    "effect.foodpower.honey_bottle_power": "Honey Power",
+    "effect.foodpower.kelp_power": "Kelp Power",
+    "effect.foodpower.rabbit_power": "Rabit Power",
+    "effect.foodpower.sweet_berries_power": "Sweet Berries Power",
 
     "_comment": "=======================Custom=======================",
 

@@ -38,8 +38,8 @@ public class FPTree extends Tree{
 			.func_225569_d_(4)//base height
 			.func_227354_b_(2)//height rand a
 			//.func_227355_c_()//height rand b
-			.func_227356_e_(2)//trunk height
-			.func_227357_f_(1)//trunk height random
+			//.func_227356_e_(2)//trunk height
+			//.func_227357_f_(1)//trunk height random
 			//.func_227358_g_()//trunk top offset
 			//.func_227359_h_()//trunk top offset random
 			.func_227360_i_(3)//foliage height

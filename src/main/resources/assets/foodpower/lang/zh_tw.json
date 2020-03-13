@@ -49,6 +49,10 @@
     "item.foodpower.sugar": "糖",
     "item.foodpower.water_bucket": "水",
     "item.foodpower.nether_wart": "地域疙瘩",
+    "item.foodpower.honey_bottle": "蜂蜜",
+    "item.foodpower.kelp": "海帶",
+    "item.foodpower.rabbit": "兔子",
+    "item.foodpower.sweet_berries": "甜莓",
 
     "_comment": "烹煮後食物",
     "item.foodpower.cake": "蛋糕",
@@ -175,6 +179,10 @@
     "effect.foodpower.sugar_power": "糖拋瓦",
     "effect.foodpower.water_bucket_power": "水拋瓦",
     "effect.foodpower.nether_wart_power": "地域疙瘩拋瓦",
+    "effect.foodpower.honey_bottle_power": "蜂蜜拋瓦",
+    "effect.foodpower.kelp_power": "海帶拋瓦",
+    "effect.foodpower.rabbit_power": "兔肉拋瓦",
+    "effect.foodpower.sweet_berries_power": "甜莓拋瓦",
 
     "_comment": "=======================特殊=======================",
 

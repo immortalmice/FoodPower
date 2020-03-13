@@ -3,6 +3,8 @@ package com.github.immortalmice.foodpower.handlers;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.world.gen.GenerationStage.Decoration;
+import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
+import net.minecraft.world.gen.placement.Placement;
 
 import java.util.Collection;
 
@@ -28,7 +30,9 @@ public class BiomeHandler{
 				case PLAINS:
 					for(FPTree tree : TREES_IN_WARM){
 						biome.addFeature(Decoration.VEGETAL_DECORATION
-							, tree.getConfiguredFeature());
+							, tree.getConfiguredFeature()
+								.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP
+									.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
 					}
 					break;
 				case JUNGLE:
@@ -36,7 +40,9 @@ public class BiomeHandler{
 				case SAVANNA:
 					for(FPTree tree : TREES_IN_HOT){
 						biome.addFeature(Decoration.VEGETAL_DECORATION
-							, tree.getConfiguredFeature());
+							, tree.getConfiguredFeature()
+								.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP
+									.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
 					}
 					break;
 				default:

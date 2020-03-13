@@ -63,6 +63,10 @@ public class Effects{
 		public static final FoodEffect SUGAR_POWER = null;
 		public static final FoodEffect WATER_BUCKET_POWER = null;
 		public static final FoodEffect NETHER_WART_POWER = null; 
+		public static final FoodEffect HONEY_BOTTLE_POWER = null; 
+		public static final FoodEffect KELP_POWER = null; 
+		public static final FoodEffect RABBIT_POWER = null; 
+		public static final FoodEffect SWEET_BERRIES_POWER = null; 
 	}
 
 	/* Construct lists when first time getFoodEffectList() called. */
@@ -153,6 +157,10 @@ class Registry{
 	public static final RegistryObject<Effect> OBJ_SUGAR_POWER = Registry.foodEffectRegister("sugar", (str) -> new FoodEffect(str, 0xFFFFFF));;
 	public static final RegistryObject<Effect> OBJ_WATER_BUCKET_POWER = Registry.foodEffectRegister("water_bucket", (str) -> new FoodEffect(str, 0x00FFFF));;
 	public static final RegistryObject<Effect> OBJ_NETHER_WART_POWER = Registry.foodEffectRegister("nether_wart", (str) -> new FoodEffect(str, 0xAA0000));; 
+	public static final RegistryObject<Effect> OBJ_HONEY_BOTTLE_POWER = Registry.foodEffectRegister("honey_bottle", (str) -> new FoodEffect(str, 0xF9F900));; 
+	public static final RegistryObject<Effect> OBJ_KELP_POWER = Registry.foodEffectRegister("kelp", (str) -> new FoodEffect(str, 0x73BF00));; 
+	public static final RegistryObject<Effect> OBJ_RABBIT_POWER = Registry.foodEffectRegister("rabbit", (str) -> new FoodEffect(str, 0xFFCBB3));; 
+	public static final RegistryObject<Effect> OBJ_SWEET_BERRIES_POWER = Registry.foodEffectRegister("sweet_berries", (str) -> new FoodEffect(str, 0xF00078));; 
 
 	private static RegistryObject<Effect> foodEffectRegister(String str, Function<String, Effect> fun){
 		return Registry.REGISTER.register(FoodEffect.getFPNameByIngredientName(str), () -> fun.apply(str));
