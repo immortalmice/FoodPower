@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
+import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
@@ -38,13 +39,23 @@ public class CookingPattern{
 		return this.name != "EMPTY PATTERN";
 	}
 	/* Filter ingrients need to display on recipe table or not */
-	public void init(){
+	private void init(){
 		for(int i = 0; i <= steps.size()-1; i ++){
 			ingredientList.addAll(steps.get(i).getIngredients().stream()
 				.filter((Ingredient a) -> !(a instanceof CookedFood))
 				.collect(Collectors.toList()));
 		}
 		return;
+	}
+
+	public List<FoodType> getFoodTypes(){
+		List<FoodType> returnList = new ArrayList<FoodType>();
+		for(Ingredient ingrient : this.ingredientList){
+			if(ingrient.isEmpty()){
+				returnList.add(ingrient.getFoodType());
+			}
+		}
+		return returnList;
 	}
 
 	public List<Ingredient> getIngredients(){

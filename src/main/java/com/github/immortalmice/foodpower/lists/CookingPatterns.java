@@ -2,6 +2,7 @@ package com.github.immortalmice.foodpower.lists;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.lists.KitchenAppliances.Blocks;
 import com.github.immortalmice.foodpower.lists.Ingredients.Items;
@@ -114,4 +115,14 @@ public class CookingPatterns{
 			Items.RAW_JUICE, Items.ICE, Items.SUGAR
 		})
 	});
+
+	@Nullable
+	public static CookingPattern getPatternByName(String nameIn){
+		for(CookingPattern pattern : CookingPatterns.list){
+			if(pattern.getName().equals(nameIn)){
+				return pattern;
+			}
+		}
+		return null;
+	}
 }

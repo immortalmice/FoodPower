@@ -1,20 +1,21 @@
 package com.github.immortalmice.foodpower.bus;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.bus.ForgeEventHandlers;
-import com.github.immortalmice.foodpower.customclass.model.meal.MealModelLoader;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Messages;
 import com.github.immortalmice.foodpower.handlers.BiomeHandler;
 import com.github.immortalmice.foodpower.handlers.EffectHandler;
+import com.github.immortalmice.foodpower.handlers.ModelHandler;
 import com.github.immortalmice.foodpower.handlers.RenderHandler;
 
 public class ModEventHandlers{
@@ -34,10 +35,21 @@ public class ModEventHandlers{
 		EffectHandler.setup();
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event){
 		Containers.registAllScreen();
 		RenderHandler.setup();
-		ModelLoaderRegistry.registerLoader(new ResourceLocation(FoodPower.MODID, "meal"), MealModelLoader.INSTANCE);
+		ModelHandler.registLoader();
 	}
+
+	@OnlyIn(Dist.CLIENT)
+	@SuppressWarnings("deprecation")
+	@SubscribeEvent
+	public static void onTextureStitch(TextureStitchEvent.Pre event){
+		if(event.getMap().func_229223_g_().equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)){
+			ModelHandler.registTextures(event);
+		}
+	}
+
 }

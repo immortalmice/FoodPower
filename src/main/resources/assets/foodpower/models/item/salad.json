@@ -1,26 +1,8 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-
-	"path_name": "salad",
-	"base": "foodpower:meals/salad/salad_base",
-	"part": [{
-		"slot": "VEGETABLE",
-		"textures": {
-			"cabbage": "foodpower:meals/salad/salad_cabbage",
-			"tomato": "foodpower:meals/salad/salad_tomato"
-		}
-	}, {
-		"slot": "MEAT",
-		"textures": {
-			"beef": "foodpower:meals/salad/salad_beef",
-			"chicken": "foodpower:meals/salad/salad_chicken"
-		}
-	}, {
-		"slot": "SEASONING",
-		"textures": {
-			"ketchop": "foodpower:meals/salad/salad_ketchop",
-			"sauce": "foodpower:meals/salad/salad_sauce"
-		}
-	}]
+	"name": "salad", 
+	"textures": {
+		"particle": "foodpower:meals/salad/salad_base"
+	}
 }

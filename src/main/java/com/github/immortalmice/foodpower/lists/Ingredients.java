@@ -16,6 +16,7 @@ import net.minecraftforge.fml.RegistryObject;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
+import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
@@ -175,6 +176,16 @@ public class Ingredients{
 	public static List<Meal> getMealList(){
 		Ingredients.setList();
 		return Ingredients.Lists.mealList;
+	}
+	public static List<Ingredient> getIngredientsByTypes(List<FoodType> foodTypes){
+		Ingredients.setList();
+		List<Ingredient> returnList = new ArrayList<Ingredient>();
+		for(Ingredient ingredient : Ingredients.getIngredientList()){
+			if(foodTypes.contains(ingredient.getFoodType())){
+				returnList.add(ingredient);
+			}
+		}
+		return returnList;
 	}
 
 }

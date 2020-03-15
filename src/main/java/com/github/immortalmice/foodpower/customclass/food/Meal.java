@@ -60,6 +60,11 @@ public class Meal extends CookedFood{
 		return stack;
 	}
 
+    @Override
+    public int getItemStackLimit(ItemStack stack){
+        return 64;
+    }
+
 	@OnlyIn(Dist.CLIENT)
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
