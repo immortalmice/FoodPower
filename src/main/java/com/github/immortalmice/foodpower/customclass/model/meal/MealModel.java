@@ -15,11 +15,9 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.client.renderer.TransformationMatrix;
-import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.IModelTransform;
 import net.minecraft.client.renderer.model.IUnbakedModel;
@@ -30,8 +28,8 @@ import net.minecraft.client.renderer.model.ModelBakery;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.BakedItemModel;
 import net.minecraftforge.client.model.IModelConfiguration;
-import net.minecraftforge.client.model.ItemLayerModel;
 import net.minecraftforge.client.model.ModelTransformComposition;
 import net.minecraftforge.client.model.PerspectiveMapWrapper;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
@@ -40,7 +38,6 @@ import net.minecraftforge.client.model.geometry.IModelGeometry;
 public class MealModel implements IModelGeometry<MealModel>{
 	private String name;
 	private Map<String, Material> materials = new HashMap<>();
-	private Map<String, ImmutableList<BakedQuad>> mapQuads = new HashMap<>();
 
 	public MealModel(String nameIn){
 		this.name = nameIn;
@@ -60,15 +57,9 @@ public class MealModel implements IModelGeometry<MealModel>{
                         PerspectiveMapWrapper.getTransforms(new ModelTransformComposition(transformsFromModel, modelTransform)) :
                         PerspectiveMapWrapper.getTransforms(modelTransform);
 
-		ImmutableList.Builder<BakedQuad> quads = new ImmutableList.Builder<BakedQuad>();
-		for(String key : materials.keySet()){
-			mapQuads.put(key, ItemLayerModel.getQuadsForSprite(0
-				, spriteGetter.apply(materials.get(key))
-				, transform));
-			quads.addAll(mapQuads.get(key));
-		}
-
-		return new MealBakedModel(quads.build(), particle, Maps.immutableEnumMap(transformMap), transform.isIdentity(), owner.isSideLit(), this);
+		return new BakedItemModel(ImmutableList.of(), particle, transformMap
+			, new MealItemOverrideList(this, owner, bakery, spriteGetter, modelTransform, overrides, modelLocation)
+			, transform.isIdentity(), owner.isSideLit());
 	}
 
 	@Override
@@ -79,8 +70,8 @@ public class MealModel implements IModelGeometry<MealModel>{
 		return this.materials.values();
 	}
 
-	public Map<String, ImmutableList<BakedQuad>> getMapQuads(){
-		return this.mapQuads;
+	public Map<String, Material> getMaterials(){
+		return this.materials;
 	}
 
 	private void init(){
