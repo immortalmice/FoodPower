@@ -6,13 +6,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
-
-import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
-import com.github.immortalmice.foodpower.customclass.food.FoodType;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
-import com.github.immortalmice.foodpower.handlers.ModelHandler;
-import com.github.immortalmice.foodpower.lists.CookingPatterns;
-import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
@@ -33,6 +26,13 @@ import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.ModelTransformComposition;
 import net.minecraftforge.client.model.PerspectiveMapWrapper;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
+
+import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
+import com.github.immortalmice.foodpower.customclass.food.FoodType;
+import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.handlers.ModelHandler;
+import com.github.immortalmice.foodpower.lists.CookingPatterns;
+import com.github.immortalmice.foodpower.lists.Ingredients;
 
 @SuppressWarnings("deprecation")
 public class MealModel implements IModelGeometry<MealModel>{
