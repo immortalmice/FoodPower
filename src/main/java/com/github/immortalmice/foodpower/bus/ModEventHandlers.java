@@ -14,6 +14,7 @@ import com.github.immortalmice.foodpower.bus.ForgeEventHandlers;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Messages;
 import com.github.immortalmice.foodpower.handlers.BiomeHandler;
+import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
 import com.github.immortalmice.foodpower.handlers.EffectHandler;
 import com.github.immortalmice.foodpower.handlers.ModelHandler;
 import com.github.immortalmice.foodpower.handlers.RenderHandler;
@@ -30,8 +31,9 @@ public class ModEventHandlers{
 	@SubscribeEvent
 	public static void onCommonSetup(FMLCommonSetupEvent event){
 		ForgeEventHandlers.registAllEvent();
-		BiomeHandler.setup();
 		Messages.registAllMessage();
+		CapabilityHandler.registAllCapabilities();
+		BiomeHandler.setup();
 		EffectHandler.setup();
 	}
 
