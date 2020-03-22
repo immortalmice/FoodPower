@@ -44,14 +44,16 @@ public class ExpCapability{
 	}
 
 	public static class Provider implements ICapabilityProvider{
+		private LazyOptional<ExpCapability> instance = LazyOptional.of(Capabilities.EXP_CAPABILITY::getDefaultInstance);
 		@Override
 		public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 			if(cap == Capabilities.EXP_CAPABILITY){
-				return LazyOptional.of(() -> Capabilities.EXP_CAPABILITY).cast();
+				return this.instance.cast();
 			}
 			return LazyOptional.empty();
 		}
 	}
+	
 	public static class Storage implements Capability.IStorage<ExpCapability>{
 		@Override
 		public INBT writeNBT(Capability<ExpCapability> capability, ExpCapability instance, Direction side){
