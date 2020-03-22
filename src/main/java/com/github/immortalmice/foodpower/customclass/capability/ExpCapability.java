@@ -26,7 +26,7 @@ public class ExpCapability{
 	public String getFullPatternExpToString(){
 		String str = "";
 		for(String key : this.patternExp.keySet()){
-			str += key + ":" + this.getPatternExpInt(key) + "\n";
+			str += key + " : " + this.getPatternExpInt(key) + "\n";
 		}
 		return str;
 	}
@@ -39,7 +39,7 @@ public class ExpCapability{
 		return this.patternExp;
 	}
 
-	private void setPatternExp(String patternName, int value){
+	public void setPatternExp(String patternName, int value){
 		this.patternExp.put(patternName, value);
 	}
 

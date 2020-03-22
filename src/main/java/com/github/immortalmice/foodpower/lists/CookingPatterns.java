@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.lists.KitchenAppliances.Blocks;
 import com.github.immortalmice.foodpower.lists.Ingredients.Items;
-import com.github.immortalmice.foodpower.lists.FoodTypes;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
