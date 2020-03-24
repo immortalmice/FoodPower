@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;

@@ -124,4 +124,12 @@ public class CookingPatterns{
 		}
 		return null;
 	}
+
+	public static List<String> getPatternNames(){
+		List<String> names = new ArrayList<String>();
+		for(CookingPattern pattern : CookingPatterns.list){
+			names.add(pattern.getName());
+		}
+		return names;
+	}
 }

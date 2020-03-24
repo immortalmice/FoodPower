@@ -2,19 +2,24 @@ package com.github.immortalmice.foodpower.bus;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.common.capabilities.Capability.IStorage;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.capability.ExpCapability;
+import com.github.immortalmice.foodpower.customclass.capability.IExpCapability;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
+import com.github.immortalmice.foodpower.lists.Capabilities;
 
 public class ForgeEventHandlers{
 	private static final IEventBus BUS = MinecraftForge.EVENT_BUS;
@@ -47,5 +52,17 @@ public class ForgeEventHandlers{
 		if(event.getObject() instanceof PlayerEntity){
 			event.addCapability(new ResourceLocation(FoodPower.MODID, "exp_capability"), new ExpCapability.Provider());
 		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerClone(PlayerEvent.Clone event){
+		event.getOriginal().getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((old_cap) -> {
+			event.getPlayer().getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((new_cap) -> {
+				IStorage<IExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();
+
+				CompoundNBT nbt = (CompoundNBT) storage.writeNBT(Capabilities.EXP_CAPABILITY, old_cap, null);
+				storage.readNBT(Capabilities.EXP_CAPABILITY, new_cap, null, nbt);
+			});
+		});
 	}
 }

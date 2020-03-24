@@ -1,5 +1,5 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "salad"
+	"name": "noodle_soup"
 }

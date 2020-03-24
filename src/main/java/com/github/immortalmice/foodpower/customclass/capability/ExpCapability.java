@@ -7,14 +7,15 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.capabilities.Capability.IStorage;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
-public class ExpCapability{
+public class ExpCapability implements IExpCapability{
 	private Map<String, Integer> patternExp = new HashMap<>();
 
 	public ExpCapability(){
@@ -43,8 +44,9 @@ public class ExpCapability{
 		this.patternExp.put(patternName, value);
 	}
 
-	public static class Provider implements ICapabilityProvider{
-		private LazyOptional<ExpCapability> instance = LazyOptional.of(Capabilities.EXP_CAPABILITY::getDefaultInstance);
+	public static class Provider implements ICapabilitySerializable<CompoundNBT>{
+		private LazyOptional<IExpCapability> instance = LazyOptional.of(Capabilities.EXP_CAPABILITY::getDefaultInstance);
+		private IStorage<IExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();
 		@Override
 		public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 			if(cap == Capabilities.EXP_CAPABILITY){
@@ -52,11 +54,25 @@ public class ExpCapability{
 			}
 			return LazyOptional.empty();
 		}
+		@Override
+		public CompoundNBT serializeNBT() {
+			if(instance.isPresent()){
+				return (CompoundNBT) storage.writeNBT(Capabilities.EXP_CAPABILITY, this.instance.orElse(null), null);
+			}
+			return new CompoundNBT();
+		}
+		@Override
+		public void deserializeNBT(CompoundNBT nbt) {
+			instance.ifPresent((capability) -> {
+				storage.readNBT(Capabilities.EXP_CAPABILITY, capability, null, nbt);
+			});
+			return;
+		}
 	}
 	
-	public static class Storage implements Capability.IStorage<ExpCapability>{
+	public static class Storage implements Capability.IStorage<IExpCapability>{
 		@Override
-		public INBT writeNBT(Capability<ExpCapability> capability, ExpCapability instance, Direction side){
+		public INBT writeNBT(Capability<IExpCapability> capability, IExpCapability instance, Direction side){
 			CompoundNBT nbt = new CompoundNBT();
 
 			CompoundNBT patternNBT = new CompoundNBT();
@@ -69,7 +85,7 @@ public class ExpCapability{
 		}
 
 		@Override
-		public void readNBT(Capability<ExpCapability> capability, ExpCapability instance, Direction side, INBT nbtIn){
+		public void readNBT(Capability<IExpCapability> capability, IExpCapability instance, Direction side, INBT nbtIn){
 			CompoundNBT nbt = (CompoundNBT)nbtIn;
 			
 			if(nbt.contains("pattern_nbt")){
