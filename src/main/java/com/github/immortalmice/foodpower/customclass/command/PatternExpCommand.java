@@ -37,7 +37,8 @@ public class PatternExpCommand{
 						.then(Commands.argument("value", IntegerArgumentType.integer(0, 99)).executes((context) -> {
 							for(ServerPlayerEntity player : EntityArgument.getPlayers(context, "target")){
 								player.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
-									capability.setPatternExp(StringArgumentType.getString(context, "pattern"), IntegerArgumentType.getInteger(context, "value"));
+									capability.setPatternExpLevel(CookingPatterns.getPatternByName(StringArgumentType.getString(context, "pattern"))
+										, IntegerArgumentType.getInteger(context, "value"));
 								});
 							}
 							context.getSource().sendFeedback(new StringTextComponent("Success"), false);

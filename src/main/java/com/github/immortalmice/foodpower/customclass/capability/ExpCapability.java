@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.customclass.capability;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -16,32 +17,54 @@ import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 public class ExpCapability implements IExpCapability{
-	private Map<String, Integer> patternExp = new HashMap<>();
+	private Map<CookingPattern, Integer> patternExp = new HashMap<>();
+
+	private static int BASE = 10;
+	private static double POWER = 1.1;
 
 	public ExpCapability(){
 		for(CookingPattern pattern : CookingPatterns.list){
-			this.patternExp.put(pattern.getName(), 0);
+			this.patternExp.put(pattern, 0);
 		}
 	}
 
+	@Override
 	public String getFullPatternExpToString(){
 		String str = "";
-		for(String key : this.patternExp.keySet()){
-			str += key + " : " + this.getPatternExpInt(key) + "\n";
+		for(CookingPattern key : this.patternExp.keySet()){
+			str += I18n.format("pattern.foodpower." + key.getName()) + " : Lv." + this.getPatternExpLevel(key) + "\n";
 		}
 		return str;
 	}
 
-	public int getPatternExpInt(String patternNameIn){
-		return this.patternExp.get(patternNameIn);
+	@Override
+	public int getPatternExpLevel(CookingPattern patternIn){
+		return ExpCapability.valueToLevel(this.patternExp.get(patternIn));
 	}
 
-	public Map<String, Integer> getPatternExp(){
-		return this.patternExp;
+	@Override
+	public Map<CookingPattern, Integer> getAllPatternExpLevel(){
+		Map<CookingPattern, Integer> map = new HashMap<>();
+		for(CookingPattern pattern : this.patternExp.keySet()){
+			map.put(pattern, ExpCapability.valueToLevel(this.patternExp.get(pattern)));
+		}
+		return map;
 	}
 
-	public void setPatternExp(String patternName, int value){
-		this.patternExp.put(patternName, value);
+	@Override
+	public void setPatternExpLevel(CookingPattern pattern, int level){
+		this.patternExp.put(pattern, ExpCapability.levelToValue(level, 0));
+	}
+
+	private static int valueToLevel(int value){
+		if(value != 0)
+			return (int) Math.floor(Math.log(1 - ((value * (1 - ExpCapability.POWER)) / ExpCapability.BASE)) / Math.log(ExpCapability.POWER));
+		else
+			return 0;
+	}
+
+	private static int levelToValue(int level, int remaining){
+		return (int) Math.ceil(((Math.pow(ExpCapability.POWER, level) - 1) * ExpCapability.BASE) / (ExpCapability.POWER - 1)) + remaining;
 	}
 
 	public static class Provider implements ICapabilitySerializable<CompoundNBT>{
@@ -76,8 +99,8 @@ public class ExpCapability implements IExpCapability{
 			CompoundNBT nbt = new CompoundNBT();
 
 			CompoundNBT patternNBT = new CompoundNBT();
-			for(String patternName : instance.getPatternExp().keySet()){
-				patternNBT.putInt(patternName, instance.getPatternExpInt(patternName));
+			for(CookingPattern pattern : instance.getAllPatternExpLevel().keySet()){
+				patternNBT.putInt(pattern.getName(), instance.getPatternExpLevel(pattern));
 			}
 			nbt.put("pattern_nbt", patternNBT);
 
@@ -91,7 +114,7 @@ public class ExpCapability implements IExpCapability{
 			if(nbt.contains("pattern_nbt")){
 				CompoundNBT patternNBT = (CompoundNBT)nbt.get("pattern_nbt");
 				for(String key : patternNBT.keySet()){
-					instance.setPatternExp(key, patternNBT.getInt(key));
+					instance.setPatternExpLevel(CookingPatterns.getPatternByName(key), patternNBT.getInt(key));
 				}
 			}
 			return;

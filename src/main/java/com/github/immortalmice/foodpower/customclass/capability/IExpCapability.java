@@ -2,9 +2,16 @@ package com.github.immortalmice.foodpower.customclass.capability;
 
 import java.util.Map;
 
+import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
+
 public interface IExpCapability{
-	public String getFullPatternExpToString();
-	public int getPatternExpInt(String patternNameIn);
-	public Map<String, Integer> getPatternExp();
-	public void setPatternExp(String patternName, int value);
+	/* This is used in command output */
+	default String getFullPatternExpToString(){
+		return "";
+	};
+
+	int getPatternExpLevel(CookingPattern patternNameIn);
+	Map<CookingPattern, Integer> getAllPatternExpLevel();
+
+	void setPatternExpLevel(CookingPattern patternName, int level);
 }
