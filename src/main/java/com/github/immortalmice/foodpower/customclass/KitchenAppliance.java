@@ -7,7 +7,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
@@ -15,7 +14,7 @@ import net.minecraftforge.common.ToolType;
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
 
 public class KitchenAppliance extends BlockBase{
-	private VoxelShape blockAABB;
+	private VoxelShape blockShape;
 
 	public KitchenAppliance(String name, AxisAlignedBB blockAABBIn){
 		super(name, Block.Properties.create(Material.IRON)
@@ -25,12 +24,16 @@ public class KitchenAppliance extends BlockBase{
 			.hardnessAndResistance(1.5f)
 			.func_226896_b_());
 
-		this.blockAABB = VoxelShapes.create(blockAABBIn);
+		this.blockShape = Block.makeCuboidShape(blockAABBIn.minX, blockAABBIn.minY, blockAABBIn.minZ, blockAABBIn.maxX, blockAABBIn.maxY, blockAABBIn.maxZ);
 	}
 	
-	/* How dare you use stone pickaxe break this holy things */
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context){
-    	return this.blockAABB;
+    	return this.blockShape;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context){
+    	return this.blockShape;
     }
 }
