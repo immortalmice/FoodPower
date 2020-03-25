@@ -10,7 +10,7 @@ import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.IMessageBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableContainer;
 
-/* Used to trasfer RecipeTable data to update */
+/* Used to trasfer RecipeTableScreen data to update */
 public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	private String action, message;
 	private int windowId;
@@ -39,6 +39,7 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 		return this;
 	}
 
+	/* Get the container and update data */
 	@Override
 	public void handle(RecipeTableMessage msg, Supplier<NetworkEvent.Context> ctx){
 		ServerPlayerEntity player = ctx.get().getSender();
@@ -60,6 +61,7 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 					case "Set InputText":
 						container.setInputText(msg.getMessage());
 						break;
+					/* Valid player is in creative mode or not */
 					case "Try Give Meal":
 						if(player.abilities.isCreativeMode){
 							player.addItemStackToInventory(container.getFinishedMeal(64));

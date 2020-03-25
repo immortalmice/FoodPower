@@ -10,6 +10,7 @@ import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
+/* Pattern means a collection of CookingStep in "cake", "salad", "fried rice"....etc */
 public class CookingPattern{
 	private List<CookingStep> steps;
 	private CookedFood result;

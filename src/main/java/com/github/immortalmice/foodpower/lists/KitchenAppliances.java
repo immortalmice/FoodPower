@@ -17,8 +17,7 @@ import net.minecraftforge.fml.RegistryObject;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 
-/* All the ingredient need to be registed will list below. */
-
+/* All the KitchenAppliances need to be registed will list below. */
 public class KitchenAppliances{
 	
 	@ObjectHolder("foodpower")

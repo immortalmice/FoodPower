@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.resources.IResourceManager;
 import net.minecraftforge.client.model.IModelLoader;
 
+/* Used in read json of meals */
 public enum MealModelLoader implements IModelLoader<MealModel>{
 	INSTANCE;
 

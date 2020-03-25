@@ -96,6 +96,7 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		this.func_212928_a(this.textBox);
 		//this.textBox.setEnableBackgroundDrawing(false);
 
+		/* If player is creative, show this button, server will valid again when message recieved */
 		if(this.container.isPlayerCreative()){
 			String giveFoodString =  I18n.format("general.foodpower.give_food");
 			int strWidth = this.font.getStringWidth(giveFoodString);

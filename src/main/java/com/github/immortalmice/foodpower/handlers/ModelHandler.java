@@ -22,6 +22,7 @@ public class ModelHandler{
 			, MealModelLoader.INSTANCE);
 	}
 
+	/* Stich texture to the atla */
 	public static void registTextures(TextureStitchEvent.Pre event){
 		List<CookingPattern> mealList = CookingPatterns.list;
 

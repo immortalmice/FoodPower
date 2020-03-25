@@ -16,9 +16,11 @@ import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
+/* Capability about FoodPower's Pattern Exp & Flavor Exp */
 public class ExpCapability implements IExpCapability{
 	private Map<CookingPattern, Integer> patternExp = new HashMap<>();
 
+	/* Every level reqired (BASE * POWER ^ level) points */
 	private static int BASE = 10;
 	private static double POWER = 1.1;
 
@@ -28,6 +30,7 @@ public class ExpCapability implements IExpCapability{
 		}
 	}
 
+	/* Used in command output only */
 	@Override
 	public String getFullPatternExpToString(){
 		String str = "";
@@ -39,31 +42,33 @@ public class ExpCapability implements IExpCapability{
 
 	@Override
 	public int getPatternExpLevel(CookingPattern patternIn){
-		return ExpCapability.valueToLevel(this.patternExp.get(patternIn));
+		return ExpCapability.pointToLevel(this.patternExp.get(patternIn));
 	}
 
 	@Override
 	public Map<CookingPattern, Integer> getAllPatternExpLevel(){
 		Map<CookingPattern, Integer> map = new HashMap<>();
 		for(CookingPattern pattern : this.patternExp.keySet()){
-			map.put(pattern, ExpCapability.valueToLevel(this.patternExp.get(pattern)));
+			map.put(pattern, ExpCapability.pointToLevel(this.patternExp.get(pattern)));
 		}
 		return map;
 	}
 
 	@Override
 	public void setPatternExpLevel(CookingPattern pattern, int level){
-		this.patternExp.put(pattern, ExpCapability.levelToValue(level, 0));
+		this.patternExp.put(pattern, ExpCapability.levelToPoint(level, 0));
 	}
 
-	private static int valueToLevel(int value){
+	/* Convert exp point to level */
+	private static int pointToLevel(int value){
 		if(value != 0)
 			return (int) Math.floor(Math.log(1 - ((value * (1 - ExpCapability.POWER)) / ExpCapability.BASE)) / Math.log(ExpCapability.POWER));
 		else
 			return 0;
 	}
 
-	private static int levelToValue(int level, int remaining){
+	/* Convert level to exp point */
+	private static int levelToPoint(int level, int remaining){
 		return (int) Math.ceil(((Math.pow(ExpCapability.POWER, level) - 1) * ExpCapability.BASE) / (ExpCapability.POWER - 1)) + remaining;
 	}
 

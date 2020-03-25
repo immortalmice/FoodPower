@@ -1,18 +1,22 @@
 package com.github.immortalmice.foodpower.customclass.effect;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DisplayEffectsScreen;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.EffectBase;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
 public class FoodEffect extends EffectBase{
 	private static final String POSTFIX = "_power";
 	private String ingredientName, fpName;
+
 	public FoodEffect(String ingredientNameIn, int liquidColorIn){
 		super(FoodEffect.getFPNameByIngredientName(ingredientNameIn), EffectType.BENEFICIAL, liquidColorIn);
 
@@ -20,26 +24,23 @@ public class FoodEffect extends EffectBase{
 		this.fpName = FoodEffect.getFPNameByIngredientName(this.ingredientName);
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void renderInventoryEffect(EffectInstance effect, DisplayEffectsScreen<?> gui, int x, int y, float z){
-		gui.getMinecraft().getTextureManager().bindTexture(this.getTexture());
-		System.out.println(this.getTexture());
-		gui.blit(x + 8, y + 8, 0, 0, 18, 18);
+		/* Cover original icon */
+		Minecraft minecraft = gui.getMinecraft();
+		minecraft.getTextureManager().bindTexture(ContainerScreen.INVENTORY_BACKGROUND);
+		gui.blit(x + 6, y, 6, 166, 18, 32);
+
+		/* Show custom icon */
+		ItemRenderer itemRenderer = minecraft.getItemRenderer();
+		itemRenderer.zLevel = z;
+		itemRenderer.renderItemAndEffectIntoGUI(new ItemStack(Ingredients.getIngredientByName(this.getIngredientName()))
+			, x + 6, y + 7);
 	}
 
 	public EffectInstance getEffectInstance(int durationIn, int amplifierIn){
 		return new EffectInstance(this, durationIn, amplifierIn, false, false);
-	}
-
-	private ResourceLocation getTexture(){
-		Ingredient ingredient = Ingredients.getIngredientByName(this.getIngredientName());
-		String domain = "";
-		if(ingredient.isVanillaItem()){
-			domain = "minecraft";
-		}else{
-			domain = FoodPower.MODID;
-		}
-		return new ResourceLocation(domain + ":textures/items/" + this.getIngredientName());
 	}
 
 	public String getIngredientName(){

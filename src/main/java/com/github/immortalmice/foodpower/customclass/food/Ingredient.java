@@ -21,7 +21,7 @@ public class Ingredient extends ItemFoodBase{
 	private FoodType foodType;
 	private FoodEffect effect;
 	private boolean isVanilla = false;
-	/* baseAmount is the value that this ingredient needed per food in level 1 */
+	/* baseAmount is the value that this ingredient needed per meal in level 1 */
 	private double baseAmount;
 	/** For Mod Ingredients */
 	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, double amountIn){

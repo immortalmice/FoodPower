@@ -13,6 +13,7 @@ import com.github.immortalmice.foodpower.customclass.container.classes.recipescr
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
+/* Used to trasfer RecipeScrollScreen data to update */
 public class RecipeScrollMessage implements IMessageBase<RecipeScrollMessage>{
 	private String message;
 	private int windowId;
@@ -39,6 +40,7 @@ public class RecipeScrollMessage implements IMessageBase<RecipeScrollMessage>{
 		return this;
 	}
 
+	/* Get the container and update data */
 	@Override
 	public void handle(RecipeScrollMessage msg, Supplier<NetworkEvent.Context> ctx){
 		ServerPlayerEntity player = ctx.get().getSender();

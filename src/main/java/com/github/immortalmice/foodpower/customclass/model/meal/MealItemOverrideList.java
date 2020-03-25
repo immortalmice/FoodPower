@@ -47,6 +47,8 @@ public class MealItemOverrideList extends ItemOverrideList{
 		this.overrides = overridesIn;
 		this.modelLocation = modelLocationIn;
 	}
+
+	/* Read NBT data from stack and choose what textures in use and merge them */
 	@Override
 	public IBakedModel getModelWithOverrides(IBakedModel model, ItemStack stack, @Nullable World worldIn, @Nullable LivingEntity entityIn){
 		IBakedModel returnModel = model;

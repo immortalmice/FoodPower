@@ -22,7 +22,7 @@ public class KitchenAppliance extends BlockBase{
 			.harvestTool(ToolType.PICKAXE)
 			.sound(SoundType.METAL)
 			.hardnessAndResistance(1.5f)
-			.func_226896_b_());
+			.func_226896_b_());//is not Soild
 
 		this.blockShape = Block.makeCuboidShape(blockAABBIn.minX, blockAABBIn.minY, blockAABBIn.minZ, blockAABBIn.maxX, blockAABBIn.maxY, blockAABBIn.maxZ);
 	}

@@ -21,7 +21,7 @@ public class RecipeScrollContainer extends ContainerBase{
 
 		this.nbt = nbtIn;
 
-		/* nbtTrackInt be dirty when  */
+		/* nbt output_amount be dirty when server end change it  */
 		this.trackInt(new IntReferenceHolder(){
 			@Override
 			public int get(){

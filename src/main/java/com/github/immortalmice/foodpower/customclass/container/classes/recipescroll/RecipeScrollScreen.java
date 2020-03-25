@@ -37,7 +37,7 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 	public void init(){
 		super.init();
 
-		int /*offsetX = (this.width - this.xSize) / 2,*/ offsetY = (this.height - this.ySize) / 2;
+		int offsetY = (this.height - this.ySize) / 2;
 		int centerX = this.width / 2;
 		this.addButton(new FPButton(centerX - 30, offsetY + 40, 10, 15, 38, 19, "", (button) ->{
 			/* Send Message To server on clicked */

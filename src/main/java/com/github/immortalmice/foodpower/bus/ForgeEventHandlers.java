@@ -56,6 +56,7 @@ public class ForgeEventHandlers{
 
 	@SubscribeEvent
 	public static void onPlayerClone(PlayerEvent.Clone event){
+		/* Copy capability data to new player */
 		event.getOriginal().getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((old_cap) -> {
 			event.getPlayer().getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((new_cap) -> {
 				IStorage<IExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();

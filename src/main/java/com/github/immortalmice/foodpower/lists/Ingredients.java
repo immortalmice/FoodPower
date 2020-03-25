@@ -20,7 +20,6 @@ import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 
 /* All the ingredient need to be registed will list below. */
-
 public class Ingredients{
 
 	@ObjectHolder("foodpower")

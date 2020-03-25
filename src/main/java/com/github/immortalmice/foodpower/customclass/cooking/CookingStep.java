@@ -6,6 +6,7 @@ import java.util.List;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 
+/* Use equipment, fill with ingredients and get result */
 public class CookingStep{
 	private KitchenAppliance equipment;
 	private List<Ingredient> ingredients = new ArrayList<Ingredient>();

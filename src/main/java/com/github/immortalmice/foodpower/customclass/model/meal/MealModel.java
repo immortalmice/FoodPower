@@ -54,6 +54,7 @@ public class MealModel implements IModelGeometry<MealModel>{
                         PerspectiveMapWrapper.getTransforms(new ModelTransformComposition(transformsFromModel, modelTransform)) :
                         PerspectiveMapWrapper.getTransforms(modelTransform);
 
+        /* Vanillad BakedItemModel but with custom MealItemOverrideList */
 		return new BakedItemModel(ImmutableList.of(), particle, transformMap
 			, new MealItemOverrideList(this, owner, bakery, spriteGetter, modelTransform, overrides, modelLocation)
 			, transform.isIdentity(), owner.isSideLit());
@@ -71,6 +72,7 @@ public class MealModel implements IModelGeometry<MealModel>{
 		return this.materials;
 	}
 
+	/* Init materials, capture all texture may use in the map */
 	private void init(){
 		CookingPattern pattern = CookingPatterns.getPatternByName(this.name);
 		this.materials.clear();
