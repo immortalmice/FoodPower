@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.function.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -28,11 +27,9 @@ import net.minecraftforge.client.model.PerspectiveMapWrapper;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
-import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.handlers.ModelHandler;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
-import com.github.immortalmice.foodpower.lists.Ingredients;
 
 @SuppressWarnings("deprecation")
 public class MealModel implements IModelGeometry<MealModel>{
@@ -77,12 +74,11 @@ public class MealModel implements IModelGeometry<MealModel>{
 	private void init(){
 		CookingPattern pattern = CookingPatterns.getPatternByName(this.name);
 		this.materials.clear();
-		this.materials.put("base", new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, "base")));
-		List<FoodType> ftList = pattern.getFoodTypes();
-		List<Ingredient> ingredientList = Ingredients.getIngredientsByTypes(ftList);
-		for(Ingredient ingredient : ingredientList){
-			Material m = new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, ingredient.getFPName()));
-			this.materials.put(ingredient.getFPName(), m);
+		this.materials.put("base"
+			, new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, "base")));
+		for(Ingredient ingredient : pattern.getAllPossibleIngredients()){
+			this.materials.put(ingredient.getFPName()
+				, new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, ingredient.getFPName())));
 		}
 	}
 }

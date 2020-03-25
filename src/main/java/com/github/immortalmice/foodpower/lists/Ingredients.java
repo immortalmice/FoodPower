@@ -176,17 +176,16 @@ public class Ingredients{
 		Ingredients.setList();
 		return Ingredients.Lists.mealList;
 	}
-	public static List<Ingredient> getIngredientsByTypes(List<FoodType> foodTypes){
+	public static List<Ingredient> getIngredientsByType(FoodType foodType){
 		Ingredients.setList();
 		List<Ingredient> returnList = new ArrayList<Ingredient>();
 		for(Ingredient ingredient : Ingredients.getIngredientList()){
-			if(foodTypes.contains(ingredient.getFoodType())){
+			if(foodType == ingredient.getFoodType()){
 				returnList.add(ingredient);
 			}
 		}
 		return returnList;
 	}
-
 }
 
 class IngredientRegistry{

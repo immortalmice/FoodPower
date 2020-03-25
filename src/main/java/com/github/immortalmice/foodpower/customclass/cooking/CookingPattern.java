@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
-import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
+import com.github.immortalmice.foodpower.lists.Ingredients;
 
 public class CookingPattern{
 	private List<CookingStep> steps;
@@ -47,18 +47,20 @@ public class CookingPattern{
 		return;
 	}
 
-	public List<FoodType> getFoodTypes(){
-		List<FoodType> returnList = new ArrayList<FoodType>();
-		for(Ingredient ingrient : this.ingredientList){
-			if(ingrient.isEmpty()){
-				returnList.add(ingrient.getFoodType());
+	public List<Ingredient> getIngredients(){
+		return ingredientList;
+	}
+
+	public List<Ingredient> getAllPossibleIngredients(){
+		List<Ingredient> returnList = new ArrayList<Ingredient>();
+		for(Ingredient patternIngredient : this.getIngredients()){
+			if(patternIngredient.isEmpty()){
+				returnList.addAll(Ingredients.getIngredientsByType(patternIngredient.getFoodType()));
+			}else{
+				returnList.add(patternIngredient);
 			}
 		}
 		return returnList;
-	}
-
-	public List<Ingredient> getIngredients(){
-		return ingredientList;
 	}
 
 	public Ingredient getResult(){

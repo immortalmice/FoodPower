@@ -10,11 +10,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
-import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.model.meal.MealModelLoader;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
-import com.github.immortalmice.foodpower.lists.Ingredients;
 
 @OnlyIn(Dist.CLIENT)
 public class ModelHandler{
@@ -30,9 +28,7 @@ public class ModelHandler{
 		for(CookingPattern pattern : mealList){
 			String name = pattern.getName();
 			event.addSprite(ModelHandler.locationGen(name, "base"));
-			List<FoodType> ftList = pattern.getFoodTypes();
-			List<Ingredient> ingredientList = Ingredients.getIngredientsByTypes(ftList);
-			for(Ingredient ingredient : ingredientList){
+			for(Ingredient ingredient : pattern.getAllPossibleIngredients()){
 				event.addSprite(ModelHandler.locationGen(name, ingredient.getFPName()));
 			}
 		}
