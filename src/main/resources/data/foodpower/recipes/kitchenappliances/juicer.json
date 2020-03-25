@@ -8,8 +8,8 @@
 		"IBI"
 	],
 	"key": {
-		"I": {"item": "minecraft:iron_ingot", "data": 0},
-		"P": {"item": "minecraft:piston", "data": 0},
-		"B": {"item": "minecraft:bucket", "data": 0}
+		"I": {"item": "minecraft:iron_ingot"},
+		"P": {"item": "minecraft:piston"},
+		"B": {"item": "minecraft:bucket"}
 	}
 }

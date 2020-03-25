@@ -8,7 +8,7 @@
 		"III"
 	],
 	"key": {
-		"I": {"item": "minecraft:iron_ingot", "data": 0},
-		"S": {"item": "minecraft:snow", "data": 0}
+		"I": {"item": "minecraft:iron_ingot"},
+		"S": {"item": "minecraft:snow_block"}
 	}
 }

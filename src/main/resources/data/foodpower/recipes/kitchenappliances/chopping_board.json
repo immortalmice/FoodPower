@@ -8,7 +8,7 @@
 		"WWW"
 	],
 	"key": {
-		"S": {"item": "minecraft:wooden_slab", "data": 32767},
-		"W": {"item": "minecraft:log", "data": 32767}
+		"S": {"tag": "minecraft:wooden_slabs"},
+		"W": {"tag": "minecraft:logs"}
 	}
 }

@@ -8,7 +8,7 @@
 		"SSS"
 	],
 	"key": {
-		"S": {"item": "minecraft:stone", "data": 0},
-		"P": {"item": "minecraft:stone_pressure_plate", "data": 0}
+		"S": {"item": "minecraft:smooth_stone"},
+		"P": {"item": "minecraft:stone_pressure_plate"}
 	}
 }

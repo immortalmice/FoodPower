@@ -8,8 +8,8 @@
 		"III"
 	],
 	"key": {
-		"I": {"item": "minecraft:iron_ingot", "data": 0},
-		"R": {"item": "minecraft:repeater", "data": 0},
-		"B": {"item": "minecraft:bucket", "data": 0}
+		"I": {"item": "minecraft:iron_ingot"},
+		"R": {"item": "minecraft:repeater"},
+		"B": {"item": "minecraft:bucket"}
 	}
 }

@@ -3,7 +3,6 @@ package com.github.immortalmice.foodpower.customclass.crop;
 import net.minecraft.item.Item;
 import net.minecraft.item.BlockNamedItem;
 
-import com.github.immortalmice.foodpower.customclass.crop.CropBlock;
 import com.github.immortalmice.foodpower.customclass.crop.CropSeed;
 import com.github.immortalmice.foodpower.lists.FPCreativeTabs;
 

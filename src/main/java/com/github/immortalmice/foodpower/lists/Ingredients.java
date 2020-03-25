@@ -18,7 +18,6 @@ import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
-import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 /* All the ingredient need to be registed will list below. */
 

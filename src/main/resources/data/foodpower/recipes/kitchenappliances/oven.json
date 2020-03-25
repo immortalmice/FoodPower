@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:kitchenappliance",
+	"result": {"item": "foodpower:oven"},
+	"pattern": [
+		"BIB",
+		"IGI",
+		"ICI"
+	],
+	"key": {
+		"I": {"item": "minecraft:iron_ingot"},
+		"G": {"tag": "foodpower:glass_panes"},
+		"B": {"tag": "minecraft:buttons"},
+		"C": {"tag": "minecraft:coals"}
+	}
+}
