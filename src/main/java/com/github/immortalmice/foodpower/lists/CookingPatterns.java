@@ -72,7 +72,7 @@ public class CookingPatterns{
 			Items.RICE, Items.WATER_BUCKET
 		}),
 		new CookingStep(Blocks.FRYING_PAN, Items.FRIED_RICE, new Ingredient[]{
-			Items.COOKED_RICE, Items.SALT, Items.SAUCE, Items.OIL, new Ingredient(FoodTypes.MEAT), new Ingredient(FoodTypes.VEGETABLE)
+			Items.COOKED_RICE, Items.SALT, new Ingredient(FoodTypes.SEASONING), Items.OIL, new Ingredient(FoodTypes.MEAT), new Ingredient(FoodTypes.VEGETABLE)
 		})
 	});
 	

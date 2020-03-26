@@ -53,6 +53,10 @@
     "item.foodpower.kelp": "海帶",
     "item.foodpower.rabbit": "兔子",
     "item.foodpower.sweet_berries": "甜莓",
+    "item.foodpower.magma_cream": "熔岩球",
+    "item.foodpower.ghast_tear": "幽靈眼淚",
+    "item.foodpower.dragon_breath": "龍息",
+    "item.foodpower.experience_bottle": "經驗瓶",
 
     "_comment": "烹煮後食物",
     "item.foodpower.cake": "蛋糕",
@@ -183,6 +187,10 @@
     "effect.foodpower.kelp_power": "海帶拋瓦",
     "effect.foodpower.rabbit_power": "兔肉拋瓦",
     "effect.foodpower.sweet_berries_power": "甜莓拋瓦",
+    "effect.foodpower.magma_cream_power": "熔岩球拋瓦",
+    "effect.foodpower.ghast_tear_power": "幽靈眼淚拋瓦",
+    "effect.foodpower.dragon_breath_power": "龍息拋瓦",
+    "effect.foodpower.experience_bottle_power": "經驗瓶拋瓦",
 
     "_comment": "=======================特殊=======================",
 

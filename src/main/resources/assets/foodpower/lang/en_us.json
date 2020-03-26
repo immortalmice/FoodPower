@@ -53,6 +53,10 @@
     "item.foodpower.kelp": "Kelp",
     "item.foodpower.rabbit": "Rabbit Meat",
     "item.foodpower.sweet_berries": "Sweet Berries",
+    "item.foodpower.magma_cream": "Magma Cream",
+    "item.foodpower.ghast_tear": "Ghast Tear",
+    "item.foodpower.dragon_breath": "Dragon Breath",
+    "item.foodpower.experience_bottle": "Bottle o' Enchanting",
 
     "_comment": "Cooked Foods",
     "item.foodpower.cake": "Cake",
@@ -183,6 +187,10 @@
     "effect.foodpower.kelp_power": "Kelp Power",
     "effect.foodpower.rabbit_power": "Rabit Power",
     "effect.foodpower.sweet_berries_power": "Sweet Berries Power",
+    "effect.foodpower.magma_cream_power": "Magma Cream Power",
+    "effect.foodpower.ghast_tear_power": "Ghast Tear Power",
+    "effect.foodpower.dragon_breath_power": "Dragon Breath Power",
+    "effect.foodpower.experience_bottle_power": "Bottle o' Enchanting Power",
 
     "_comment": "=======================Custom=======================",
 
