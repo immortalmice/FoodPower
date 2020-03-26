@@ -18,10 +18,8 @@ import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
-import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 /* All the ingredient need to be registed will list below. */
-
 public class Ingredients{
 
 	@ObjectHolder("foodpower")
@@ -177,17 +175,16 @@ public class Ingredients{
 		Ingredients.setList();
 		return Ingredients.Lists.mealList;
 	}
-	public static List<Ingredient> getIngredientsByTypes(List<FoodType> foodTypes){
+	public static List<Ingredient> getIngredientsByType(FoodType foodType){
 		Ingredients.setList();
 		List<Ingredient> returnList = new ArrayList<Ingredient>();
 		for(Ingredient ingredient : Ingredients.getIngredientList()){
-			if(foodTypes.contains(ingredient.getFoodType())){
+			if(foodType == ingredient.getFoodType()){
 				returnList.add(ingredient);
 			}
 		}
 		return returnList;
 	}
-
 }
 
 class IngredientRegistry{

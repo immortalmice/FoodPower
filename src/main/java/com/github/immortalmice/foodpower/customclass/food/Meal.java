@@ -20,6 +20,7 @@ import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
+/* The final product you get! It will give you power! */
 public class Meal extends CookedFood{
 	public Meal(String nameIn){
 		super(nameIn);
@@ -45,6 +46,7 @@ public class Meal extends CookedFood{
 		return ItemStack.EMPTY;
 	}
 
+    /* Give effect to player when eaten */
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stackIn, World worldIn, LivingEntity entityLiving){
 		ItemStack stack = entityLiving.onFoodEaten(worldIn, stackIn);

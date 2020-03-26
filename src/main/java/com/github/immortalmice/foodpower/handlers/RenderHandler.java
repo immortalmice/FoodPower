@@ -20,6 +20,7 @@ public class RenderHandler{
 		RenderHandler.setupRenderLayer();
 	}
 
+	/* RenderType.func_228641_d_() : cutout_mipped */
 	public static void setupRenderLayer(){
 		List<KitchenAppliance> list = KitchenAppliances.getList();
 		for(KitchenAppliance block : list){

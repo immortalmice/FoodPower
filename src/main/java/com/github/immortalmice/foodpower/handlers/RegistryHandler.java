@@ -13,6 +13,7 @@ import com.github.immortalmice.foodpower.lists.OtherItems;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 import com.github.immortalmice.foodpower.lists.Trees;
 
+/* Regist things is ForgeRegistryEntry */
 public class RegistryHandler{
 	private static final IEventBus BUS = FMLJavaModLoadingContext.get().getModEventBus();
 

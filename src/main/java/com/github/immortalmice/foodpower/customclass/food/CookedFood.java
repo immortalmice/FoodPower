@@ -32,6 +32,7 @@ public class CookedFood extends Ingredient{
     	return 1;
     }
 
+    /* 3 second rule! If you don't pickup in 3 seconds.....Eww */
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entityItem){
         if(this.getRegistryName().toString() != "dirty_food"){

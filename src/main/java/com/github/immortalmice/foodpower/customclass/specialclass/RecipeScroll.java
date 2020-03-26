@@ -60,6 +60,7 @@ public class RecipeScroll extends ItemBase{
 		return result;
 	}
 
+    /* Set rarity and calculate ingredient amount in need */
     public static void initStack(ItemStack stack){
         Random rand = new Random();
         CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
@@ -69,7 +70,9 @@ public class RecipeScroll extends ItemBase{
         int rarity = rand.nextInt(4);
         nbt.putInt("rarity", rarity);
 
+        /* Give a random float 0.9~1.1 to randomize ingredient amount in need */
         nbt.putDouble("random", rand.nextFloat() * 0.2 + 0.9);
+        /* How many meals player want to cook? */
         nbt.putInt("output_amount", 1);
 
         if(nbt.contains("ingredients")){
@@ -82,6 +85,7 @@ public class RecipeScroll extends ItemBase{
         }
     }
 
+    /* Calculate amount with single ingredient, Lv.2 amount * 2 and Lv.3 amount * 4 */
     private static int calcuAmount(String ingredientName, int outputAmount, int level, Double rand){
         Ingredient ingrdient = Ingredients.getIngredientByName(ingredientName);
         return (int) Math.ceil(ingrdient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand);
@@ -91,6 +95,7 @@ public class RecipeScroll extends ItemBase{
         RecipeScroll.calcuAllAmount(scroll.hasTag() ? scroll.getTag() : new CompoundNBT());
     }
 
+    /* Calculate amount with each ingredient */
     public static void calcuAllAmount(CompoundNBT nbt){
         int ouputAmount = nbt.contains("output_amount") ? nbt.getInt("output_amount") : 0;
 
@@ -104,6 +109,7 @@ public class RecipeScroll extends ItemBase{
         }
     }
 
+    /* dif may be negative */
     public static int addOutputAmount(ItemStack scroll, int dif){
         CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
         int amount = (nbt.contains("output_amount") ? nbt.getInt("output_amount") : 0) + dif;
@@ -157,6 +163,7 @@ public class RecipeScroll extends ItemBase{
     	return new TranslationTextComponent("general.foodpower.unknown_recipe");
     }
 
+    /* Open gui on right click, transfer nbt tag to construct container and screen */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn){
         ItemStack stack = playerIn.getHeldEquipment().iterator().next();

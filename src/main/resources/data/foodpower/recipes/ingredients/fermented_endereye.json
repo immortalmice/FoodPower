@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:ingredients",
+	"result": {"item": "foodpower:fermented_endereye"},
+	"pattern": [
+		"SSS",
+		"SES",
+		"SSS"
+	],
+	"key": {
+		"S": {"item": "minecraft:sugar"},
+		"E": {"item": "minecraft:ender_pearl"}
+	}
+}

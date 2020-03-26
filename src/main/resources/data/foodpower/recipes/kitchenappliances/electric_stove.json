@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:kitchenappliance",
+	"result": {"item": "foodpower:electric_stove"},
+	"pattern": [
+		"CCC",
+		"IBI",
+		"III"
+	],
+	"key": {
+		"I": {"item": "minecraft:iron_ingot"},
+		"B": {"tag": "minecraft:buttons"},
+		"C": {"tag": "minecraft:coals"}
+	}
+}

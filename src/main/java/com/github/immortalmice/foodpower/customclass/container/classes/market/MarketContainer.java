@@ -26,6 +26,7 @@ public class MarketContainer extends ContainerBase{
 	private static final int FULL_LIST_SIZE = MarketContainer.TREE_LIST_SIZE + MarketContainer.CROP_LIST_SIZE;
 
 	private final int windowId;
+	/* index means current page in container */
 	private int index = 0;
 
 	public MarketContainer(int windowIdIn, PlayerInventory playerInventory, PacketBuffer extraData){
@@ -90,7 +91,7 @@ public class MarketContainer extends ContainerBase{
 			}
 		}
 	}
-	/* Hope not crash again PLEASE.... */
+	/* Handle shift click */
 	@Override
 	public ItemStack transferStackInSlot(PlayerEntity entityPlayer, int fromSlot){
 		ItemStack previous = ItemStack.EMPTY;
@@ -101,7 +102,7 @@ public class MarketContainer extends ContainerBase{
 			previous = current.copy();
 			// Custom behaviour
 			if(fromSlot < 36){
-				// From TE Inventory to Player Inventory
+				// From Container Inventory to Player Inventory
 				if (!this.mergeItemStack(current, 36, 38, true))
 				    return ItemStack.EMPTY;
 			}else if(fromSlot == 37){
@@ -113,7 +114,7 @@ public class MarketContainer extends ContainerBase{
 						return ItemStack.EMPTY;
 				}
 			}else{
-					// From Player Inventory to TE Inventory
+					// From Player Inventory to Coontainer Inventory
 				if (!this.mergeItemStack(current, 0, 36, false))
 				    return ItemStack.EMPTY;
 			}
@@ -146,7 +147,7 @@ public class MarketContainer extends ContainerBase{
 		this.refreshGood();
 	}
 
-	/* Get Index Form NBT, And Return Right Item */
+	/* Get Index Form NBT, And Return The Item */
 	public Item getItem(){
 		if(this.index >= 0 && this.index <= MarketContainer.TREE_LIST_SIZE -1){
 			return Trees.getSaplingList().get(this.index).asItem();
@@ -159,7 +160,7 @@ public class MarketContainer extends ContainerBase{
 			return Items.AIR;
 		}
 	}
-	/* No Emerald, No Sapling */
+	/* No Emerald, No Sapling, Of Course No Seed Too */
 	public void refreshGood(){
 		ItemStack stack = emeraldSlot.getStack();
 		if(!stack.isEmpty()){

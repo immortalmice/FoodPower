@@ -2,6 +2,7 @@ package com.github.immortalmice.foodpower.customclass.food;
 
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
+/* The main purpose is prevent you add beef into a honey toast :) */
 public class FoodType{
 	private String name;
 

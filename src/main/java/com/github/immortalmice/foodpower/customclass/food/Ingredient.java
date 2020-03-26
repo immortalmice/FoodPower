@@ -15,13 +15,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
-import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 public class Ingredient extends ItemFoodBase{
 	private FoodType foodType;
 	private FoodEffect effect;
-	/* baseAmount is the value that this ingredient needed per food in level 1 */
+	private boolean isVanilla = false;
+	/* baseAmount is the value that this ingredient needed per meal in level 1 */
 	private double baseAmount;
 	/** For Mod Ingredients */
 	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, double amountIn){
@@ -36,10 +36,14 @@ public class Ingredient extends ItemFoodBase{
 			, itemIn.isFood() ? itemIn.getFood().getHealing() : 0
 			, itemIn.isFood() ? itemIn.getFood().getSaturation() : 0.0f
 			, ftIn, amountIn);
+
+		this.isVanilla = true;
 	}
 	/* For CookedFoods & Meals */
 	public Ingredient(String nameIn){
 		this(nameIn, 2, 0.4f, FoodTypes.NONE, 1);
+
+		this.isVanilla = true;
 	}
 	/* For Empty (Use In Present A Food With That Type) */
 	public Ingredient(FoodType ftIn){
@@ -72,6 +76,10 @@ public class Ingredient extends ItemFoodBase{
 
 	public void setEffect(FoodEffect effectIn){
 		this.effect = effectIn;
+	}
+
+	public boolean isVanillaItem(){
+		return this.isVanilla;
 	}
 	/* Show FoodType on tooltip */
 	@OnlyIn(Dist.CLIENT)

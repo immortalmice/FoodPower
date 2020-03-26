@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:kitchenappliance",
+	"result": {"item": "foodpower:revolving_cake_stand"},
+	"pattern": [
+		"PPP",
+		" I ",
+		"III"
+	],
+	"key": {
+		"P": {"item": "minecraft:heavy_weighted_pressure_plate"},
+		"I": {"item": "minecraft:iron_ingot"}
+	}
+}

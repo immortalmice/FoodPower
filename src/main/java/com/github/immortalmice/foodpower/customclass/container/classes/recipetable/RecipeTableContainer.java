@@ -29,6 +29,7 @@ public class RecipeTableContainer extends ContainerBase{
 
 	protected ItemStackHandler scrollSlot, bookSlot, ingredientsSlot;
 
+	/* index is the current page in container */
 	private int index = 0;
 	private String inputText = "";
 	private final int windowId;
@@ -73,7 +74,7 @@ public class RecipeTableContainer extends ContainerBase{
 			@Override
 			public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack){
 				RecipeTableContainer.this.bookSlot.setStackInSlot(0, ItemStack.EMPTY);
-				/* Init the amount needed in recipe, and rarity */
+				/* Init the ingredient amount needed in recipe, and rarity */
 				RecipeScroll.initStack(stack);
 				return stack;
 			}

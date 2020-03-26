@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "foopower:kitchenappliance",
+	"result": {"item": "foodpower:electric_pot"},
+	"pattern": [
+		"IPI",
+		"I I",
+		"III"
+	],
+	"key": {
+		"I": {"item": "minecraft:iron_ingot"},
+		"P": {"item": "minecraft:heavy_weighted_pressure_plate"}
+	}
+}

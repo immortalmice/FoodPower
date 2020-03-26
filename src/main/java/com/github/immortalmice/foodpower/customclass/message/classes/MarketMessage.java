@@ -10,7 +10,7 @@ import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.IMessageBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketContainer;
 
-/* Used to trasfer Market data to update */
+/* Used to trasfer MarketScreen data to update */
 public class MarketMessage implements IMessageBase<MarketMessage>{
 	private int windowId;
 	private String message;
@@ -37,6 +37,7 @@ public class MarketMessage implements IMessageBase<MarketMessage>{
 		return this;
 	}
 
+	/* Get the container and update data */
 	@Override
 	public void handle(MarketMessage msg, Supplier<NetworkEvent.Context> ctx){
 		ServerPlayerEntity player = ctx.get().getSender();

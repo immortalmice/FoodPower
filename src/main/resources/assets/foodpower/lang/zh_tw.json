@@ -105,7 +105,7 @@
     "block.foodpower.electric_stove": "電子爐",
     "block.foodpower.shaker": "雪克機",
     "block.foodpower.chopping_board": "砧板",
-    "block.foodpower.universal_stand": "萬用台",
+    "block.foodpower.universal_station": "萬用台",
 
     "_comment": "作物方塊",
     "block.foodpower.mint_crop": "薄荷作物",

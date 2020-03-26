@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.lists.KitchenAppliances.Blocks;
 import com.github.immortalmice.foodpower.lists.Ingredients.Items;
-import com.github.immortalmice.foodpower.lists.FoodTypes;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
@@ -124,5 +123,13 @@ public class CookingPatterns{
 			}
 		}
 		return null;
+	}
+
+	public static List<String> getPatternNames(){
+		List<String> names = new ArrayList<String>();
+		for(CookingPattern pattern : CookingPatterns.list){
+			names.add(pattern.getName());
+		}
+		return names;
 	}
 }

@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import com.github.immortalmice.foodpower.lists.Ingredients.Items;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances.Blocks;
 
-/* All Food Power's creativetabs list below.*/
+/* All FoodPower's creativetabs list below.*/
 public class FPCreativeTabs{
 	public static final ItemGroup ITEM_TAB = (new ItemGroup("foodpower.items"){
 		@Override

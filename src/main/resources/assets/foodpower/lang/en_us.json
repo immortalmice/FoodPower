@@ -105,7 +105,7 @@
     "block.foodpower.electric_stove": "Electric Stove",
     "block.foodpower.shaker": "Shaker",
     "block.foodpower.chopping_board": "Chopping Board",
-    "block.foodpower.universal_stand": "Universal Stand",
+    "block.foodpower.universal_station": "Universal Stand",
 
     "_comment": "Crop Block",
     "block.foodpower.mint_crop": "Mint Crop",

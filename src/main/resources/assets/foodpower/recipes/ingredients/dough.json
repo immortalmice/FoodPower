@@ -1,9 +1,0 @@
-{
-	"type": "minecraft:crafting_shapeless",
-	"group": "foopower:ingredients",
-	"result": {"item": "foodpower:dough"},
-	"ingredients": [
-        {"item": "foodpower:flour", "data": 0},
-        {"item": "minecraft:water_bucket", "data": 0}
-    ]
-}

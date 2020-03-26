@@ -7,6 +7,7 @@ import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.Effects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
+/* Used to connect ingredient & effect in FMLCommonSetupEvent */
 public class EffectHandler{
 	public static void setup(){
 		List<Ingredient> list = Ingredients.getIngredientList();
