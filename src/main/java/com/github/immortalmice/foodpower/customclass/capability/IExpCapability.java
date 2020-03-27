@@ -6,8 +6,12 @@ import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 
 public interface IExpCapability{
 
-	int getPatternExpLevel(CookingPattern patternNameIn);
+	int getPatternExpLevel(CookingPattern pattern);
 	Map<CookingPattern, Integer> getAllPatternExpLevel();
 
-	void setPatternExpLevel(CookingPattern patternName, int level);
+	void setPatternExpLevel(CookingPattern pattern, int level);
+
+	/* You can override this to make your own conversion between level and value. Ex. 20 value for 1 level */
+	/* Return how many value actually add, can pass in negative value, and return might be negative */
+	int addPatternExp(CookingPattern pattern, int value);
 }

@@ -23,6 +23,9 @@ public class ExpCapability implements IExpCapability{
 	private static int BASE = 10;
 	private static double POWER = 1.1;
 
+	private static int MAX_LEVEL = 99;
+	private static int MIN_LEVEL = 0;
+
 	public ExpCapability(){
 		for(CookingPattern pattern : CookingPatterns.list){
 			this.patternExp.put(pattern, 0);
@@ -45,7 +48,25 @@ public class ExpCapability implements IExpCapability{
 
 	@Override
 	public void setPatternExpLevel(CookingPattern pattern, int level){
+		if(level > ExpCapability.MAX_LEVEL) level = ExpCapability.MAX_LEVEL;
+		if(level < ExpCapability.MIN_LEVEL) level = ExpCapability.MIN_LEVEL;
+
 		this.patternExp.put(pattern, ExpCapability.levelToPoint(level, 0));
+	}
+
+	@Override
+	public int addPatternExp(CookingPattern pattern, int value){
+		int oldPoint = patternExp.get(pattern);
+		int newPoint = oldPoint + value;
+		this.patternExp.put(pattern, newPoint);
+
+		if(ExpCapability.pointToLevel(patternExp.get(pattern)) >= ExpCapability.MAX_LEVEL)
+			this.setPatternExpLevel(pattern, ExpCapability.MAX_LEVEL);
+
+		if(ExpCapability.pointToLevel(patternExp.get(pattern)) <= ExpCapability.MIN_LEVEL)
+			this.setPatternExpLevel(pattern, ExpCapability.MIN_LEVEL);
+
+		return this.patternExp.get(pattern) - oldPoint;
 	}
 
 	/* Convert exp point to level */

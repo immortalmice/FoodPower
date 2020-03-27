@@ -222,5 +222,8 @@
     "food_type.foodpower.meat": "§4Meat",
     "food_type.foodpower.vegetable": "§aVegetable",
     "food_type.foodpower.sweet": "§dSweet",
-    "food_type.foodpower.seasoning": "§9Seasoning"
+    "food_type.foodpower.seasoning": "§9Seasoning",
+
+    "_comment": "Message",
+    "message.foodpower.add_pattern_exp": "You ate %s (%s), gained %d experience points."
 }

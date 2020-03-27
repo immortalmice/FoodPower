@@ -222,5 +222,8 @@
     "food_type.foodpower.meat": "§4肉",
     "food_type.foodpower.vegetable": "§a蔬菜",
     "food_type.foodpower.sweet": "§d甜食",
-    "food_type.foodpower.seasoning": "§9醬料"
+    "food_type.foodpower.seasoning": "§9醬料",
+
+    "_comment": "Message",
+    "message.foodpower.add_pattern_exp": "你吃下了%s(%s)，獲得了%d點經驗值。"
 }

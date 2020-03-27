@@ -21,7 +21,7 @@ import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 public class PatternExpCommand{
-	/* Command = /<"foodpower"> <"patternExp"> <target> <"show"||"set"> <pattern> <value> */
+	/* Command = /<"foodpower"> <"patternExp"> <target> <"show"||"set"||"reset"> <pattern> <value> */
 	private static final LiteralArgumentBuilder<CommandSource> COMMAND = Commands.literal(FoodPower.MODID)
 		.requires((param) -> { return param.hasPermissionLevel(2); })
 		.then(Commands.literal("patternExp")
