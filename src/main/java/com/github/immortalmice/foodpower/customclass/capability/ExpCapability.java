@@ -3,7 +3,6 @@ package com.github.immortalmice.foodpower.customclass.capability;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -28,16 +27,6 @@ public class ExpCapability implements IExpCapability{
 		for(CookingPattern pattern : CookingPatterns.list){
 			this.patternExp.put(pattern, 0);
 		}
-	}
-
-	/* Used in command output only */
-	@Override
-	public String getFullPatternExpToString(){
-		String str = "";
-		for(CookingPattern key : this.patternExp.keySet()){
-			str += I18n.format("pattern.foodpower." + key.getName()) + " : Lv." + this.getPatternExpLevel(key) + "\n";
-		}
-		return str;
 	}
 
 	@Override

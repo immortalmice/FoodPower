@@ -5,10 +5,6 @@ import java.util.Map;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 
 public interface IExpCapability{
-	/* This is used in command output, override is optional */
-	default String getFullPatternExpToString(){
-		return "";
-	};
 
 	int getPatternExpLevel(CookingPattern patternNameIn);
 	Map<CookingPattern, Integer> getAllPatternExpLevel();
