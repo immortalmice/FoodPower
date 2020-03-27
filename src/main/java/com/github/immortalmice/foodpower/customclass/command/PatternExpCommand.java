@@ -51,6 +51,17 @@ public class PatternExpCommand{
 						}))
 					)
 				)
+				.then(Commands.literal("reset").executes((context) -> {
+					for(ServerPlayerEntity player : EntityArgument.getPlayers(context, "target")){
+						player.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
+							for(CookingPattern key : capability.getAllPatternExpLevel().keySet()){
+								capability.setPatternExpLevel(key, 0);
+							}
+							context.getSource().sendFeedback(new StringTextComponent("Success Set All PatternExp To 0."), false);
+						});
+					}
+					return Command.SINGLE_SUCCESS;
+				}))
 			)
 		); 
 
