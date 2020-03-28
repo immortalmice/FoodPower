@@ -5,6 +5,7 @@ import java.util.Random;
 import java.lang.Math;
 import javax.annotation.Nullable;
 
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -17,6 +18,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -26,6 +28,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
@@ -34,8 +37,27 @@ import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 public class RecipeScroll extends ItemBase{
+    private static final IItemPropertyGetter RARITY_GETTER = (stack, world, entity) -> {
+        CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
+
+        if(!nbt.contains("rarity")) return 0.0f; // Rarity WOOD
+        switch(nbt.getInt("rarity")){
+            case 0:
+                return 0.0f; // Rarity WOOD
+            case 1:
+                return 0.1f; // Rarity IRON
+            case 2:
+                return 0.2f; // Rarity GOLD
+            case 3:
+                return 0.3f; // Rarity DIAMOND
+            default:
+                return 0.0f; // Rarity WOOD
+        }
+    };
 	public RecipeScroll(){
 		super("recipe_scroll", new Item.Properties().maxStackSize(1));
+
+        this.addPropertyOverride(new ResourceLocation(FoodPower.MODID, "scroll_property"), RecipeScroll.RARITY_GETTER);
 	}
 
 	/* create a ItemStack and set NBTTags with given information */

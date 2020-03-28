@@ -1,0 +1,22 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "item/oak_log"
+	},
+
+	"overrides":[
+		{
+			"predicate": {"foodpower:scroll_property": 0.0},
+			"model": "foodpower:item/recipe_scroll_wood"
+		},{
+			"predicate": {"foodpower:scroll_property": 0.1},
+			"model": "foodpower:item/recipe_scroll_iron"
+		},{
+			"predicate": {"foodpower:scroll_property": 0.2},
+			"model": "foodpower:item/recipe_scroll_gold"
+		},{
+			"predicate": {"foodpower:scroll_property": 0.3},
+			"model": "foodpower:item/recipe_scroll_diamond"
+		}
+	]
+}
