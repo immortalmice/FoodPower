@@ -1,8 +1,5 @@
 {
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "item/oak_log"
-	},
+	"parent": "foodpower:item/recipe_scroll_wood",
 
 	"overrides":[
 		{

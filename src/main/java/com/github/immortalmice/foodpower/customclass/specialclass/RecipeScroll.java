@@ -1,7 +1,6 @@
 package com.github.immortalmice.foodpower.customclass.specialclass;
 
 import java.util.List;
-import java.util.Random;
 import java.lang.Math;
 import javax.annotation.Nullable;
 
@@ -54,6 +53,7 @@ public class RecipeScroll extends ItemBase{
                 return 0.0f; // Rarity WOOD
         }
     };
+    private static final float[] RARITY_DISCOUNT = {1.0f, 0.8f, 0.6f, 0.4f};
 	public RecipeScroll(){
 		super("recipe_scroll", new Item.Properties().maxStackSize(1));
 
@@ -83,34 +83,21 @@ public class RecipeScroll extends ItemBase{
 	}
 
     /* Set rarity and calculate ingredient amount in need */
-    public static void initStack(ItemStack stack){
-        Random rand = new Random();
+    public static void initStack(ItemStack stack, int rarity, float rand){
         CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
 
-        if(nbt.contains("rarity")) return;
-
-        int rarity = rand.nextInt(4);
         nbt.putInt("rarity", rarity);
-
-        /* Give a random float 0.9~1.1 to randomize ingredient amount in need */
-        nbt.putDouble("random", rand.nextFloat() * 0.2 + 0.9);
+        nbt.putDouble("random", rand);
         /* How many meals player want to cook? */
         nbt.putInt("output_amount", 1);
 
-        if(nbt.contains("ingredients")){
-            ListNBT list = (ListNBT)nbt.get("ingredients");
-            for(int i = 0; i <= list.size()-1; i ++){
-                CompoundNBT element = (CompoundNBT)list.get(i);
-                int amount = RecipeScroll.calcuAmount(element.getString("name"), nbt.getInt("output_amount"), element.getInt("level"), nbt.getDouble("random"));
-                element.putInt("amount", amount);
-            }
-        }
+        RecipeScroll.calcuAllAmount(nbt);
     }
 
     /* Calculate amount with single ingredient, Lv.2 amount * 2 and Lv.3 amount * 4 */
-    private static int calcuAmount(String ingredientName, int outputAmount, int level, Double rand){
+    private static int calcuAmount(String ingredientName, int outputAmount, int level, Double rand, int rarity){
         Ingredient ingrdient = Ingredients.getIngredientByName(ingredientName);
-        return (int) Math.ceil(ingrdient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand);
+        return (int) Math.ceil(ingrdient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand * RecipeScroll.RARITY_DISCOUNT[rarity]);
     }
 
     private static void calcuAllAmount(ItemStack scroll){
@@ -119,13 +106,29 @@ public class RecipeScroll extends ItemBase{
 
     /* Calculate amount with each ingredient */
     public static void calcuAllAmount(CompoundNBT nbt){
-        int ouputAmount = nbt.contains("output_amount") ? nbt.getInt("output_amount") : 0;
+        int ouputAmount = 1;
+        int rarity = 0;
+        double random = 1.1;
+
+        if(!nbt.contains("output_amount") || !nbt.contains("rarity") || !nbt.contains("random")){
+            nbt.putInt("output_amount", ouputAmount);
+            nbt.putInt("rarity", rarity);
+            nbt.putDouble("random", random);
+        }
+
+        ouputAmount = nbt.getInt("output_amount");
+        rarity = nbt.getInt("rarity");
+        random = nbt.getDouble("random");
 
         if(nbt.contains("ingredients")){
             ListNBT list = (ListNBT)nbt.get("ingredients");
             for(int i = 0; i <= list.size()-1; i ++){
                 CompoundNBT element = (CompoundNBT)list.get(i);
-                int amount = RecipeScroll.calcuAmount(element.getString("name"), ouputAmount, element.getInt("level"), nbt.getDouble("random"));
+                int amount = RecipeScroll.calcuAmount(element.getString("name")
+                    , ouputAmount
+                    , element.getInt("level")
+                    , random
+                    , rarity);
                 element.putInt("amount", amount);
             }
         }

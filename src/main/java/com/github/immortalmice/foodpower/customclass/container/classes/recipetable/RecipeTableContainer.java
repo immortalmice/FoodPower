@@ -16,11 +16,13 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Slot;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.customclass.container.util.RecipeTableSlot;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
+import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
@@ -75,7 +77,8 @@ public class RecipeTableContainer extends ContainerBase{
 			public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack){
 				RecipeTableContainer.this.bookSlot.setStackInSlot(0, ItemStack.EMPTY);
 				/* Init the ingredient amount needed in recipe, and rarity */
-				RecipeScroll.initStack(stack);
+				FoodPower.NETWORK.sendToServer(new RecipeTableMessage(RecipeTableContainer.this.getWindowId()
+					, "Init Recipe Scroll", ""));
 				return stack;
 			}
 		});
