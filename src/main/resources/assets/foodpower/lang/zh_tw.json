@@ -197,12 +197,12 @@
     "_comment": "全域名字",
     "general.foodpower.food_type": "食物種類",
     "general.foodpower.cooking_pattern": "料理樣板",
+    "general.foodpower.meal": "料理",
     "general.foodpower.ingredient": "食材",
     "general.foodpower.ingredients": "食材",
     "general.foodpower.level": "等級",
     "general.foodpower.unknown_recipe": "未命名的食譜",
     "general.foodpower.recipe_name": "食譜名稱",
-    "general.foodpower.give_food": "獲得料理成品",
     "general.foodpower.none": "無",
 
     "_comment": "食譜樣板",
@@ -225,5 +225,8 @@
     "food_type.foodpower.seasoning": "§9醬料",
 
     "_comment": "Message",
-    "message.foodpower.add_pattern_exp": "你吃下了%s(%s)，獲得了%d點經驗值。"
+    "message.foodpower.give_food": "獲得料理成品",
+    "message.foodpower.tooltip_more_info": "按Shift顯示更多訊息",
+    "message.foodpower.tooltip_exp_title": "獲取經驗值",
+    "message.foodpower.output_amount": "製作數量 : %d"
 }

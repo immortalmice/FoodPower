@@ -98,7 +98,7 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 
 		/* If player is creative, show this button, server will valid again when message recieved */
 		if(this.container.isPlayerCreative()){
-			String giveFoodString =  I18n.format("general.foodpower.give_food");
+			String giveFoodString =  I18n.format("message.foodpower.give_food");
 			int strWidth = this.font.getStringWidth(giveFoodString);
 
 			this.addButton(new Button(offsetX - strWidth - 20, offsetY + 20

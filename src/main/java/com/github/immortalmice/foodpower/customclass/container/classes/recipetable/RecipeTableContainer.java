@@ -75,6 +75,7 @@ public class RecipeTableContainer extends ContainerBase{
 			public boolean isItemValid(ItemStack stack){
 				return false;
 			}
+			/* You can't take the stack, but I handle this in slotClick method */
 			@Override
 			public boolean canTakeStack(PlayerEntity playerIn){
 				return false;

@@ -197,12 +197,12 @@
     "_comment": "General",
     "general.foodpower.food_type": "Food Type",
     "general.foodpower.cooking_pattern": "Cooking Pattern",
+    "general.foodpower.meal": "Meal",
     "general.foodpower.ingredient": "Ingredient",
     "general.foodpower.ingredients": "Ingredients",
     "general.foodpower.level": "Level",
     "general.foodpower.unknown_recipe": "Unknown Recipe",
     "general.foodpower.recipe_name": "Recipe Name",
-    "general.foodpower.give_food": "Get Finished Meal",
     "general.foodpower.none": "None",
 
     "_comment": "Cooking Pattern",
@@ -225,5 +225,8 @@
     "food_type.foodpower.seasoning": "§9Seasoning",
 
     "_comment": "Message",
-    "message.foodpower.add_pattern_exp": "You ate %s (%s), gained %d experience points."
+    "message.foodpower.give_food": "Get Finished Meal",
+    "message.foodpower.tooltip_more_info": "Press shift to see more info",
+    "message.foodpower.tooltip_exp_title": "Gain Experience",
+    "message.foodpower.output_amount": "Amount To Make : %d"
 }

@@ -14,7 +14,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +29,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
+import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
@@ -153,26 +154,38 @@ public class RecipeScroll extends ItemBase{
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
+        TooltipUtil tooltipHelper = new TooltipUtil(tooltip);
 
-    	String patternStr = I18n.format("general.foodpower.cooking_pattern") + ":";
+    	String patternStr = TooltipUtil.translate("general.foodpower.cooking_pattern") + " : ";
     	CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
     	if(nbt.contains("pattern")){
-    		patternStr += I18n.format("pattern.foodpower." + nbt.getString("pattern"));
+    		patternStr += TooltipUtil.translate("pattern.foodpower." + nbt.getString("pattern"));
     	}else{
-    		patternStr += I18n.format("general.foodpower.none");
+    		patternStr += TooltipUtil.translate("general.foodpower.none");
     	}
-    	tooltip.add(new StringTextComponent(patternStr));
+    	tooltipHelper.add(patternStr);
+        if(nbt.contains("output_amount")){
+            tooltipHelper.addTranslate("message.foodpower.output_amount", nbt.getInt("output_amount"));
+        }
+        tooltipHelper.newBlankRow();
+
+        /* Whether player press down shift key or not */
+        boolean moreInfo = Screen.hasShiftDown();
+        if(!moreInfo){
+            tooltipHelper.addTranslate("message.foodpower.tooltip_more_info");
+            return;
+        }
 
     	if(nbt.contains("ingredients")){
-    		tooltip.add(new TranslationTextComponent("general.foodpower.ingredients"));
+    		tooltipHelper.addTranslate("general.foodpower.ingredients");
     		ListNBT list = (ListNBT)nbt.get("ingredients");
     		for(int i = 0; i <= list.size()-1; i ++){
     			CompoundNBT element = (CompoundNBT) list.get(i);
-    			String ingredientStr = I18n.format("item.foodpower." + element.getString("name"));
-    			ingredientStr += " [" + I18n.format("general.foodpower.level") + element.getInt("level") + "]";
+    			String ingredientStr = TooltipUtil.translate("item.foodpower." + element.getString("name"));
+    			ingredientStr += " [" + TooltipUtil.translate("general.foodpower.level") + element.getInt("level") + "]";
                 if(element.contains("amount"))
                     ingredientStr += " (" + element.getInt("amount") + ")";
-    			tooltip.add(new StringTextComponent("  " + ingredientStr));
+    			tooltipHelper.addWithLeftSpace(ingredientStr);
     		}
     	}
     }
