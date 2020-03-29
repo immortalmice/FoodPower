@@ -20,12 +20,22 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	private String action, message;
 	private int windowId;
+	private ItemStack scroll;
 
 	public RecipeTableMessage(int windowidIn, String actionIn, String messageIn){
 		this.windowId = windowidIn;
 		this.action = actionIn;
 		this.message = messageIn;
+		this.scroll = ItemStack.EMPTY;
 	}
+
+	public RecipeTableMessage(int windowidIn, String actionIn, ItemStack scrollIn){
+		this.windowId = windowidIn;
+		this.action = actionIn;
+		this.message = "";
+		this.scroll = scrollIn;
+	}
+
 	public RecipeTableMessage(){
 		this(0, "", "");
 	}
@@ -35,6 +45,7 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 		buf.writeInt(msg.getWindowId());
 		buf.writeString(msg.getAction());
 		buf.writeString(msg.getMessage());
+		buf.writeItemStack(msg.getScroll(), false);
 	}
 
 	@Override
@@ -42,6 +53,7 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 		this.windowId = buf.readInt();
 		this.action = buf.readString(32767);
 		this.message = buf.readString(32767);
+		this.scroll = buf.readItemStack();
 		return this;
 	}
 
@@ -74,8 +86,8 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 						}
 						break;
 					case "Init Recipe Scroll":
-						RecipeTableMessage.handleInitRecipeScroll(player, container);
-
+						RecipeTableMessage.handleInitRecipeScroll(player, container, msg.getScroll());
+						break;
 				}
 			}
 		}
@@ -104,7 +116,11 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 		return this.message;
 	}
 
-	private static void handleInitRecipeScroll(ServerPlayerEntity player, RecipeTableContainer container){
+	public ItemStack getScroll(){
+		return this.scroll;
+	}
+
+	private static void handleInitRecipeScroll(ServerPlayerEntity player, RecipeTableContainer container, ItemStack scroll){
 		CookingPattern pattern = CookingPatterns.list.get(container.getIndex());
 		player.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
 			int rarity = 0;
@@ -131,12 +147,16 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	            rarity = ++ i;
 	        }
 
-	        ItemStack stack = player.inventory.getItemStack();
-	        if(stack.getItem() instanceof RecipeScroll){
+	        if(level == 99) rarity = 3;
+
+	        if(scroll.getItem() instanceof RecipeScroll){
 	        	/* Give a random float 0.9 ~ 1.1 to randomize ingredient amount in need */
-	        	RecipeScroll.initStack(stack, rarity, serverWorld.rand.nextFloat() * 0.2f + 0.9f);
+	        	RecipeScroll.initStack(scroll, rarity, serverWorld.rand.nextFloat() * 0.2f + 0.9f);
+	        	player.inventory.setItemStack(scroll);
 	        	player.updateHeldItem();
+	        	container.setScrollTaken();
 	        }
 		});
+
 	}
 }

@@ -9,7 +9,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.command.Commands;
 import net.minecraft.command.ISuggestionProvider;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -72,7 +71,7 @@ public class PatternExpCommand{
 	private static String parsePatternExpOutput(Map<CookingPattern, Integer> map){
 		String str = "";
 		for(CookingPattern key : map.keySet()){
-			str += I18n.format("pattern.foodpower." + key.getName()) + " : Lv." + map.get(key) + "\n";
+			str += key.getName() + " : Lv." + map.get(key) + "\n";
 		}
 		return str;
 	}

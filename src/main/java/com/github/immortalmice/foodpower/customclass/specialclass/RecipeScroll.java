@@ -71,6 +71,7 @@ public class RecipeScroll extends ItemBase{
 
 		ListNBT tagList = new ListNBT();
 		for(int i = 0; i <= listIn.size()-1; i ++){
+            if(listIn.get(i).isEmpty()) return ItemStack.EMPTY;
 			CompoundNBT element = new CompoundNBT();
 			element.putString("name", ((Ingredient)listIn.get(i).getItem()).getFPName());
 			element.putInt("level", listIn.get(i).getCount());
@@ -94,7 +95,7 @@ public class RecipeScroll extends ItemBase{
         RecipeScroll.calcuAllAmount(nbt);
     }
 
-    /* Calculate amount with single ingredient, Lv.2 amount * 2 and Lv.3 amount * 4 */
+    /* Calculate amount with single ingredient, Lv.1 amount*1, Lv.2 amount*2 and Lv.3 amount*4 */
     private static int calcuAmount(String ingredientName, int outputAmount, int level, Double rand, int rarity){
         Ingredient ingrdient = Ingredients.getIngredientByName(ingredientName);
         return (int) Math.ceil(ingrdient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand * RecipeScroll.RARITY_DISCOUNT[rarity]);

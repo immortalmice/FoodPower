@@ -44,4 +44,13 @@ public abstract class ContainerBase extends Container{
     		super.putStackInSlot(slotID, stack);
     	}
     }
+    /* Check SlotID is in list range!!!! */
+    @Nullable
+    @Override
+    public Slot getSlot(int slotID){
+        if(slotID < this.inventorySlots.size() && slotID >= 0){
+            return super.getSlot(slotID);
+        }
+        return null;
+    }
 }

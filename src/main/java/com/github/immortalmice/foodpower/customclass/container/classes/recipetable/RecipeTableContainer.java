@@ -2,19 +2,21 @@ package com.github.immortalmice.foodpower.customclass.container.classes.recipeta
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.Callable;
 import java.lang.Math;
 
 import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Slot;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
@@ -74,12 +76,8 @@ public class RecipeTableContainer extends ContainerBase{
 				return false;
 			}
 			@Override
-			public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack){
-				RecipeTableContainer.this.bookSlot.setStackInSlot(0, ItemStack.EMPTY);
-				/* Init the ingredient amount needed in recipe, and rarity */
-				FoodPower.NETWORK.sendToServer(new RecipeTableMessage(RecipeTableContainer.this.getWindowId()
-					, "Init Recipe Scroll", ""));
-				return stack;
+			public boolean canTakeStack(PlayerEntity playerIn){
+				return false;
 			}
 		});
 
@@ -121,6 +119,16 @@ public class RecipeTableContainer extends ContainerBase{
 		scrollSlot.setStackInSlot(0, this.getScroll(false));
 	}
 
+	/* Server will call this when a scroll is successfully taken by player */
+	public void setScrollTaken(){
+		ItemStack book = this.bookSlot.getStackInSlot(0);
+		/* Decrease written book stack count in slot by 1, just consider may other mod change max stack size of written book */
+		book.setCount(book.getCount() - 1);
+		this.bookSlot.setStackInSlot(0, book);
+		this.refreshScroll();
+		return;
+	}
+
 	private boolean hasEmptyIngredientSlot(){
 		for(int i = 0; i <= ingredientsSlot.getSlots()-1; i ++){
 			if(ingredientsSlot.getStackInSlot(i).isEmpty()){
@@ -158,13 +166,25 @@ public class RecipeTableContainer extends ContainerBase{
 	/* Click on slot to regist the ingredient to it */
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity playerIn){
+		Slot slot = this.getSlot(slotId);
 		if(slotId >= 38 && slotId <= this.ingredientsSlot.getSlots() + 37){
-			Slot slot = this.getSlot(slotId);
 			if(slot instanceof RecipeTableSlot){
 				RecipeTableSlot currentSlot = (RecipeTableSlot) slot;
 				currentSlot.tryRegistIngrediant(playerIn.inventory.getItemStack());
 			}
 			return ItemStack.EMPTY;
+		}else if(slotId == 37){
+			this.refreshScroll();
+			ItemStack scroll = slot.getStack();
+			if(!scroll.isEmpty() && scroll.getItem() instanceof RecipeScroll){
+				DistExecutor.callWhenOn(Dist.CLIENT, () -> new Callable<Void>(){
+					@Override
+					public Void call(){
+						FoodPower.NETWORK.sendToServer(new RecipeTableMessage(RecipeTableContainer.this.getWindowId(), "Init Recipe Scroll", scroll));
+						return null;
+					}
+				});
+			}
 		}
 		this.refreshScroll();
 		return super.slotClick(slotId, dragType, clickTypeIn, playerIn);
