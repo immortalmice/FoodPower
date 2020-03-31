@@ -20,6 +20,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -172,7 +174,8 @@ public class RecipeScroll extends ItemBase{
         /* Whether player press down shift key or not */
         boolean moreInfo = Screen.hasShiftDown();
         if(!moreInfo){
-            tooltipHelper.addTranslate("message.foodpower.tooltip_more_info");
+            tooltipHelper.addTranslate("message.foodpower.tooltip_more_info"
+                , (new Style()).setItalic(true).setColor(TextFormatting.GRAY));
             return;
         }
 

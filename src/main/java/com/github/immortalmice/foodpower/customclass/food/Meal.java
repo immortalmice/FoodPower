@@ -12,6 +12,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -98,7 +100,8 @@ public class Meal extends CookedFood{
         /* Whether player press down shift key or not */
         boolean moreInfo = Screen.hasShiftDown();
         if(!moreInfo){
-            tooltipHelper.addTranslate("message.foodpower.tooltip_more_info");
+            tooltipHelper.addTranslate("message.foodpower.tooltip_more_info"
+                , (new Style()).setItalic(true).setColor(TextFormatting.GRAY));
             return;
         }
 

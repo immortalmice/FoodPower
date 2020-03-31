@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -21,6 +22,10 @@ public class TooltipUtil{
 		this.tooltip.add(new StringTextComponent(str));
 	}
 
+	public void add(String str, Style style){
+		this.tooltip.add((new StringTextComponent(str)).setStyle(style));
+	}
+
 	public void add(ITextComponent text){
 		this.tooltip.add(text);
 	}
@@ -31,6 +36,10 @@ public class TooltipUtil{
 
 	public void addTranslate(String key, Object... parameters){
 		this.add(TooltipUtil.translate(key, parameters));
+	}
+
+	public void addTranslate(String key, Style style, Object... parameters){
+		this.add(TooltipUtil.translate(key, parameters), style);
 	}
 
     public void newBlankRow(){
