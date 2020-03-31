@@ -16,7 +16,7 @@ import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPPa
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
-/* Capability about FoodPower's Pattern Exp & Flavor Exp */
+/* Capability about FoodPower's Pattern Exp */
 public class FPPatternExpCapability implements IFPPatternExpCapability{
 	private Map<CookingPattern, Integer> patternExp = new HashMap<>();
 
@@ -34,12 +34,12 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 	}
 
 	@Override
-	public int getPatternExpLevel(CookingPattern patternIn){
+	public int getExpLevel(CookingPattern patternIn){
 		return FPPatternExpCapability.pointToLevel(this.patternExp.get(patternIn));
 	}
 
 	@Override
-	public Map<CookingPattern, Integer> getAllPatternExpLevel(){
+	public Map<CookingPattern, Integer> getAllExpLevel(){
 		Map<CookingPattern, Integer> map = new HashMap<>();
 		for(CookingPattern pattern : this.patternExp.keySet()){
 			map.put(pattern, FPPatternExpCapability.pointToLevel(this.patternExp.get(pattern)));
@@ -48,7 +48,7 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 	}
 
 	@Override
-	public void setPatternExpLevel(CookingPattern pattern, int level){
+	public void setExpLevel(CookingPattern pattern, int level){
 		if(level > FPPatternExpCapability.MAX_LEVEL) level = FPPatternExpCapability.MAX_LEVEL;
 		if(level < FPPatternExpCapability.MIN_LEVEL) level = FPPatternExpCapability.MIN_LEVEL;
 
@@ -56,16 +56,16 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 	}
 
 	@Override
-	public int addPatternExp(CookingPattern pattern, int value){
+	public int addExp(CookingPattern pattern, int value){
 		int oldPoint = patternExp.get(pattern);
 		int newPoint = oldPoint + value;
 		this.patternExp.put(pattern, newPoint);
 
 		if(FPPatternExpCapability.pointToLevel(patternExp.get(pattern)) >= FPPatternExpCapability.MAX_LEVEL)
-			this.setPatternExpLevel(pattern, FPPatternExpCapability.MAX_LEVEL);
+			this.setExpLevel(pattern, FPPatternExpCapability.MAX_LEVEL);
 
 		if(FPPatternExpCapability.pointToLevel(patternExp.get(pattern)) <= FPPatternExpCapability.MIN_LEVEL)
-			this.setPatternExpLevel(pattern, FPPatternExpCapability.MIN_LEVEL);
+			this.setExpLevel(pattern, FPPatternExpCapability.MIN_LEVEL);
 
 		return this.patternExp.get(pattern) - oldPoint;
 	}
@@ -115,8 +115,8 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 			CompoundNBT nbt = new CompoundNBT();
 
 			CompoundNBT patternNBT = new CompoundNBT();
-			for(CookingPattern pattern : instance.getAllPatternExpLevel().keySet()){
-				patternNBT.putInt(pattern.getName(), instance.getPatternExpLevel(pattern));
+			for(CookingPattern pattern : instance.getAllExpLevel().keySet()){
+				patternNBT.putInt(pattern.getName(), instance.getExpLevel(pattern));
 			}
 			nbt.put("pattern_nbt", patternNBT);
 
@@ -130,7 +130,7 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 			if(nbt.contains("pattern_nbt")){
 				CompoundNBT patternNBT = (CompoundNBT)nbt.get("pattern_nbt");
 				for(String key : patternNBT.keySet()){
-					instance.setPatternExpLevel(CookingPatterns.getPatternByName(key), patternNBT.getInt(key));
+					instance.setExpLevel(CookingPatterns.getPatternByName(key), patternNBT.getInt(key));
 				}
 			}
 			return;

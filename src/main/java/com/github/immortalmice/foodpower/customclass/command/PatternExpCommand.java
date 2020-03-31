@@ -29,7 +29,7 @@ public class PatternExpCommand{
 					for(ServerPlayerEntity player : EntityArgument.getPlayers(context, "target")){
 						player.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
 							context.getSource().sendFeedback(new StringTextComponent("Player : " + player.getName().getUnformattedComponentText()), false);
-							context.getSource().sendFeedback(new StringTextComponent(PatternExpCommand.parsePatternExpOutput(capability.getAllPatternExpLevel())), false);
+							context.getSource().sendFeedback(new StringTextComponent(PatternExpCommand.parsePatternExpOutput(capability.getAllExpLevel())), false);
 						});
 					}
 					return Command.SINGLE_SUCCESS;
@@ -41,7 +41,7 @@ public class PatternExpCommand{
 						.then(Commands.argument("value", IntegerArgumentType.integer(0, 99)).executes((context) -> {
 							for(ServerPlayerEntity player : EntityArgument.getPlayers(context, "target")){
 								player.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
-									capability.setPatternExpLevel(CookingPatterns.getPatternByName(StringArgumentType.getString(context, "pattern"))
+									capability.setExpLevel(CookingPatterns.getPatternByName(StringArgumentType.getString(context, "pattern"))
 										, IntegerArgumentType.getInteger(context, "value"));
 								});
 							}
@@ -53,8 +53,8 @@ public class PatternExpCommand{
 				.then(Commands.literal("reset").executes((context) -> {
 					for(ServerPlayerEntity player : EntityArgument.getPlayers(context, "target")){
 						player.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
-							for(CookingPattern key : capability.getAllPatternExpLevel().keySet()){
-								capability.setPatternExpLevel(key, 0);
+							for(CookingPattern key : capability.getAllExpLevel().keySet()){
+								capability.setExpLevel(key, 0);
 							}
 							context.getSource().sendFeedback(new StringTextComponent("Success Set All PatternExp To 0."), false);
 						});

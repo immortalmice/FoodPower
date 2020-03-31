@@ -4,14 +4,15 @@ import java.util.Map;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 
+/* Capability about FoodPower's Pattern Exp */
 public interface IFPPatternExpCapability{
 
-	int getPatternExpLevel(CookingPattern pattern);
-	Map<CookingPattern, Integer> getAllPatternExpLevel();
+	int getExpLevel(CookingPattern pattern);
+	Map<CookingPattern, Integer> getAllExpLevel();
 
-	void setPatternExpLevel(CookingPattern pattern, int level);
+	void setExpLevel(CookingPattern pattern, int level);
 
 	/* You can override this to make your own conversion between level and value. Ex. 20 value for 1 level */
 	/* Return how many value actually add, can pass in negative value, and return might be negative */
-	int addPatternExp(CookingPattern pattern, int value);
+	int addExp(CookingPattern pattern, int value);
 }

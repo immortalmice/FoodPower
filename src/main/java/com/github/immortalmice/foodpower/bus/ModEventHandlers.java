@@ -32,8 +32,8 @@ public class ModEventHandlers{
 	@SubscribeEvent
 	public static void onCommonSetup(FMLCommonSetupEvent event){
 		ForgeEventHandlers.registAllEvent();
-		Messages.registAllMessage();
 		CapabilityHandler.registAllCapabilities();
+		Messages.registAllMessage();
 		BiomeHandler.setup();
 		EffectHandler.setup();
 	}

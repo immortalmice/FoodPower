@@ -70,7 +70,7 @@ public class Meal extends CookedFood{
         /* Give pattern exp to player when eaten */
         int expPoint = Meal.calculatePatternExpPoints(stack);
         entityLiving.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
-            capability.addPatternExp(CookingPatterns.getPatternByName(this.getFPName()), expPoint);
+            capability.addExp(CookingPatterns.getPatternByName(this.getFPName()), expPoint);
         });
 
 		return stack;
