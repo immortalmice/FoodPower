@@ -22,6 +22,8 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	private int windowId;
 	private ItemStack scroll;
 
+	private static final int LEVEL_REQUIRED = 15;
+
 	public RecipeTableMessage(int windowidIn, String actionIn, String messageIn){
 		this.windowId = windowidIn;
 		this.action = actionIn;
@@ -121,6 +123,9 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	}
 
 	private static void handleInitRecipeScroll(ServerPlayerEntity player, RecipeTableContainer container, ItemStack scroll){
+		if(!player.abilities.isCreativeMode && player.experienceLevel < RecipeTableMessage.LEVEL_REQUIRED)
+			return;
+
 		CookingPattern pattern = CookingPatterns.list.get(container.getIndex());
 		player.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
 			int rarity = 0;
@@ -154,6 +159,7 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 	        	RecipeScroll.initStack(scroll, rarity, serverWorld.rand.nextFloat() * 0.2f + 0.9f);
 	        	player.inventory.setItemStack(scroll);
 	        	player.updateHeldItem();
+	        	player.addExperienceLevel(RecipeTableMessage.LEVEL_REQUIRED * -1);
 	        	container.setScrollTaken();
 	        }
 		});
