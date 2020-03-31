@@ -1,10 +1,10 @@
-package com.github.immortalmice.foodpower.customclass.capability;
+package com.github.immortalmice.foodpower.customclass.capability.interfaces;
 
 import java.util.Map;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 
-public interface IExpCapability{
+public interface IFPPatternExpCapability{
 
 	int getPatternExpLevel(CookingPattern pattern);
 	Map<CookingPattern, Integer> getAllPatternExpLevel();

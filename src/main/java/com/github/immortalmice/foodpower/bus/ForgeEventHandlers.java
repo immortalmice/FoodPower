@@ -16,8 +16,8 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.capability.ExpCapability;
-import com.github.immortalmice.foodpower.customclass.capability.IExpCapability;
+import com.github.immortalmice.foodpower.customclass.capability.classes.FPPatternExpCapability;
+import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPPatternExpCapability;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 
@@ -50,7 +50,7 @@ public class ForgeEventHandlers{
 	@SubscribeEvent
 	public static void addCapabilities(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject() instanceof PlayerEntity){
-			event.addCapability(new ResourceLocation(FoodPower.MODID, "exp_capability"), new ExpCapability.Provider());
+			event.addCapability(new ResourceLocation(FoodPower.MODID, "exp_capability"), new FPPatternExpCapability.Provider());
 		}
 	}
 
@@ -59,7 +59,7 @@ public class ForgeEventHandlers{
 		/* Copy capability data to new player */
 		event.getOriginal().getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((old_cap) -> {
 			event.getPlayer().getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((new_cap) -> {
-				IStorage<IExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();
+				IStorage<IFPPatternExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();
 
 				CompoundNBT nbt = (CompoundNBT) storage.writeNBT(Capabilities.EXP_CAPABILITY, old_cap, null);
 				storage.readNBT(Capabilities.EXP_CAPABILITY, new_cap, null, nbt);

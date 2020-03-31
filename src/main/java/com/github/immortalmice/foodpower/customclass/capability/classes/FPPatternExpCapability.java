@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.capability;
+package com.github.immortalmice.foodpower.customclass.capability.classes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,11 +12,12 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
+import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPPatternExpCapability;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 /* Capability about FoodPower's Pattern Exp & Flavor Exp */
-public class ExpCapability implements IExpCapability{
+public class FPPatternExpCapability implements IFPPatternExpCapability{
 	private Map<CookingPattern, Integer> patternExp = new HashMap<>();
 
 	/* Every level reqired (BASE * POWER ^ level) points */
@@ -26,7 +27,7 @@ public class ExpCapability implements IExpCapability{
 	private static int MAX_LEVEL = 99;
 	private static int MIN_LEVEL = 0;
 
-	public ExpCapability(){
+	public FPPatternExpCapability(){
 		for(CookingPattern pattern : CookingPatterns.list){
 			this.patternExp.put(pattern, 0);
 		}
@@ -34,24 +35,24 @@ public class ExpCapability implements IExpCapability{
 
 	@Override
 	public int getPatternExpLevel(CookingPattern patternIn){
-		return ExpCapability.pointToLevel(this.patternExp.get(patternIn));
+		return FPPatternExpCapability.pointToLevel(this.patternExp.get(patternIn));
 	}
 
 	@Override
 	public Map<CookingPattern, Integer> getAllPatternExpLevel(){
 		Map<CookingPattern, Integer> map = new HashMap<>();
 		for(CookingPattern pattern : this.patternExp.keySet()){
-			map.put(pattern, ExpCapability.pointToLevel(this.patternExp.get(pattern)));
+			map.put(pattern, FPPatternExpCapability.pointToLevel(this.patternExp.get(pattern)));
 		}
 		return map;
 	}
 
 	@Override
 	public void setPatternExpLevel(CookingPattern pattern, int level){
-		if(level > ExpCapability.MAX_LEVEL) level = ExpCapability.MAX_LEVEL;
-		if(level < ExpCapability.MIN_LEVEL) level = ExpCapability.MIN_LEVEL;
+		if(level > FPPatternExpCapability.MAX_LEVEL) level = FPPatternExpCapability.MAX_LEVEL;
+		if(level < FPPatternExpCapability.MIN_LEVEL) level = FPPatternExpCapability.MIN_LEVEL;
 
-		this.patternExp.put(pattern, ExpCapability.levelToPoint(level, 0));
+		this.patternExp.put(pattern, FPPatternExpCapability.levelToPoint(level, 0));
 	}
 
 	@Override
@@ -60,11 +61,11 @@ public class ExpCapability implements IExpCapability{
 		int newPoint = oldPoint + value;
 		this.patternExp.put(pattern, newPoint);
 
-		if(ExpCapability.pointToLevel(patternExp.get(pattern)) >= ExpCapability.MAX_LEVEL)
-			this.setPatternExpLevel(pattern, ExpCapability.MAX_LEVEL);
+		if(FPPatternExpCapability.pointToLevel(patternExp.get(pattern)) >= FPPatternExpCapability.MAX_LEVEL)
+			this.setPatternExpLevel(pattern, FPPatternExpCapability.MAX_LEVEL);
 
-		if(ExpCapability.pointToLevel(patternExp.get(pattern)) <= ExpCapability.MIN_LEVEL)
-			this.setPatternExpLevel(pattern, ExpCapability.MIN_LEVEL);
+		if(FPPatternExpCapability.pointToLevel(patternExp.get(pattern)) <= FPPatternExpCapability.MIN_LEVEL)
+			this.setPatternExpLevel(pattern, FPPatternExpCapability.MIN_LEVEL);
 
 		return this.patternExp.get(pattern) - oldPoint;
 	}
@@ -72,19 +73,19 @@ public class ExpCapability implements IExpCapability{
 	/* Convert exp point to level */
 	private static int pointToLevel(int value){
 		if(value != 0)
-			return (int) Math.floor(Math.log(1 - ((value * (1 - ExpCapability.POWER)) / ExpCapability.BASE)) / Math.log(ExpCapability.POWER));
+			return (int) Math.floor(Math.log(1 - ((value * (1 - FPPatternExpCapability.POWER)) / FPPatternExpCapability.BASE)) / Math.log(FPPatternExpCapability.POWER));
 		else
 			return 0;
 	}
 
 	/* Convert level to exp point */
 	private static int levelToPoint(int level, int remaining){
-		return (int) Math.ceil(((Math.pow(ExpCapability.POWER, level) - 1) * ExpCapability.BASE) / (ExpCapability.POWER - 1)) + remaining;
+		return (int) Math.ceil(((Math.pow(FPPatternExpCapability.POWER, level) - 1) * FPPatternExpCapability.BASE) / (FPPatternExpCapability.POWER - 1)) + remaining;
 	}
 
 	public static class Provider implements ICapabilitySerializable<CompoundNBT>{
-		private LazyOptional<IExpCapability> instance = LazyOptional.of(Capabilities.EXP_CAPABILITY::getDefaultInstance);
-		private IStorage<IExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();
+		private LazyOptional<IFPPatternExpCapability> instance = LazyOptional.of(Capabilities.EXP_CAPABILITY::getDefaultInstance);
+		private IStorage<IFPPatternExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();
 		@Override
 		public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
 			if(cap == Capabilities.EXP_CAPABILITY){
@@ -108,9 +109,9 @@ public class ExpCapability implements IExpCapability{
 		}
 	}
 	
-	public static class Storage implements Capability.IStorage<IExpCapability>{
+	public static class Storage implements Capability.IStorage<IFPPatternExpCapability>{
 		@Override
-		public INBT writeNBT(Capability<IExpCapability> capability, IExpCapability instance, Direction side){
+		public INBT writeNBT(Capability<IFPPatternExpCapability> capability, IFPPatternExpCapability instance, Direction side){
 			CompoundNBT nbt = new CompoundNBT();
 
 			CompoundNBT patternNBT = new CompoundNBT();
@@ -123,7 +124,7 @@ public class ExpCapability implements IExpCapability{
 		}
 
 		@Override
-		public void readNBT(Capability<IExpCapability> capability, IExpCapability instance, Direction side, INBT nbtIn){
+		public void readNBT(Capability<IFPPatternExpCapability> capability, IFPPatternExpCapability instance, Direction side, INBT nbtIn){
 			CompoundNBT nbt = (CompoundNBT)nbtIn;
 			
 			if(nbt.contains("pattern_nbt")){

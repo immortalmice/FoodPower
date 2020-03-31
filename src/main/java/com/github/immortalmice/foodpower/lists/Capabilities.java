@@ -3,9 +3,9 @@ package com.github.immortalmice.foodpower.lists;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
-import com.github.immortalmice.foodpower.customclass.capability.IExpCapability;
+import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPPatternExpCapability;
 
 public class Capabilities{
-	@CapabilityInject(IExpCapability.class)
-	public static final Capability<IExpCapability> EXP_CAPABILITY = null;
+	@CapabilityInject(IFPPatternExpCapability.class)
+	public static final Capability<IFPPatternExpCapability> EXP_CAPABILITY = null;
 }

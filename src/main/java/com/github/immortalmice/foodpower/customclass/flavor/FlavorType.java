@@ -15,6 +15,7 @@ public class FlavorType{
 		FlavorTypes.list.add(this);
 	}
 
+	/* If oppositeFlavor is already set, skip everything */
 	public void setOppositeFlavor(FlavorType flavorIn){
 		if(this.isOppositeSet || flavorIn.isOppositeSet)
 			return;
@@ -34,7 +35,7 @@ public class FlavorType{
 
 	public boolean equals(Object flavorIn){
 		if(flavorIn instanceof FlavorType){
-			return this.name == ((FlavorType)flavorIn).getName();
+			return this.name.equals(((FlavorType)flavorIn).getName());
 		}
 		return false;
 	}
