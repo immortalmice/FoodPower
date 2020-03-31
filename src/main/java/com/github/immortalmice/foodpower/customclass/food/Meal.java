@@ -95,17 +95,18 @@ public class Meal extends CookedFood{
     		patternStr += TooltipUtil.translate("general.foodpower.none");
     	}
     	tooltipHelper.add(patternStr);
-        tooltipHelper.newBlankRow();
 
         /* Whether player press down shift key or not */
         boolean moreInfo = Screen.hasShiftDown();
         if(!moreInfo){
+            tooltipHelper.newBlankRow();
             tooltipHelper.addTranslate("message.foodpower.tooltip_more_info"
                 , (new Style()).setItalic(true).setColor(TextFormatting.GRAY));
             return;
         }
 
     	if(nbt.contains("ingredients")){
+            tooltipHelper.newBlankRow();
     		tooltipHelper.addTranslate("general.foodpower.ingredients");
     		ListNBT list = (ListNBT)nbt.get("ingredients");
     		for(int i = 0; i <= list.size()-1; i ++){
@@ -116,10 +117,9 @@ public class Meal extends CookedFood{
     		}
     	}
 
-        tooltipHelper.newBlankRow();
-
         int patternExp = Meal.calculatePatternExpPoints(stack);
         if(patternExp != 0 && nbt.contains("pattern")){
+            tooltipHelper.newBlankRow();
             tooltipHelper.addTranslate("message.foodpower.tooltip_exp_title");
             tooltipHelper.addWithLeftSpace(TooltipUtil.translate("pattern.foodpower." + nbt.getString("pattern")) + " : " + patternExp);
         }

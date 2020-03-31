@@ -1,0 +1,45 @@
+package com.github.immortalmice.foodpower.customclass.flavor;
+
+import javax.annotation.Nullable;
+
+import com.github.immortalmice.foodpower.lists.FlavorTypes;
+
+public class FlavorType{
+	private String name;
+	private FlavorType oppositeFlavor;
+	private boolean isOppositeSet = false;
+
+	public FlavorType(String nameIn){
+		this.name = nameIn;
+
+		FlavorTypes.list.add(this);
+	}
+
+	public void setOppositeFlavor(FlavorType flavorIn){
+		if(this.isOppositeSet || flavorIn.isOppositeSet)
+			return;
+		this.oppositeFlavor = flavorIn;
+		this.isOppositeSet = true;
+		flavorIn.setOppositeFlavor(this);
+	}
+
+	@Nullable
+	public FlavorType getOppositeFlavor(FlavorType flavorIn){
+		return this.oppositeFlavor;
+	}
+
+	public String getName(){
+		return this.name;
+	}
+
+	public boolean equals(Object flavorIn){
+		if(flavorIn instanceof FlavorType){
+			return this.name == ((FlavorType)flavorIn).getName();
+		}
+		return false;
+	}
+
+	public boolean isOpposite(FlavorType flavorIn){
+		return this.oppositeFlavor.equals(flavorIn);
+	}
+}

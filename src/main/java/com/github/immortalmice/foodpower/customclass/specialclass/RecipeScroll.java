@@ -169,17 +169,18 @@ public class RecipeScroll extends ItemBase{
         if(nbt.contains("output_amount")){
             tooltipHelper.addTranslate("message.foodpower.output_amount", nbt.getInt("output_amount"));
         }
-        tooltipHelper.newBlankRow();
 
         /* Whether player press down shift key or not */
         boolean moreInfo = Screen.hasShiftDown();
         if(!moreInfo){
+            tooltipHelper.newBlankRow();
             tooltipHelper.addTranslate("message.foodpower.tooltip_more_info"
                 , (new Style()).setItalic(true).setColor(TextFormatting.GRAY));
             return;
         }
 
     	if(nbt.contains("ingredients")){
+            tooltipHelper.newBlankRow();
     		tooltipHelper.addTranslate("general.foodpower.ingredients");
     		ListNBT list = (ListNBT)nbt.get("ingredients");
     		for(int i = 0; i <= list.size()-1; i ++){

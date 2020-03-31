@@ -8,7 +8,7 @@ public class ItemBase extends Item{
 	private String name;
 
 	public ItemBase(String nameIn, Item.Properties propertiesIn){
-		super(propertiesIn);
+		super(propertiesIn.group(FPCreativeTabs.ITEM_TAB));
 
 		this.name = nameIn;
 	}

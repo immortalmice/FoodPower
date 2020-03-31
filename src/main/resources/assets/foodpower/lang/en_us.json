@@ -196,6 +196,7 @@
 
     "_comment": "General",
     "general.foodpower.food_type": "Food Type",
+    "general.foodpower.flavor_type": "Flavor Type",
     "general.foodpower.cooking_pattern": "Cooking Pattern",
     "general.foodpower.meal": "Meal",
     "general.foodpower.ingredient": "Ingredient",
@@ -223,6 +224,17 @@
     "food_type.foodpower.vegetable": "§aVegetable",
     "food_type.foodpower.sweet": "§dSweet",
     "food_type.foodpower.seasoning": "§9Seasoning",
+
+    "_comment": "Flavor Type",
+    "flavor_type.foodpower.none": "§7None",
+    "flavor_type.foodpower.sweet": "§dSweet",
+    "flavor_type.foodpower.bitter": "§8Bitter",
+    "flavor_type.foodpower.sour": "§eSour",
+    "flavor_type.foodpower.salty": "§3Salty",
+    "flavor_type.foodpower.hot": "§cHot",
+    "flavor_type.foodpower.ice": "§bIce",
+    "flavor_type.foodpower.nether": "§4Nether",
+    "flavor_type.foodpower.ender": "§5Ender",
 
     "_comment": "Message",
     "message.foodpower.give_food": "Get Finished Meal",

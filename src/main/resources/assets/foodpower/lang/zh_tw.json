@@ -196,6 +196,7 @@
 
     "_comment": "全域名字",
     "general.foodpower.food_type": "食物種類",
+    "general.foodpower.flavor_type": "風味種類",
     "general.foodpower.cooking_pattern": "料理樣板",
     "general.foodpower.meal": "料理",
     "general.foodpower.ingredient": "食材",
@@ -223,6 +224,17 @@
     "food_type.foodpower.vegetable": "§a蔬菜",
     "food_type.foodpower.sweet": "§d甜食",
     "food_type.foodpower.seasoning": "§9醬料",
+
+    "_comment": "風味種類",
+    "flavor_type.foodpower.none": "§7無",
+    "flavor_type.foodpower.sweet": "§d甜",
+    "flavor_type.foodpower.bitter": "§8苦",
+    "flavor_type.foodpower.sour": "§e酸",
+    "flavor_type.foodpower.salty": "§3鹹",
+    "flavor_type.foodpower.hot": "§c辣",
+    "flavor_type.foodpower.ice": "§b冰",
+    "flavor_type.foodpower.nether": "§4地獄",
+    "flavor_type.foodpower.ender": "§5終界",
 
     "_comment": "Message",
     "message.foodpower.give_food": "獲得料理成品",
