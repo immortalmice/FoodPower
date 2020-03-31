@@ -38,6 +38,7 @@ public class CookingPattern{
 	public boolean isNotEmpty(){
 		return this.name != "EMPTY PATTERN";
 	}
+	
 	/* Filter ingrients need to display on recipe table or not */
 	private void init(){
 		for(int i = 0; i <= steps.size()-1; i ++){

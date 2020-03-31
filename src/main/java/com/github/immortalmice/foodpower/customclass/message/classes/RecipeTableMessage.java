@@ -127,7 +127,7 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 			return;
 
 		CookingPattern pattern = CookingPatterns.list.get(container.getIndex());
-		player.getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((capability) -> {
+		player.getCapability(Capabilities.PATTERN_EXP_CAPABILITY, null).ifPresent((capability) -> {
 			int rarity = 0;
 			int level = capability.getExpLevel(pattern);
 			ServerWorld serverWorld = player.getServerWorld();

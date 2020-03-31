@@ -16,7 +16,9 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 import com.github.immortalmice.foodpower.FoodPower;
+import com.github.immortalmice.foodpower.customclass.capability.classes.FPFlavorExpCapability;
 import com.github.immortalmice.foodpower.customclass.capability.classes.FPPatternExpCapability;
+import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPFlavorExpCapability;
 import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPPatternExpCapability;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
@@ -51,18 +53,28 @@ public class ForgeEventHandlers{
 	public static void addCapabilities(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject() instanceof PlayerEntity){
 			event.addCapability(new ResourceLocation(FoodPower.MODID, "pattern_exp_capability"), new FPPatternExpCapability.Provider());
+			event.addCapability(new ResourceLocation(FoodPower.MODID, "flavor_exp_capability"), new FPFlavorExpCapability.Provider());
 		}
 	}
 
 	@SubscribeEvent
 	public static void onPlayerClone(PlayerEvent.Clone event){
 		/* Copy capability data to new player */
-		event.getOriginal().getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((old_cap) -> {
-			event.getPlayer().getCapability(Capabilities.EXP_CAPABILITY, null).ifPresent((new_cap) -> {
-				IStorage<IFPPatternExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();
+		event.getOriginal().getCapability(Capabilities.PATTERN_EXP_CAPABILITY, null).ifPresent((old_cap) -> {
+			event.getPlayer().getCapability(Capabilities.PATTERN_EXP_CAPABILITY, null).ifPresent((new_cap) -> {
+				IStorage<IFPPatternExpCapability> storage = Capabilities.PATTERN_EXP_CAPABILITY.getStorage();
 
-				CompoundNBT nbt = (CompoundNBT) storage.writeNBT(Capabilities.EXP_CAPABILITY, old_cap, null);
-				storage.readNBT(Capabilities.EXP_CAPABILITY, new_cap, null, nbt);
+				CompoundNBT nbt = (CompoundNBT) storage.writeNBT(Capabilities.PATTERN_EXP_CAPABILITY, old_cap, null);
+				storage.readNBT(Capabilities.PATTERN_EXP_CAPABILITY, new_cap, null, nbt);
+			});
+		});
+
+		event.getOriginal().getCapability(Capabilities.FLAVOR_EXP_CAPABILITY, null).ifPresent((old_cap) -> {
+			event.getPlayer().getCapability(Capabilities.FLAVOR_EXP_CAPABILITY, null).ifPresent((new_cap) -> {
+				IStorage<IFPFlavorExpCapability> storage = Capabilities.FLAVOR_EXP_CAPABILITY.getStorage();
+
+				CompoundNBT nbt = (CompoundNBT) storage.writeNBT(Capabilities.FLAVOR_EXP_CAPABILITY, old_cap, null);
+				storage.readNBT(Capabilities.FLAVOR_EXP_CAPABILITY, new_cap, null, nbt);
 			});
 		});
 	}

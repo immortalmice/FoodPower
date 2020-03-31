@@ -3,8 +3,8 @@ package com.github.immortalmice.foodpower.customclass.capability.classes;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
@@ -21,8 +21,8 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 public class FPPatternExpCapability implements IFPPatternExpCapability{
 	private Map<CookingPattern, Integer> patternExp = new HashMap<>();
 
-	private static int MAX_LEVEL = 99;
-	private static int MIN_LEVEL = 0;
+	public static final int MAX_LEVEL = 99;
+	public static final int MIN_LEVEL = 0;
 
 	public FPPatternExpCapability(){
 		for(CookingPattern pattern : CookingPatterns.list){
@@ -32,7 +32,10 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 
 	@Override
 	public int getExpLevel(CookingPattern patternIn){
-		return LevelPointConverter.PATTERN_CONVERTER.pointToLevel(this.patternExp.get(patternIn));
+		if(this.patternExp.containsKey(patternIn)){
+			return LevelPointConverter.PATTERN_CONVERTER.pointToLevel(this.patternExp.get(patternIn));
+		}
+		return 0;
 	}
 
 	@Override
@@ -53,26 +56,29 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 	}
 
 	@Override
-	public int addExp(CookingPattern pattern, int value){
-		int oldPoint = patternExp.get(pattern);
-		int newPoint = oldPoint + value;
-		this.patternExp.put(pattern, newPoint);
+	public int addExp(CookingPattern patternIn, int value){
+		if(this.patternExp.containsKey(patternIn)){
+			int oldPoint = this.patternExp.get(patternIn);
+			int newPoint = oldPoint + value;
+			this.patternExp.put(patternIn, newPoint);
 
-		if(LevelPointConverter.PATTERN_CONVERTER.pointToLevel(patternExp.get(pattern)) >= FPPatternExpCapability.MAX_LEVEL)
-			this.setExpLevel(pattern, FPPatternExpCapability.MAX_LEVEL);
+			if(LevelPointConverter.PATTERN_CONVERTER.pointToLevel(this.patternExp.get(patternIn)) >= FPPatternExpCapability.MAX_LEVEL)
+				this.setExpLevel(patternIn, FPPatternExpCapability.MAX_LEVEL);
 
-		if(LevelPointConverter.PATTERN_CONVERTER.pointToLevel(patternExp.get(pattern)) <= FPPatternExpCapability.MIN_LEVEL)
-			this.setExpLevel(pattern, FPPatternExpCapability.MIN_LEVEL);
+			if(LevelPointConverter.PATTERN_CONVERTER.pointToLevel(this.patternExp.get(patternIn)) <= FPPatternExpCapability.MIN_LEVEL)
+				this.setExpLevel(patternIn, FPPatternExpCapability.MIN_LEVEL);
 
-		return this.patternExp.get(pattern) - oldPoint;
+			return this.patternExp.get(patternIn) - oldPoint;
+		}
+		return 0;
 	}
 
 	public static class Provider implements ICapabilitySerializable<CompoundNBT>{
-		private LazyOptional<IFPPatternExpCapability> instance = LazyOptional.of(Capabilities.EXP_CAPABILITY::getDefaultInstance);
-		private IStorage<IFPPatternExpCapability> storage = Capabilities.EXP_CAPABILITY.getStorage();
+		private LazyOptional<IFPPatternExpCapability> instance = LazyOptional.of(Capabilities.PATTERN_EXP_CAPABILITY::getDefaultInstance);
+		private IStorage<IFPPatternExpCapability> storage = Capabilities.PATTERN_EXP_CAPABILITY.getStorage();
 		@Override
 		public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-			if(cap == Capabilities.EXP_CAPABILITY){
+			if(cap == Capabilities.PATTERN_EXP_CAPABILITY){
 				return this.instance.cast();
 			}
 			return LazyOptional.empty();
@@ -80,14 +86,14 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 		@Override
 		public CompoundNBT serializeNBT() {
 			if(instance.isPresent()){
-				return (CompoundNBT) storage.writeNBT(Capabilities.EXP_CAPABILITY, this.instance.orElse(null), null);
+				return (CompoundNBT) storage.writeNBT(Capabilities.PATTERN_EXP_CAPABILITY, this.instance.orElse(null), null);
 			}
 			return new CompoundNBT();
 		}
 		@Override
 		public void deserializeNBT(CompoundNBT nbt) {
 			instance.ifPresent((capability) -> {
-				storage.readNBT(Capabilities.EXP_CAPABILITY, capability, null, nbt);
+				storage.readNBT(Capabilities.PATTERN_EXP_CAPABILITY, capability, null, nbt);
 			});
 			return;
 		}
