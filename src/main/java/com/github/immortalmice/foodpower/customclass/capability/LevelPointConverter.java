@@ -6,7 +6,7 @@ public class LevelPointConverter{
 	private final float power;
 
 	public static LevelPointConverter PATTERN_CONVERTER = new LevelPointConverter(10, 1.1f);
-	public static LevelPointConverter FLAVOR_CONVERTER = new LevelPointConverter(10, 1.1f);
+	public static LevelPointConverter FLAVOR_CONVERTER = new LevelPointConverter(5, 1.1f);
 
 	private LevelPointConverter(int baseIn, float powerIn){
 		this.base = baseIn;

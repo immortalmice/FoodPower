@@ -49,6 +49,8 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 
 	@Override
 	public void setExpLevel(CookingPattern pattern, int level){
+		if(pattern == null) return;
+
 		if(level > FPPatternExpCapability.MAX_LEVEL) level = FPPatternExpCapability.MAX_LEVEL;
 		if(level < FPPatternExpCapability.MIN_LEVEL) level = FPPatternExpCapability.MIN_LEVEL;
 
@@ -57,7 +59,7 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 
 	@Override
 	public int addExp(CookingPattern patternIn, int value){
-		if(this.patternExp.containsKey(patternIn)){
+		if(patternIn != null && this.patternExp.containsKey(patternIn)){
 			int oldPoint = this.patternExp.get(patternIn);
 			int newPoint = oldPoint + value;
 			this.patternExp.put(patternIn, newPoint);
@@ -106,6 +108,7 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 
 			CompoundNBT patternNBT = new CompoundNBT();
 			for(CookingPattern pattern : instance.getAllExpLevel().keySet()){
+				if(pattern == null) continue;
 				patternNBT.putInt(pattern.getName(), instance.getExpLevel(pattern));
 			}
 			nbt.put("pattern_nbt", patternNBT);
@@ -120,7 +123,9 @@ public class FPPatternExpCapability implements IFPPatternExpCapability{
 			if(nbt.contains("pattern_nbt")){
 				CompoundNBT patternNBT = (CompoundNBT)nbt.get("pattern_nbt");
 				for(String key : patternNBT.keySet()){
-					instance.setExpLevel(CookingPatterns.getPatternByName(key), patternNBT.getInt(key));
+					CookingPattern pattern = CookingPatterns.getPatternByName(key);
+					if(pattern == null) continue;
+					instance.setExpLevel(pattern, patternNBT.getInt(key));
 				}
 			}
 			return;

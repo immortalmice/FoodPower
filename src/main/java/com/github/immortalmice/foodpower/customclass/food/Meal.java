@@ -1,6 +1,9 @@
 package com.github.immortalmice.foodpower.customclass.food;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.client.gui.screen.Screen;
@@ -19,11 +22,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
+import com.github.immortalmice.foodpower.customclass.flavor.FlavorType;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
+import com.github.immortalmice.foodpower.lists.FlavorTypes;
 import com.github.immortalmice.foodpower.lists.Ingredients;
+import com.mojang.datafixers.util.Pair;
 
 /* The final product you get! It will give you power! */
 public class Meal extends CookedFood{
@@ -44,6 +51,8 @@ public class Meal extends CookedFood{
 				mealNBT.putString("displayName", scrollNBT.getString("displayName"));
 				mealNBT.put("ingredients", scrollNBT.get("ingredients").copy());
 				result.setTag(mealNBT);
+
+                Meal.calculateAndAssignExpPoints(result);
 
 				return result;
 			}
@@ -67,11 +76,28 @@ public class Meal extends CookedFood{
     		}
 		}
 
-        /* Give pattern exp to player when eaten */
-        int expPoint = Meal.calculatePatternExpPoints(stack);
-        entityLiving.getCapability(Capabilities.PATTERN_EXP_CAPABILITY, null).ifPresent((capability) -> {
-            capability.addExp(CookingPatterns.getPatternByName(this.getFPName()), expPoint);
-        });
+        Pair<String, Integer> patternExp = Meal.getPatternExp(stackIn);
+        if(patternExp != null){
+            CookingPattern pattern = CookingPatterns.getPatternByName(patternExp.getFirst());
+            if(pattern != null){
+                entityLiving.getCapability(Capabilities.PATTERN_EXP_CAPABILITY, null).ifPresent((capability) -> {
+                    capability.addExp(pattern, patternExp.getSecond());
+                });
+            }
+        }
+
+        Map<String, Integer> flavorExp = Meal.getFlavorExp(stackIn);
+
+        if(flavorExp.size() > 0){
+            entityLiving.getCapability(Capabilities.FLAVOR_EXP_CAPABILITY, null).ifPresent((capability) -> {
+                for(String key : flavorExp.keySet()){
+                    FlavorType flavor = FlavorTypes.getFlavorByName(key);
+                    if(flavor != null){
+                        capability.addExp(flavor, flavorExp.get(key));
+                    }
+                }
+            });
+        }
 
 		return stack;
 	}
@@ -117,11 +143,25 @@ public class Meal extends CookedFood{
     		}
     	}
 
-        int patternExp = Meal.calculatePatternExpPoints(stack);
-        if(patternExp != 0 && nbt.contains("pattern")){
+        Pair<String, Integer> patternExp = Meal.getPatternExp(stack);
+        boolean hasPatternExp = patternExp != null;
+
+        Map<String, Integer> flavorExp = Meal.getFlavorExp(stack);
+        boolean hasFlavorExp =  flavorExp.size() > 0;
+        
+        if(hasPatternExp || hasFlavorExp){
             tooltipHelper.newBlankRow();
             tooltipHelper.addTranslate("message.foodpower.tooltip_exp_title");
-            tooltipHelper.addWithLeftSpace(TooltipUtil.translate("pattern.foodpower." + nbt.getString("pattern")) + " : " + patternExp);
+        }
+
+        if(hasPatternExp){
+            tooltipHelper.addWithLeftSpace(TooltipUtil.translate("pattern.foodpower." + patternExp.getFirst()) + " : " + patternExp.getSecond());
+        }
+
+        if(hasFlavorExp){
+            for(String key : flavorExp.keySet()){
+                tooltipHelper.addWithLeftSpace(TooltipUtil.translate("flavor_type.foodpower." + key) + " : " + flavorExp.get(key));
+            }
         }
     }
 
@@ -142,18 +182,75 @@ public class Meal extends CookedFood{
         return I18n.format("item.foodpower." + this.getFPName());
     }
 
-    private static int calculatePatternExpPoints(ItemStack stack){
-        int point = 0;
-        if(stack.getItem() instanceof Meal){
-            CompoundNBT mealNBT = stack.hasTag() ? stack.getTag() : new CompoundNBT();
-            if(mealNBT.contains("ingredients")){
-                ListNBT list = (ListNBT)mealNBT.get("ingredients");
-                for(int i = 0; i <= list.size()-1; i ++){
-                    CompoundNBT element = (CompoundNBT) list.get(i);
-                    point += 10 * (element.contains("level") ? element.getInt("level") : 0);
-                }
+    /* In general, this map should have size in 1 or 0 only */
+    @Nullable
+    private static Pair<String, Integer> getPatternExp(ItemStack stack){
+        if(stack.hasTag() && stack.getTag().contains("pattern_exp")){
+            CompoundNBT nbt = (CompoundNBT)stack.getTag().get("pattern_exp");
+            String[] keys = nbt.keySet().toArray(new String[0]);
+            Pair<String, Integer> pair = new Pair<String, Integer>(keys[0], nbt.getInt(keys[0]));
+            return pair;
+        }
+        return null;
+    }
+
+    private static Map<String, Integer> getFlavorExp(ItemStack stack){
+        Map<String, Integer> map = new HashMap<>();
+
+        if(stack.hasTag() && stack.getTag().contains("flavor_exp")){
+            CompoundNBT nbt = (CompoundNBT)stack.getTag().get("flavor_exp");
+            String[] keys = nbt.keySet().toArray(new String[0]);
+            for(String key : keys){
+                map.put(key, nbt.getInt(key));
             }
         }
-        return point;
+        return map;
+    }
+
+    /* Calculate Pattern & Flavor Exp And Assign To NBT */
+    private static void calculateAndAssignExpPoints(ItemStack stack){
+        if(stack.getItem() instanceof Meal && stack.hasTag() && stack.getTag().contains("ingredients")){
+            CompoundNBT nbt = stack.getTag();
+            ListNBT list = (ListNBT) nbt.get("ingredients");
+            int patternPoint = 0;
+            Map<FlavorType, Integer> flavorExpMap = new HashMap<>();
+            for(int i = 0; i <= list.size()-1; i ++){
+                CompoundNBT element = (CompoundNBT) list.get(i);
+                if(element.contains("name")){
+                    Ingredient ingredient = Ingredients.getIngredientByName(element.getString("name"));
+                    if(!ingredient.isEmpty()){
+                        int level = element.contains("level") ? element.getInt("level") : 0;
+                        /* Pattern Exp Point */
+                        patternPoint += 10 * level;
+                        /* Flavor Exp Point */
+                        FlavorType flavor = ingredient.getFlavorType();
+                        if(flavor.equals(FlavorTypes.NONE)) continue;
+
+                        int currentFlavorPoint = flavorExpMap.containsKey(flavor) ? flavorExpMap.get(flavor) : 0;
+                        flavorExpMap.put(flavor, currentFlavorPoint + 10 * level);
+                    }
+                }
+            }
+            /* Filter Opposite Flavor */
+            flavorExpMap.entrySet().removeIf((entry) -> {
+                FlavorType flavor = entry.getKey();
+                return flavorExpMap.containsKey(flavor.getOppositeFlavor())
+                    && flavorExpMap.get(flavor.getOppositeFlavor()) >= flavorExpMap.get(flavor);
+            });
+
+            if(nbt.contains("pattern") && patternPoint != 0){
+                CompoundNBT patternExpNBT = new CompoundNBT();
+                patternExpNBT.putInt(nbt.getString("pattern"), patternPoint);
+                nbt.put("pattern_exp", patternExpNBT);
+            }
+
+            if(flavorExpMap.size() > 0){
+                CompoundNBT flavorExpNBT = new CompoundNBT();
+                for(FlavorType flavor : flavorExpMap.keySet()){
+                    flavorExpNBT.putInt(flavor.getName(), flavorExpMap.get(flavor));
+                }
+                nbt.put("flavor_exp", flavorExpNBT);
+            }
+        }
     }
 }

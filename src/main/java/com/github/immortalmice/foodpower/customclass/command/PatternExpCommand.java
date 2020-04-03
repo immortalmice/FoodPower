@@ -42,11 +42,13 @@ public class PatternExpCommand{
 						.then(Commands.argument("value", IntegerArgumentType.integer(FPPatternExpCapability.MIN_LEVEL, FPPatternExpCapability.MAX_LEVEL)).executes((context) -> {
 							for(ServerPlayerEntity player : EntityArgument.getPlayers(context, "target")){
 								player.getCapability(Capabilities.PATTERN_EXP_CAPABILITY, null).ifPresent((capability) -> {
-									capability.setExpLevel(CookingPatterns.getPatternByName(StringArgumentType.getString(context, "pattern"))
+									CookingPattern pattern = CookingPatterns.getPatternByName(StringArgumentType.getString(context, "pattern"));
+									if(pattern == null) return;
+									capability.setExpLevel(pattern
 										, IntegerArgumentType.getInteger(context, "value"));
+										context.getSource().sendFeedback(new StringTextComponent(player.getName().getString() + " : Success"), false);
 								});
 							}
-							context.getSource().sendFeedback(new StringTextComponent("Success"), false);
 							return Command.SINGLE_SUCCESS;
 						}))
 					)

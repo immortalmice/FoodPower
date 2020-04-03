@@ -45,11 +45,13 @@ public class FlavorExpCommand{
 						.then(Commands.argument("value", IntegerArgumentType.integer(FPFlavorExpCapability.MIN_LEVEL, FPFlavorExpCapability.MAX_LEVEL)).executes((context) -> {
 							for(ServerPlayerEntity player : EntityArgument.getPlayers(context, "target")){
 								player.getCapability(Capabilities.FLAVOR_EXP_CAPABILITY, null).ifPresent((capability) -> {
-									capability.setExpLevel(FlavorTypes.getFlavorByName(StringArgumentType.getString(context, "pattern"))
+									FlavorType flavor = FlavorTypes.getFlavorByName(StringArgumentType.getString(context, "pattern"));
+									if(flavor == null) return;
+									capability.setExpLevel(flavor
 										, IntegerArgumentType.getInteger(context, "value"));
+									context.getSource().sendFeedback(new StringTextComponent(player.getName().getString() + " : Success"), false);
 								});
 							}
-							context.getSource().sendFeedback(new StringTextComponent("Success"), false);
 							return Command.SINGLE_SUCCESS;
 						}))
 					)

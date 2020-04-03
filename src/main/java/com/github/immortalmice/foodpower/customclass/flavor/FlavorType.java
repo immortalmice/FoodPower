@@ -25,7 +25,7 @@ public class FlavorType{
 	}
 
 	@Nullable
-	public FlavorType getOppositeFlavor(FlavorType flavorIn){
+	public FlavorType getOppositeFlavor(){
 		return this.oppositeFlavor;
 	}
 

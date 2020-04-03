@@ -21,6 +21,7 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 	private Map<FlavorType, Integer> flavorExp = new HashMap<>();
 
 	public static final int MAX_LEVEL = 99;
+	public static final int CEIL_LEVEL = 95;
 	public static final int MIN_LEVEL = 0;
 	
 	public FPFlavorExpCapability(){
@@ -48,6 +49,8 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 	}
 	@Override
 	public void setExpLevel(FlavorType flavor, int level){
+		if(flavor == null) return;
+
 		if(level > FPFlavorExpCapability.MAX_LEVEL) level = FPFlavorExpCapability.MAX_LEVEL;
 		if(level < FPFlavorExpCapability.MIN_LEVEL) level = FPFlavorExpCapability.MIN_LEVEL;
 
@@ -56,20 +59,22 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 
 	@Override
 	public int addExp(FlavorType flavorIn, int value){
-		if(this.flavorExp.containsKey(flavorIn)){
-			int oldPoint = this.flavorExp.get(flavorIn);
-			int newPoint = oldPoint + value;
-			this.flavorExp.put(flavorIn, newPoint);
+		if(flavorIn == null || !this.flavorExp.containsKey(flavorIn)) return 0;
 
-			if(LevelPointConverter.FLAVOR_CONVERTER.pointToLevel(this.flavorExp.get(flavorIn)) >= FPFlavorExpCapability.MAX_LEVEL)
-				this.setExpLevel(flavorIn, FPFlavorExpCapability.MAX_LEVEL);
+		if(this.flavorExp.get(flavorIn) <= this.flavorExp.get(flavorIn.getOppositeFlavor()))
+			value /= 2;
+		
+		int oldPoint = this.flavorExp.get(flavorIn);
+		int newPoint = oldPoint + value;
+		this.flavorExp.put(flavorIn, newPoint);
 
-			if(LevelPointConverter.FLAVOR_CONVERTER.pointToLevel(this.flavorExp.get(flavorIn)) <= FPFlavorExpCapability.MIN_LEVEL)
-				this.setExpLevel(flavorIn, FPFlavorExpCapability.MIN_LEVEL);
+		if(LevelPointConverter.FLAVOR_CONVERTER.pointToLevel(this.flavorExp.get(flavorIn)) >= FPFlavorExpCapability.CEIL_LEVEL)
+			this.setExpLevel(flavorIn, FPFlavorExpCapability.CEIL_LEVEL);
 
-			return this.flavorExp.get(flavorIn) - oldPoint;
-		}
-		return 0;
+		if(LevelPointConverter.FLAVOR_CONVERTER.pointToLevel(this.flavorExp.get(flavorIn)) <= FPFlavorExpCapability.MIN_LEVEL)
+			this.setExpLevel(flavorIn, FPFlavorExpCapability.MIN_LEVEL);
+
+		return this.flavorExp.get(flavorIn) - oldPoint;
 	}
 
 	public static class Provider implements ICapabilitySerializable<CompoundNBT>{
@@ -110,6 +115,7 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 
 			CompoundNBT flavorNBT = new CompoundNBT();
 			for(FlavorType flavor : instance.getAllExpLevel().keySet()){
+				if(flavor == null) continue;
 				flavorNBT.putInt(flavor.getName(), instance.getExpLevel(flavor));
 			}
 			nbt.put("flavor_nbt", flavorNBT);
@@ -125,7 +131,9 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 			if(nbt.contains("flavor_nbt")){
 				CompoundNBT flavorNBT = (CompoundNBT)nbt.get("flavor_nbt");
 				for(String key : flavorNBT.keySet()){
-					instance.setExpLevel(FlavorTypes.getFlavorByName(key), flavorNBT.getInt(key));
+					FlavorType flavor = FlavorTypes.getFlavorByName(key);
+					if(flavor == null) continue;
+					instance.setExpLevel(flavor, flavorNBT.getInt(key));
 				}
 			}
 			return;

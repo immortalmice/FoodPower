@@ -16,8 +16,6 @@ public class FlavorTypes{
 	public static final FlavorType BITTER = new FlavorType("bitter");
 	public static final FlavorType SOUR = new FlavorType("sour");
 	public static final FlavorType SALTY = new FlavorType("salty");
-	public static final FlavorType HOT = new FlavorType("hot");
-	public static final FlavorType ICE = new FlavorType("ice");
 	public static final FlavorType NETHER = new FlavorType("nether");
 	public static final FlavorType ENDER = new FlavorType("ender");
 
@@ -42,7 +40,6 @@ public class FlavorTypes{
 	static{
 		FlavorTypes.SWEET.setOppositeFlavor(FlavorTypes.BITTER);
 		FlavorTypes.SOUR.setOppositeFlavor(FlavorTypes.SALTY);
-		FlavorTypes.HOT.setOppositeFlavor(FlavorTypes.ICE);
 		FlavorTypes.NETHER.setOppositeFlavor(FlavorTypes.ENDER);
 	}
 	

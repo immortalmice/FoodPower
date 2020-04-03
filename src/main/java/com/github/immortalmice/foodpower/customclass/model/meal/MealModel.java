@@ -75,6 +75,7 @@ public class MealModel implements IModelGeometry<MealModel>{
 	/* Init materials, capture all texture may use in the map */
 	private void init(){
 		CookingPattern pattern = CookingPatterns.getPatternByName(this.name);
+		if(pattern == null) return;
 		this.materials.clear();
 		this.materials.put("base"
 			, new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, "base")));
