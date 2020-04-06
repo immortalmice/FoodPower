@@ -99,9 +99,7 @@ public class MealBakedModel extends BakedItemModel{
 						, sprite, Direction.SOUTH));
 				}
 			}
-
-			float zStart = 1.0f - MealBakedModel.NORTH_Z;
-			float zEnd = 1.0f - MealBakedModel.SOUTH_Z;
+			
 			boolean isTransparent = true;
 
 			/* Up & Down Side */
@@ -118,10 +116,10 @@ public class MealBakedModel extends BakedItemModel{
 
 					if(isTransparent){
 						quads.add(this.createQuad(
-							new Vec3d(xStart, (16 - iy) / 16.0f, zStart)
-							, new Vec3d(xStart, (16 - iy) / 16.0f, zEnd)
-							, new Vec3d(xEnd, (16 - iy) / 16.0f, zEnd)
-							, new Vec3d(xEnd, (16 - iy) / 16.0f, zStart)
+							new Vec3d(xStart, (16 - iy) / 16.0f, MealBakedModel.NORTH_Z)
+							, new Vec3d(xStart, (16 - iy) / 16.0f, MealBakedModel.SOUTH_Z)
+							, new Vec3d(xEnd, (16 - iy) / 16.0f, MealBakedModel.SOUTH_Z)
+							, new Vec3d(xEnd, (16 - iy) / 16.0f, MealBakedModel.NORTH_Z)
 							, ix, ix + 1, iy, iy + 1
 							, sprite, Direction.UP));
 
@@ -137,10 +135,10 @@ public class MealBakedModel extends BakedItemModel{
 
 					if(isTransparent){
 						quads.add(this.createQuad(
-							new Vec3d(xStart, (16 - (iy + 1)) / 16.0f, zStart)
-							, new Vec3d(xEnd, (16 - (iy + 1)) / 16.0f, zStart)
-							, new Vec3d(xEnd, (16 - (iy + 1)) / 16.0f, zEnd)
-							, new Vec3d(xStart, (16 - (iy + 1)) / 16.0f, zEnd)
+							new Vec3d(xStart, (16 - (iy + 1)) / 16.0f, MealBakedModel.NORTH_Z)
+							, new Vec3d(xEnd, (16 - (iy + 1)) / 16.0f, MealBakedModel.NORTH_Z)
+							, new Vec3d(xEnd, (16 - (iy + 1)) / 16.0f, MealBakedModel.SOUTH_Z)
+							, new Vec3d(xStart, (16 - (iy + 1)) / 16.0f, MealBakedModel.SOUTH_Z)
 							, ix, ix + 1, iy, iy + 1
 							, sprite, Direction.DOWN));
 
@@ -162,10 +160,10 @@ public class MealBakedModel extends BakedItemModel{
 					}
 					if(isTransparent){
 						quads.add(this.createQuad(
-							new Vec3d(ix / 16.0f, yStart, zStart)
-							, new Vec3d(ix / 16.0f, yStart, zEnd)
-							, new Vec3d(ix / 16.0f, yEnd, zEnd)
-							, new Vec3d(ix / 16.0f, yEnd, zStart)
+							new Vec3d(ix / 16.0f, yStart, MealBakedModel.NORTH_Z)
+							, new Vec3d(ix / 16.0f, yStart, MealBakedModel.SOUTH_Z)
+							, new Vec3d(ix / 16.0f, yEnd, MealBakedModel.SOUTH_Z)
+							, new Vec3d(ix / 16.0f, yEnd, MealBakedModel.NORTH_Z)
 							, ix, ix + 1, iy, iy + 1
 							, sprite, Direction.WEST));
 
@@ -180,10 +178,10 @@ public class MealBakedModel extends BakedItemModel{
 					}
 					if(isTransparent){
 						quads.add(this.createQuad(
-							new Vec3d((ix + 1) / 16.0f, yStart, zStart)
-							, new Vec3d((ix + 1) / 16.0f, yEnd, zStart)
-							, new Vec3d((ix + 1) / 16.0f, yEnd, zEnd)
-							, new Vec3d((ix + 1) / 16.0f, yStart, zEnd)
+							new Vec3d((ix + 1) / 16.0f, yStart, MealBakedModel.NORTH_Z)
+							, new Vec3d((ix + 1) / 16.0f, yEnd, MealBakedModel.NORTH_Z)
+							, new Vec3d((ix + 1) / 16.0f, yEnd, MealBakedModel.SOUTH_Z)
+							, new Vec3d((ix + 1) / 16.0f, yStart, MealBakedModel.SOUTH_Z)
 							, ix, ix + 1, iy, iy + 1
 							, sprite, Direction.EAST));
 
