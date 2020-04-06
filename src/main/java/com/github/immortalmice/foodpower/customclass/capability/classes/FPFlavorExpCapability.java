@@ -59,7 +59,7 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 
 	@Override
 	public int addExp(FlavorType flavorIn, int value){
-		if(flavorIn == null || !this.flavorExp.containsKey(flavorIn)) return 0;
+		if(flavorIn == null || !this.flavorExp.containsKey(flavorIn) || !this.flavorExp.containsKey(flavorIn.getOppositeFlavor())) return 0;
 
 		if(this.flavorExp.get(flavorIn) <= this.flavorExp.get(flavorIn.getOppositeFlavor()))
 			value /= 2;

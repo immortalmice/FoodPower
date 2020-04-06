@@ -1,5 +1,8 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "salad"
+	"name": "salad",
+	"textures": {
+		"particle": "foodpower:meals/salad/salad_base"
+	}
 }

@@ -2,10 +2,10 @@ package com.github.immortalmice.foodpower.customclass.model.meal;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.function.Function;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 
@@ -20,14 +20,12 @@ import net.minecraft.client.renderer.model.ModelBakery;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.BakedItemModel;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.ModelTransformComposition;
 import net.minecraftforge.client.model.PerspectiveMapWrapper;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.handlers.ModelHandler;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
@@ -47,17 +45,18 @@ public class MealModel implements IModelGeometry<MealModel>{
 			, ItemOverrideList overrides, ResourceLocation modelLocation){
 
 		TextureAtlasSprite particle = spriteGetter.apply(owner.resolveTexture("particle"));
-		TransformationMatrix transform = modelTransform.func_225615_b_();
-
+		
 		IModelTransform transformsFromModel = owner.getCombinedTransform();
 		ImmutableMap<TransformType, TransformationMatrix> transformMap = transformsFromModel != null ?
                         PerspectiveMapWrapper.getTransforms(new ModelTransformComposition(transformsFromModel, modelTransform)) :
                         PerspectiveMapWrapper.getTransforms(modelTransform);
 
+        modelTransform = transformsFromModel != null ? new ModelTransformComposition(transformsFromModel, modelTransform) : modelTransform;
+
+		TransformationMatrix transform = modelTransform.func_225615_b_();
+
         /* Vanillad BakedItemModel but with custom MealItemOverrideList */
-		return new BakedItemModel(ImmutableList.of(), particle, transformMap
-			, new MealItemOverrideList(this, owner, bakery, spriteGetter, modelTransform, overrides, modelLocation)
-			, transform.isIdentity(), owner.isSideLit());
+		return new MealBakedModel(this.materials, spriteGetter, particle, transformMap, transform, owner.isSideLit());
 	}
 
 	@Override
@@ -68,20 +67,25 @@ public class MealModel implements IModelGeometry<MealModel>{
 		return this.materials.values();
 	}
 
-	public Map<String, Material> getMaterials(){
-		return this.materials;
-	}
-
 	/* Init materials, capture all texture may use in the map */
 	private void init(){
 		CookingPattern pattern = CookingPatterns.getPatternByName(this.name);
 		if(pattern == null) return;
+
 		this.materials.clear();
-		this.materials.put("base"
-			, new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, "base")));
-		for(Ingredient ingredient : pattern.getAllPossibleIngredients()){
-			this.materials.put(ingredient.getFPName()
-				, new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, ingredient.getFPName())));
+		ArrayList<String> names = new ArrayList<String>();
+		pattern.getAllPossibleIngredients().forEach((ingredient) -> {
+			names.add(ingredient.getFPName());
+		});
+		names.add("base");
+
+		this.materials.put("base", this.genMaterial("base"));
+		for(String ingredientName : names){
+			this.materials.put(ingredientName, this.genMaterial(ingredientName));
 		}
+	}
+
+	private Material genMaterial(String fileName){
+		return new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, fileName));
 	}
 }

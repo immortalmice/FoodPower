@@ -1,73 +1,74 @@
 package com.github.immortalmice.foodpower.customclass.model.meal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.IModelTransform;
 import net.minecraft.client.renderer.model.ItemOverrideList;
 import net.minecraft.client.renderer.model.Material;
-import net.minecraft.client.renderer.model.ModelBakery;
+import net.minecraft.client.renderer.texture.MissingTextureSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.IModelConfiguration;
-import net.minecraftforge.client.model.ItemLayerModel;
 
 import com.github.immortalmice.foodpower.customclass.food.Meal;
-import com.google.common.collect.ImmutableList;
 
 public class MealItemOverrideList extends ItemOverrideList{
+	private Map<String, TextureAtlasSprite> sprites = new HashMap<String, TextureAtlasSprite>();
 	private Map<String, Material> materials;
-	private IModelConfiguration owner;
-	private ModelBakery bakery;
 	private Function<Material, TextureAtlasSprite> spriteGetter;
-	private IModelTransform modelTransform;
-	private ItemOverrideList overrides;
-	private ResourceLocation modelLocation;
 
-	public MealItemOverrideList(MealModel mealModelIn
-		, IModelConfiguration ownerIn, ModelBakery bakeryIn
-		, Function<Material, TextureAtlasSprite> spriteGetterIn, IModelTransform modelTransformIn
-		, ItemOverrideList overridesIn, ResourceLocation modelLocationIn){
+	public MealItemOverrideList(Map<String, Material> materialsIn
+		, Function<Material, TextureAtlasSprite> spriteGetterIn){
 
-		this.materials = mealModelIn.getMaterials();
-		this.owner = ownerIn;
-		this.bakery = bakeryIn;
+		this.materials = materialsIn;
 		this.spriteGetter = spriteGetterIn;
-		this.modelTransform = modelTransformIn;
-		this.overrides = overridesIn;
-		this.modelLocation = modelLocationIn;
 	}
 
 	/* Read NBT data from stack and choose what textures in use and merge them */
 	@Override
 	public IBakedModel getModelWithOverrides(IBakedModel model, ItemStack stack, @Nullable World worldIn, @Nullable LivingEntity entityIn){
+		this.initSprites();
+
 		IBakedModel returnModel = model;
-		if(stack.getItem() instanceof Meal){
+		if(stack.getItem() instanceof Meal && returnModel instanceof MealBakedModel){
+			MealBakedModel mealModel = (MealBakedModel) returnModel;
 			CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
 
-			List<Material> textures = new ArrayList<Material>();
-			textures.add(this.materials.get("base"));
-
 			if(nbt.contains("ingredients")){
+				List<TextureAtlasSprite> selectedSprites = new ArrayList<TextureAtlasSprite>();
 				ListNBT list = (ListNBT)nbt.get("ingredients");
 				for(INBT ele : list){
 					CompoundNBT element = (CompoundNBT)ele;
-					textures.add(this.materials.get(element.getString("name")));
+					String ingredientName = element.getString("name");
+					if(this.sprites.containsKey(ingredientName)){
+						selectedSprites.add(this.sprites.get(ingredientName));
+					}
 				}
+				mealModel = mealModel.setIngredientSprites(selectedSprites);
 			}
-			returnModel = new ItemLayerModel(ImmutableList.copyOf(textures))
-				.bake(this.owner, this.bakery, this.spriteGetter, this.modelTransform, this.overrides, this.modelLocation);
+			return mealModel.getNewBakedItemModel();
 		}
 		return returnModel;
+	}
+
+	/* Check materials is missing texture or not, then put in to this.sprites */
+	private void initSprites(){
+		for(String name : this.materials.keySet()){
+			Material material = this.materials.get(name);
+			TextureAtlasSprite sprite = this.spriteGetter.apply(material);
+			if(!sprite.getName().equals(MissingTextureSprite.getLocation())){
+				sprites.put(name, sprite);
+			}
+		}
 	}
 }
