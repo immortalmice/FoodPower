@@ -24,12 +24,15 @@ import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.ModelTransformComposition;
 import net.minecraftforge.client.model.PerspectiveMapWrapper;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.handlers.ModelHandler;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 @SuppressWarnings("deprecation")
+@OnlyIn(Dist.CLIENT)
 public class MealModel implements IModelGeometry<MealModel>{
 	private String name;
 	private Map<String, Material> materials = new HashMap<>();
@@ -55,7 +58,7 @@ public class MealModel implements IModelGeometry<MealModel>{
 
 		TransformationMatrix transform = modelTransform.func_225615_b_();
 
-        /* Vanillad BakedItemModel but with custom MealItemOverrideList */
+        /* Vanillad BakedItemModel but with custom MealItemOverrideList, used in store data, it'll display nothing */
 		return new MealBakedModel(this.materials, spriteGetter, particle, transformMap, transform, owner.isSideLit());
 	}
 

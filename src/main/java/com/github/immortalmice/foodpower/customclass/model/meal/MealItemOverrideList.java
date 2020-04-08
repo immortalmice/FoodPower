@@ -19,9 +19,12 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 
+@OnlyIn(Dist.CLIENT)
 public class MealItemOverrideList extends ItemOverrideList{
 	private Map<String, TextureAtlasSprite> sprites = new HashMap<String, TextureAtlasSprite>();
 	private Map<String, Material> materials;
@@ -54,6 +57,7 @@ public class MealItemOverrideList extends ItemOverrideList{
 						selectedSprites.add(this.sprites.get(ingredientName));
 					}
 				}
+				/* Get a new model with sprites passed in */
 				mealModel = mealModel.setIngredientSprites(selectedSprites);
 			}
 			return mealModel.getNewBakedItemModel();

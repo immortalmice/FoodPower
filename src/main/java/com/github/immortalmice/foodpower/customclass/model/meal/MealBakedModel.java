@@ -1,12 +1,11 @@
 package com.github.immortalmice.foodpower.customclass.model.meal;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-
 import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -14,6 +13,8 @@ import net.minecraftforge.client.model.BakedItemModel;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 import net.minecraftforge.client.model.pipeline.TRSRTransformer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.TransformationMatrix;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
@@ -24,11 +25,15 @@ import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.Vec3d;
 
+/* Do not use this baked model directly, it'll display nothing, use MealBakedModel#getNewBakedItemModel */
 @SuppressWarnings("deprecation")
+@OnlyIn(Dist.CLIENT)
 public class MealBakedModel extends BakedItemModel{
 	private TextureAtlasSprite baseSprite = null;
 	private List<TextureAtlasSprite> ingredientSprites = new ArrayList<TextureAtlasSprite>();
 	private TransformationMatrix transform;
+	/* Catch the result of quads, using a location combination */
+	private static Map<String, ImmutableList<BakedQuad>> catche = new HashMap<String, ImmutableList<BakedQuad>>();
 
 	private static float NORTH_Z = 7.496f / 16f;
 	private static float SOUTH_Z = 8.504f / 16f;
@@ -62,6 +67,12 @@ public class MealBakedModel extends BakedItemModel{
 	}
 
 	private ImmutableList<BakedQuad> genQuads(){
+		String catcheKey = this.getCatchKeyString();
+
+		/* Check is this sprite location combination is already baked or not  */
+		if(MealBakedModel.catche.containsKey(catcheKey))
+			return MealBakedModel.catche.get(catcheKey);
+
 		ImmutableList.Builder<BakedQuad> quads = ImmutableList.builder();
 		List<TextureAtlasSprite> sprites = new ArrayList<TextureAtlasSprite>();
 
@@ -73,6 +84,7 @@ public class MealBakedModel extends BakedItemModel{
 			/* North & South Side */
 			for(int ix = 0; ix <= 15; ix ++){
 				for(int iy = 0; iy <= 15; iy ++){
+					/* Find the last pixel not transparent in sprites, use that to build North/South quads */
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null) continue;
 
@@ -107,6 +119,7 @@ public class MealBakedModel extends BakedItemModel{
 				float xStart = ix / 16.0f;
 				float xEnd = (ix + 1) / 16.0f;
 
+				/* Scan from Up to Bottom, find the pixel not transparent, use that to build Top quads */
 				for(int iy = 0; iy <= 15; iy ++){
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null){
@@ -126,6 +139,7 @@ public class MealBakedModel extends BakedItemModel{
 						isTransparent = false;
 					}
 				}
+				/* Scan from Bottom to Up, find the pixel not transparent, use that to build Down quads */
 				for(int iy = 15; iy >= 0; iy --){
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null){
@@ -152,6 +166,7 @@ public class MealBakedModel extends BakedItemModel{
 				float yStart = (16 - (iy + 1)) / 16.0f;
 				float yEnd = (16 - iy) / 16.0f;
 
+				/* Scan from Left to Right, find the pixel not transparent, use that to build West quads */
 				for(int ix = 0; ix <= 15; ix ++){
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null){
@@ -170,6 +185,7 @@ public class MealBakedModel extends BakedItemModel{
 						isTransparent = false;
 					}
 				}
+				/* Scan from Right to Left, find the pixel not transparent, use that to build East quads */
 				for(int ix = 15; ix >= 0; ix --){
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null){
@@ -191,9 +207,13 @@ public class MealBakedModel extends BakedItemModel{
 			}
 		}
 
-		return quads.build();
+		ImmutableList<BakedQuad> returnQuads = quads.build();
+		MealBakedModel.catche.put(catcheKey, returnQuads);
+
+		return returnQuads;
 	}
 
+	/* Give four corner, generate a quad */
 	private BakedQuad createQuad(Vec3d v1, Vec3d v2, Vec3d v3, Vec3d v4
 		, int xStart, int xEnd, int yStart, int yEnd, TextureAtlasSprite sprite
 		, Direction orientation){
@@ -211,6 +231,7 @@ public class MealBakedModel extends BakedItemModel{
 		return builder.build();
 	}
 
+	/* Put data into the consumer */
 	private static void putVertex(IVertexConsumer consumer
 		, Vec3d vec, double u, double v
 		, TextureAtlasSprite sprite, Direction orientation){
@@ -255,11 +276,27 @@ public class MealBakedModel extends BakedItemModel{
 		return null;
 	}
 
+	/* Give a BakedItemModel base on data in this, can use directly to display */
 	public BakedItemModel getNewBakedItemModel(){
 		return new BakedItemModel(this.genQuads(), this.particle, this.transforms, this.overrides, this.transform.isIdentity(), this.isSideLit);
 	}
 
+	/* Give a new MealBakedModel with sprites added */
 	public MealBakedModel setIngredientSprites(List<TextureAtlasSprite> spritesIn){
 		return new MealBakedModel(this, spritesIn);
+	}
+
+	/* Get a combination string of loactions, used in catche's key */
+	private String getCatchKeyString(){
+		List<String> locations = new ArrayList<String>();
+		if(this.baseSprite != null)
+			locations.add(this.baseSprite.getName().toString());
+
+		for(TextureAtlasSprite sprite : this.ingredientSprites){
+			locations.add(sprite.getName().toString());
+		}
+
+		String str = String.join(",", locations);
+		return str;
 	}
 }
