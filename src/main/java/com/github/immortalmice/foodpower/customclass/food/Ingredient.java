@@ -18,13 +18,15 @@ import com.github.immortalmice.foodpower.customclass.flavor.FlavorType;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
+/* Do not use ingrediant directly to create ItemStack, use Ingredient#asItem */
 public class Ingredient extends ItemFoodBase{
 	private FoodType foodType;
 	private FlavorType flavorType;
 	private FoodEffect effect;
-	private boolean isVanilla = false;
 	/* baseAmount is the value that this ingredient needed per meal in level 1 */
 	private double baseAmount;
+	/* Real Item that registed in game */
+	private Item item = null;
 	/** For Mod Ingredients */
 	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, FlavorType flavorIn, double amountIn){
 		super(nameIn, healing, saturation);
@@ -32,6 +34,7 @@ public class Ingredient extends ItemFoodBase{
 		this.foodType = ftIn;
 		this.flavorType = flavorIn;
 		this.baseAmount = amountIn;
+		if(this.item == null) this.item = this;
 	}
 	/* For Vanilla Ingredient Food or not Food */
 	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, FlavorType flavorIn, double amountIn){
@@ -40,13 +43,11 @@ public class Ingredient extends ItemFoodBase{
 			, itemIn.isFood() ? itemIn.getFood().getSaturation() : 0.0f
 			, ftIn, flavorIn, amountIn);
 
-		this.isVanilla = true;
+		this.item = itemIn;
 	}
 	/* For CookedFoods & Meals */
 	public Ingredient(String nameIn){
 		this(nameIn, 2, 0.4f, FoodTypes.NONE, FlavorTypes.NONE, 1);
-
-		this.isVanilla = true;
 	}
 	/* For Empty (Use In Present A Food With That Type) */
 	public Ingredient(FoodType ftIn){
@@ -85,8 +86,8 @@ public class Ingredient extends ItemFoodBase{
 		this.effect = effectIn;
 	}
 
-	public boolean isVanillaItem(){
-		return this.isVanilla;
+	public Item asItem(){
+		return this.item;
 	}
 	/* Show FoodType & FlavorType on tooltip */
 	@OnlyIn(Dist.CLIENT)

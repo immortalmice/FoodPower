@@ -35,7 +35,7 @@ public class FoodEffect extends EffectBase{
 		/* Show custom icon */
 		ItemRenderer itemRenderer = minecraft.getItemRenderer();
 		itemRenderer.zLevel = z;
-		itemRenderer.renderItemAndEffectIntoGUI(new ItemStack(Ingredients.getIngredientByName(this.getIngredientName()))
+		itemRenderer.renderItemAndEffectIntoGUI(new ItemStack((Ingredients.getIngredientByName(this.getIngredientName())).asItem())
 			, x + 6, y + 7);
 	}
 

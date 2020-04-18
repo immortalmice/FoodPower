@@ -2,7 +2,6 @@ package com.github.immortalmice.foodpower.bus;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
@@ -12,14 +11,15 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.common.capabilities.Capability.IStorage;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent.LoggedInEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.capability.classes.FPFlavorExpCapability;
 import com.github.immortalmice.foodpower.customclass.capability.classes.FPPatternExpCapability;
-import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPFlavorExpCapability;
-import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPPatternExpCapability;
+import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 
@@ -50,6 +50,12 @@ public class ForgeEventHandlers{
 	}
 
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
+	public static void onPlayerLogin(LoggedInEvent event){
+
+	}
+
+	@SubscribeEvent
 	public static void addCapabilities(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject() instanceof PlayerEntity){
 			event.addCapability(new ResourceLocation(FoodPower.MODID, "pattern_exp_capability"), new FPPatternExpCapability.Provider());
@@ -60,22 +66,7 @@ public class ForgeEventHandlers{
 	@SubscribeEvent
 	public static void onPlayerClone(PlayerEvent.Clone event){
 		/* Copy capability data to new player */
-		event.getOriginal().getCapability(Capabilities.PATTERN_EXP_CAPABILITY, null).ifPresent((old_cap) -> {
-			event.getPlayer().getCapability(Capabilities.PATTERN_EXP_CAPABILITY, null).ifPresent((new_cap) -> {
-				IStorage<IFPPatternExpCapability> storage = Capabilities.PATTERN_EXP_CAPABILITY.getStorage();
-
-				CompoundNBT nbt = (CompoundNBT) storage.writeNBT(Capabilities.PATTERN_EXP_CAPABILITY, old_cap, null);
-				storage.readNBT(Capabilities.PATTERN_EXP_CAPABILITY, new_cap, null, nbt);
-			});
-		});
-
-		event.getOriginal().getCapability(Capabilities.FLAVOR_EXP_CAPABILITY, null).ifPresent((old_cap) -> {
-			event.getPlayer().getCapability(Capabilities.FLAVOR_EXP_CAPABILITY, null).ifPresent((new_cap) -> {
-				IStorage<IFPFlavorExpCapability> storage = Capabilities.FLAVOR_EXP_CAPABILITY.getStorage();
-
-				CompoundNBT nbt = (CompoundNBT) storage.writeNBT(Capabilities.FLAVOR_EXP_CAPABILITY, old_cap, null);
-				storage.readNBT(Capabilities.FLAVOR_EXP_CAPABILITY, new_cap, null, nbt);
-			});
-		});
+		CapabilityHandler.copyCapabilityData(event.getOriginal(), event.getPlayer(), Capabilities.PATTERN_EXP_CAPABILITY);
+		CapabilityHandler.copyCapabilityData(event.getOriginal(), event.getPlayer(), Capabilities.FLAVOR_EXP_CAPABILITY);
 	}
 }

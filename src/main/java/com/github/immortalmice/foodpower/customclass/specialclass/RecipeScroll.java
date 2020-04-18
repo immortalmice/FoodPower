@@ -76,7 +76,9 @@ public class RecipeScroll extends ItemBase{
 		for(int i = 0; i <= listIn.size()-1; i ++){
             if(listIn.get(i).isEmpty()) return ItemStack.EMPTY;
 			CompoundNBT element = new CompoundNBT();
-			element.putString("name", ((Ingredient)listIn.get(i).getItem()).getFPName());
+            Ingredient ingrdient = Ingredients.getIngredientByItem(listIn.get(i).getItem());
+            if(ingrdient.isEmpty()) continue;
+			element.putString("name", ingrdient.getFPName());
 			element.putInt("level", listIn.get(i).getCount());
 			tagList.add(element);
 		}

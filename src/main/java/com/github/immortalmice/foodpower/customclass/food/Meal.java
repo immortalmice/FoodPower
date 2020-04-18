@@ -44,7 +44,7 @@ public class Meal extends CookedFood{
 		if(scrollNBT != null && scrollNBT.contains("pattern")){
 			Ingredient ingredient = Ingredients.getIngredientByName(scrollNBT.getString("pattern"));
 			if(ingredient instanceof Meal){
-				ItemStack result = new ItemStack(ingredient, amount);
+				ItemStack result = new ItemStack(ingredient.asItem(), amount);
 
 				CompoundNBT mealNBT = new CompoundNBT();
 				mealNBT.putString("pattern", scrollNBT.getString("pattern"));

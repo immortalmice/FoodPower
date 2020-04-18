@@ -138,6 +138,5 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 			}
 			return;
 		}
-		
 	}
 }

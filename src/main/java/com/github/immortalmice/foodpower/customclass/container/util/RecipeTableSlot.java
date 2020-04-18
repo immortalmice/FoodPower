@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableContainer;
 
 /* Custom Slot, Design for Slots in Recipe Table */
@@ -52,9 +53,8 @@ public class RecipeTableSlot extends SlotItemHandler{
 			}
 		}
 
-		if(hold.getItem() instanceof Ingredient){
-			Ingredient holdIngredient = (Ingredient) hold.getItem();
-
+		Ingredient holdIngredient = Ingredients.getIngredientByItem(hold.getItem());
+		if(!holdIngredient.isEmpty()){
 			/* If it's custom ingredient, only check food type */
 			if(ingredient.isEmpty()){
 				if(holdIngredient.isTypeEqual(ingredient)){

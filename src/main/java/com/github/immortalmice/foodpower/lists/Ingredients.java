@@ -7,7 +7,6 @@ import java.util.function.Function;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.DeferredRegister;
@@ -20,6 +19,7 @@ import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 
 /* All the ingredient need to be registed will list below. */
+/* Do not use ingrediant directly to create ItemStack, use Ingredient#asItem */
 public class Ingredients{
 
 	@ObjectHolder("foodpower")
@@ -49,33 +49,33 @@ public class Ingredients{
 		public static final Ingredient CREAM = null;
 
 		/* Vanilla Ingrediant */
-		public static final Ingredient APPLE = null;
-		public static final Ingredient MELON = null;
-		public static final Ingredient PUMPKIN = null;
-		public static final Ingredient CARROT = null;
-		public static final Ingredient POTATO = null;
-		public static final Ingredient BEETROOT = null;
-		public static final Ingredient BROWN_MUSHROOM = null;
-		public static final Ingredient RED_MUSHROOM = null;
-		public static final Ingredient EGG = null;
-		public static final Ingredient MILK_BUCKET = null;
-		public static final Ingredient PORKCHOP = null;
-		public static final Ingredient BEEF = null;
-		public static final Ingredient CHICKEN = null;
-		public static final Ingredient MUTTON = null;
-		public static final Ingredient CHORUS_FRUIT = null;
-		public static final Ingredient COCOA_BEANS = null;
-		public static final Ingredient SUGAR = null;
-		public static final Ingredient WATER_BUCKET = null;
-		public static final Ingredient NETHER_WART = null;
-		public static final Ingredient HONEY_BOTTLE = null;
-		public static final Ingredient KELP = null;
-		public static final Ingredient RABBIT = null;
-		public static final Ingredient SWEET_BERRIES = null;
-		public static final Ingredient MAGMA_CREAM = null;
-		public static final Ingredient GHAST_TEAR = null;
-		public static final Ingredient DRAGON_BREATH = null;
-		public static final Ingredient EXPERIENCE_BOTTLE = null;
+		public static final Ingredient APPLE = new Ingredient("apple", net.minecraft.item.Items.APPLE, FoodTypes.FRUIT, FlavorTypes.SOUR, 1.25);
+		public static final Ingredient MELON = new Ingredient("melon", net.minecraft.item.Items.MELON, FoodTypes.FRUIT, FlavorTypes.SWEET, 0.85);
+		public static final Ingredient PUMPKIN = new Ingredient("pumpkin", Blocks.PUMPKIN.asItem(), FoodTypes.VEGETABLE, FlavorTypes.NONE, 0.8);
+		public static final Ingredient CARROT = new Ingredient("carrot", net.minecraft.item.Items.CARROT, FoodTypes.VEGETABLE, FlavorTypes.SWEET, 1.25);
+		public static final Ingredient POTATO = new Ingredient("potato", net.minecraft.item.Items.POTATO, FoodTypes.VEGETABLE, FlavorTypes.NONE, 1.25);
+		public static final Ingredient BEETROOT = new Ingredient("beetroot", net.minecraft.item.Items.BEETROOT, FoodTypes.VEGETABLE, FlavorTypes.SWEET, 1.2);
+		public static final Ingredient BROWN_MUSHROOM = new Ingredient("brown_mushroom", Blocks.BROWN_MUSHROOM.asItem(), FoodTypes.VEGETABLE, FlavorTypes.NETHER, 1.5);
+		public static final Ingredient RED_MUSHROOM = new Ingredient("red_mushroom", Blocks.RED_MUSHROOM.asItem(), FoodTypes.VEGETABLE, FlavorTypes.NETHER, 1.5);
+		public static final Ingredient EGG = new Ingredient("egg", net.minecraft.item.Items.EGG, FoodTypes.NONE, FlavorTypes.NONE, 1.1);
+		public static final Ingredient MILK_BUCKET = new Ingredient("milk_bucket", net.minecraft.item.Items.MILK_BUCKET, FoodTypes.NONE, FlavorTypes.NONE, 0.6);
+		public static final Ingredient PORKCHOP = new Ingredient("porkchop", net.minecraft.item.Items.PORKCHOP, FoodTypes.MEAT, FlavorTypes.NONE, 0.95);
+		public static final Ingredient BEEF = new Ingredient("beef", net.minecraft.item.Items.BEEF, FoodTypes.MEAT, FlavorTypes.NONE, 0.9);
+		public static final Ingredient CHICKEN = new Ingredient("chicken", net.minecraft.item.Items.CHICKEN, FoodTypes.MEAT, FlavorTypes.NONE, 1.2);
+		public static final Ingredient MUTTON = new Ingredient("mutton", net.minecraft.item.Items.MUTTON, FoodTypes.MEAT, FlavorTypes.NONE, 0.95);
+		public static final Ingredient CHORUS_FRUIT = new Ingredient("chorus_fruit", net.minecraft.item.Items.CHORUS_FRUIT, FoodTypes.FRUIT, FlavorTypes.ENDER, 0.85);
+		public static final Ingredient COCOA_BEANS = new Ingredient("cocoa_beans", net.minecraft.item.Items.COCOA_BEANS, FoodTypes.SWEET, FlavorTypes.SWEET, 2.2);
+		public static final Ingredient SUGAR = new Ingredient("sugar", net.minecraft.item.Items.SUGAR, FoodTypes.NONE, FlavorTypes.SWEET, 2.5);
+		public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", net.minecraft.item.Items.WATER_BUCKET, FoodTypes.NONE, FlavorTypes.NONE, 1.8);
+		public static final Ingredient NETHER_WART = new Ingredient("nether_wart", net.minecraft.item.Items.NETHER_WART, FoodTypes.VEGETABLE, FlavorTypes.NETHER, 1.2);
+		public static final Ingredient HONEY_BOTTLE = new Ingredient("honey_bottle", net.minecraft.item.Items.field_226638_pX_, FoodTypes.SEASONING, FlavorTypes.SWEET, 1.9);
+		public static final Ingredient KELP = new Ingredient("kelp", net.minecraft.item.Items.KELP, FoodTypes.VEGETABLE, FlavorTypes.SALTY, 1.75);
+		public static final Ingredient RABBIT = new Ingredient("rabbit", net.minecraft.item.Items.RABBIT, FoodTypes.MEAT, FlavorTypes.NONE, 1.1);
+		public static final Ingredient SWEET_BERRIES = new Ingredient("sweet_berries", net.minecraft.item.Items.SWEET_BERRIES, FoodTypes.FRUIT, FlavorTypes.SWEET, 1.7);
+		public static final Ingredient MAGMA_CREAM = new Ingredient("magma_cream", net.minecraft.item.Items.MAGMA_CREAM, FoodTypes.SWEET, FlavorTypes.NETHER, 0.8);
+		public static final Ingredient GHAST_TEAR = new Ingredient("ghast_tear", net.minecraft.item.Items.GHAST_TEAR, FoodTypes.SEASONING, FlavorTypes.NETHER, 0.7);
+		public static final Ingredient DRAGON_BREATH = new Ingredient("dragon_breath", net.minecraft.item.Items.DRAGON_BREATH, FoodTypes.SEASONING, FlavorTypes.ENDER, 1);
+		public static final Ingredient EXPERIENCE_BOTTLE = new Ingredient("experience_bottle", net.minecraft.item.Items.EXPERIENCE_BOTTLE, FoodTypes.SEASONING, FlavorTypes.BITTER, 0.1);
 
 		/* CookedFoods */
 		public static final CookedFood BATTER = null;
@@ -127,6 +127,23 @@ public class Ingredients{
 		}
 		for(Ingredient ingredient : Ingredients.Lists.mealList){
 			if(ingredient.getFPName().equals(nameIn))
+				return ingredient;
+		}
+		return new Ingredient(FoodTypes.NONE);
+	}
+
+	public static Ingredient getIngredientByItem(Item itemIn){
+		Ingredients.setList();
+		for(Ingredient ingredient : Ingredients.Lists.list){
+			if(ingredient.asItem() == itemIn)
+				return ingredient;
+		}
+		for(Ingredient ingredient : Ingredients.Lists.cookedFoodList){
+			if(ingredient.asItem() == itemIn)
+				return ingredient;
+		}
+		for(Ingredient ingredient : Ingredients.Lists.mealList){
+			if(ingredient.asItem() == itemIn)
 				return ingredient;
 		}
 		return new Ingredient(FoodTypes.NONE);
@@ -219,6 +236,7 @@ class IngredientRegistry{
 	public static final RegistryObject<Item> OBJ_CREAM = IngredientRegistry.register("cream", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 1.2));
 
 	/* Vanilla Ingrediant */
+	/*
 	public static final RegistryObject<Item> OBJ_APPLE = IngredientRegistry.register("apple", (str) -> new Ingredient(str, Items.APPLE, FoodTypes.FRUIT, FlavorTypes.SOUR, 1.25));
 	public static final RegistryObject<Item> OBJ_MELON = IngredientRegistry.register("melon", (str) -> new Ingredient(str, Items.MELON, FoodTypes.FRUIT, FlavorTypes.SWEET, 0.85));
 	public static final RegistryObject<Item> OBJ_PUMPKIN = IngredientRegistry.register("pumpkin", (str) -> new Ingredient(str, Blocks.PUMPKIN.asItem(), FoodTypes.VEGETABLE, FlavorTypes.NONE, 0.8));
@@ -246,6 +264,7 @@ class IngredientRegistry{
 	public static final RegistryObject<Item> OBJ_GHAST_TEAR = IngredientRegistry.register("ghast_tear", (str) -> new Ingredient(str, Items.GHAST_TEAR, FoodTypes.SEASONING, FlavorTypes.NETHER, 0.7));
 	public static final RegistryObject<Item> OBJ_DRAGON_BREATH = IngredientRegistry.register("dragon_breath", (str) -> new Ingredient(str, Items.DRAGON_BREATH, FoodTypes.SEASONING, FlavorTypes.ENDER, 1));
 	public static final RegistryObject<Item> OBJ_EXPERIENCE_BOTTLE = IngredientRegistry.register("experience_bottle", (str) -> new Ingredient(str, Items.EXPERIENCE_BOTTLE, FoodTypes.SEASONING, FlavorTypes.BITTER, 0.1));
+	*/
 
 	/* CookedFoods */
 	public static final RegistryObject<Item> OBJ_BATTER = IngredientRegistry.register("batter", (str) -> new CookedFood(str));
