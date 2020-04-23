@@ -1,7 +1,5 @@
 package com.github.immortalmice.foodpower.handlers;
 
-import java.util.List;
-
 import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.Effects;
@@ -10,12 +8,11 @@ import com.github.immortalmice.foodpower.lists.Ingredients;
 /* Used to connect ingredient & effect in FMLCommonSetupEvent */
 public class EffectHandler{
 	public static void setup(){
-		List<Ingredient> list = Ingredients.getIngredientList();
-		if(list.isEmpty()){
+		if(Ingredients.list.isEmpty()){
 			System.out.println("[Warning] Ingredient list is empty!");
 			return;
 		}
-		for(Ingredient ingredient : list){
+		for(Ingredient ingredient : Ingredients.list){
 			FoodEffect effect = Effects.getFoodEffectByIngredient(ingredient);
 
 			if(effect != null){

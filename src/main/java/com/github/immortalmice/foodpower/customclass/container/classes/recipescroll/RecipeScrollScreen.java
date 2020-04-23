@@ -34,6 +34,12 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 	}
 
 	@Override
+	public void render(int mouseX, int mouseY, float partialTicks){
+		this.renderBackground();
+		super.render(mouseX, mouseY, partialTicks);
+	}
+
+	@Override
 	public void init(){
 		super.init();
 

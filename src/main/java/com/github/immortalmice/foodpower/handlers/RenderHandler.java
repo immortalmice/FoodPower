@@ -1,7 +1,5 @@
 package com.github.immortalmice.foodpower.handlers;
 
-import java.util.List;
-
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,16 +20,13 @@ public class RenderHandler{
 
 	/* RenderType.func_228641_d_() : cutout_mipped */
 	public static void setupRenderLayer(){
-		List<KitchenAppliance> list = KitchenAppliances.getList();
-		for(KitchenAppliance block : list){
+		for(KitchenAppliance block : KitchenAppliances.list){
 			RenderTypeLookup.setRenderLayer(block, RenderType.func_228641_d_());
 		}
-		List<CropBlock> cropList = Crops.getBlockList();
-		for(CropBlock block : cropList){
+		for(CropBlock block : Crops.blockList){
 			RenderTypeLookup.setRenderLayer(block, RenderType.func_228641_d_());
 		}
-		List<TreeSaplingBush> saplingList = Trees.getSaplingList();
-		for(TreeSaplingBush block : saplingList){
+		for(TreeSaplingBush block : Trees.saplingBushList){
 			RenderTypeLookup.setRenderLayer(block, RenderType.func_228641_d_());
 		}
 	}

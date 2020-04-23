@@ -18,7 +18,7 @@ public class TextureHandler{
 		try{
 			/* I know I need to pass in srg name, but it's forge's class xd */
 			Set<ResourceLocation> sprites = ObfuscationReflectionHelper.getPrivateValue(TextureStitchEvent.Pre.class, event, "sprites");
-			List<String> foodEffectNames = Effects.getFoodEffectList().stream().map((foodEffect) -> foodEffect.getFPName()).collect(Collectors.toList());
+			List<String> foodEffectNames = Effects.list.stream().map((foodEffect) -> foodEffect.getFPName()).collect(Collectors.toList());
 			Set<ResourceLocation> removeObjs = new HashSet<ResourceLocation>();
 
 			for(ResourceLocation sprite : sprites){

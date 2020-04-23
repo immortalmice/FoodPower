@@ -1,8 +1,5 @@
 package com.github.immortalmice.foodpower.lists;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
 
 import net.minecraft.item.Item;
@@ -14,9 +11,12 @@ import net.minecraftforge.registries.DeferredRegister;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.crop.CropSeed;
+import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 import com.github.immortalmice.foodpower.customclass.crop.CropBlock;
 
 public class Crops{
+	public static final ReflectList<CropBlock, Blocks> blockList = new ReflectList<CropBlock, Blocks>(CropBlock.class, Blocks.class, null);
+	public static final ReflectList<CropSeed, Items> itemList = new ReflectList<CropSeed, Items>(CropSeed.class, Items.class, null);
 
 	@ObjectHolder("foodpower")
 	public static class Blocks{
@@ -38,56 +38,6 @@ public class Crops{
 		public static final CropSeed SPINACH_SEED = null;
 		public static final CropSeed CABBAGE_SEED = null;
 		public static final CropSeed CORN_SEED = null;
-	}
-	
-	/* Construct lists when first time getBlockList(), getItemList() called. */
-	private static class Lists{
-		public static final List<CropBlock> blockList = new ArrayList<CropBlock>();
-		public static final List<CropSeed> itemList = new ArrayList<CropSeed>();
-	}
-
-	/* If called before ObjectHolder worked, list will be empty */
-	public static List<CropBlock> getBlockList(){
-		if(Crops.Lists.blockList.isEmpty()){
-			Field[] fields = Crops.Blocks.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.getType() == CropBlock.class){
-						if(field.get(null) != null){
-							Crops.Lists.blockList.add((CropBlock)field.get(null));
-						}else{
-							throw new Exception();
-						}
-					}
-				}catch(Exception e){
-					Crops.Lists.blockList.clear();
-					break;
-				}
-			}
-		}
-		return Crops.Lists.blockList;
-	}
-
-	/* If called before ObjectHolder worked, list will be empty */
-	public static List<CropSeed> getItemList(){
-		if(Crops.Lists.itemList.isEmpty()){
-			Field[] fields = Crops.Items.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.getType() == CropSeed.class){
-						if(field.get(null) != null){
-							Crops.Lists.itemList.add((CropSeed)field.get(null));
-						}else{
-							throw new Exception();
-						}
-					}
-				}catch(Exception e){
-					Crops.Lists.itemList.clear();
-					break;
-				}
-			}
-		}
-		return Crops.Lists.itemList;
 	}
 
 	public static DeferredRegister<Block> getBlockRegister(){

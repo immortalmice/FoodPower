@@ -1,6 +1,5 @@
 package com.github.immortalmice.foodpower.lists;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -17,10 +16,14 @@ import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
+import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 /* All the ingredient need to be registed will list below. */
 /* Do not use ingrediant directly to create ItemStack, use Ingredient#asItem */
 public class Ingredients{
+	public static final ReflectList<Ingredient, Items> list = new ReflectList<Ingredient, Items>(Ingredient.class, Items.class, null);
+	public static final ReflectList<CookedFood, Items> cookedFoodList = new ReflectList<CookedFood, Items>(CookedFood.class, Items.class, null);
+	public static final ReflectList<Meal, Items> mealList = new ReflectList<Meal, Items>(Meal.class, Items.class, null);
 
 	@ObjectHolder("foodpower")
 	public static class Items{
@@ -104,28 +107,20 @@ public class Ingredients{
 		public static final Meal JUICE = null;
 	}
 
-	/* Construct lists when first time setList() called. */
-	private static class Lists{
-		public static final List<Ingredient> list = new ArrayList<Ingredient>();
-		public static final List<CookedFood> cookedFoodList = new ArrayList<CookedFood>();
-		public static final List<Meal> mealList = new ArrayList<Meal>();
-	}
-
 	public static DeferredRegister<Item> getRegister(){
 		return IngredientRegistry.REGISTER;
 	}
 
 	public static Ingredient getIngredientByName(String nameIn){
-		Ingredients.setList();
-		for(Ingredient ingredient : Ingredients.Lists.list){
+		for(Ingredient ingredient : Ingredients.list){
 			if(ingredient.getFPName().equals(nameIn))
 				return ingredient;
 		}
-		for(Ingredient ingredient : Ingredients.Lists.cookedFoodList){
+		for(Ingredient ingredient : Ingredients.cookedFoodList){
 			if(ingredient.getFPName().equals(nameIn))
 				return ingredient;
 		}
-		for(Ingredient ingredient : Ingredients.Lists.mealList){
+		for(Ingredient ingredient : Ingredients.mealList){
 			if(ingredient.getFPName().equals(nameIn))
 				return ingredient;
 		}
@@ -133,73 +128,24 @@ public class Ingredients{
 	}
 
 	public static Ingredient getIngredientByItem(Item itemIn){
-		Ingredients.setList();
-		for(Ingredient ingredient : Ingredients.Lists.list){
+		for(Ingredient ingredient : Ingredients.list){
 			if(ingredient.asItem() == itemIn)
 				return ingredient;
 		}
-		for(Ingredient ingredient : Ingredients.Lists.cookedFoodList){
+		for(Ingredient ingredient : Ingredients.cookedFoodList){
 			if(ingredient.asItem() == itemIn)
 				return ingredient;
 		}
-		for(Ingredient ingredient : Ingredients.Lists.mealList){
+		for(Ingredient ingredient : Ingredients.mealList){
 			if(ingredient.asItem() == itemIn)
 				return ingredient;
 		}
 		return new Ingredient(FoodTypes.NONE);
 	}
 
-	/* If called before ObjectHolder worked, list will be empty */
-	private static void setList(){
-		if(Ingredients.Lists.list.isEmpty()
-			|| Ingredients.Lists.cookedFoodList.isEmpty()
-			|| Ingredients.Lists.mealList.isEmpty()){
-
-			Ingredients.Lists.list.clear();
-			Ingredients.Lists.cookedFoodList.clear();
-			Ingredients.Lists.mealList.clear();
-
-			Field[] fields = Ingredients.Items.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.get(null) != null){
-						if(field.getType() == Meal.class){
-							Ingredients.Lists.mealList.add((Meal)field.get(null));
-						}else if(field.getType() == CookedFood.class){
-							Ingredients.Lists.cookedFoodList.add((CookedFood)field.get(null));
-						}else if(field.getType() == Ingredient.class){
-							Ingredients.Lists.list.add((Ingredient)field.get(null));
-						}
-					}else if(field.getType() == Meal.class
-							|| field.getType() == CookedFood.class
-							|| field.getType() == Ingredient.class){
-
-						throw new Exception();
-					}
-				}catch(Exception e){
-
-				}
-			}
-
-		}
-	}
-
-	public static List<Ingredient> getIngredientList(){
-		Ingredients.setList();
-		return Ingredients.Lists.list;
-	}
-	public static List<CookedFood> getCookedFoodList(){
-		Ingredients.setList();
-		return Ingredients.Lists.cookedFoodList;
-	}
-	public static List<Meal> getMealList(){
-		Ingredients.setList();
-		return Ingredients.Lists.mealList;
-	}
 	public static List<Ingredient> getIngredientsByType(FoodType foodType){
-		Ingredients.setList();
 		List<Ingredient> returnList = new ArrayList<Ingredient>();
-		for(Ingredient ingredient : Ingredients.getIngredientList()){
+		for(Ingredient ingredient : Ingredients.list){
 			if(foodType == ingredient.getFoodType()){
 				returnList.add(ingredient);
 			}

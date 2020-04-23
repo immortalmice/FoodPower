@@ -1,8 +1,5 @@
 package com.github.immortalmice.foodpower.lists;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
 
 import net.minecraft.block.Block;
@@ -16,9 +13,13 @@ import net.minecraftforge.fml.RegistryObject;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.tree.FPTree;
 import com.github.immortalmice.foodpower.customclass.tree.TreeSaplingBush;
+import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 import com.github.immortalmice.foodpower.customclass.tree.TreeLeave;
 
 public class Trees{
+	public static final ReflectList<FPTree, Trees> list = new ReflectList<FPTree, Trees>(FPTree.class, Trees.class, null);
+	public static final ReflectList<TreeLeave, Blocks> leaveList = new ReflectList<TreeLeave, Blocks>(TreeLeave.class, Blocks.class, null);
+	public static final ReflectList<TreeSaplingBush, Blocks> saplingBushList = new ReflectList<TreeSaplingBush, Blocks>(TreeSaplingBush.class, Blocks.class, null);
 
 	public static final FPTree ORANGE = new FPTree("orange");
 	public static final FPTree KIWI = new FPTree("kiwi");
@@ -41,13 +42,6 @@ public class Trees{
 		public static final TreeSaplingBush LEMON_SAPLING = null;
 	}
 
-	/* Construct lists when first time setList() called. */
-	private static class Lists{
-		public static final List<FPTree> list = new ArrayList<FPTree>();
-		public static final List<TreeSaplingBush> saplingBushList = new ArrayList<TreeSaplingBush>();
-		public static final List<TreeLeave> leaveList = new ArrayList<TreeLeave>();
-	}
-
 	public static DeferredRegister<Block> getBlockRegister(){
 		return TreeRegistry.BLOCK_REGISTER;
 	}
@@ -55,64 +49,6 @@ public class Trees{
 	public static DeferredRegister<Item> getItemRegister(){
 		return TreeRegistry.ITEM_REGISTER;
 	}
-
-	/* If called before ObjectHolder worked, list will be empty */
-	private static void setList(){
-		if(Trees.Lists.list.isEmpty()){
-			Field[] fields = Trees.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.getType() == FPTree.class){
-						Trees.Lists.list.add((FPTree) field.get(null));
-					}
-				}catch(Exception e){
-
-				}
-			}
-		}
-		if(Trees.Lists.saplingBushList.isEmpty()
-			|| Trees.Lists.leaveList.isEmpty()){
-
-			Trees.Lists.saplingBushList.clear();
-			Trees.Lists.leaveList.clear();
-
-			Field[] fields = Trees.Blocks.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.get(null) != null){
-						if(field.getType() == TreeLeave.class){
-							Trees.Lists.leaveList.add((TreeLeave)field.get(null));
-						}else if(field.getType() == TreeSaplingBush.class){
-							Trees.Lists.saplingBushList.add((TreeSaplingBush)field.get(null));
-						}
-					}else if(field.getType() == TreeLeave.class
-							|| field.getType() == TreeSaplingBush.class){
-
-						throw new Exception();
-					}
-				}catch(Exception e){
-
-				}
-			}
-
-		}
-	}
-
-	public static List<FPTree> getFPTreeList(){
-		Trees.setList();
-		return Trees.Lists.list;
-	}
-
-	public static List<TreeSaplingBush> getSaplingList(){
-		Trees.setList();
-		return Trees.Lists.saplingBushList;
-	}
-
-	public static List<TreeLeave> getLeaveList(){
-		Trees.setList();
-		return Trees.Lists.leaveList;
-	}
-
 
 	public static void setup(){
 		Trees.ORANGE.setLeaveAndSapling(Trees.Blocks.ORANGE_LEAVE, Trees.Blocks.ORANGE_SAPLING);

@@ -38,6 +38,13 @@ public class MarketScreen extends ScreenBase<MarketContainer>{
 		String itemName = I18n.format(item.getItem().getTranslationKey());
 		this.font.drawString(itemName, 45 - (this.font.getStringWidth(itemName) / 2), 35, 0x404040);
 	}
+
+	@Override
+	public void render(int mouseX, int mouseY, float partialTicks){
+		this.renderBackground();
+		super.render(mouseX, mouseY, partialTicks);
+	}
+
 	@Override
 	public void init(){
 		super.init();

@@ -1,8 +1,5 @@
 package com.github.immortalmice.foodpower.lists;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
 
 import net.minecraft.block.Block;
@@ -16,9 +13,11 @@ import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
+import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 /* All the KitchenAppliances need to be registed will list below. */
 public class KitchenAppliances{
+	public static final ReflectList<KitchenAppliance, Blocks> list = new ReflectList<KitchenAppliance, Blocks>(KitchenAppliance.class, Blocks.class, null);
 	
 	@ObjectHolder("foodpower")
 	public static class Blocks{
@@ -35,38 +34,11 @@ public class KitchenAppliances{
 		public static final KitchenAppliance UNIVERSAL_STATION = null;
 	}
 
-	/* Construct lists when first time getList() called. */
-	private static class Lists{
-		public static final List<KitchenAppliance> list = new ArrayList<KitchenAppliance>();
-	}
-
 	public static DeferredRegister<Block> getBlockRegister(){
 		return KitchenAppliancesRegistry.BLOCK_REGISTER;
 	}
 	public static DeferredRegister<Item> getItemRegister(){
 		return KitchenAppliancesRegistry.ITEM_REGISTER;
-	}
-	
-	/* If called before ObjectHolder worked, list will be empty */
-	public static List<KitchenAppliance> getList(){
-		if(KitchenAppliances.Lists.list.isEmpty()){
-			Field[] fields = KitchenAppliances.Blocks.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.getType() == KitchenAppliance.class){
-						if(field.get(null) != null){
-							KitchenAppliances.Lists.list.add((KitchenAppliance)field.get(null));
-						}else{
-							throw new Exception();
-						}
-					}
-				}catch(Exception e){
-					KitchenAppliances.Lists.list.clear();
-					break;
-				}
-			}
-		}
-		return KitchenAppliances.Lists.list;
 	}
 }
 

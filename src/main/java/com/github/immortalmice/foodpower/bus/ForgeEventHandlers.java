@@ -8,6 +8,7 @@ import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -66,7 +67,8 @@ public class ForgeEventHandlers{
 	@SubscribeEvent
 	public static void onPlayerClone(PlayerEvent.Clone event){
 		/* Copy capability data to new player */
-		CapabilityHandler.copyCapabilityData(event.getOriginal(), event.getPlayer(), Capabilities.PATTERN_EXP_CAPABILITY);
-		CapabilityHandler.copyCapabilityData(event.getOriginal(), event.getPlayer(), Capabilities.FLAVOR_EXP_CAPABILITY);
+		for(Capability<?> cap : Capabilities.list){
+			CapabilityHandler.copyCapabilityData(event.getOriginal(), event.getPlayer(), cap);
+		}
 	}
 }

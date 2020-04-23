@@ -1,8 +1,5 @@
 package com.github.immortalmice.foodpower.lists;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
 
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,8 +11,10 @@ import net.minecraftforge.fml.RegistryObject;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 public class Effects{
+	public static final ReflectList<FoodEffect, FoodEffects> list = new ReflectList<FoodEffect, FoodEffects>(FoodEffect.class, FoodEffects.class, null);
 
 	@ObjectHolder("foodpower")
 	public static class FoodEffects{
@@ -73,39 +72,12 @@ public class Effects{
 		public static final FoodEffect EXPERIENCE_BOTTLE_POWER = null; 
 	}
 
-	/* Construct lists when first time getFoodEffectList() called. */
-	private static class Lists{
-		public static List<FoodEffect> list = new ArrayList<FoodEffect>();
-	}
-
 	public static DeferredRegister<Effect> getRegister(){
 		return Registry.REGISTER;
 	}
 
-	/* If called before ObjectHolder worked, list will be empty */
-	public static List<FoodEffect> getFoodEffectList(){
-		if(Effects.Lists.list.isEmpty()){
-			Field[] fields = Effects.FoodEffects.class.getFields();
-			for(Field field : fields){
-				try{
-					if(field.getType() == FoodEffect.class){
-						if(field.get(null) != null){
-							Effects.Lists.list.add((FoodEffect)field.get(null));
-						}else{
-							throw new Exception();
-						}
-					}
-				}catch(Exception e){
-					Effects.Lists.list.clear();
-					break;
-				}
-			}
-		}
-		return Effects.Lists.list;
-	}
-
 	public static FoodEffect getFoodEffectByIngredient(Ingredient ingredientIn){
-		for(FoodEffect effect : Effects.getFoodEffectList()){
+		for(FoodEffect effect : Effects.list){
 			if(effect.getIngredientName().equals(ingredientIn.getFPName())){
 				return effect;
 			}
