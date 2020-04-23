@@ -2,7 +2,6 @@ package com.github.immortalmice.foodpower.customclass.model.meal;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.function.Function;
@@ -27,19 +26,15 @@ import net.minecraftforge.client.model.geometry.IModelGeometry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
-import com.github.immortalmice.foodpower.handlers.ModelHandler;
-import com.github.immortalmice.foodpower.lists.CookingPatterns;
-
 @SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
 public class MealModel implements IModelGeometry<MealModel>{
-	private String name;
 	private Map<String, Material> materials = new HashMap<>();
 
-	public MealModel(String nameIn){
-		this.name = nameIn;
-		this.init();
+	public MealModel(Map<String, ResourceLocation> map){
+		for(Map.Entry<String, ResourceLocation> entry : map.entrySet()){
+			materials.put(entry.getKey(), new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, entry.getValue()));
+		}
 	}
 
 	@Override
@@ -68,27 +63,5 @@ public class MealModel implements IModelGeometry<MealModel>{
 		, Set<Pair<String, String>> missingTextureErrors){
 
 		return this.materials.values();
-	}
-
-	/* Init materials, capture all texture may use in the map */
-	private void init(){
-		CookingPattern pattern = CookingPatterns.getPatternByName(this.name);
-		if(pattern == null) return;
-
-		this.materials.clear();
-		ArrayList<String> names = new ArrayList<String>();
-		pattern.getAllPossibleIngredients().forEach((ingredient) -> {
-			names.add(ingredient.getFPName());
-		});
-		names.add("base");
-
-		this.materials.put("base", this.genMaterial("base"));
-		for(String ingredientName : names){
-			this.materials.put(ingredientName, this.genMaterial(ingredientName));
-		}
-	}
-
-	private Material genMaterial(String fileName){
-		return new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, ModelHandler.locationGen(this.name, fileName));
 	}
 }

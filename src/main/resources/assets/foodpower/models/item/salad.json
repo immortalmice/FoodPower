@@ -1,8 +1,16 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "salad",
 	"textures": {
 		"particle": "foodpower:meals/salad/salad_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/salad/salad_base",
+		"beef": "foodpower:meals/salad/salad_beef",
+		"cabbage": "foodpower:meals/salad/salad_cabbage",
+		"chicken": "foodpower:meals/salad/salad_chicken",
+		"ketchup": "foodpower:meals/salad/salad_ketchup",
+		"sauce": "foodpower:meals/salad/salad_sauce",
+		"tomato": "foodpower:meals/salad/salad_tomato"	
 	}
 }
