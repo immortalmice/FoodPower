@@ -1,12 +1,8 @@
 package com.github.immortalmice.foodpower.customclass.food;
 
 import java.util.List;
-import javax.annotation.Nullable;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -90,19 +86,16 @@ public class Ingredient extends ItemFoodBase{
 		return this.item;
 	}
 	/* Show FoodType & FlavorType on tooltip */
-	@OnlyIn(Dist.CLIENT)
-	@Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
-    	super.addInformation(stack, worldIn, tooltip, flagIn);
-
+    @OnlyIn(Dist.CLIENT)
+    public static void addFoodAndFlavorTooltip(Ingredient ingredient, List<ITextComponent> tooltip){
     	TooltipUtil tooltipHelper = new TooltipUtil(tooltip);
 
     	String foodTypeName = TooltipUtil.translate("general.foodpower.food_type");
-    	String foodTypeValue = TooltipUtil.translate("food_type.foodpower." + this.foodType.getName());
+    	String foodTypeValue = TooltipUtil.translate("food_type.foodpower." + ingredient.foodType.getName());
     	tooltipHelper.add(foodTypeName + " : " + foodTypeValue);
 
     	String flavorTypeName = TooltipUtil.translate("general.foodpower.flavor_type");
-    	String flavorTypeValue = TooltipUtil.translate("flavor_type.foodpower." + this.flavorType.getName());
+    	String flavorTypeValue = TooltipUtil.translate("flavor_type.foodpower." + ingredient.flavorType.getName());
     	tooltipHelper.add(flavorTypeName + " : " + flavorTypeValue);
     }
 }

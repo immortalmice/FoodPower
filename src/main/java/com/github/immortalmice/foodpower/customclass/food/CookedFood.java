@@ -12,13 +12,13 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
-public class CookedFood extends Ingredient{
+public class CookedFood extends ItemFoodBase{
 	/* For a empty CookedFood */
 	public CookedFood(String name){
-		super(name);
+		super(name, 1, 0.1f);
 	}
 
 	@OnlyIn(Dist.CLIENT)
