@@ -4,7 +4,7 @@ issueTrackerURL="https://github.com/immortalmice/FoodPower/issues"
 
 [[mods]]
 	modId="foodpower"
-	version="1.0"
+	version="${version}"
 	displayName="Food Power"
 	credits="Pudding, donut, and all sweet things."
 	authors="Immortalmice, YenHsinWu"

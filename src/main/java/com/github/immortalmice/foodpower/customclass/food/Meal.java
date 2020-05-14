@@ -1,5 +1,6 @@
 package com.github.immortalmice.foodpower.customclass.food;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
@@ -76,6 +78,7 @@ public class Meal extends CookedFood{
     		}
 		}
 
+        /* Give pattern exp to player when eaten */
         Pair<String, Integer> patternExp = Meal.getPatternExp(stackIn);
         if(patternExp != null){
             CookingPattern pattern = CookingPatterns.getPatternByName(patternExp.getFirst());
@@ -86,6 +89,7 @@ public class Meal extends CookedFood{
             }
         }
 
+        /* Give flavor exp to player when eaten */
         Map<String, Integer> flavorExp = Meal.getFlavorExp(stackIn);
 
         if(flavorExp.size() > 0){
@@ -251,6 +255,37 @@ public class Meal extends CookedFood{
                 }
                 nbt.put("flavor_exp", flavorExpNBT);
             }
+        }
+    }
+
+    public static class MealEffectContainer{
+        private List<EffectInstance> effectInstances = new ArrayList<EffectInstance>();
+        private List<Float> effectDurationMultipliers = new ArrayList<Float>();
+        private List<Integer> extraEffectDurationTicks = new ArrayList<Integer>();
+        private List<Float> notConsumMealChances = new ArrayList<Float>();
+
+        public MealEffectContainer addEffectInstance(EffectInstance effectInstanceIn){
+            this.effectInstances.add(effectInstanceIn);
+            return this;
+        }
+
+        public MealEffectContainer addEffectDuationMultiplier(float multiplierIn){
+            this.effectDurationMultipliers.add(multiplierIn);
+            return this;
+        }
+
+        public MealEffectContainer addExtraEffectDurationTick(int tickIn){
+            this.extraEffectDurationTicks.add(tickIn);
+            return this;
+        }
+
+        public MealEffectContainer addNotConsumMealChance(float chanceIn){
+            this.notConsumMealChances.add(chanceIn);
+            return this;
+        }
+
+        private void apply(ItemStack stackIn, World worldIn, LivingEntity entityLivingIn){
+
         }
     }
 }
