@@ -32,6 +32,7 @@ import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
 import com.github.immortalmice.foodpower.lists.Ingredients;
+import com.github.immortalmice.foodpower.lists.Meals;
 import com.mojang.datafixers.util.Pair;
 
 /* The final product you get! It will give you power! */
@@ -44,9 +45,9 @@ public class Meal extends CookedFood{
 	public static ItemStack create(ItemStack scrollIn, int amount){
 		CompoundNBT scrollNBT = scrollIn.getTag();
 		if(scrollNBT != null && scrollNBT.contains("pattern")){
-			Ingredient ingredient = Ingredients.getIngredientByName(scrollNBT.getString("pattern"));
-			if(ingredient instanceof Meal){
-				ItemStack result = new ItemStack(ingredient.asItem(), amount);
+			Meal meal = Meals.getMealByName(scrollNBT.getString("pattern"));
+			if(meal != null){
+				ItemStack result = new ItemStack(meal, amount);
 
 				CompoundNBT mealNBT = new CompoundNBT();
 				mealNBT.putString("pattern", scrollNBT.getString("pattern"));

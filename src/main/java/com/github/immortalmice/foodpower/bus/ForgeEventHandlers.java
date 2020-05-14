@@ -2,6 +2,7 @@ package com.github.immortalmice.foodpower.bus;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
@@ -11,6 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent.LoggedInEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -20,9 +22,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.capability.classes.FPFlavorExpCapability;
 import com.github.immortalmice.foodpower.customclass.capability.classes.FPPatternExpCapability;
+import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
+import com.github.immortalmice.foodpower.lists.Ingredients;
 
 public class ForgeEventHandlers{
 	private static final IEventBus BUS = MinecraftForge.EVENT_BUS;
@@ -54,6 +58,17 @@ public class ForgeEventHandlers{
 	@OnlyIn(Dist.CLIENT)
 	public static void onPlayerLogin(LoggedInEvent event){
 
+	}
+
+	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
+	public static void onItemTooltip(ItemTooltipEvent event){
+		Item item = event.getItemStack().getItem();
+		Ingredient ingredient = Ingredients.getIngredientByItem(item);
+
+		if(!ingredient.isEmpty()){
+			Ingredient.addFoodAndFlavorTooltip(ingredient, event.getToolTip());
+		}
 	}
 
 	@SubscribeEvent

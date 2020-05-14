@@ -3,8 +3,8 @@ package com.github.immortalmice.foodpower.customclass.cooking;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
@@ -42,9 +42,12 @@ public class CookingPattern{
 	/* Filter ingrients need to display on recipe table or not */
 	private void init(){
 		for(int i = 0; i <= steps.size()-1; i ++){
-			ingredientList.addAll(steps.get(i).getIngredients().stream()
-				.filter((Ingredient a) -> !(a instanceof CookedFood))
-				.collect(Collectors.toList()));
+			List<ItemFoodBase> list = steps.get(i).getIngredients();
+			for(ItemFoodBase itemFood : list){
+				if(itemFood instanceof Ingredient){
+					this.ingredientList.add((Ingredient)itemFood);
+				}
+			}
 		}
 		return;
 	}
@@ -53,11 +56,11 @@ public class CookingPattern{
 		return ingredientList;
 	}
 
-	public List<Ingredient> getAllPossibleIngredients(){
-		List<Ingredient> returnList = new ArrayList<Ingredient>();
-		for(Ingredient patternIngredient : this.getIngredients()){
-			if(patternIngredient.isEmpty()){
-				returnList.addAll(Ingredients.getIngredientsByType(patternIngredient.getFoodType()));
+	public List<ItemFoodBase> getAllPossibleIngredients(){
+		List<ItemFoodBase> returnList = new ArrayList<ItemFoodBase>();
+		for(ItemFoodBase patternIngredient : this.getIngredients()){
+			if(patternIngredient instanceof Ingredient && ((Ingredient)patternIngredient).isEmpty()){
+				returnList.addAll(Ingredients.getIngredientsByType(((Ingredient)patternIngredient).getFoodType()));
 			}else{
 				returnList.add(patternIngredient);
 			}
@@ -65,7 +68,7 @@ public class CookingPattern{
 		return returnList;
 	}
 
-	public Ingredient getResult(){
+	public CookedFood getResult(){
 		return this.result;
 	}
 }
