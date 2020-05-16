@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
@@ -11,9 +12,11 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -25,7 +28,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
-import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
 import com.github.immortalmice.foodpower.customclass.flavor.FlavorType;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.lists.Capabilities;
@@ -70,13 +72,22 @@ public class Meal extends CookedFood{
         /* Give effect to player when eaten */
 		ItemStack stack = entityLiving.onFoodEaten(worldIn, stackIn);
 		if(stackIn.hasTag() && stackIn.getTag().contains("ingredients")){
-			ListNBT list = (ListNBT)stackIn.getTag().get("ingredients");
+            MealEffectContainer container = new MealEffectContainer(stack, worldIn, entityLiving);
+
+            int levelSum = 0;
+            ListNBT list = (ListNBT)stackIn.getTag().get("ingredients");
     		for(int i = 0; i <= list.size()-1; i ++){
     			CompoundNBT element = (CompoundNBT) list.get(i);
+                levelSum += element.getInt("level");
 
-    			FoodEffect effect = Ingredients.getIngredientByName(element.getString("name")).getEffect();
-    			entityLiving.addPotionEffect(effect.getEffectInstance(1200, element.getInt("level") - 1));
+    			Ingredient ingredient = Ingredients.getIngredientByName(element.getString("name"));
+                if(ingredient.getContainer() != null){
+                    ingredient.getContainer().accept(container, element.getInt("level"));
+                }
     		}
+
+            container.setHunger(levelSum).setSaturation(1.2f);
+            container.apply();
 		}
 
         /* Give pattern exp to player when eaten */
@@ -260,10 +271,36 @@ public class Meal extends CookedFood{
     }
 
     public static class MealEffectContainer{
+        private final ItemStack stack;
+        private final World world;
+        private final LivingEntity entityLiving;
+
+        private int hunger = 0;
+        private float saturation = 0.2f;
+
         private List<EffectInstance> effectInstances = new ArrayList<EffectInstance>();
         private List<Float> effectDurationMultipliers = new ArrayList<Float>();
         private List<Integer> extraEffectDurationTicks = new ArrayList<Integer>();
         private List<Float> notConsumMealChances = new ArrayList<Float>();
+        private List<Float> hungerMultipliers = new ArrayList<Float>();
+        private List<Integer> extraHungerPoints = new ArrayList<Integer>();
+        private List<Consumer<MealEffectContainer>> extraBehaviors = new ArrayList<Consumer<MealEffectContainer>>();
+
+        private MealEffectContainer(ItemStack stackIn, World worldIn, LivingEntity entityLivingIn){
+            this.stack = stackIn;
+            this.world = worldIn;
+            this.entityLiving = entityLivingIn;
+        }
+
+        private MealEffectContainer setHunger(int hungerIn){
+            this.hunger = hungerIn;
+            return this;
+        }
+
+        private MealEffectContainer setSaturation(float saturationIn){
+            this.saturation = saturationIn;
+            return this;
+        }
 
         public MealEffectContainer addEffectInstance(EffectInstance effectInstanceIn){
             this.effectInstances.add(effectInstanceIn);
@@ -285,8 +322,75 @@ public class Meal extends CookedFood{
             return this;
         }
 
-        private void apply(ItemStack stackIn, World worldIn, LivingEntity entityLivingIn){
+        public MealEffectContainer addHungerMultiplier(float multiplierIn){
+            this.hungerMultipliers.add(multiplierIn);
+            return this;
+        }
 
+        public MealEffectContainer addExtraHungerPoints(int pointsIn){
+            this.extraHungerPoints.add(pointsIn);
+            return this;
+        }
+
+        /* You can use getItemStack, getWorld, getEntityLiving to do something else */
+        public MealEffectContainer addExtraBehavior(Consumer<MealEffectContainer> consumerIn){
+            this.extraBehaviors.add(consumerIn);
+            return this;
+        }
+
+        public ItemStack getItemStack(){return this.stack;}
+        public World getWorld(){return this.world;}
+        public LivingEntity getEntityLiving(){return this.entityLiving;}
+
+        private void apply(){
+            List<EffectInstance> effectsToApply = new ArrayList<EffectInstance>();
+
+            /* Apply effects to entity */
+            for(EffectInstance effect : this.effectInstances){
+                Effect potion = effect.getPotion();
+                int amplifier = effect.getAmplifier();
+                int duration = effect.getDuration();
+
+                for(Float multiplier : this.effectDurationMultipliers){
+                    duration *= multiplier;
+                }
+
+                for(int extraTick : this.extraEffectDurationTicks){
+                    duration += extraTick;
+                }
+
+                effectsToApply.add(new EffectInstance(potion, duration, amplifier));
+            }
+            for(EffectInstance effect : effectsToApply){
+                this.entityLiving.addPotionEffect(effect);
+            }
+
+            /* Chance not consum item */
+            if(!(this.entityLiving instanceof PlayerEntity) || !((PlayerEntity)this.entityLiving).abilities.isCreativeMode){
+                Float finalChance = 0.0f;
+                for(Float chance : this.notConsumMealChances){
+                    finalChance += chance;
+                }
+                if(this.world.rand.nextFloat() <= finalChance){
+                    this.stack.shrink(-1);
+                }
+            }
+
+            /* Add hunger & staturation to player */
+            if(this.entityLiving instanceof PlayerEntity){
+                for(float multiplier : this.hungerMultipliers){
+                    this.hunger *= multiplier;
+                }
+                for(int point : this.extraHungerPoints){
+                    this.hunger += point;
+                }
+                ((PlayerEntity)this.entityLiving).getFoodStats().addStats(this.hunger, this.saturation);
+            }
+
+            /* Some extra behavior */
+            for(Consumer<MealEffectContainer> consumer : this.extraBehaviors){
+                consumer.accept(this);
+            }
         }
     }
 }

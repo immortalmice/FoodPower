@@ -18,7 +18,7 @@ import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 public class CookedFood extends ItemFoodBase{
 	/* For a empty CookedFood */
 	public CookedFood(String name){
-		super(name, 1, 0.1f);
+		super(name, 0, 0.0f);
 	}
 
 	@OnlyIn(Dist.CLIENT)

@@ -1,6 +1,7 @@
 package com.github.immortalmice.foodpower.customclass.food;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
@@ -11,8 +12,8 @@ import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
 import com.github.immortalmice.foodpower.customclass.flavor.FlavorType;
+import com.github.immortalmice.foodpower.customclass.food.Meal.MealEffectContainer;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
-import com.github.immortalmice.foodpower.lists.FoodTypes;
 
 /* Do not use ingrediant directly to create ItemStack, use Ingredient#asItem */
 public class Ingredient extends ItemFoodBase{
@@ -23,31 +24,32 @@ public class Ingredient extends ItemFoodBase{
 	private double baseAmount;
 	/* Real Item that registed in game */
 	private Item item = null;
-	/** For Mod Ingredients */
-	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, FlavorType flavorIn, double amountIn){
+	/* A container to apply ingredient's effect with level in */
+	private BiConsumer<MealEffectContainer, Integer> container = null;
+
+	/* For Mod Ingredients */
+	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, FlavorType flavorIn, double amountIn, BiConsumer<MealEffectContainer, Integer> consumerIn){
 		super(nameIn, healing, saturation);
 
 		this.foodType = ftIn;
 		this.flavorType = flavorIn;
 		this.baseAmount = amountIn;
+		this.container = consumerIn;
+
 		if(this.item == null) this.item = this;
 	}
 	/* For Vanilla Ingredient Food or not Food */
-	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, FlavorType flavorIn, double amountIn){
+	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, FlavorType flavorIn, double amountIn, BiConsumer<MealEffectContainer, Integer> consumerIn){
 		this(nameIn
 			, itemIn.isFood() ? itemIn.getFood().getHealing() : 0
 			, itemIn.isFood() ? itemIn.getFood().getSaturation() : 0.0f
-			, ftIn, flavorIn, amountIn);
+			, ftIn, flavorIn, amountIn, consumerIn);
 
 		this.item = itemIn;
 	}
-	/* For CookedFoods & Meals */
-	public Ingredient(String nameIn){
-		this(nameIn, 2, 0.4f, FoodTypes.NONE, FlavorTypes.NONE, 1);
-	}
 	/* For Empty (Use In Present A Food With That Type) */
 	public Ingredient(FoodType ftIn){
-		this("empty", 0, 0.0f, ftIn, FlavorTypes.NONE, 1);
+		this("empty", 0, 0.0f, ftIn, FlavorTypes.NONE, 1, null);
 	}
 
 	public boolean isEqual(Ingredient a){
@@ -78,8 +80,8 @@ public class Ingredient extends ItemFoodBase{
 		return this.baseAmount;
 	}
 
-	public void setEffect(FoodEffect effectIn){
-		this.effect = effectIn;
+	public BiConsumer<MealEffectContainer, Integer> getContainer(){
+		return this.container;
 	}
 
 	public Item asItem(){
