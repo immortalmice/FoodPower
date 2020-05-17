@@ -81,8 +81,8 @@ public class Meal extends CookedFood{
                 levelSum += element.getInt("level");
 
     			Ingredient ingredient = Ingredients.getIngredientByName(element.getString("name"));
-                if(ingredient.getContainer() != null){
-                    ingredient.getContainer().accept(container, element.getInt("level"));
+                if(ingredient.getMealEffectBiConsumer() != null){
+                    ingredient.getMealEffectBiConsumer().accept(container, element.getInt("level"));
                 }
     		}
 

@@ -24,32 +24,31 @@ public class Ingredient extends ItemFoodBase{
 	private double baseAmount;
 	/* Real Item that registed in game */
 	private Item item = null;
-	/* A container to apply ingredient's effect with level in */
-	private BiConsumer<MealEffectContainer, Integer> container = null;
+	/* A consumer to apply ingredient's effect with level in */
+	private BiConsumer<MealEffectContainer, Integer> mealEffectBiConsumer = null;
 
 	/* For Mod Ingredients */
-	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, FlavorType flavorIn, double amountIn, BiConsumer<MealEffectContainer, Integer> consumerIn){
+	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, FlavorType flavorIn, double amountIn){
 		super(nameIn, healing, saturation);
 
 		this.foodType = ftIn;
 		this.flavorType = flavorIn;
 		this.baseAmount = amountIn;
-		this.container = consumerIn;
 
 		if(this.item == null) this.item = this;
 	}
 	/* For Vanilla Ingredient Food or not Food */
-	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, FlavorType flavorIn, double amountIn, BiConsumer<MealEffectContainer, Integer> consumerIn){
+	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, FlavorType flavorIn, double amountIn){
 		this(nameIn
 			, itemIn.isFood() ? itemIn.getFood().getHealing() : 0
 			, itemIn.isFood() ? itemIn.getFood().getSaturation() : 0.0f
-			, ftIn, flavorIn, amountIn, consumerIn);
+			, ftIn, flavorIn, amountIn);
 
 		this.item = itemIn;
 	}
 	/* For Empty (Use In Present A Food With That Type) */
 	public Ingredient(FoodType ftIn){
-		this("empty", 0, 0.0f, ftIn, FlavorTypes.NONE, 1, null);
+		this("empty", 0, 0.0f, ftIn, FlavorTypes.NONE, 1);
 	}
 
 	public boolean isEqual(Ingredient a){
@@ -80,8 +79,13 @@ public class Ingredient extends ItemFoodBase{
 		return this.baseAmount;
 	}
 
-	public BiConsumer<MealEffectContainer, Integer> getContainer(){
-		return this.container;
+	public BiConsumer<MealEffectContainer, Integer> getMealEffectBiConsumer(){
+		return this.mealEffectBiConsumer;
+	}
+
+	public void setMealEffectBiConsumer(BiConsumer<MealEffectContainer, Integer> consumerIn){
+		this.mealEffectBiConsumer = consumerIn;
+		return;
 	}
 
 	public Item asItem(){
