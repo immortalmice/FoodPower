@@ -15,6 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
@@ -64,6 +65,22 @@ public class Meal extends CookedFood{
 		}
 		return ItemStack.EMPTY;
 	}
+
+    /* Get the level of specific ingredient in this meal, return 0 when ingredient not exist in this meal */
+    public static int getIngredientLevel(ItemStack stack, Ingredient ingredient){
+        if(stack.hasTag()){
+            CompoundNBT nbt = stack.getTag();
+            if(nbt.contains("ingredients")){
+                for(INBT ele : (ListNBT)nbt.get("ingredients")){
+                    CompoundNBT element = (CompoundNBT)ele;
+                    if(Ingredients.getIngredientByName(element.getString("name")) == ingredient){
+                        return element.getInt("level");
+                    }
+                }
+            }
+        }
+        return 0;
+    }
 
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stackIn, World worldIn, LivingEntity entityLiving){
