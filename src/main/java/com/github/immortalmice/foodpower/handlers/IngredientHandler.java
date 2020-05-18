@@ -6,6 +6,7 @@ public class IngredientHandler{
 	public static void setupAllEffect(){
 		/* Mod Ingrediants */
 		Ingredients.Items.BUTTER.setMealEffectBiConsumer((effectContainer, level) -> {
+			/* This effect handle by ForgeEventHandlers#onEntityInteract, nothing to do here */
 			return;
 		});
 		Ingredients.Items.ORANGE.setMealEffectBiConsumer((effectContainer, level) -> {
