@@ -2,18 +2,25 @@ package com.github.immortalmice.foodpower.handlers;
 
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+
 public class IngredientHandler{
 	public static void setupAllEffect(){
 		/* Mod Ingrediants */
 		Ingredients.Items.BUTTER.setMealEffectBiConsumer((effectContainer, level) -> {
 			/* This effect handle by ForgeEventHandlers#onEntityInteract, nothing to do here */
-			return;
 		});
 		Ingredients.Items.ORANGE.setMealEffectBiConsumer((effectContainer, level) -> {
 
 		});
 		Ingredients.Items.KIWI.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(Effects.HEALTH_BOOST, (level - 1) * 1200 + 600, level - 1));
+			if(level == 3){
+				effectContainer.addExtraBehavior(() -> {
+					effectContainer.getEntityLiving().heal(2.0f);
+				});
+			}
 		});
 		Ingredients.Items.PAPAYA.setMealEffectBiConsumer((effectContainer, level) -> {
 

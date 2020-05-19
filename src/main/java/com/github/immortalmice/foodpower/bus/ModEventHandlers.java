@@ -15,6 +15,7 @@ import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Messages;
 import com.github.immortalmice.foodpower.handlers.BiomeHandler;
 import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
+import com.github.immortalmice.foodpower.handlers.IngredientHandler;
 import com.github.immortalmice.foodpower.handlers.ModelHandler;
 import com.github.immortalmice.foodpower.handlers.RenderHandler;
 import com.github.immortalmice.foodpower.handlers.TextureHandler;
@@ -34,6 +35,7 @@ public class ModEventHandlers{
 		CapabilityHandler.registAllCapabilities();
 		Messages.registAllMessage();
 		BiomeHandler.setup();
+		IngredientHandler.setupAllEffect();
 	}
 
 	@OnlyIn(Dist.CLIENT)
