@@ -19,16 +19,8 @@ public class Effects{
 	@ObjectHolder("foodpower")
 	public static class FoodEffects{
 		/* Mod Ingrediant */
-		public static final FoodEffect BUTTER_POWER = null;
-		public static final FoodEffect ORANGE_POWER = null;
-		public static final FoodEffect KIWI_POWER = null;
-		public static final FoodEffect PAPAYA_POWER = null;
-		public static final FoodEffect MANGO_POWER = null;
-		public static final FoodEffect LEMON_POWER = null;
 		public static final FoodEffect MINT_POWER = null;
 		public static final FoodEffect FERMENTED_ENDEREYE_POWER = null;
-		public static final FoodEffect DOUGH_POWER = null;
-		public static final FoodEffect TOMATO_POWER = null;
 		public static final FoodEffect KETCHUP_POWER = null;
 		public static final FoodEffect SAUCE_POWER = null;
 		public static final FoodEffect SALT_POWER = null;
@@ -38,9 +30,7 @@ public class Effects{
 		public static final FoodEffect CHILI_POWER = null;
 		public static final FoodEffect SPINACH_POWER = null;
 		public static final FoodEffect CABBAGE_POWER = null;
-		public static final FoodEffect FLOUR_POWER = null;
 		public static final FoodEffect CORN_POWER = null;
-		public static final FoodEffect CREAM_POWER = null;
 
 		/* Vanilla Ingrediant */
 		public static final FoodEffect APPLE_POWER = null;
@@ -59,15 +49,9 @@ public class Effects{
 		public static final FoodEffect MUTTON_POWER = null;
 		public static final FoodEffect CHORUS_FRUIT_POWER = null;
 		public static final FoodEffect COCOA_BEANS_POWER = null;
-		public static final FoodEffect SUGAR_POWER = null;
 		public static final FoodEffect WATER_BUCKET_POWER = null;
-		public static final FoodEffect NETHER_WART_POWER = null; 
 		public static final FoodEffect HONEY_BOTTLE_POWER = null; 
-		public static final FoodEffect KELP_POWER = null; 
-		public static final FoodEffect RABBIT_POWER = null; 
 		public static final FoodEffect SWEET_BERRIES_POWER = null; 
-		public static final FoodEffect MAGMA_CREAM_POWER = null; 
-		public static final FoodEffect GHAST_TEAR_POWER = null; 
 		public static final FoodEffect DRAGON_BREATH_POWER = null; 
 		public static final FoodEffect EXPERIENCE_BOTTLE_POWER = null; 
 	}
@@ -90,16 +74,8 @@ class Registry{
 	public static final DeferredRegister<Effect> REGISTER = new DeferredRegister<Effect>(ForgeRegistries.POTIONS, FoodPower.MODID);
 
 	/* Mod Ingrediant */
-	public static final RegistryObject<Effect> OBJ_BUTTER_POWER = Registry.foodEffectRegister("butter", (str) -> new FoodEffect(str, 0xFFFF00));;
-	public static final RegistryObject<Effect> OBJ_ORANGE_POWER = Registry.foodEffectRegister("orange", (str) -> new FoodEffect(str, 0xFFAA33));;
-	public static final RegistryObject<Effect> OBJ_KIWI_POWER = Registry.foodEffectRegister("kiwi", (str) -> new FoodEffect(str, 0x00FF00));;
-	public static final RegistryObject<Effect> OBJ_PAPAYA_POWER = Registry.foodEffectRegister("papaya", (str) -> new FoodEffect(str, 0xDDAA00));;
-	public static final RegistryObject<Effect> OBJ_MANGO_POWER = Registry.foodEffectRegister("mango", (str) -> new FoodEffect(str, 0xFFAA33));;
-	public static final RegistryObject<Effect> OBJ_LEMON_POWER = Registry.foodEffectRegister("lemon", (str) -> new FoodEffect(str, 0xFFFF33));;
 	public static final RegistryObject<Effect> OBJ_MINT_POWER = Registry.foodEffectRegister("mint", (str) -> new FoodEffect(str, 0x77FF00));;
 	public static final RegistryObject<Effect> OBJ_FERMENTED_ENDEREYE_POWER = Registry.foodEffectRegister("fermented_endereye", (str) -> new FoodEffect(str, 0xFF5511));;
-	public static final RegistryObject<Effect> OBJ_DOUGH_POWER = Registry.foodEffectRegister("dough", (str) -> new FoodEffect(str, 0xFFCC22));;
-	public static final RegistryObject<Effect> OBJ_TOMATO_POWER = Registry.foodEffectRegister("tomato", (str) -> new FoodEffect(str, 0xE63F00));;
 	public static final RegistryObject<Effect> OBJ_KETCHUP_POWER = Registry.foodEffectRegister("ketchup", (str) -> new FoodEffect(str, 0xC63300));;
 	public static final RegistryObject<Effect> OBJ_SAUCE_POWER = Registry.foodEffectRegister("sauce", (str) -> new FoodEffect(str, 0xCC0000));;
 	public static final RegistryObject<Effect> OBJ_SALT_POWER = Registry.foodEffectRegister("salt", (str) -> new FoodEffect(str, 0xFFFFFF));;
@@ -109,9 +85,7 @@ class Registry{
 	public static final RegistryObject<Effect> OBJ_CHILI_POWER = Registry.foodEffectRegister("chili", (str) -> new FoodEffect(str, 0xFF0000));;
 	public static final RegistryObject<Effect> OBJ_SPINACH_POWER = Registry.foodEffectRegister("spinach", (str) -> new FoodEffect(str, 0x00DD00));;
 	public static final RegistryObject<Effect> OBJ_CABBAGE_POWER = Registry.foodEffectRegister("cabbage", (str) -> new FoodEffect(str, 0x00AA00));;
-	public static final RegistryObject<Effect> OBJ_FLOUR_POWER = Registry.foodEffectRegister("flour", (str) -> new FoodEffect(str, 0xEEFFBB));;
 	public static final RegistryObject<Effect> OBJ_CORN_POWER = Registry.foodEffectRegister("corn", (str) -> new FoodEffect(str, 0xFFFF00));;
-	public static final RegistryObject<Effect> OBJ_CREAM_POWER = Registry.foodEffectRegister("cream", (str) -> new FoodEffect(str, 0xFFFFBB));;
 
 	/* Vanilla Ingrediant */
 	public static final RegistryObject<Effect> OBJ_APPLE_POWER = Registry.foodEffectRegister("apple", (str) -> new FoodEffect(str, 0xE63F00));;
@@ -130,15 +104,9 @@ class Registry{
 	public static final RegistryObject<Effect> OBJ_MUTTON_POWER = Registry.foodEffectRegister("mutton", (str) -> new FoodEffect(str, 0xFF8888));;
 	public static final RegistryObject<Effect> OBJ_CHORUS_FRUIT_POWER = Registry.foodEffectRegister("chorus_fruit", (str) -> new FoodEffect(str, 0xD28EFF));;
 	public static final RegistryObject<Effect> OBJ_COCOA_BEANS_POWER = Registry.foodEffectRegister("cocoa_beans", (str) -> new FoodEffect(str, 0xBB5500));;
-	public static final RegistryObject<Effect> OBJ_SUGAR_POWER = Registry.foodEffectRegister("sugar", (str) -> new FoodEffect(str, 0xFFFFFF));;
 	public static final RegistryObject<Effect> OBJ_WATER_BUCKET_POWER = Registry.foodEffectRegister("water_bucket", (str) -> new FoodEffect(str, 0x00FFFF));;
-	public static final RegistryObject<Effect> OBJ_NETHER_WART_POWER = Registry.foodEffectRegister("nether_wart", (str) -> new FoodEffect(str, 0xAA0000));; 
 	public static final RegistryObject<Effect> OBJ_HONEY_BOTTLE_POWER = Registry.foodEffectRegister("honey_bottle", (str) -> new FoodEffect(str, 0xF9F900));; 
-	public static final RegistryObject<Effect> OBJ_KELP_POWER = Registry.foodEffectRegister("kelp", (str) -> new FoodEffect(str, 0x73BF00));; 
-	public static final RegistryObject<Effect> OBJ_RABBIT_POWER = Registry.foodEffectRegister("rabbit", (str) -> new FoodEffect(str, 0xFFCBB3));; 
 	public static final RegistryObject<Effect> OBJ_SWEET_BERRIES_POWER = Registry.foodEffectRegister("sweet_berries", (str) -> new FoodEffect(str, 0xF00078));; 
-	public static final RegistryObject<Effect> OBJ_MAGMA_CREAM_POWER = Registry.foodEffectRegister("magma_cream", (str) -> new FoodEffect(str, 0xFFAA33));
-	public static final RegistryObject<Effect> OBJ_GHAST_TEAR_POWER = Registry.foodEffectRegister("ghast_tear", (str) -> new FoodEffect(str, 0xFFFFFF));
 	public static final RegistryObject<Effect> OBJ_DRAGON_BREATH_POWER = Registry.foodEffectRegister("dragon_breath", (str) -> new FoodEffect(str, 0x9955FF));
 	public static final RegistryObject<Effect> OBJ_EXPERIENCE_BOTTLE_POWER = Registry.foodEffectRegister("experience_bottle", (str) -> new FoodEffect(str, 0xBBFF00));
 
