@@ -32,7 +32,7 @@ public class IngredientHandler{
 
 		});
 		Ingredients.Items.MANGO.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(Effects.HASTE, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.LEMON.setMealEffectBiConsumer((effectContainer, level) -> {
 
