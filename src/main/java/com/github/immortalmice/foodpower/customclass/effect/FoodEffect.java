@@ -39,10 +39,6 @@ public class FoodEffect extends EffectBase{
 			, x + 6, y + 7);
 	}
 
-	public EffectInstance getEffectInstance(int durationIn, int amplifierIn){
-		return new EffectInstance(this, durationIn, amplifierIn, false, false);
-	}
-
 	public String getIngredientName(){
 		return this.ingredientName;
 	}
