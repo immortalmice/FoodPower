@@ -12,10 +12,16 @@ public class IngredientHandler{
 			/* This effect handle by ForgeEventHandlers#onEntityInteract, nothing to do here */
 		});
 		Ingredients.Items.ORANGE.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			switch(level){
+				case 2:
+					effectContainer.addExtraEffectDurationTick(127 * 20);
+					break;
+				case 3:
+					effectContainer.addExtraEffectDurationTick(255 * 20);
+			}
 		});
 		Ingredients.Items.KIWI.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(Effects.HEALTH_BOOST, (level - 1) * 1200 + 600, level - 1));
+			effectContainer.addEffectInstance(new EffectInstance(Effects.HEALTH_BOOST, (level - 1) * 1500 + 600, level - 1));
 			if(level == 3){
 				effectContainer.addExtraBehavior(() -> {
 					effectContainer.getEntityLiving().heal(2.0f);
