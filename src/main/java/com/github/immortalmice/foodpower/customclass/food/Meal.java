@@ -301,7 +301,7 @@ public class Meal extends CookedFood{
         private List<Float> notConsumMealChances = new ArrayList<Float>();
         private List<Float> hungerMultipliers = new ArrayList<Float>();
         private List<Integer> extraHungerPoints = new ArrayList<Integer>();
-        private List<Consumer<MealEffectContainer>> extraBehaviors = new ArrayList<Consumer<MealEffectContainer>>();
+        private List<Runnable> extraBehaviors = new ArrayList<Runnable>();
 
         private MealEffectContainer(ItemStack stackIn, World worldIn, LivingEntity entityLivingIn){
             this.stack = stackIn;
@@ -350,8 +350,8 @@ public class Meal extends CookedFood{
         }
 
         /* You can use getItemStack, getWorld, getEntityLiving to do something else */
-        public MealEffectContainer addExtraBehavior(Consumer<MealEffectContainer> consumerIn){
-            this.extraBehaviors.add(consumerIn);
+        public MealEffectContainer addExtraBehavior(Runnable runnableIn){
+            this.extraBehaviors.add(runnableIn);
             return this;
         }
 
@@ -405,8 +405,8 @@ public class Meal extends CookedFood{
             }
 
             /* Some extra behavior */
-            for(Consumer<MealEffectContainer> consumer : this.extraBehaviors){
-                consumer.accept(this);
+            for(Runnable runnable : this.extraBehaviors){
+                runnable.run();
             }
         }
     }
