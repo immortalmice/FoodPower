@@ -1,6 +1,7 @@
 package com.github.immortalmice.foodpower.customclass.effect;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.DisplayEffectsScreen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -37,6 +38,27 @@ public class FoodEffect extends EffectBase{
 		itemRenderer.zLevel = z;
 		itemRenderer.renderItemAndEffectIntoGUI(new ItemStack((Ingredients.getIngredientByName(this.getIngredientName())).asItem())
 			, x + 6, y + 7);
+	}
+/*	
+	// I can't actually cover the original broken texture, so I disable the HUD display.
+	// Need help.
+
+	@OnlyIn(Dist.CLIENT)
+	@Override
+	public void renderHUDEffect(EffectInstance effect, AbstractGui gui, int x, int y, float z, float alpha){
+		Minecraft minecraft = Minecraft.getInstance();
+		minecraft.getTextureManager().bindTexture(ContainerScreen.INVENTORY_BACKGROUND);
+		gui.blit(x, y, 141, 166, 24, 24);
+
+		ItemRenderer itemRenderer = minecraft.getItemRenderer();
+		itemRenderer.zLevel = z;
+		itemRenderer.renderItemAndEffectIntoGUI(new ItemStack((Ingredients.getIngredientByName(this.getIngredientName())).asItem())
+			, x + 4, y + 4);
+	}
+*/
+	@Override
+	public boolean shouldRenderHUD(EffectInstance effect){
+		return false;
 	}
 
 	public String getIngredientName(){
