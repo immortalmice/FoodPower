@@ -237,7 +237,7 @@ public class MealBakedModel extends BakedItemModel{
 		, TextureAtlasSprite sprite, Direction orientation){
 
 		/* For each VertexFormatElement in VertexFormat of consumer  */
-		ImmutableList<VertexFormatElement> elements = consumer.getVertexFormat().func_227894_c_();
+		ImmutableList<VertexFormatElement> elements = consumer.getVertexFormat().getElements();
 		for(int e = 0; e <= elements.size() - 1; e ++){
 			VertexFormatElement element = elements.get(e);
 			switch(element.getUsage()){

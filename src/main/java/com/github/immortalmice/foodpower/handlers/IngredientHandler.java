@@ -1,5 +1,6 @@
 package com.github.immortalmice.foodpower.handlers;
 
+import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
 import net.minecraft.potion.EffectInstance;
@@ -38,7 +39,7 @@ public class IngredientHandler{
 
 		});
 		Ingredients.Items.MINT.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.MINT_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.FERMENTED_ENDEREYE.setMealEffectBiConsumer((effectContainer, level) -> {
 

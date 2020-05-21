@@ -92,8 +92,8 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		this.textBox.setCanLoseFocus(true);
 		this.textBox.changeFocus(true);
 		this.children.add(this.textBox);
-		this.textBox.func_212954_a((str) -> onTextChanged());
-		this.func_212928_a(this.textBox);
+		this.textBox.setResponder((str) -> onTextChanged());
+		this.addButton(this.textBox);
 		//this.textBox.setEnableBackgroundDrawing(false);
 
 		/* If player is creative, show this button, server will valid again when message recieved */

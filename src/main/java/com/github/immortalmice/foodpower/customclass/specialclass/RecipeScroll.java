@@ -215,7 +215,7 @@ public class RecipeScroll extends ItemBase{
         CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
 
         /* ActionResultType.SUCCESS */
-        if(worldIn.isRemote) return ActionResult.func_226248_a_(stack);
+        if(worldIn.isRemote) return ActionResult.resultSuccess(stack);
         NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
             @Override
             public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){

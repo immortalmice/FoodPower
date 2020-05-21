@@ -21,13 +21,13 @@ public class RenderHandler{
 	/* RenderType.func_228641_d_() : cutout_mipped */
 	public static void setupRenderLayer(){
 		for(KitchenAppliance block : KitchenAppliances.list){
-			RenderTypeLookup.setRenderLayer(block, RenderType.func_228641_d_());
+			RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
 		}
 		for(CropBlock block : Crops.blockList){
-			RenderTypeLookup.setRenderLayer(block, RenderType.func_228641_d_());
+			RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
 		}
 		for(TreeSaplingBush block : Trees.saplingBushList){
-			RenderTypeLookup.setRenderLayer(block, RenderType.func_228641_d_());
+			RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
 		}
 	}
 }

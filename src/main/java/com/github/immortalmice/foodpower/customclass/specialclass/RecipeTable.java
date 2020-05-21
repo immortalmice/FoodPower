@@ -26,13 +26,13 @@ public class RecipeTable extends BlockBase{
 
 	/* Open the GUI */
 	@Override
-	public ActionResultType func_225533_a_(BlockState stateIn, World worldIn
+	public ActionResultType onBlockActivated(BlockState stateIn, World worldIn
 		, BlockPos posIn, PlayerEntity playerIn
 		, Hand handIn, BlockRayTraceResult resultIn){
 
 		if(worldIn.isRemote) return ActionResultType.SUCCESS;
 
-		if(!playerIn.func_225608_bj_()){
+		if(!playerIn.isSneaking()){
 			boolean isCreative = playerIn.abilities.isCreativeMode;
 			NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
 				@Override

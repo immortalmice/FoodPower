@@ -50,10 +50,10 @@ public class ModEventHandlers{
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onTextureStitch(TextureStitchEvent.Pre event){
-		if(event.getMap().func_229223_g_().equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)){
+		if(event.getMap().getTextureLocation().equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)){
 			ModelHandler.registTextures(event);
 		}
-		if(event.getMap().func_229223_g_().equals(new ResourceLocation("textures/atlas/mob_effects.png"))){
+		if(event.getMap().getTextureLocation().equals(new ResourceLocation("textures/atlas/mob_effects.png"))){
 			TextureHandler.deleteAllFoodEffectTexture(event);
 		}
 	}

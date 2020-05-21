@@ -88,7 +88,7 @@ public class Ingredients{
 		public static final Ingredient SUGAR = new Ingredient("sugar", net.minecraft.item.Items.SUGAR, FoodTypes.NONE, FlavorTypes.SWEET, 2.5);
 		public static final Ingredient WATER_BUCKET = new Ingredient("water_bucket", net.minecraft.item.Items.WATER_BUCKET, FoodTypes.NONE, FlavorTypes.NONE, 1.8);
 		public static final Ingredient NETHER_WART = new Ingredient("nether_wart", net.minecraft.item.Items.NETHER_WART, FoodTypes.VEGETABLE, FlavorTypes.NETHER, 1.2);
-		public static final Ingredient HONEY_BOTTLE = new Ingredient("honey_bottle", net.minecraft.item.Items.field_226638_pX_, FoodTypes.SEASONING, FlavorTypes.SWEET, 1.9);
+		public static final Ingredient HONEY_BOTTLE = new Ingredient("honey_bottle", net.minecraft.item.Items.HONEY_BOTTLE, FoodTypes.SEASONING, FlavorTypes.SWEET, 1.9);
 		public static final Ingredient KELP = new Ingredient("kelp", net.minecraft.item.Items.KELP, FoodTypes.VEGETABLE, FlavorTypes.SALTY, 1.75);
 		public static final Ingredient RABBIT = new Ingredient("rabbit", net.minecraft.item.Items.RABBIT, FoodTypes.MEAT, FlavorTypes.NONE, 1.1);
 		public static final Ingredient SWEET_BERRIES = new Ingredient("sweet_berries", net.minecraft.item.Items.SWEET_BERRIES, FoodTypes.FRUIT, FlavorTypes.SWEET, 1.7);

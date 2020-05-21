@@ -51,7 +51,7 @@ public class MealModel implements IModelGeometry<MealModel>{
 
         modelTransform = transformsFromModel != null ? new ModelTransformComposition(transformsFromModel, modelTransform) : modelTransform;
 
-		TransformationMatrix transform = modelTransform.func_225615_b_();
+		TransformationMatrix transform = modelTransform.getRotation();
 
         /* Vanillad BakedItemModel but with custom MealItemOverrideList, used in store data, it'll display nothing */
 		return new MealBakedModel(this.materials, spriteGetter, particle, transformMap, transform, owner.isSideLit());

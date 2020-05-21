@@ -31,8 +31,8 @@ public class BiomeHandler{
 					for(FPTree tree : TREES_IN_WARM){
 						biome.addFeature(Decoration.VEGETAL_DECORATION
 							, tree.getConfiguredFeature()
-								.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP
-									.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
+								.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP
+									.configure(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
 					}
 					break;
 				case JUNGLE:
@@ -41,8 +41,8 @@ public class BiomeHandler{
 					for(FPTree tree : TREES_IN_HOT){
 						biome.addFeature(Decoration.VEGETAL_DECORATION
 							, tree.getConfiguredFeature()
-								.func_227228_a_(Placement.COUNT_EXTRA_HEIGHTMAP
-									.func_227446_a_(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
+								.withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP
+									.configure(new AtSurfaceWithExtraConfig(0, 0.1F, 1))));
 					}
 					break;
 				default:

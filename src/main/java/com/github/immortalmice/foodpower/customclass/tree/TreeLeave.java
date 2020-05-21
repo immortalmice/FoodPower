@@ -15,7 +15,7 @@ public class TreeLeave extends LeavesBlock{
             .sound(SoundType.PLANT)
             .tickRandomly()
             .variableOpacity()
-            .func_226896_b_());//is not Soild
+            .notSolid());//is not Soild
 
         this.fpName = nameIn;
 	}

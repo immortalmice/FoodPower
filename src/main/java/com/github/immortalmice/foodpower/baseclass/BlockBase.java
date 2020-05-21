@@ -19,7 +19,7 @@ public class BlockBase extends HorizontalBlock{
 	}
 
 	public BlockBase(String nameIn, Material material){
-		this(nameIn, Block.Properties.create(material).func_226896_b_());
+		this(nameIn, Block.Properties.create(material).notSolid());
 	}
 
 	@Override
