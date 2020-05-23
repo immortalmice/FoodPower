@@ -2,7 +2,6 @@ package com.github.immortalmice.foodpower.customclass.container.classes.recipeta
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.lang.Math;
 
 import net.minecraft.util.IntReferenceHolder;
@@ -13,8 +12,6 @@ import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Slot;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -178,13 +175,7 @@ public class RecipeTableContainer extends ContainerBase{
 			this.refreshScroll();
 			ItemStack scroll = slot.getStack();
 			if(!scroll.isEmpty() && scroll.getItem() instanceof RecipeScroll){
-				DistExecutor.callWhenOn(Dist.CLIENT, () -> new Callable<Void>(){
-					@Override
-					public Void call(){
-						FoodPower.NETWORK.sendToServer(new RecipeTableMessage(RecipeTableContainer.this.getWindowId(), "Init Recipe Scroll", scroll));
-						return null;
-					}
-				});
+				FoodPower.NETWORK.sendToServer(new RecipeTableMessage(RecipeTableContainer.this.getWindowId(), "Init Recipe Scroll", scroll));
 			}
 		}
 		this.refreshScroll();
