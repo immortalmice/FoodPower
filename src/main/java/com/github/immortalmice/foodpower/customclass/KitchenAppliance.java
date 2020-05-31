@@ -22,15 +22,10 @@ public class KitchenAppliance extends BlockBase{
 			.harvestTool(ToolType.PICKAXE)
 			.sound(SoundType.METAL)
 			.hardnessAndResistance(1.5f)
-			.notSolid());//is not Soild
+			.notSolid());
 
 		this.blockShape = Block.makeCuboidShape(blockAABBIn.minX, blockAABBIn.minY, blockAABBIn.minZ, blockAABBIn.maxX, blockAABBIn.maxY, blockAABBIn.maxZ);
 	}
-	
-    @Override
-    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context){
-    	return this.blockShape;
-    }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context){
