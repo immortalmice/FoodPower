@@ -1,6 +1,7 @@
 package com.github.immortalmice.foodpower.customclass.specialclass;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -8,6 +9,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -21,7 +23,10 @@ import com.github.immortalmice.foodpower.customclass.container.classes.market.Ma
 
 public class Market extends BlockBase{
 	public Market(){
-		super("market", Material.ROCK);
+		super("market", Block.Properties.create(Material.WOOD)
+			.harvestLevel(0)
+			.harvestTool(ToolType.AXE)
+			.hardnessAndResistance(1.5f));
 	}
 	/* Open the GUI */
 	@Override
