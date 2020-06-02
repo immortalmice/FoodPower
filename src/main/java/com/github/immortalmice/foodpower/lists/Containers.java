@@ -35,7 +35,6 @@ public class Containers{
 		public static final ContainerType<RecipeScrollContainer> RECIPE_SCROLL = null;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static void registAllScreen(){
 		ScreenManager.registerFactory(Containers.ContainerTypes.MARKET, MarketScreen::new);
 		ScreenManager.registerFactory(Containers.ContainerTypes.RECIPE_TABLE, RecipeTableScreen::new);

@@ -24,7 +24,6 @@ public class FoodEffect extends EffectBase{
 		this.fpName = FoodEffect.getFPNameByIngredientName(this.ingredientName);
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void renderInventoryEffect(EffectInstance effect, DisplayEffectsScreen<?> gui, int x, int y, float z){
 		/* Cover original icon */
@@ -42,7 +41,6 @@ public class FoodEffect extends EffectBase{
 	// I can't actually cover the original broken texture, so I disable the HUD display.
 	// Need help.
 
-	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void renderHUDEffect(EffectInstance effect, AbstractGui gui, int x, int y, float z, float alpha){
 		Minecraft minecraft = Minecraft.getInstance();

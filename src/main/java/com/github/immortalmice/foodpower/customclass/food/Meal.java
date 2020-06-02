@@ -139,7 +139,6 @@ public class Meal extends CookedFood{
         return 64;
     }
 
-	@OnlyIn(Dist.CLIENT)
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
@@ -197,13 +196,11 @@ public class Meal extends CookedFood{
         }
     }
 
-	@OnlyIn(Dist.CLIENT)
     @Override
     public ITextComponent getDisplayName(ItemStack stack){
     	return new StringTextComponent(this.formateDisplayName(stack));
     }
 
-    @OnlyIn(Dist.CLIENT)
     private String formateDisplayName(ItemStack stack){
         if(stack.hasTag()
             && stack.getTag().contains("displayName") 

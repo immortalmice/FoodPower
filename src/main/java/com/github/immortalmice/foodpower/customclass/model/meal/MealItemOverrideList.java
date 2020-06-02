@@ -24,7 +24,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 
-@OnlyIn(Dist.CLIENT)
 public class MealItemOverrideList extends ItemOverrideList{
 	private Map<String, TextureAtlasSprite> sprites = new HashMap<String, TextureAtlasSprite>();
 	private Map<String, Material> materials;

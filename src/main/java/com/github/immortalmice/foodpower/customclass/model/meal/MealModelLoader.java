@@ -17,7 +17,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 /* Used in read json of meals */
-@OnlyIn(Dist.CLIENT)
 public enum MealModelLoader implements IModelLoader<MealModel>{
 	INSTANCE;
 

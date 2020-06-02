@@ -12,7 +12,6 @@ import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.Trees;
 
-@OnlyIn(Dist.CLIENT)
 public class RenderHandler{
 	public static void setup(){
 		RenderHandler.setupRenderLayer();

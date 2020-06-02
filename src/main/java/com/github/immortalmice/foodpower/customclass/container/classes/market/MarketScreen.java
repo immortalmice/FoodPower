@@ -13,7 +13,6 @@ import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
 import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketContainer;
 import com.github.immortalmice.foodpower.customclass.message.classes.MarketMessage;
 
-@OnlyIn(Dist.CLIENT)
 public class MarketScreen extends ScreenBase<MarketContainer>{
 
 	public MarketScreen(MarketContainer containerIn, PlayerInventory inventoryIn, ITextComponent textIn){

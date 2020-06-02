@@ -96,7 +96,6 @@ public class ForgeEventHandlers{
 	}
 
 	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
 	public static void onItemTooltip(ItemTooltipEvent event){
 		Item item = event.getItemStack().getItem();
 		Ingredient ingredient = Ingredients.getIngredientByItem(item);

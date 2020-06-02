@@ -20,7 +20,6 @@ import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTable
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
-@OnlyIn(Dist.CLIENT)
 public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 	private TextFieldWidget textBox;
 

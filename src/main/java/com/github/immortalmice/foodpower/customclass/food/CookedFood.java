@@ -21,7 +21,6 @@ public class CookedFood extends ItemFoodBase{
 		super(name, 0, 0.0f);
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	return;

@@ -154,7 +154,6 @@ public class RecipeScroll extends ItemBase{
     }
 
 	/* Add information about pattern and ingrdient to tooltip */
-    @OnlyIn(Dist.CLIENT)
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
@@ -196,7 +195,6 @@ public class RecipeScroll extends ItemBase{
     	}
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public ITextComponent getDisplayName(ItemStack stack){
     	if(stack.hasTag() 

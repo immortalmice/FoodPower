@@ -11,7 +11,6 @@ import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-@OnlyIn(Dist.CLIENT)
 public class ScreenBase<T extends ContainerBase> extends ContainerScreen<T>{
 	protected String textureFileName = "default";
 

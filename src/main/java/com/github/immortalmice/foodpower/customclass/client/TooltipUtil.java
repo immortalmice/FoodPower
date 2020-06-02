@@ -9,7 +9,6 @@ import net.minecraft.util.text.Style;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class TooltipUtil{
 	private List<ITextComponent> tooltip = null;
 	private static String leftSpace = "  ";

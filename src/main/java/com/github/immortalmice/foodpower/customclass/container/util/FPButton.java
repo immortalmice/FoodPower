@@ -9,7 +9,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-@OnlyIn(Dist.CLIENT)
 public class FPButton extends Button{
 	private int textureOffsetX, textureOffsetY;
 	public FPButton(int x, int y

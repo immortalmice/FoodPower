@@ -92,7 +92,6 @@ public class Ingredient extends ItemFoodBase{
 		return this.item;
 	}
 	/* Show FoodType & FlavorType on tooltip */
-    @OnlyIn(Dist.CLIENT)
     public static void addFoodAndFlavorTooltip(Ingredient ingredient, List<ITextComponent> tooltip){
     	TooltipUtil tooltipHelper = new TooltipUtil(tooltip);
 

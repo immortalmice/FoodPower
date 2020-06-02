@@ -27,7 +27,6 @@ import net.minecraft.util.math.Vec3d;
 
 /* Do not use this baked model directly, it'll display nothing, use MealBakedModel#getNewBakedItemModel */
 @SuppressWarnings("deprecation")
-@OnlyIn(Dist.CLIENT)
 public class MealBakedModel extends BakedItemModel{
 	private TextureAtlasSprite baseSprite = null;
 	private List<TextureAtlasSprite> ingredientSprites = new ArrayList<TextureAtlasSprite>();

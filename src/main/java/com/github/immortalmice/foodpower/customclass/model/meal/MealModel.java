@@ -27,7 +27,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @SuppressWarnings("deprecation")
-@OnlyIn(Dist.CLIENT)
 public class MealModel implements IModelGeometry<MealModel>{
 	private Map<String, Material> materials = new HashMap<>();
 

@@ -9,7 +9,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.model.meal.MealModelLoader;
 
-@OnlyIn(Dist.CLIENT)
 public class ModelHandler{
 	public static void registLoader(){
 		ModelLoaderRegistry.registerLoader(

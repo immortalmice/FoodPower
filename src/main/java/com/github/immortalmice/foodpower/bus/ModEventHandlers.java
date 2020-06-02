@@ -38,7 +38,6 @@ public class ModEventHandlers{
 		IngredientHandler.setupAllEffect();
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event){
 		Containers.registAllScreen();
@@ -46,7 +45,6 @@ public class ModEventHandlers{
 		ModelHandler.registLoader();
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onTextureStitch(TextureStitchEvent.Pre event){
