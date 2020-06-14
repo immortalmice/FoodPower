@@ -3,8 +3,6 @@ package com.github.immortalmice.foodpower.customclass.container.util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.mojang.blaze3d.systems.RenderSystem;

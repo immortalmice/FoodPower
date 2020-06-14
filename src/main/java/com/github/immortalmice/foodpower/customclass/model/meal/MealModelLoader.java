@@ -13,8 +13,6 @@ import com.google.gson.JsonObject;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.resources.IResourceManager;
 import net.minecraftforge.client.model.IModelLoader;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 /* Used in read json of meals */
 public enum MealModelLoader implements IModelLoader<MealModel>{

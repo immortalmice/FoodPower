@@ -2,8 +2,6 @@ package com.github.immortalmice.foodpower.handlers;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.crop.CropBlock;

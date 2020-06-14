@@ -23,8 +23,6 @@ import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.ModelTransformComposition;
 import net.minecraftforge.client.model.PerspectiveMapWrapper;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 @SuppressWarnings("deprecation")
 public class MealModel implements IModelGeometry<MealModel>{

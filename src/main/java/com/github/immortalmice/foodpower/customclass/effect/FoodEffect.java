@@ -7,8 +7,6 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.baseclass.EffectBase;
 import com.github.immortalmice.foodpower.lists.Ingredients;

@@ -9,8 +9,6 @@ import net.minecraft.world.World;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;

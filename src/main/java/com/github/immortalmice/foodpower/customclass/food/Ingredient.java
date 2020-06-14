@@ -5,8 +5,6 @@ import java.util.function.BiConsumer;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
