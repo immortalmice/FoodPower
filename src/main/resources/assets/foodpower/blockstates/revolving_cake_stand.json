@@ -1,0 +1,8 @@
+{
+	"variants":{
+		"facing=north": {"model": "foodpower:block/revolving_cake_stand_model"},
+		"facing=east": {"model": "foodpower:block/revolving_cake_stand_model", "y": 90},
+		"facing=south": {"model": "foodpower:block/revolving_cake_stand_model", "y": 180},
+		"facing=west": {"model": "foodpower:block/revolving_cake_stand_model", "y": 270}
+	}
+}
