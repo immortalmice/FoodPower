@@ -14,10 +14,9 @@ import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 public class CookedFood extends ItemFoodBase{
-	/* For a empty CookedFood */
-	public CookedFood(String name){
-		super(name, 0, 0.0f);
-	}
+    public CookedFood(String name){
+        super(name, 0, 0.0f, false);
+    }
 
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){

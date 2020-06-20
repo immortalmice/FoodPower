@@ -8,10 +8,15 @@ public class ItemBase extends Item{
 	private String name;
 
 	public ItemBase(String nameIn, Item.Properties propertiesIn){
-		super(propertiesIn.group(FPCreativeTabs.ITEM_TAB));
+		super(propertiesIn);
 
 		this.name = nameIn;
 	}
+
+	public ItemBase(String nameIn, Item.Properties propertiesIn, boolean isInCreativeTab){
+		this(nameIn, propertiesIn.group(isInCreativeTab ? FPCreativeTabs.ITEM_TAB : null));
+	}
+
 	public ItemBase(String nameIn){
 		this(nameIn, new Item.Properties().group(FPCreativeTabs.ITEM_TAB));
 	}
