@@ -11,6 +11,7 @@ import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.Meals;
 import com.github.immortalmice.foodpower.lists.OtherBlocks;
+import com.github.immortalmice.foodpower.lists.OtherEntitys;
 import com.github.immortalmice.foodpower.lists.OtherItems;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 import com.github.immortalmice.foodpower.lists.Trees;
@@ -22,6 +23,7 @@ public class RegistryHandler{
 	public static void registAll(){
 		RegistryHandler.registAllItem();
 		RegistryHandler.registAllBlock();
+		RegistryHandler.registAllEntity();
 		RegistryHandler.registAllContainer();
 		RegistryHandler.registAllEffect();
 		//RegistryHandler.registAllTileEntityType();
@@ -41,6 +43,9 @@ public class RegistryHandler{
 		Crops.getBlockRegister().register(RegistryHandler.BUS);
 		Trees.getBlockRegister().register(RegistryHandler.BUS);
 		OtherBlocks.getBlockRegister().register(RegistryHandler.BUS);
+	}
+	public static void registAllEntity(){
+		OtherEntitys.getRegister().register(RegistryHandler.BUS);
 	}
 	public static void registAllContainer(){
 		Containers.REGISTER.register(RegistryHandler.BUS);

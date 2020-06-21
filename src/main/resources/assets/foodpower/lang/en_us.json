@@ -95,6 +95,7 @@
     "_comment": "Other Items",
     "item.foodpower.dirty_food": "Dirty Food",
     "item.foodpower.recipe_scroll": "RecipeScroll",
+    "item.foodpower.papaya_seed": "PapayaSeed",
 
     "_comment": "=======================BLOCK=======================",
 
@@ -136,6 +137,11 @@
     "_comment": "Other Block & Item",
     "block.foodpower.market": "Market",
     "block.foodpower.recipe_table": "Recipe Table",
+
+    "_comment": "=======================ENTITY=======================",
+
+    "_comment": "Other Entity",
+    "entity.foodpower.papaya_seed": "Papaya Seed",
 
     "_comment": "=======================EFFECT=======================",
 

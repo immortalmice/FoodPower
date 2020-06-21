@@ -95,6 +95,7 @@
     "_comment": "其他物品",
     "item.foodpower.dirty_food": "髒掉的食物",
     "item.foodpower.recipe_scroll": "食譜卷軸",
+    "item.foodpower.papaya_seed": "木瓜子",
 
     "_comment": "=======================方塊=======================",
 
@@ -136,6 +137,11 @@
     "_comment": "其他方塊&物品",
     "block.foodpower.market": "市場",
     "block.foodpower.recipe_table": "食譜桌",
+
+    "_comment": "=======================實體=======================",
+
+    "_comment": "其他實體",
+    "entity.foodpower.papaya_seed": "木瓜子",
 
     "_comment": "=======================效果=======================",
 

@@ -22,6 +22,7 @@ public class OtherItems{
 	public static class Items{
 		public static final DirtyFood DIRTY_FOOD = null;
 		public static final RecipeScroll RECIPE_SCROLL = null;	
+		public static final Item PAPAYA_SEED = null;
 	}
 	
 	public static DeferredRegister<Item> getRegister(){
@@ -34,6 +35,7 @@ class OtherItemsRegistry{
 
 	public static final RegistryObject<Item> OBJ_DIRTY_FOOD = OtherItemsRegistry.register("dirty_food", () -> new DirtyFood());
 	public static final RegistryObject<Item> OBJ_RECIPE_SCROLL = OtherItemsRegistry.register("recipe_scroll", () -> new RecipeScroll());
+	public static final RegistryObject<Item> OBJ_PAPAYA_SEED = OtherItemsRegistry.register("papaya_seed", () -> new Item(new Item.Properties()));
 
 	private static RegistryObject<Item> register(String name, Supplier<Item> sup){
 		return OtherItemsRegistry.REGISTER.register(name, sup);
