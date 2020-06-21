@@ -15,7 +15,7 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 public class Meals{
 	public static final ReflectList<Meal, Items> list = new ReflectList<Meal, Items>(Meal.class, Items.class, null);
 
-	@ObjectHolder("foodpower")
+	@ObjectHolder(FoodPower.MODID)
 	public static class Items{
 		/* Meals */
 		public static final Meal CAKE = null;

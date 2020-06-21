@@ -18,7 +18,7 @@ public class Crops{
 	public static final ReflectList<CropBlock, Blocks> blockList = new ReflectList<CropBlock, Blocks>(CropBlock.class, Blocks.class, null);
 	public static final ReflectList<CropSeed, Items> itemList = new ReflectList<CropSeed, Items>(CropSeed.class, Items.class, null);
 
-	@ObjectHolder("foodpower")
+	@ObjectHolder(FoodPower.MODID)
 	public static class Blocks{
 		public static final CropBlock MINT_CROP = null;
 		public static final CropBlock TOMATO_CROP = null;
@@ -29,7 +29,7 @@ public class Crops{
 		public static final CropBlock CORN_CROP = null;
 	}
 
-	@ObjectHolder("foodpower")
+	@ObjectHolder(FoodPower.MODID)
 	public static class Items{
 		public static final CropSeed MINT_SEED = null;
 		public static final CropSeed TOMATO_SEED = null;

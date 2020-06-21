@@ -27,7 +27,7 @@ public class Trees{
 	public static final FPTree MANGO = new FPTree("mango");
 	public static final FPTree LEMON = new FPTree("lemon");
 
-	@ObjectHolder("foodpower")
+	@ObjectHolder(FoodPower.MODID)
 	public static class Blocks{
 		public static final TreeLeave ORANGE_LEAVE = null;
 		public static final TreeLeave KIWI_LEAVE = null;

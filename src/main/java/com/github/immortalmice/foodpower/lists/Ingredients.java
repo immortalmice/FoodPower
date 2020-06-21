@@ -23,49 +23,49 @@ public class Ingredients{
 
 	public static class Items{
 		/* Mod Ingrediants */
-		@ObjectHolder("foodpower:butter")
+		@ObjectHolder(FoodPower.MODID + ":butter")
 		public static final Ingredient BUTTER = null;
-		@ObjectHolder("foodpower:orange")
+		@ObjectHolder(FoodPower.MODID + ":orange")
 		public static final Ingredient ORANGE = null;
-		@ObjectHolder("foodpower:kiwi")
+		@ObjectHolder(FoodPower.MODID + ":kiwi")
 		public static final Ingredient KIWI = null;
-		@ObjectHolder("foodpower:papaya")
+		@ObjectHolder(FoodPower.MODID + ":papaya")
 		public static final Ingredient PAPAYA = null;
-		@ObjectHolder("foodpower:mango")
+		@ObjectHolder(FoodPower.MODID + ":mango")
 		public static final Ingredient MANGO = null;
-		@ObjectHolder("foodpower:lemon")
+		@ObjectHolder(FoodPower.MODID + ":lemon")
 		public static final Ingredient LEMON = null;
-		@ObjectHolder("foodpower:mint")
+		@ObjectHolder(FoodPower.MODID + ":mint")
 		public static final Ingredient MINT = null;
-		@ObjectHolder("foodpower:fermented_endereye")
+		@ObjectHolder(FoodPower.MODID + ":fermented_endereye")
 		public static final Ingredient FERMENTED_ENDEREYE = null;
-		@ObjectHolder("foodpower:dough")
+		@ObjectHolder(FoodPower.MODID + ":dough")
 		public static final Ingredient DOUGH = null;
-		@ObjectHolder("foodpower:tomato")
+		@ObjectHolder(FoodPower.MODID + ":tomato")
 		public static final Ingredient TOMATO = null;
-		@ObjectHolder("foodpower:ketchup")
+		@ObjectHolder(FoodPower.MODID + ":ketchup")
 		public static final Ingredient KETCHUP = null;
-		@ObjectHolder("foodpower:sauce")
+		@ObjectHolder(FoodPower.MODID + ":sauce")
 		public static final Ingredient SAUCE = null;
-		@ObjectHolder("foodpower:salt")
+		@ObjectHolder(FoodPower.MODID + ":salt")
 		public static final Ingredient SALT = null;
-		@ObjectHolder("foodpower:oil")
+		@ObjectHolder(FoodPower.MODID + ":oil")
 		public static final Ingredient OIL = null;
-		@ObjectHolder("foodpower:rice")
+		@ObjectHolder(FoodPower.MODID + ":rice")
 		public static final Ingredient RICE = null;
-		@ObjectHolder("foodpower:cheese")
+		@ObjectHolder(FoodPower.MODID + ":cheese")
 		public static final Ingredient CHEESE = null;
-		@ObjectHolder("foodpower:chili")
+		@ObjectHolder(FoodPower.MODID + ":chili")
 		public static final Ingredient CHILI = null;
-		@ObjectHolder("foodpower:spinach")
+		@ObjectHolder(FoodPower.MODID + ":spinach")
 		public static final Ingredient SPINACH = null;
-		@ObjectHolder("foodpower:cabbage")
+		@ObjectHolder(FoodPower.MODID + ":cabbage")
 		public static final Ingredient CABBAGE = null;
-		@ObjectHolder("foodpower:flour")
+		@ObjectHolder(FoodPower.MODID + ":flour")
 		public static final Ingredient FLOUR = null;
-		@ObjectHolder("foodpower:corn")
+		@ObjectHolder(FoodPower.MODID + ":corn")
 		public static final Ingredient CORN = null;
-		@ObjectHolder("foodpower:cream")
+		@ObjectHolder(FoodPower.MODID + ":cream")
 		public static final Ingredient CREAM = null;
 
 		/* Vanilla Ingrediants */

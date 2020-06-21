@@ -16,7 +16,7 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 public class Effects{
 	public static final ReflectList<FoodEffect, FoodEffects> list = new ReflectList<FoodEffect, FoodEffects>(FoodEffect.class, FoodEffects.class, null);
 
-	@ObjectHolder("foodpower")
+	@ObjectHolder(FoodPower.MODID)
 	public static class FoodEffects{
 		/* Mod Ingrediant */
 		public static final FoodEffect MINT_POWER = null;

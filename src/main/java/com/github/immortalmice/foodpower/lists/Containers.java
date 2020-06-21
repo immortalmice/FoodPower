@@ -26,7 +26,7 @@ public class Containers{
 	public static final ContainerPack<RecipeTableContainer> RECIPE_TABLE_PACK = new ContainerPack<RecipeTableContainer>("recipe_table", RecipeTableContainer::new);
 	public static final ContainerPack<RecipeScrollContainer> RECIPE_SCROLL_PACK = new ContainerPack<RecipeScrollContainer>("recipe_scroll", RecipeScrollContainer::new);
 
-	@ObjectHolder("foodpower")
+	@ObjectHolder(FoodPower.MODID)
 	public static class ContainerTypes{
 		public static final ContainerType<MarketContainer> MARKET = null;
 		public static final ContainerType<RecipeTableContainer> RECIPE_TABLE = null;

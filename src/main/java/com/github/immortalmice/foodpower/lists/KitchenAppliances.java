@@ -19,7 +19,7 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 public class KitchenAppliances{
 	public static final ReflectList<KitchenAppliance, Blocks> list = new ReflectList<KitchenAppliance, Blocks>(KitchenAppliance.class, Blocks.class, null);
 	
-	@ObjectHolder("foodpower")
+	@ObjectHolder(FoodPower.MODID)
 	public static class Blocks{
 		public static final KitchenAppliance OVEN = null;
 		public static final KitchenAppliance JUICER = null;
