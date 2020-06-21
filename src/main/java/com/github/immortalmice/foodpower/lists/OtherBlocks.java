@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ObjectHolder;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
@@ -19,6 +20,7 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 public class OtherBlocks{
 	public static final ReflectList<BlockBase, Blocks> list = new ReflectList<BlockBase, Blocks>(BlockBase.class, Blocks.class, null, true);
 
+	@ObjectHolder(FoodPower.MODID)
 	public static class Blocks{
 		public static final Market MARKET = null;
 		public static final RecipeTable RECIPE_TABLE = null;	
