@@ -6,7 +6,8 @@
 		"side": "foodpower:blocks/refrigerator_side",
 		"bottom": "foodpower:blocks/refrigerator_bottom",
 		"front": "foodpower:blocks/refrigerator_front",
-		"back": "foodpower:blocks/refrigerator_back"
+		"topback": "foodpower:blocks/refrigerator_topback",
+		"bottomback": "foodpower:blocks/refrigerator_bottomback"
 	},
 	"elements": [
 		{
@@ -17,7 +18,7 @@
 				"down": {"uv": [16, 0, 0, 16], "texture": "#bottom"},
 				"north": {"uv": [0, 0, 16, 16], "texture": "#front"},
 				"east": {"uv": [16, 0, 0, 16], "texture": "#side"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#back"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#bottomback"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#side"}
 			}
 		},
@@ -29,7 +30,7 @@
 				"up": {"uv": [16, 16, 0, 0], "texture": "#top"},
 				"north": {"uv": [0, 0, 16, 16], "texture": "#front"},
 				"east": {"uv": [16, 0, 0, 16], "texture": "#side"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#back"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#topback"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#side"}
 			}
 		}
