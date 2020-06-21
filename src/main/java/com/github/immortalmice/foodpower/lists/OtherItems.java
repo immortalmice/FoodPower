@@ -21,7 +21,7 @@ public class OtherItems{
 	@ObjectHolder(FoodPower.MODID)
 	public static class Items{
 		public static final DirtyFood DIRTY_FOOD = null;
-		public static final RecipeScroll RECIPE_SCROLL = null;	
+		public static final RecipeScroll RECIPE_SCROLL = null;
 		public static final Item PAPAYA_SEED = null;
 	}
 	
