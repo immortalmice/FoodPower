@@ -15,7 +15,7 @@ public class RenderHandler{
 		RenderHandler.setupBlockRenderLayer();
 	}
 
-	public static void setupBlockRenderLayer(){
+	private static void setupBlockRenderLayer(){
 		for(KitchenAppliance block : KitchenAppliances.list){
 			RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
 		}
