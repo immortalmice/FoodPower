@@ -12,10 +12,10 @@ import com.github.immortalmice.foodpower.lists.Trees;
 
 public class RenderHandler{
 	public static void setup(){
-		RenderHandler.setupRenderLayer();
+		RenderHandler.setupBlockRenderLayer();
 	}
 
-	public static void setupRenderLayer(){
+	public static void setupBlockRenderLayer(){
 		for(KitchenAppliance block : KitchenAppliances.list){
 			RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
 		}
