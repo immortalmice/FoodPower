@@ -16,6 +16,10 @@ public class PapayaSeedEntity extends ProjectileItemEntity{
 		super(type, worldIn);
 	}
 
+	public PapayaSeedEntity(World worldIn, double x, double y, double z){
+		super(OtherEntitys.EntityTypes.PAPAYA_SEED, x, y, z, worldIn);
+	}
+
 	@Override
 	protected Item getDefaultItem() {
 		return OtherItems.Items.PAPAYA_SEED;
