@@ -11,7 +11,7 @@ import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.Trees;
 
 public class RenderHandler{
-	public static void setup(){
+	public static void setupClient(){
 		RenderHandler.setupBlockRenderLayer();
 	}
 

@@ -39,7 +39,7 @@ public class ModEventHandlers{
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event){
 		Containers.registAllScreen();
-		RenderHandler.setup();
+		RenderHandler.setupClient();
 		ModelHandler.registLoader();
 	}
 
