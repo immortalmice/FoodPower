@@ -15,7 +15,6 @@ public class RenderHandler{
 		RenderHandler.setupRenderLayer();
 	}
 
-	/* RenderType.func_228641_d_() : cutout_mipped */
 	public static void setupRenderLayer(){
 		for(KitchenAppliance block : KitchenAppliances.list){
 			RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
