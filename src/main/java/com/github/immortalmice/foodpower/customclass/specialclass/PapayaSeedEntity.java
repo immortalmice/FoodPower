@@ -21,7 +21,7 @@ public class PapayaSeedEntity extends ProjectileItemEntity{
 	}
 
 	@Override
-	protected Item getDefaultItem() {
+	protected Item getDefaultItem(){
 		return OtherItems.Items.PAPAYA_SEED;
 	}
 
@@ -31,7 +31,7 @@ public class PapayaSeedEntity extends ProjectileItemEntity{
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult result) {
+	protected void onImpact(RayTraceResult result){
 		
 	}
 } 
