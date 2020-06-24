@@ -56,11 +56,11 @@ public class Effects{
 	}
 
 	public static DeferredRegister<Effect> getRegister(){
-		return Registry.REGISTER;
+		return EffectRegistry.REGISTER;
 	}
 }
 
-class Registry{
+class EffectRegistry{
 	public static final DeferredRegister<Effect> REGISTER = new DeferredRegister<Effect>(ForgeRegistries.POTIONS, FoodPower.MODID);
 
 	/* Mod Ingrediant */
