@@ -5,19 +5,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
-import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
 /* Pattern means a collection of CookingStep in "cake", "salad", "fried rice"....etc */
 public class CookingPattern{
 	private List<CookingStep> steps;
-	private CookedFood result;
+	private Meal result;
 	private String name;
 	private List<Ingredient> ingredientList = new ArrayList<Ingredient>();
 
-	public CookingPattern(String nameIn, CookedFood resultIn, CookingStep stepsIn[]){
+	public CookingPattern(String nameIn, Meal resultIn, CookingStep stepsIn[]){
 		
 		this.name = nameIn;
 		this.result = resultIn;
@@ -35,6 +35,7 @@ public class CookingPattern{
 	public String getName(){
 		return this.name;
 	}
+	
 	public boolean isNotEmpty(){
 		return this.name != "EMPTY PATTERN";
 	}
@@ -68,7 +69,7 @@ public class CookingPattern{
 		return returnList;
 	}
 
-	public CookedFood getResult(){
+	public Meal getResult(){
 		return this.result;
 	}
 }
