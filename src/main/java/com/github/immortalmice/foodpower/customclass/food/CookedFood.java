@@ -31,7 +31,7 @@ public class CookedFood extends ItemFoodBase{
     /* 3 second rule! If you don't pickup in 3 seconds.....Eww */
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entityItem){
-        if(this.getRegistryName().toString() != "dirty_food"){
+        if(this.getRegistryName().toString() != "foodpower:dirty_food"){
             CompoundNBT compound = new CompoundNBT();
             entityItem.writeAdditional(compound);
             if(compound.getShort("Age") >= 20 * 3){
