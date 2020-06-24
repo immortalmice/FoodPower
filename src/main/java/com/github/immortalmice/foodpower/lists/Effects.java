@@ -1,6 +1,6 @@
 package com.github.immortalmice.foodpower.lists;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
@@ -10,7 +10,6 @@ import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 public class Effects{
@@ -74,43 +73,43 @@ class Registry{
 	public static final DeferredRegister<Effect> REGISTER = new DeferredRegister<Effect>(ForgeRegistries.POTIONS, FoodPower.MODID);
 
 	/* Mod Ingrediant */
-	public static final RegistryObject<Effect> OBJ_MINT_POWER = Registry.foodEffectRegister("mint", (str) -> new FoodEffect(str, 0x77FF00));;
-	public static final RegistryObject<Effect> OBJ_FERMENTED_ENDEREYE_POWER = Registry.foodEffectRegister("fermented_endereye", (str) -> new FoodEffect(str, 0xFF5511));;
-	public static final RegistryObject<Effect> OBJ_KETCHUP_POWER = Registry.foodEffectRegister("ketchup", (str) -> new FoodEffect(str, 0xC63300));;
-	public static final RegistryObject<Effect> OBJ_SAUCE_POWER = Registry.foodEffectRegister("sauce", (str) -> new FoodEffect(str, 0xCC0000));;
-	public static final RegistryObject<Effect> OBJ_SALT_POWER = Registry.foodEffectRegister("salt", (str) -> new FoodEffect(str, 0xFFFFFF));;
-	public static final RegistryObject<Effect> OBJ_OIL_POWER = Registry.foodEffectRegister("oil", (str) -> new FoodEffect(str, 0xFFEE99));;
-	public static final RegistryObject<Effect> OBJ_RICE_POWER = Registry.foodEffectRegister("rice", (str) -> new FoodEffect(str, 0xFFFFBB));;
-	public static final RegistryObject<Effect> OBJ_CHEESE_POWER = Registry.foodEffectRegister("cheese", (str) -> new FoodEffect(str, 0xFF8800));;
-	public static final RegistryObject<Effect> OBJ_CHILI_POWER = Registry.foodEffectRegister("chili", (str) -> new FoodEffect(str, 0xFF0000));;
-	public static final RegistryObject<Effect> OBJ_SPINACH_POWER = Registry.foodEffectRegister("spinach", (str) -> new FoodEffect(str, 0x00DD00));;
-	public static final RegistryObject<Effect> OBJ_CABBAGE_POWER = Registry.foodEffectRegister("cabbage", (str) -> new FoodEffect(str, 0x00AA00));;
-	public static final RegistryObject<Effect> OBJ_CORN_POWER = Registry.foodEffectRegister("corn", (str) -> new FoodEffect(str, 0xFFFF00));;
+	public static final RegistryObject<Effect> OBJ_MINT_POWER = EffectRegistry.foodEffectRegister("mint_power", () -> new FoodEffect(0x77FF00));;
+	public static final RegistryObject<Effect> OBJ_FERMENTED_ENDEREYE_POWER = EffectRegistry.foodEffectRegister("fermented_endereye_power", () -> new FoodEffect(0xFF5511));;
+	public static final RegistryObject<Effect> OBJ_KETCHUP_POWER = EffectRegistry.foodEffectRegister("ketchup_power", () -> new FoodEffect(0xC63300));;
+	public static final RegistryObject<Effect> OBJ_SAUCE_POWER = EffectRegistry.foodEffectRegister("sauce_power", () -> new FoodEffect(0xCC0000));;
+	public static final RegistryObject<Effect> OBJ_SALT_POWER = EffectRegistry.foodEffectRegister("salt_power", () -> new FoodEffect(0xFFFFFF));;
+	public static final RegistryObject<Effect> OBJ_OIL_POWER = EffectRegistry.foodEffectRegister("oil_power", () -> new FoodEffect(0xFFEE99));;
+	public static final RegistryObject<Effect> OBJ_RICE_POWER = EffectRegistry.foodEffectRegister("rice_power", () -> new FoodEffect(0xFFFFBB));;
+	public static final RegistryObject<Effect> OBJ_CHEESE_POWER = EffectRegistry.foodEffectRegister("cheese_power", () -> new FoodEffect(0xFF8800));;
+	public static final RegistryObject<Effect> OBJ_CHILI_POWER = EffectRegistry.foodEffectRegister("chili_power", () -> new FoodEffect(0xFF0000));;
+	public static final RegistryObject<Effect> OBJ_SPINACH_POWER = EffectRegistry.foodEffectRegister("spinach_power", () -> new FoodEffect(0x00DD00));;
+	public static final RegistryObject<Effect> OBJ_CABBAGE_POWER = EffectRegistry.foodEffectRegister("cabbage_power", () -> new FoodEffect(0x00AA00));;
+	public static final RegistryObject<Effect> OBJ_CORN_POWER = EffectRegistry.foodEffectRegister("corn_power", () -> new FoodEffect(0xFFFF00));;
 
 	/* Vanilla Ingrediant */
-	public static final RegistryObject<Effect> OBJ_APPLE_POWER = Registry.foodEffectRegister("apple", (str) -> new FoodEffect(str, 0xE63F00));;
-	public static final RegistryObject<Effect> OBJ_MELON_POWER = Registry.foodEffectRegister("melon", (str) -> new FoodEffect(str, 0x33FF33));;
-	public static final RegistryObject<Effect> OBJ_PUMPKIN_POWER = Registry.foodEffectRegister("pumpkin", (str) -> new FoodEffect(str, 0xEE7700));;
-	public static final RegistryObject<Effect> OBJ_CARROT_POWER = Registry.foodEffectRegister("carrot", (str) -> new FoodEffect(str, 0xFFAA33));;
-	public static final RegistryObject<Effect> OBJ_POTATO_POWER = Registry.foodEffectRegister("potato", (str) -> new FoodEffect(str, 0xFFDDAA));;
-	public static final RegistryObject<Effect> OBJ_BEETROOT_POWER = Registry.foodEffectRegister("beetroot", (str) -> new FoodEffect(str, 0xFF5511));;
-	public static final RegistryObject<Effect> OBJ_BROWN_MUSHROOM_POWER = Registry.foodEffectRegister("brown_mushroom", (str) -> new FoodEffect(str, 0xAA7700));;
-	public static final RegistryObject<Effect> OBJ_RED_MUSHROOM_POWER = Registry.foodEffectRegister("red_mushroom", (str) -> new FoodEffect(str, 0xE63F00));;
-	public static final RegistryObject<Effect> OBJ_EGG_POWER = Registry.foodEffectRegister("egg", (str) -> new FoodEffect(str, 0xDDDDDD));;
-	public static final RegistryObject<Effect> OBJ_MILK_BUCKET_POWER = Registry.foodEffectRegister("milk_bucket", (str) -> new FoodEffect(str, 0xFFFFFF));;
-	public static final RegistryObject<Effect> OBJ_PORKCHOP_POWER = Registry.foodEffectRegister("porkchop", (str) -> new FoodEffect(str, 0xFFCCCC));;
-	public static final RegistryObject<Effect> OBJ_BEEF_POWER = Registry.foodEffectRegister("beef", (str) -> new FoodEffect(str, 0xFF8888));;
-	public static final RegistryObject<Effect> OBJ_CHICKEN_POWER = Registry.foodEffectRegister("chicken", (str) -> new FoodEffect(str, 0xFFCCCC));;
-	public static final RegistryObject<Effect> OBJ_MUTTON_POWER = Registry.foodEffectRegister("mutton", (str) -> new FoodEffect(str, 0xFF8888));;
-	public static final RegistryObject<Effect> OBJ_CHORUS_FRUIT_POWER = Registry.foodEffectRegister("chorus_fruit", (str) -> new FoodEffect(str, 0xD28EFF));;
-	public static final RegistryObject<Effect> OBJ_COCOA_BEANS_POWER = Registry.foodEffectRegister("cocoa_beans", (str) -> new FoodEffect(str, 0xBB5500));;
-	public static final RegistryObject<Effect> OBJ_WATER_BUCKET_POWER = Registry.foodEffectRegister("water_bucket", (str) -> new FoodEffect(str, 0x00FFFF));;
-	public static final RegistryObject<Effect> OBJ_HONEY_BOTTLE_POWER = Registry.foodEffectRegister("honey_bottle", (str) -> new FoodEffect(str, 0xF9F900));; 
-	public static final RegistryObject<Effect> OBJ_SWEET_BERRIES_POWER = Registry.foodEffectRegister("sweet_berries", (str) -> new FoodEffect(str, 0xF00078));; 
-	public static final RegistryObject<Effect> OBJ_DRAGON_BREATH_POWER = Registry.foodEffectRegister("dragon_breath", (str) -> new FoodEffect(str, 0x9955FF));
-	public static final RegistryObject<Effect> OBJ_EXPERIENCE_BOTTLE_POWER = Registry.foodEffectRegister("experience_bottle", (str) -> new FoodEffect(str, 0xBBFF00));
+	public static final RegistryObject<Effect> OBJ_APPLE_POWER = EffectRegistry.foodEffectRegister("apple_power", () -> new FoodEffect(0xE63F00));;
+	public static final RegistryObject<Effect> OBJ_MELON_POWER = EffectRegistry.foodEffectRegister("melon_power", () -> new FoodEffect(0x33FF33));;
+	public static final RegistryObject<Effect> OBJ_PUMPKIN_POWER = EffectRegistry.foodEffectRegister("pumpkin_power", () -> new FoodEffect(0xEE7700));;
+	public static final RegistryObject<Effect> OBJ_CARROT_POWER = EffectRegistry.foodEffectRegister("carrot_power", () -> new FoodEffect(0xFFAA33));;
+	public static final RegistryObject<Effect> OBJ_POTATO_POWER = EffectRegistry.foodEffectRegister("potato_power", () -> new FoodEffect(0xFFDDAA));;
+	public static final RegistryObject<Effect> OBJ_BEETROOT_POWER = EffectRegistry.foodEffectRegister("beetroot_power", () -> new FoodEffect(0xFF5511));;
+	public static final RegistryObject<Effect> OBJ_BROWN_MUSHROOM_POWER = EffectRegistry.foodEffectRegister("brown_mushroom_power", () -> new FoodEffect(0xAA7700));;
+	public static final RegistryObject<Effect> OBJ_RED_MUSHROOM_POWER = EffectRegistry.foodEffectRegister("red_mushroom_power", () -> new FoodEffect(0xE63F00));;
+	public static final RegistryObject<Effect> OBJ_EGG_POWER = EffectRegistry.foodEffectRegister("egg_power", () -> new FoodEffect(0xDDDDDD));;
+	public static final RegistryObject<Effect> OBJ_MILK_BUCKET_POWER = EffectRegistry.foodEffectRegister("milk_bucket_power", () -> new FoodEffect(0xFFFFFF));;
+	public static final RegistryObject<Effect> OBJ_PORKCHOP_POWER = EffectRegistry.foodEffectRegister("porkchop_power", () -> new FoodEffect(0xFFCCCC));;
+	public static final RegistryObject<Effect> OBJ_BEEF_POWER = EffectRegistry.foodEffectRegister("beef_power", () -> new FoodEffect(0xFF8888));;
+	public static final RegistryObject<Effect> OBJ_CHICKEN_POWER = EffectRegistry.foodEffectRegister("chicken_power", () -> new FoodEffect(0xFFCCCC));;
+	public static final RegistryObject<Effect> OBJ_MUTTON_POWER = EffectRegistry.foodEffectRegister("mutton_power", () -> new FoodEffect(0xFF8888));;
+	public static final RegistryObject<Effect> OBJ_CHORUS_FRUIT_POWER = EffectRegistry.foodEffectRegister("chorus_fruit_power", () -> new FoodEffect(0xD28EFF));;
+	public static final RegistryObject<Effect> OBJ_COCOA_BEANS_POWER = EffectRegistry.foodEffectRegister("cocoa_beans_power", () -> new FoodEffect(0xBB5500));;
+	public static final RegistryObject<Effect> OBJ_WATER_BUCKET_POWER = EffectRegistry.foodEffectRegister("water_bucket_power", () -> new FoodEffect(0x00FFFF));;
+	public static final RegistryObject<Effect> OBJ_HONEY_BOTTLE_POWER = EffectRegistry.foodEffectRegister("honey_bottle_power", () -> new FoodEffect(0xF9F900));; 
+	public static final RegistryObject<Effect> OBJ_SWEET_BERRIES_POWER = EffectRegistry.foodEffectRegister("sweet_berries_power", () -> new FoodEffect(0xF00078));; 
+	public static final RegistryObject<Effect> OBJ_DRAGON_BREATH_POWER = EffectRegistry.foodEffectRegister("dragon_breath_power", () -> new FoodEffect(0x9955FF));
+	public static final RegistryObject<Effect> OBJ_EXPERIENCE_BOTTLE_POWER = EffectRegistry.foodEffectRegister("experience_bottle_power", () -> new FoodEffect(0xBBFF00));
 
-	private static RegistryObject<Effect> foodEffectRegister(String str, Function<String, Effect> fun){
-		return Registry.REGISTER.register(FoodEffect.getFPNameByIngredientName(str), () -> fun.apply(str));
+	private static RegistryObject<Effect> foodEffectRegister(String str, Supplier<Effect> sup){
+		return EffectRegistry.REGISTER.register(str, sup);
 	}
 }
