@@ -18,17 +18,14 @@ import net.minecraft.world.storage.loot.LootTableManager;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockBase extends HorizontalBlock{
-	private String name;
-
-	public BlockBase(String nameIn, Block.Properties propertiesIn){
+	public BlockBase(Block.Properties propertiesIn){
 		super(propertiesIn);
 
-		this.name = nameIn;
 		this.setDefaultState(this.stateContainer.getBaseState().with(HorizontalBlock.HORIZONTAL_FACING, Direction.NORTH));
 	}
 
-	public BlockBase(String nameIn, Material material){
-		this(nameIn, Block.Properties.create(material).notSolid());
+	public BlockBase(Material material){
+		this(Block.Properties.create(material).notSolid());
 	}
 
 	@Override
@@ -50,9 +47,5 @@ public class BlockBase extends HorizontalBlock{
 			return super.getDrops(state, builder);
 		}
 		return Arrays.asList(new ItemStack(ForgeRegistries.ITEMS.getValue(this.getRegistryName())));
-	}
-
-	public String getFPName(){
-		return this.name;
 	}
 }

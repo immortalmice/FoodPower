@@ -23,7 +23,7 @@ import com.github.immortalmice.foodpower.customclass.container.classes.recipetab
 
 public class RecipeTable extends BlockBase{
 	public RecipeTable(){
-		super("recipe_table", Block.Properties.create(Material.WOOD)
+		super(Block.Properties.create(Material.WOOD)
 			.harvestLevel(0)
 			.harvestTool(ToolType.AXE)
 			.hardnessAndResistance(1.5f)

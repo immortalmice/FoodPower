@@ -16,8 +16,8 @@ import com.github.immortalmice.foodpower.baseclass.BlockBase;
 public class KitchenAppliance extends BlockBase{
 	private VoxelShape blockShape;
 
-	public KitchenAppliance(String name, AxisAlignedBB blockAABBIn){
-		super(name, Block.Properties.create(Material.IRON)
+	public KitchenAppliance(AxisAlignedBB blockAABBIn){
+		super(Block.Properties.create(Material.IRON)
 			.harvestLevel(2)
 			.harvestTool(ToolType.PICKAXE)
 			.sound(SoundType.METAL)

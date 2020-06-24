@@ -23,7 +23,7 @@ import com.github.immortalmice.foodpower.customclass.container.classes.market.Ma
 
 public class Market extends BlockBase{
 	public Market(){
-		super("market", Block.Properties.create(Material.WOOD)
+		super(Block.Properties.create(Material.WOOD)
 			.harvestLevel(0)
 			.harvestTool(ToolType.AXE)
 			.hardnessAndResistance(1.5f));
