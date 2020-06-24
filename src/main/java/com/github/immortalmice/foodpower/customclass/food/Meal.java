@@ -12,17 +12,20 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
@@ -32,20 +35,20 @@ import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
 import com.github.immortalmice.foodpower.lists.Ingredients;
-import com.github.immortalmice.foodpower.lists.Meals;
 import com.mojang.datafixers.util.Pair;
 
 /* The final product you get! It will give you power! */
 public class Meal extends CookedFood{
-	public Meal(String nameIn){
-		super(nameIn);
+	public Meal(){
+		super();
 	}
 
 	/* create a ItemStack and set NBTTags with given RecipeScroll */
 	public static ItemStack create(ItemStack scrollIn, int amount){
 		CompoundNBT scrollNBT = scrollIn.getTag();
 		if(scrollNBT != null && scrollNBT.contains("pattern")){
-			Meal meal = Meals.getMealByName(scrollNBT.getString("pattern"));
+			CookingPattern pattern = CookingPatterns.getPatternByName(scrollNBT.getString("pattern"));
+			Meal meal = pattern != null ? pattern.getResult() : null;
 			if(meal != null){
 				ItemStack result = new ItemStack(meal, amount);
 
@@ -166,7 +169,9 @@ public class Meal extends CookedFood{
     		ListNBT list = (ListNBT)nbt.get("ingredients");
     		for(int i = 0; i <= list.size()-1; i ++){
     			CompoundNBT element = (CompoundNBT) list.get(i);
-    			String ingredientStr = TooltipUtil.translate("item.foodpower." + element.getString("name"));
+    			ResourceLocation res = new ResourceLocation(element.getString("name"));
+                Item item = ForgeRegistries.ITEMS.getValue(res);
+    			String ingredientStr = TooltipUtil.translate(item != null ? item.getTranslationKey() : "general.foodpower.none");
     			ingredientStr += " [" + TooltipUtil.translate("general.foodpower.level") + element.getInt("level") + "]";
     			tooltipHelper.addWithLeftSpace(ingredientStr);
     		}
@@ -206,7 +211,7 @@ public class Meal extends CookedFood{
 
             return stack.getTag().getString("displayName");
         }
-        return I18n.format("item.foodpower." + this.getFPName());
+        return I18n.format("item.foodpower." + this.getRegistryName().getPath());
     }
 
     /* In general, this map should have size in 1 or 0 only */

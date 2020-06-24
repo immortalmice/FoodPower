@@ -6,11 +6,11 @@
 	},
 	"ingredients": {
 		"base": "foodpower:meals/salad/salad_base",
-		"beef": "foodpower:meals/salad/salad_beef",
-		"cabbage": "foodpower:meals/salad/salad_cabbage",
-		"chicken": "foodpower:meals/salad/salad_chicken",
-		"ketchup": "foodpower:meals/salad/salad_ketchup",
-		"sauce": "foodpower:meals/salad/salad_sauce",
-		"tomato": "foodpower:meals/salad/salad_tomato"	
+		"minecraft:beef": "foodpower:meals/salad/salad_beef",
+		"foodpower:cabbage": "foodpower:meals/salad/salad_cabbage",
+		"minecraft:chicken": "foodpower:meals/salad/salad_chicken",
+		"foodpower:ketchup": "foodpower:meals/salad/salad_ketchup",
+		"foodpower:sauce": "foodpower:meals/salad/salad_sauce",
+		"foodpower:tomato": "foodpower:meals/salad/salad_tomato"	
 	}
 }

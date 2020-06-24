@@ -6,7 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
@@ -42,21 +42,21 @@ class CookedFoodRegistry{
 	public static final DeferredRegister<Item> REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
 
 	/* CookedFoods */
-	public static final RegistryObject<Item> OBJ_BATTER = CookedFoodRegistry.register("batter", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_CAKE_BASE = CookedFoodRegistry.register("cake_base", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_FLAT_DOUGH = CookedFoodRegistry.register("flat_dough", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_RAW_PIZZA = CookedFoodRegistry.register("raw_pizza", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_COOKED_PIZZA = CookedFoodRegistry.register("cooked_pizza", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_RAW_JUICE = CookedFoodRegistry.register("raw_juice", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_MIXED_JUICE = CookedFoodRegistry.register("mixed_juice", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_ICE_CREAM_BASE = CookedFoodRegistry.register("ice_cream_base", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_TOAST = CookedFoodRegistry.register("toast", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_TOAST_SLICE = CookedFoodRegistry.register("toast_slice", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_COOKED_RICE = CookedFoodRegistry.register("cooked_rice", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_NOODLE = CookedFoodRegistry.register("noodle", (str) -> new CookedFood(str));
-	public static final RegistryObject<Item> OBJ_ICE = CookedFoodRegistry.register("ice", (str) -> new CookedFood(str));
+	public static final RegistryObject<Item> OBJ_BATTER = CookedFoodRegistry.register("batter", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_CAKE_BASE = CookedFoodRegistry.register("cake_base", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_FLAT_DOUGH = CookedFoodRegistry.register("flat_dough", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_RAW_PIZZA = CookedFoodRegistry.register("raw_pizza", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_COOKED_PIZZA = CookedFoodRegistry.register("cooked_pizza", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_RAW_JUICE = CookedFoodRegistry.register("raw_juice", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_MIXED_JUICE = CookedFoodRegistry.register("mixed_juice", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_ICE_CREAM_BASE = CookedFoodRegistry.register("ice_cream_base", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_TOAST = CookedFoodRegistry.register("toast", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_TOAST_SLICE = CookedFoodRegistry.register("toast_slice", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_COOKED_RICE = CookedFoodRegistry.register("cooked_rice", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_NOODLE = CookedFoodRegistry.register("noodle", () -> new CookedFood());
+	public static final RegistryObject<Item> OBJ_ICE = CookedFoodRegistry.register("ice", () -> new CookedFood());
 
-	private static RegistryObject<Item> register(String name, Function<String, Item> fun){
-		return CookedFoodRegistry.REGISTER.register(name, () -> fun.apply(name));
+	private static RegistryObject<Item> register(String name, Supplier<Item> sup){
+		return CookedFoodRegistry.REGISTER.register(name, sup);
 	}
 }

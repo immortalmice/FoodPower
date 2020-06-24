@@ -6,13 +6,13 @@ import net.minecraft.item.Food;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
 
 public class ItemFoodBase extends ItemBase{
-	public ItemFoodBase(String name, int hunger, float saturation, boolean isInCreativeTab){
+	public ItemFoodBase(int hunger, float saturation, boolean isInCreativeTab){
 		/* Can wolf eat my sweetie? NO WAY!*/
-		super(name, new Item.Properties()
+		super(new Item.Properties()
 			.food(new Food.Builder().saturation(saturation).hunger(hunger).build()), isInCreativeTab);
 	}
 
-	public ItemFoodBase(String name, int hunger, float saturation){
-		this(name, hunger, saturation, true);
+	public ItemFoodBase(int hunger, float saturation){
+		this(hunger, saturation, true);
 	}
 }

@@ -26,8 +26,8 @@ public class Ingredient extends ItemFoodBase{
 	private BiConsumer<MealEffectContainer, Integer> mealEffectBiConsumer = null;
 
 	/* For Mod Ingredients */
-	public Ingredient(String nameIn, int healing, float saturation, FoodType ftIn, FlavorType flavorIn, double amountIn){
-		super(nameIn, healing, saturation);
+	public Ingredient(int healing, float saturation, FoodType ftIn, FlavorType flavorIn, double amountIn){
+		super(healing, saturation);
 
 		this.foodType = ftIn;
 		this.flavorType = flavorIn;
@@ -37,8 +37,7 @@ public class Ingredient extends ItemFoodBase{
 	}
 	/* For Vanilla Ingredient Food or not Food */
 	public Ingredient(String nameIn, Item itemIn, FoodType ftIn, FlavorType flavorIn, double amountIn){
-		this(nameIn
-			, itemIn.isFood() ? itemIn.getFood().getHealing() : 0
+		this(itemIn.isFood() ? itemIn.getFood().getHealing() : 0
 			, itemIn.isFood() ? itemIn.getFood().getSaturation() : 0.0f
 			, ftIn, flavorIn, amountIn);
 
@@ -46,11 +45,11 @@ public class Ingredient extends ItemFoodBase{
 	}
 	/* For Empty (Use In Present A Food With That Type) */
 	public Ingredient(FoodType ftIn){
-		this("empty", 0, 0.0f, ftIn, FlavorTypes.NONE, 1);
+		this(0, 0.0f, ftIn, FlavorTypes.NONE, 1);
 	}
 
 	public boolean isEqual(Ingredient a){
-		return this.getFPName() == a.getFPName();
+		return this.item.getRegistryName().equals(a.item.getRegistryName());
 	}
 
 	public boolean isTypeEqual(Ingredient a){
@@ -58,7 +57,7 @@ public class Ingredient extends ItemFoodBase{
 	}
 
     public boolean isEmpty(){
-    	return this.getFPName().equals("empty");
+    	return this.item.getRegistryName() == null;
     }
 
 	public FoodType getFoodType(){

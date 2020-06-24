@@ -2,7 +2,7 @@ package com.github.immortalmice.foodpower.lists;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -104,7 +104,7 @@ public class Ingredients{
 
 	public static Ingredient getIngredientByName(String nameIn){
 		for(Ingredient ingredient : Ingredients.list){
-			if(ingredient.getFPName().equals(nameIn))
+			if(ingredient.asItem().getRegistryName().toString().equals(nameIn))
 				return ingredient;
 		}
 		return new Ingredient(FoodTypes.NONE);
@@ -133,30 +133,30 @@ class IngredientRegistry{
 	public static final DeferredRegister<Item> REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
 
 	/* Mod Ingrediant */
-	public static final RegistryObject<Item> OBJ_BUTTER = IngredientRegistry.register("butter", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 1.1));
-	public static final RegistryObject<Item> OBJ_ORANGE = IngredientRegistry.register("orange", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SOUR, 0.95));
-	public static final RegistryObject<Item> OBJ_KIWI = IngredientRegistry.register("kiwi", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SWEET, 1));
-	public static final RegistryObject<Item> OBJ_PAPAYA = IngredientRegistry.register("papaya", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SWEET, 0.9));
-	public static final RegistryObject<Item> OBJ_MANGO = IngredientRegistry.register("mango", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SWEET, 1.05));
-	public static final RegistryObject<Item> OBJ_LEMON = IngredientRegistry.register("lemon", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SOUR, 1.1));
-	public static final RegistryObject<Item> OBJ_MINT = IngredientRegistry.register("mint", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SWEET, FlavorTypes.BITTER, 1.9));
-	public static final RegistryObject<Item> OBJ_FERMENTED_ENDEREYE = IngredientRegistry.register("fermented_endereye", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SWEET, FlavorTypes.ENDER, 0.9));
-	public static final RegistryObject<Item> OBJ_DOUGH = IngredientRegistry.register("dough", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 1.2));
-	public static final RegistryObject<Item> OBJ_TOMATO = IngredientRegistry.register("tomato", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.SOUR, 1.1));
-	public static final RegistryObject<Item> OBJ_KETCHUP = IngredientRegistry.register("ketchup", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SEASONING, FlavorTypes.SOUR, 0.8));
-	public static final RegistryObject<Item> OBJ_SAUCE = IngredientRegistry.register("sauce", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.SEASONING, FlavorTypes.SALTY, 0.8));
-	public static final RegistryObject<Item> OBJ_SALT = IngredientRegistry.register("salt", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.SALTY, 2.1));
-	public static final RegistryObject<Item> OBJ_OIL = IngredientRegistry.register("oil", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 0.8));
-	public static final RegistryObject<Item> OBJ_RICE = IngredientRegistry.register("rice", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 2.2));
-	public static final RegistryObject<Item> OBJ_CHEESE = IngredientRegistry.register("cheese", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.SALTY, 1.2));
-	public static final RegistryObject<Item> OBJ_CHILI = IngredientRegistry.register("chili", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.NETHER, 0.8));
-	public static final RegistryObject<Item> OBJ_SPINACH = IngredientRegistry.register("spinach", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.BITTER, 1.2));
-	public static final RegistryObject<Item> OBJ_CABBAGE = IngredientRegistry.register("cabbage", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.BITTER, 1.2));
-	public static final RegistryObject<Item> OBJ_FLOUR = IngredientRegistry.register("flour", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 0.8));
-	public static final RegistryObject<Item> OBJ_CORN = IngredientRegistry.register("corn", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.NONE, 0.95));
-	public static final RegistryObject<Item> OBJ_CREAM = IngredientRegistry.register("cream", (str) -> new Ingredient(str, 1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 1.2));
+	public static final RegistryObject<Item> OBJ_BUTTER = IngredientRegistry.register("butter", () -> new Ingredient(1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 1.1));
+	public static final RegistryObject<Item> OBJ_ORANGE = IngredientRegistry.register("orange", () -> new Ingredient(1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SOUR, 0.95));
+	public static final RegistryObject<Item> OBJ_KIWI = IngredientRegistry.register("kiwi", () -> new Ingredient(1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SWEET, 1));
+	public static final RegistryObject<Item> OBJ_PAPAYA = IngredientRegistry.register("papaya", () -> new Ingredient(1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SWEET, 0.9));
+	public static final RegistryObject<Item> OBJ_MANGO = IngredientRegistry.register("mango", () -> new Ingredient(1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SWEET, 1.05));
+	public static final RegistryObject<Item> OBJ_LEMON = IngredientRegistry.register("lemon", () -> new Ingredient(1, 0.1f, FoodTypes.FRUIT, FlavorTypes.SOUR, 1.1));
+	public static final RegistryObject<Item> OBJ_MINT = IngredientRegistry.register("mint", () -> new Ingredient(1, 0.1f, FoodTypes.SWEET, FlavorTypes.BITTER, 1.9));
+	public static final RegistryObject<Item> OBJ_FERMENTED_ENDEREYE = IngredientRegistry.register("fermented_endereye", () -> new Ingredient(1, 0.1f, FoodTypes.SWEET, FlavorTypes.ENDER, 0.9));
+	public static final RegistryObject<Item> OBJ_DOUGH = IngredientRegistry.register("dough", () -> new Ingredient(1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 1.2));
+	public static final RegistryObject<Item> OBJ_TOMATO = IngredientRegistry.register("tomato", () -> new Ingredient(1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.SOUR, 1.1));
+	public static final RegistryObject<Item> OBJ_KETCHUP = IngredientRegistry.register("ketchup", () -> new Ingredient(1, 0.1f, FoodTypes.SEASONING, FlavorTypes.SOUR, 0.8));
+	public static final RegistryObject<Item> OBJ_SAUCE = IngredientRegistry.register("sauce", () -> new Ingredient(1, 0.1f, FoodTypes.SEASONING, FlavorTypes.SALTY, 0.8));
+	public static final RegistryObject<Item> OBJ_SALT = IngredientRegistry.register("salt", () -> new Ingredient(1, 0.1f, FoodTypes.NONE, FlavorTypes.SALTY, 2.1));
+	public static final RegistryObject<Item> OBJ_OIL = IngredientRegistry.register("oil", () -> new Ingredient(1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 0.8));
+	public static final RegistryObject<Item> OBJ_RICE = IngredientRegistry.register("rice", () -> new Ingredient(1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 2.2));
+	public static final RegistryObject<Item> OBJ_CHEESE = IngredientRegistry.register("cheese", () -> new Ingredient(1, 0.1f, FoodTypes.NONE, FlavorTypes.SALTY, 1.2));
+	public static final RegistryObject<Item> OBJ_CHILI = IngredientRegistry.register("chili", () -> new Ingredient(1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.NETHER, 0.8));
+	public static final RegistryObject<Item> OBJ_SPINACH = IngredientRegistry.register("spinach", () -> new Ingredient(1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.BITTER, 1.2));
+	public static final RegistryObject<Item> OBJ_CABBAGE = IngredientRegistry.register("cabbage", () -> new Ingredient(1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.BITTER, 1.2));
+	public static final RegistryObject<Item> OBJ_FLOUR = IngredientRegistry.register("flour", () -> new Ingredient(1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 0.8));
+	public static final RegistryObject<Item> OBJ_CORN = IngredientRegistry.register("corn", () -> new Ingredient(1, 0.1f, FoodTypes.VEGETABLE, FlavorTypes.NONE, 0.95));
+	public static final RegistryObject<Item> OBJ_CREAM = IngredientRegistry.register("cream", () -> new Ingredient(1, 0.1f, FoodTypes.NONE, FlavorTypes.NONE, 1.2));
 
-	private static RegistryObject<Item> register(String name, Function<String, Item> fun){
-		return IngredientRegistry.REGISTER.register(name, () -> fun.apply(name));
+	private static RegistryObject<Item> register(String name, Supplier<Item> sup){
+		return IngredientRegistry.REGISTER.register(name, sup);
 	}
 }

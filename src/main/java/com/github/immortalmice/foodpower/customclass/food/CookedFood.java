@@ -14,8 +14,8 @@ import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 public class CookedFood extends ItemFoodBase{
-    public CookedFood(String name){
-        super(name, 0, 0.0f, false);
+    public CookedFood(){
+        super(0, 0.0f, false);
     }
 
 	@Override

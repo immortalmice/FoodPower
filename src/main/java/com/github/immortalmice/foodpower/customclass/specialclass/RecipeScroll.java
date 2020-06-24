@@ -26,6 +26,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
@@ -56,7 +57,7 @@ public class RecipeScroll extends ItemBase{
     };
     private static final float[] RARITY_DISCOUNT = {1.0f, 0.8f, 0.6f, 0.4f};
 	public RecipeScroll(){
-		super("recipe_scroll", new Item.Properties().maxStackSize(1));
+		super(new Item.Properties().maxStackSize(1));
 
         this.addPropertyOverride(new ResourceLocation(FoodPower.MODID, "scroll_property"), RecipeScroll.RARITY_GETTER);
 	}
@@ -76,7 +77,7 @@ public class RecipeScroll extends ItemBase{
 			CompoundNBT element = new CompoundNBT();
             Ingredient ingrdient = Ingredients.getIngredientByItem(listIn.get(i).getItem());
             if(ingrdient.isEmpty()) continue;
-			element.putString("name", ingrdient.getFPName());
+			element.putString("name", ingrdient.asItem().getRegistryName().toString());
 			element.putInt("level", listIn.get(i).getCount());
 			tagList.add(element);
 		}
@@ -184,7 +185,9 @@ public class RecipeScroll extends ItemBase{
     		ListNBT list = (ListNBT)nbt.get("ingredients");
     		for(int i = 0; i <= list.size()-1; i ++){
     			CompoundNBT element = (CompoundNBT) list.get(i);
-    			String ingredientStr = TooltipUtil.translate("item.foodpower." + element.getString("name"));
+    			ResourceLocation res = new ResourceLocation(element.getString("name"));
+                Item item = ForgeRegistries.ITEMS.getValue(res);
+    			String ingredientStr = TooltipUtil.translate(item != null ? item.getTranslationKey() : "general.foodpower.none");
     			ingredientStr += " [" + TooltipUtil.translate("general.foodpower.level") + element.getInt("level") + "]";
                 if(element.contains("amount"))
                     ingredientStr += " (" + element.getInt("amount") + ")";

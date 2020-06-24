@@ -4,6 +4,6 @@ import com.github.immortalmice.foodpower.baseclass.ItemBase;
 
 public class DirtyFood extends ItemBase{
 	public DirtyFood(){
-		super("dirty_food");
+		super();
 	}
 }

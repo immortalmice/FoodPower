@@ -6,7 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
@@ -32,31 +32,23 @@ public class Meals{
 	public static DeferredRegister<Item> getRegister(){
 		return MealRegistry.REGISTER;
 	}
-
-	public static Meal getMealByName(String nameIn){
-		for(Meal meal : Meals.list){
-			if(meal.getFPName().equals(nameIn))
-				return meal;
-		}
-		return null;
-	}
 }
 
 class MealRegistry{
 	public static final DeferredRegister<Item> REGISTER = new DeferredRegister<Item>(ForgeRegistries.ITEMS, FoodPower.MODID);
 
 	/* Meals */
-	public static final RegistryObject<Item> OBJ_CAKE = MealRegistry.register("cake", (str) -> new Meal(str));
-	public static final RegistryObject<Item> OBJ_PIZZA = MealRegistry.register("pizza", (str) -> new Meal(str));
-	public static final RegistryObject<Item> OBJ_SANDWICH = MealRegistry.register("sandwich", (str) -> new Meal(str));
-	public static final RegistryObject<Item> OBJ_ICE_CREAM = MealRegistry.register("ice_cream", (str) -> new Meal(str));
-	public static final RegistryObject<Item> OBJ_FRIED_RICE = MealRegistry.register("fried_rice", (str) -> new Meal(str));
-	public static final RegistryObject<Item> OBJ_NOODLE_SOUP = MealRegistry.register("noodle_soup", (str) -> new Meal(str));
-	public static final RegistryObject<Item> OBJ_HONEY_TOAST = MealRegistry.register("honey_toast", (str) -> new Meal(str));
-	public static final RegistryObject<Item> OBJ_SALAD = MealRegistry.register("salad", (str) -> new Meal(str));
-	public static final RegistryObject<Item> OBJ_JUICE = MealRegistry.register("juice", (str) -> new Meal(str));
+	public static final RegistryObject<Item> OBJ_CAKE = MealRegistry.register("cake", () -> new Meal());
+	public static final RegistryObject<Item> OBJ_PIZZA = MealRegistry.register("pizza", () -> new Meal());
+	public static final RegistryObject<Item> OBJ_SANDWICH = MealRegistry.register("sandwich", () -> new Meal());
+	public static final RegistryObject<Item> OBJ_ICE_CREAM = MealRegistry.register("ice_cream", () -> new Meal());
+	public static final RegistryObject<Item> OBJ_FRIED_RICE = MealRegistry.register("fried_rice", () -> new Meal());
+	public static final RegistryObject<Item> OBJ_NOODLE_SOUP = MealRegistry.register("noodle_soup", () -> new Meal());
+	public static final RegistryObject<Item> OBJ_HONEY_TOAST = MealRegistry.register("honey_toast", () -> new Meal());
+	public static final RegistryObject<Item> OBJ_SALAD = MealRegistry.register("salad", () -> new Meal());
+	public static final RegistryObject<Item> OBJ_JUICE = MealRegistry.register("juice", () -> new Meal());
 
-	private static RegistryObject<Item> register(String name, Function<String, Item> fun){
-		return MealRegistry.REGISTER.register(name, () -> fun.apply(name));
+	private static RegistryObject<Item> register(String name, Supplier<Item> sup){
+		return MealRegistry.REGISTER.register(name, sup);
 	}
 }
