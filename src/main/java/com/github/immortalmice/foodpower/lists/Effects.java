@@ -58,15 +58,6 @@ public class Effects{
 	public static DeferredRegister<Effect> getRegister(){
 		return Registry.REGISTER;
 	}
-
-	public static FoodEffect getFoodEffectByIngredient(Ingredient ingredientIn){
-		for(FoodEffect effect : Effects.list){
-			if(effect.getIngredientName().equals(ingredientIn.getFPName())){
-				return effect;
-			}
-		}
-		return null;
-	}
 }
 
 class Registry{
