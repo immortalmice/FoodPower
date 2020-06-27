@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": {"model": "foodpower:block/frying_pan_model"},
+		"facing=east": {"model": "foodpower:block/frying_pan_model", "y": 90},
+		"facing=south": {"model": "foodpower:block/frying_pan_model", "y": 180},
+		"facing=west": {"model": "foodpower:block/frying_pan_model", "y": 270}
+	}
+}
