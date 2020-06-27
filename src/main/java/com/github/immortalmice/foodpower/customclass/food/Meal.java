@@ -63,7 +63,7 @@ public class Meal extends CookedFood{
 	}
 
     /* Get the level of specific ingredient in this meal, return 0 when ingredient not exist in this meal */
-    public static int getIngredientLevel(ItemStack stack, Ingredient ingredient){
+    public static int getIngredientLevel(ItemStack meal, Ingredient ingredient){
         if(!(meal.getItem() instanceof Meal)) return 0;
 
         ListNBT nbt = Meal.getIngredientsListNBT(meal);
