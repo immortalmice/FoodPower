@@ -98,7 +98,7 @@ public class ForgeEventHandlers{
 		Item item = event.getItemStack().getItem();
 		Ingredient ingredient = Ingredients.getIngredientByItem(item);
 
-		if(!ingredient.isEmpty()){
+		if(ingredient != null){
 			Ingredient.addFoodAndFlavorTooltip(ingredient, event.getToolTip());
 		}
 	}

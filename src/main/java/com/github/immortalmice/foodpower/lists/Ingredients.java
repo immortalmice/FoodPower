@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -101,21 +103,23 @@ public class Ingredients{
 	public static DeferredRegister<Item> getRegister(){
 		return IngredientRegistry.REGISTER;
 	}
-
+	
+	@Nullable
 	public static Ingredient getIngredientByName(String nameIn){
 		for(Ingredient ingredient : Ingredients.list){
 			if(ingredient.asItem().getRegistryName().toString().equals(nameIn))
 				return ingredient;
 		}
-		return new Ingredient(FoodTypes.NONE);
+		return null;
 	}
-
+	
+	@Nullable
 	public static Ingredient getIngredientByItem(Item itemIn){
 		for(Ingredient ingredient : Ingredients.list){
 			if(ingredient.asItem() == itemIn)
 				return ingredient;
 		}
-		return new Ingredient(FoodTypes.NONE);
+		return null;
 	}
 
 	public static List<Ingredient> getIngredientsByType(FoodType foodType){

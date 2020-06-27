@@ -54,7 +54,7 @@ public class RecipeTableSlot extends SlotItemHandler{
 		}
 
 		Ingredient holdIngredient = Ingredients.getIngredientByItem(hold.getItem());
-		if(!holdIngredient.isEmpty()){
+		if(holdIngredient != null){
 			/* If it's custom ingredient, only check food type */
 			if(ingredient.isEmpty()){
 				if(holdIngredient.isTypeEqual(ingredient)){
