@@ -53,7 +53,7 @@ class KitchenAppliancesRegistry{
 	public static final RegistryObject<Block> OBJ_BLOCK_REFRIGERATOR = KitchenAppliancesRegistry.registerBlock("refrigerator", () -> new KitchenAppliance(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16.0D, 32.0D, 16.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_ELECTRIC_POT = KitchenAppliancesRegistry.registerBlock("electric_pot", () -> new KitchenAppliance(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_STOCKPOT = KitchenAppliancesRegistry.registerBlock("stockpot", () -> new KitchenAppliance(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)));
-	public static final RegistryObject<Block> OBJ_BLOCK_FRYING_PAN = KitchenAppliancesRegistry.registerBlock("frying_pan", () -> new KitchenAppliance(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)));
+	public static final RegistryObject<Block> OBJ_BLOCK_FRYING_PAN = KitchenAppliancesRegistry.registerBlock("frying_pan", () -> new KitchenAppliance(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_ELECTRIC_STOVE = KitchenAppliancesRegistry.registerBlock("electric_stove", () -> new KitchenAppliance(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_SHAKER = KitchenAppliancesRegistry.registerBlock("shaker", () -> new KitchenAppliance(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)));
 	public static final RegistryObject<Block> OBJ_BLOCK_CHOPPING_BOARD = KitchenAppliancesRegistry.registerBlock("chopping_board", () -> new KitchenAppliance(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)));
