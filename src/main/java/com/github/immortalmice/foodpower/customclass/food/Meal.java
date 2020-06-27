@@ -12,20 +12,16 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
@@ -68,18 +64,52 @@ public class Meal extends CookedFood{
 
     /* Get the level of specific ingredient in this meal, return 0 when ingredient not exist in this meal */
     public static int getIngredientLevel(ItemStack stack, Ingredient ingredient){
-        if(stack.hasTag()){
-            CompoundNBT nbt = stack.getTag();
-            if(nbt.contains("ingredients")){
-                for(INBT ele : (ListNBT)nbt.get("ingredients")){
-                    CompoundNBT element = (CompoundNBT)ele;
-                    if(Ingredients.getIngredientByName(element.getString("name")) == ingredient){
-                        return element.getInt("level");
-                    }
-                }
+        if(!(meal.getItem() instanceof Meal)) return 0;
+
+        ListNBT nbt = Meal.getIngredientsListNBT(meal);
+
+        return Meal.getIngredientLevel(nbt, ingredient);
+    }
+
+    public static int getIngredientLevel(ListNBT nbt, Ingredient ingredient){
+        for(int i = 0; i <= nbt.size()-1; i ++){
+            CompoundNBT element = nbt.getCompound(i);
+            
+            Ingredient ingredientResult = Ingredients.getIngredientByName(element.getString("name"));
+            if(ingredientResult != null && ingredientResult.isEqual(ingredient)){
+                return element.getInt("level");
             }
         }
         return 0;
+    }
+
+    public static List<Ingredient> getIngredients(ItemStack meal){
+        if(!(meal.getItem() instanceof Meal)) return new ArrayList<Ingredient>();
+
+        ListNBT nbt = Meal.getIngredientsListNBT(meal);
+        return Meal.getIngredients(nbt);
+    }
+
+    public static List<Ingredient> getIngredients(ListNBT nbt){
+        List<Ingredient> list = new ArrayList<Ingredient>();
+
+        for(int i = 0; i <= nbt.size()-1; i ++){
+            CompoundNBT element = nbt.getCompound(i);
+            Ingredient ingredient = Ingredients.getIngredientByName(element.getString("name"));
+            if(ingredient != null)
+                list.add(ingredient);
+        }
+        return list;
+    }
+
+    public static ListNBT getIngredientsListNBT(ItemStack meal){
+        if(meal.hasTag()){
+            CompoundNBT nbt = meal.getTag();
+            if(nbt.contains("ingredients")){
+                return (ListNBT) nbt.get("ingredients");
+            }
+        }
+        return new ListNBT();
     }
 
 	@Override
@@ -88,24 +118,21 @@ public class Meal extends CookedFood{
 
         /* Give effect to player when eaten */
 		ItemStack stack = entityLiving.onFoodEaten(worldIn, stackIn);
-		if(stackIn.hasTag() && stackIn.getTag().contains("ingredients")){
-            MealEffectContainer container = new MealEffectContainer(stack, worldIn, entityLiving);
 
-            int levelSum = 0;
-            ListNBT list = (ListNBT)stackIn.getTag().get("ingredients");
-    		for(int i = 0; i <= list.size()-1; i ++){
-    			CompoundNBT element = (CompoundNBT) list.get(i);
-                levelSum += element.getInt("level");
+        ListNBT ingredientNBT = Meal.getIngredientsListNBT(stackIn);
+        List<Ingredient> ingredientList = Meal.getIngredients(ingredientNBT);
+        MealEffectContainer container = new MealEffectContainer(stack, worldIn, entityLiving);
 
-    			Ingredient ingredient = Ingredients.getIngredientByName(element.getString("name"));
-                if(ingredient.getMealEffectBiConsumer() != null){
-                    ingredient.getMealEffectBiConsumer().accept(container, element.getInt("level"));
-                }
-    		}
+        int levelSum = 0;
+        for(Ingredient ingredient : ingredientList){
+            if(ingredient.getMealEffectBiConsumer() != null){
+                int level = Meal.getIngredientLevel(ingredientNBT, ingredient);
+                ingredient.getMealEffectBiConsumer().accept(container, level);
+            }
+        }
 
-            container.setHunger(levelSum).setSaturation(1.2f);
-            container.apply();
-		}
+        container.setHunger(levelSum).setSaturation(1.2f);
+        container.apply();
 
         /* Give pattern exp to player when eaten */
         Pair<String, Integer> patternExp = Meal.getPatternExp(stackIn);
@@ -163,16 +190,14 @@ public class Meal extends CookedFood{
             return;
         }
 
-    	if(nbt.contains("ingredients")){
+        ListNBT ingredientNBT = Meal.getIngredientsListNBT(stack);
+        List<Ingredient> ingredientList = Meal.getIngredients(ingredientNBT);
+    	if(!ingredientList.isEmpty()){
             tooltipHelper.newBlankRow();
     		tooltipHelper.addTranslate("general.foodpower.ingredients");
-    		ListNBT list = (ListNBT)nbt.get("ingredients");
-    		for(int i = 0; i <= list.size()-1; i ++){
-    			CompoundNBT element = (CompoundNBT) list.get(i);
-    			ResourceLocation res = new ResourceLocation(element.getString("name"));
-                Item item = ForgeRegistries.ITEMS.getValue(res);
-    			String ingredientStr = TooltipUtil.translate(item != null ? item.getTranslationKey() : "general.foodpower.none");
-    			ingredientStr += " [" + TooltipUtil.translate("general.foodpower.level") + element.getInt("level") + "]";
+    		for(Ingredient ingredient : ingredientList){
+    			String ingredientStr = TooltipUtil.translate(ingredient.asItem().getTranslationKey());
+    			ingredientStr += " [" + TooltipUtil.translate("general.foodpower.level") + Meal.getIngredientLevel(ingredientNBT, ingredient) + "]";
     			tooltipHelper.addWithLeftSpace(ingredientStr);
     		}
     	}
@@ -241,35 +266,30 @@ public class Meal extends CookedFood{
 
     /* Calculate Pattern & Flavor Exp And Assign To NBT */
     private static void calculateAndAssignExpPoints(ItemStack stack){
-        if(stack.getItem() instanceof Meal && stack.hasTag() && stack.getTag().contains("ingredients")){
+        ListNBT ingredientNBT = Meal.getIngredientsListNBT(stack);
+        List<Ingredient> ingredientList = Meal.getIngredients(ingredientNBT);
+        int patternPoint = 0;
+        Map<FlavorType, Integer> flavorExpMap = new HashMap<>();
+        for(Ingredient ingredient : ingredientList){
+            int level = Meal.getIngredientLevel(ingredientNBT, ingredient);
+            /* Pattern Exp Point */
+            patternPoint += 10 * level;
+            /* Flavor Exp Point */
+            FlavorType flavor = ingredient.getFlavorType();
+            if(flavor.equals(FlavorTypes.NONE)) continue;
+
+            int currentFlavorPoint = flavorExpMap.containsKey(flavor) ? flavorExpMap.get(flavor) : 0;
+            flavorExpMap.put(flavor, currentFlavorPoint + 10 * level);
+        }
+        /* Filter Opposite Flavor */
+        flavorExpMap.entrySet().removeIf((entry) -> {
+            FlavorType flavor = entry.getKey();
+            return flavorExpMap.containsKey(flavor.getOppositeFlavor())
+                && flavorExpMap.get(flavor.getOppositeFlavor()) >= flavorExpMap.get(flavor);
+        });
+
+        if(stack.hasTag()){
             CompoundNBT nbt = stack.getTag();
-            ListNBT list = (ListNBT) nbt.get("ingredients");
-            int patternPoint = 0;
-            Map<FlavorType, Integer> flavorExpMap = new HashMap<>();
-            for(int i = 0; i <= list.size()-1; i ++){
-                CompoundNBT element = (CompoundNBT) list.get(i);
-                if(element.contains("name")){
-                    Ingredient ingredient = Ingredients.getIngredientByName(element.getString("name"));
-                    if(!ingredient.isEmpty()){
-                        int level = element.contains("level") ? element.getInt("level") : 0;
-                        /* Pattern Exp Point */
-                        patternPoint += 10 * level;
-                        /* Flavor Exp Point */
-                        FlavorType flavor = ingredient.getFlavorType();
-                        if(flavor.equals(FlavorTypes.NONE)) continue;
-
-                        int currentFlavorPoint = flavorExpMap.containsKey(flavor) ? flavorExpMap.get(flavor) : 0;
-                        flavorExpMap.put(flavor, currentFlavorPoint + 10 * level);
-                    }
-                }
-            }
-            /* Filter Opposite Flavor */
-            flavorExpMap.entrySet().removeIf((entry) -> {
-                FlavorType flavor = entry.getKey();
-                return flavorExpMap.containsKey(flavor.getOppositeFlavor())
-                    && flavorExpMap.get(flavor.getOppositeFlavor()) >= flavorExpMap.get(flavor);
-            });
-
             if(nbt.contains("pattern") && patternPoint != 0){
                 CompoundNBT patternExpNBT = new CompoundNBT();
                 patternExpNBT.putInt(nbt.getString("pattern"), patternPoint);
