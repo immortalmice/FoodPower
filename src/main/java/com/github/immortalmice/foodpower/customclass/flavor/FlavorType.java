@@ -17,7 +17,7 @@ public class FlavorType{
 
 	/* If oppositeFlavor is already set, skip everything */
 	public void setOppositeFlavor(FlavorType flavorIn){
-		if(this.isOppositeSet || flavorIn.isOppositeSet)
+		if(this.isOppositeSet)
 			return;
 		this.oppositeFlavor = flavorIn;
 		this.isOppositeSet = true;
