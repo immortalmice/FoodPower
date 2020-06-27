@@ -239,7 +239,6 @@ public class Meal extends CookedFood{
         return I18n.format("item.foodpower." + this.getRegistryName().getPath());
     }
 
-    /* In general, this map should have size in 1 or 0 only */
     @Nullable
     private static Pair<String, Integer> getPatternExp(ItemStack stack){
         if(stack.hasTag() && stack.getTag().contains("pattern_exp")){
