@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
@@ -24,6 +25,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+
+import java.util.List;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.capability.classes.FPFlavorExpCapability;
@@ -58,6 +61,18 @@ public class ForgeEventHandlers{
 					TableLootEntry.builder(
 						new ResourceLocation(FoodPower.MODID, "grass")))
 				.build());
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerInteract(PlayerInteractEvent event){
+		ItemStack stack = event.getPlayer().getHeldItem(event.getHand());
+		if(stack.getItem() instanceof Meal){
+			ListNBT nbt = Meal.getIngredientsListNBT(stack);
+			List<Ingredient> ingrdients = Meal.getIngredients(nbt);
+			for(Ingredient ingredient : ingrdients){
+				ingredient.applyInteractEffect(event, Meal.getIngredientLevel(nbt, ingredient));
+			}
 		}
 	}
 
