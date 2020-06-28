@@ -1,0 +1,22 @@
+{
+	"parent": "block/block",
+	"textures": {
+		"particle": "foodpower:blocks/universal_station_top",
+		"top": "foodpower:blocks/universal_station_top",
+		"side": "foodpower:blocks/universal_station_side"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16], 
+			"faces": {
+				"up": {"uv": [16, 16, 0, 0], "texture": "#top"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#top"},
+				"north": {"uv": [0, 0, 16, 16], "texture": "#side"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#side"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#side"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#side"}
+			}
+		}
+	]
+}
