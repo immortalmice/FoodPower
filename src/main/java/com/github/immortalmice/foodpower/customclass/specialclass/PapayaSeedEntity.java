@@ -4,6 +4,7 @@ import com.github.immortalmice.foodpower.lists.OtherEntitys;
 import com.github.immortalmice.foodpower.lists.OtherItems;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.IPacket;
@@ -16,8 +17,8 @@ public class PapayaSeedEntity extends ProjectileItemEntity{
 		super(type, worldIn);
 	}
 
-	public PapayaSeedEntity(World worldIn, double x, double y, double z){
-		super(OtherEntitys.EntityTypes.PAPAYA_SEED, x, y, z, worldIn);
+	public PapayaSeedEntity(World worldIn, LivingEntity throwerIn){
+		super(OtherEntitys.EntityTypes.PAPAYA_SEED, throwerIn, worldIn);
 	}
 
 	@Override
