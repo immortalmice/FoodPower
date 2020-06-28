@@ -75,39 +75,7 @@ public class ForgeEventHandlers{
 			}
 		}
 	}
-
-	@SubscribeEvent
-	public static void onEntityInteract(PlayerInteractEvent.EntityInteract event){
-		PlayerEntity player = event.getPlayer();
-		ItemStack stack = player.getHeldItem(event.getHand());
-		if(stack.getItem() instanceof Meal && event.getTarget() instanceof AnimalEntity){
-			if(!player.world.isRemote()){
-				int level = Meal.getIngredientLevel(stack, Ingredients.Items.BUTTER);
-				AnimalEntity target = (AnimalEntity) event.getTarget();
-				boolean isVaildAnimal = false;
-				switch(level){
-					case 3:
-						isVaildAnimal = true;
-					case 2:
-						if(target instanceof CowEntity || target instanceof SheepEntity || target instanceof PigEntity)
-							isVaildAnimal = true;
-					case 1:
-						if(target instanceof ChickenEntity)
-							isVaildAnimal = true;
-				}
-
-				if(isVaildAnimal && target.getGrowingAge() == 0 && target.canBreed()){
-					if(target instanceof TameableEntity && !((TameableEntity)target).isTamed()) return;
-					if(target instanceof AbstractHorseEntity && !((AbstractHorseEntity)target).isTame()) return;
-
-					target.setInLove(player);
-					if(!player.abilities.isCreativeMode) stack.shrink(1);
-				}
-			}
-			event.setCanceled(true);
-		}
-	}
-
+	
 	@SubscribeEvent
 	public static void onItemTooltip(ItemTooltipEvent event){
 		Item item = event.getItemStack().getItem();
