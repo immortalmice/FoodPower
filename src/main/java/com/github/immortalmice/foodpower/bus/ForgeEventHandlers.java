@@ -1,16 +1,10 @@
 package com.github.immortalmice.foodpower.bus;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.entity.passive.horse.AbstractHorseEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
@@ -24,6 +18,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+
+import java.util.List;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.capability.classes.FPFlavorExpCapability;
@@ -62,37 +58,17 @@ public class ForgeEventHandlers{
 	}
 
 	@SubscribeEvent
-	public static void onEntityInteract(PlayerInteractEvent.EntityInteract event){
-		PlayerEntity player = event.getPlayer();
-		ItemStack stack = player.getHeldItem(event.getHand());
-		if(stack.getItem() instanceof Meal && event.getTarget() instanceof AnimalEntity){
-			if(!player.world.isRemote()){
-				int level = Meal.getIngredientLevel(stack, Ingredients.Items.BUTTER);
-				AnimalEntity target = (AnimalEntity) event.getTarget();
-				boolean isVaildAnimal = false;
-				switch(level){
-					case 3:
-						isVaildAnimal = true;
-					case 2:
-						if(target instanceof CowEntity || target instanceof SheepEntity || target instanceof PigEntity)
-							isVaildAnimal = true;
-					case 1:
-						if(target instanceof ChickenEntity)
-							isVaildAnimal = true;
-				}
-
-				if(isVaildAnimal && target.getGrowingAge() == 0 && target.canBreed()){
-					if(target instanceof TameableEntity && !((TameableEntity)target).isTamed()) return;
-					if(target instanceof AbstractHorseEntity && !((AbstractHorseEntity)target).isTame()) return;
-
-					target.setInLove(player);
-					if(!player.abilities.isCreativeMode) stack.shrink(1);
-				}
+	public static void onPlayerInteract(PlayerInteractEvent event){
+		ItemStack stack = event.getPlayer().getHeldItem(event.getHand());
+		if(stack.getItem() instanceof Meal){
+			ListNBT nbt = Meal.getIngredientsListNBT(stack);
+			List<Ingredient> ingrdients = Meal.getIngredients(nbt);
+			for(Ingredient ingredient : ingrdients){
+				ingredient.applyInteractEffect(event, Meal.getIngredientLevel(nbt, ingredient));
 			}
-			event.setCanceled(true);
 		}
 	}
-
+	
 	@SubscribeEvent
 	public static void onItemTooltip(ItemTooltipEvent event){
 		Item item = event.getItemStack().getItem();

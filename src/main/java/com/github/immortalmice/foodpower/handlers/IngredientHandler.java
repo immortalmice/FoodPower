@@ -1,16 +1,56 @@
 package com.github.immortalmice.foodpower.handlers;
 
+import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.passive.TameableEntity;
+import net.minecraft.entity.passive.horse.AbstractHorseEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class IngredientHandler{
 	public static void setupAllEffect(){
 		/* Mod Ingrediants */
-		Ingredients.Items.BUTTER.setMealEffectBiConsumer((effectContainer, level) -> {
-			/* This effect handle by ForgeEventHandlers#onEntityInteract, nothing to do here */
+		Ingredients.Items.BUTTER.setInteractEffectBiConsumer((rawEvent, level) -> {
+			if(rawEvent instanceof PlayerInteractEvent.EntityInteract){
+				PlayerInteractEvent.EntityInteract event = (PlayerInteractEvent.EntityInteract) rawEvent;
+				PlayerEntity player = event.getPlayer();
+				ItemStack stack = player.getHeldItem(event.getHand());
+				if(stack.getItem() instanceof Meal && event.getTarget() instanceof AnimalEntity){
+					if(!player.world.isRemote()){
+						AnimalEntity target = (AnimalEntity) event.getTarget();
+						boolean isVaildAnimal = false;
+						switch(level){
+							case 3:
+								isVaildAnimal = true;
+							case 2:
+								if(target instanceof CowEntity || target instanceof SheepEntity || target instanceof PigEntity)
+									isVaildAnimal = true;
+							case 1:
+								if(target instanceof ChickenEntity)
+									isVaildAnimal = true;
+						}
+
+						if(isVaildAnimal && target.getGrowingAge() == 0 && target.canBreed()){
+							if(target instanceof TameableEntity && !((TameableEntity)target).isTamed()) return;
+							if(target instanceof AbstractHorseEntity && !((AbstractHorseEntity)target).isTame()) return;
+
+							target.setInLove(player);
+							if(!player.abilities.isCreativeMode) stack.shrink(1);
+						}
+					}
+					event.setCanceled(true);
+				}
+			}
 		});
 		Ingredients.Items.ORANGE.setMealEffectBiConsumer((effectContainer, level) -> {
 			switch(level){
