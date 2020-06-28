@@ -7,11 +7,11 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.baseclass.IMessageBase;
+import com.github.immortalmice.foodpower.baseclass.MessageBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketContainer;
 
 /* Used to trasfer MarketScreen data to update */
-public class MarketMessage implements IMessageBase<MarketMessage>{
+public class MarketMessage extends MessageBase<MarketMessage>{
 	private int windowId;
 	private String message;
 
@@ -24,22 +24,17 @@ public class MarketMessage implements IMessageBase<MarketMessage>{
 		this.message = messageIn;
 	}
 	
-	@Override
-	public void encode(MarketMessage msg, PacketBuffer buf){
+	public static void encode(MarketMessage msg, PacketBuffer buf){
 		buf.writeInt(msg.getWindowId());
 		buf.writeString(msg.getMessage());
 	}
 
-	@Override
-	public MarketMessage decode(PacketBuffer buf){
-		this.windowId = buf.readInt();
-		this.message = buf.readString(32767);
-		return this;
+	public static MarketMessage decode(PacketBuffer buf){
+		return new MarketMessage(buf.readInt(), buf.readString(32767));
 	}
 
 	/* Get the container and update data */
-	@Override
-	public void handle(MarketMessage msg, Supplier<NetworkEvent.Context> ctx){
+	public static void handle(MarketMessage msg, Supplier<NetworkEvent.Context> ctx){
 		ServerPlayerEntity player = ctx.get().getSender();
 		if(player.openContainer instanceof MarketContainer){
 			MarketContainer container = (MarketContainer) player.openContainer;
@@ -63,9 +58,9 @@ public class MarketMessage implements IMessageBase<MarketMessage>{
 		FoodPower.NETWORK.registerMessage(
 			i
 			, MarketMessage.class
-			, this::encode
-			, this::decode
-			, this::handle);
+			, MarketMessage::encode
+			, MarketMessage::decode
+			, MarketMessage::handle);
 	}
 
 	public String getMessage(){

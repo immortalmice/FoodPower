@@ -9,7 +9,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.server.ServerWorld;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.baseclass.IMessageBase;
+import com.github.immortalmice.foodpower.baseclass.MessageBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
@@ -17,51 +17,49 @@ import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 /* Used to trasfer RecipeTableScreen data to update */
-public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
+public class RecipeTableMessage extends MessageBase<RecipeTableMessage>{
 	private String action, message;
 	private int windowId;
 	private ItemStack scroll;
 
 	private static final int LEVEL_REQUIRED = 15;
 
-	public RecipeTableMessage(int windowidIn, String actionIn, String messageIn){
+	public RecipeTableMessage(int windowidIn, String actionIn, String messageIn, ItemStack scrollIn){
 		this.windowId = windowidIn;
 		this.action = actionIn;
 		this.message = messageIn;
-		this.scroll = ItemStack.EMPTY;
+		this.scroll = scrollIn;
+	}
+
+	public RecipeTableMessage(int windowidIn, String actionIn, String messageIn){
+		this(windowidIn, actionIn, messageIn, ItemStack.EMPTY);
 	}
 
 	public RecipeTableMessage(int windowidIn, String actionIn, ItemStack scrollIn){
-		this.windowId = windowidIn;
-		this.action = actionIn;
-		this.message = "";
-		this.scroll = scrollIn;
+		this(windowidIn, actionIn, "", scrollIn);
 	}
 
 	public RecipeTableMessage(){
 		this(0, "", "");
 	}
 
-	@Override
-	public void encode(RecipeTableMessage msg, PacketBuffer buf){
+	public static void encode(RecipeTableMessage msg, PacketBuffer buf){
 		buf.writeInt(msg.getWindowId());
 		buf.writeString(msg.getAction());
 		buf.writeString(msg.getMessage());
 		buf.writeItemStack(msg.getScroll(), false);
 	}
 
-	@Override
-	public RecipeTableMessage decode(PacketBuffer buf){
-		this.windowId = buf.readInt();
-		this.action = buf.readString(32767);
-		this.message = buf.readString(32767);
-		this.scroll = buf.readItemStack();
-		return this;
+	public static RecipeTableMessage decode(PacketBuffer buf){
+		return new RecipeTableMessage(
+			buf.readInt()
+			, buf.readString(32767)
+			, buf.readString(32767)
+			, buf.readItemStack());
 	}
 
 	/* Get the container and update data */
-	@Override
-	public void handle(RecipeTableMessage msg, Supplier<NetworkEvent.Context> ctx){
+	public static void handle(RecipeTableMessage msg, Supplier<NetworkEvent.Context> ctx){
 		ServerPlayerEntity player = ctx.get().getSender();
 		if(player.openContainer instanceof RecipeTableContainer){
 			RecipeTableContainer container = (RecipeTableContainer) player.openContainer;
@@ -101,9 +99,9 @@ public class RecipeTableMessage implements IMessageBase<RecipeTableMessage>{
 		FoodPower.NETWORK.registerMessage(
 			i
 			, RecipeTableMessage.class
-			, this::encode
-			, this::decode
-			, this::handle);
+			, RecipeTableMessage::encode
+			, RecipeTableMessage::decode
+			, RecipeTableMessage::handle);
 	}
 
 	public int getWindowId(){

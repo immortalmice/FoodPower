@@ -8,13 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.baseclass.IMessageBase;
+import com.github.immortalmice.foodpower.baseclass.MessageBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 /* Used to trasfer RecipeScrollScreen data to update */
-public class RecipeScrollMessage implements IMessageBase<RecipeScrollMessage>{
+public class RecipeScrollMessage extends MessageBase<RecipeScrollMessage>{
 	private String message;
 	private int windowId;
 
@@ -27,22 +27,17 @@ public class RecipeScrollMessage implements IMessageBase<RecipeScrollMessage>{
 		this(0, "");
 	}
 
-	@Override
-	public void encode(RecipeScrollMessage msg, PacketBuffer buf){
+	public static void encode(RecipeScrollMessage msg, PacketBuffer buf){
 		buf.writeInt(msg.getWindowId());
 		buf.writeString(msg.getMessage());
 	}
 
-	@Override
-	public RecipeScrollMessage decode(PacketBuffer buf){
-		this.windowId = buf.readInt();
-		this.message = buf.readString(32767);
-		return this;
+	public static RecipeScrollMessage decode(PacketBuffer buf){
+		return new RecipeScrollMessage(buf.readInt(), buf.readString(32767));
 	}
 
 	/* Get the container and update data */
-	@Override
-	public void handle(RecipeScrollMessage msg, Supplier<NetworkEvent.Context> ctx){
+	public static void handle(RecipeScrollMessage msg, Supplier<NetworkEvent.Context> ctx){
 		ServerPlayerEntity player = ctx.get().getSender();
 		if(player.openContainer instanceof RecipeScrollContainer){
 			RecipeScrollContainer container = (RecipeScrollContainer) player.openContainer;
@@ -71,9 +66,9 @@ public class RecipeScrollMessage implements IMessageBase<RecipeScrollMessage>{
 		FoodPower.NETWORK.registerMessage(
 			i
 			, RecipeScrollMessage.class
-			, this::encode
-			, this::decode
-			, this::handle);
+			, RecipeScrollMessage::encode
+			, RecipeScrollMessage::decode
+			, RecipeScrollMessage::handle);
 	}
 
 	public int getWindowId(){
