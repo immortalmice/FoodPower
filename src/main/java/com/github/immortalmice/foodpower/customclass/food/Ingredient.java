@@ -76,8 +76,10 @@ public class Ingredient extends ItemFoodBase{
 		return this.baseAmount;
 	}
 
-	public BiConsumer<MealEffectContainer, Integer> getMealEffectBiConsumer(){
-		return this.mealEffectBiConsumer;
+	public void applyMealEffect(MealEffectContainer container, int level){
+		if(this.mealEffectBiConsumer != null)
+			this.mealEffectBiConsumer.accept(container, level);
+		return;
 	}
 
 	public void setMealEffectBiConsumer(BiConsumer<MealEffectContainer, Integer> consumerIn){

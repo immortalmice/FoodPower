@@ -125,10 +125,8 @@ public class Meal extends CookedFood{
 
         int levelSum = 0;
         for(Ingredient ingredient : ingredientList){
-            if(ingredient.getMealEffectBiConsumer() != null){
-                int level = Meal.getIngredientLevel(ingredientNBT, ingredient);
-                ingredient.getMealEffectBiConsumer().accept(container, level);
-            }
+            int level = Meal.getIngredientLevel(ingredientNBT, ingredient);
+            ingredient.applyMealEffect(container, level);
         }
 
         container.setHunger(levelSum).setSaturation(1.2f);
