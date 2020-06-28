@@ -86,7 +86,10 @@ public class Ingredient extends ItemFoodBase{
 	}
 
 	public void setMealEffectBiConsumer(BiConsumer<MealEffectContainer, Integer> consumerIn){
-		this.mealEffectBiConsumer = consumerIn;
+		if(this.mealEffectBiConsumer == null)
+			this.mealEffectBiConsumer = consumerIn;
+		return;
+	}
 
 	public void applyInteractEffect(PlayerInteractEvent event, int level){
 		if(this.interactEffectBiConsumer != null)
