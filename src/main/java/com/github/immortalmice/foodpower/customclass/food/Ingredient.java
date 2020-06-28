@@ -5,6 +5,7 @@ import java.util.function.BiConsumer;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
@@ -24,6 +25,8 @@ public class Ingredient extends ItemFoodBase{
 	private Item item = null;
 	/* A consumer to apply ingredient's effect with level in */
 	private BiConsumer<MealEffectContainer, Integer> mealEffectBiConsumer = null;
+	/* A consumer to apply some action when player interact with a meal */
+	private BiConsumer<PlayerInteractEvent, Integer> interactEffectBiConsumer = null;
 
 	/* For Mod Ingredients */
 	public Ingredient(int healing, float saturation, FoodType ftIn, FlavorType flavorIn, double amountIn){
@@ -84,6 +87,16 @@ public class Ingredient extends ItemFoodBase{
 
 	public void setMealEffectBiConsumer(BiConsumer<MealEffectContainer, Integer> consumerIn){
 		this.mealEffectBiConsumer = consumerIn;
+
+	public void applyInteractEffect(PlayerInteractEvent event, int level){
+		if(this.interactEffectBiConsumer != null)
+			this.interactEffectBiConsumer.accept(event, level);
+		return;
+	}
+
+	public void setInteractEffectBiConsumer(BiConsumer<PlayerInteractEvent, Integer> consumerIn){
+		if(this.interactEffectBiConsumer == null)
+			this.interactEffectBiConsumer = consumerIn;
 		return;
 	}
 
