@@ -1,6 +1,8 @@
 package com.github.immortalmice.foodpower.handlers;
 
+import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
+import com.github.immortalmice.foodpower.customclass.message.classes.ShootPapayaSeedMessage;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
@@ -69,8 +71,10 @@ public class IngredientHandler{
 				});
 			}
 		});
-		Ingredients.Items.PAPAYA.setMealEffectBiConsumer((effectContainer, level) -> {
-
+		Ingredients.Items.PAPAYA.setInteractEffectBiConsumer((rawEvent, level) -> {
+			if(rawEvent instanceof PlayerInteractEvent.LeftClickEmpty){
+				FoodPower.NETWORK.sendToServer(new ShootPapayaSeedMessage());
+			}
 		});
 		Ingredients.Items.MANGO.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addEffectInstance(new EffectInstance(Effects.HASTE, (level - 1) * 1500 + 600, level - 1));
