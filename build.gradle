@@ -175,3 +175,24 @@ processResources {
         exclude 'META-INF/mods.toml'
     }
 }
+
+// FoodPower Addon Gradle Task
+// Assum Minecraft is install in %appdata%/.minecraft and has forge installed
+// Or you may need to configure some value below
+project.ext['appdata_path'] = System.getenv("APPDATA");
+project.ext['laucher_location'] = 'C:/Program Files (x86)/Minecraft Launcher/MinecraftLauncher.exe';
+
+task fpBuild() {
+    group 'food power'
+    description 'build using gradle and copy to minecraft dir and launch'
+    dependsOn build
+    doLast {
+        copy {
+            from 'build/libs/foodpower-' + project.version + '.jar'
+            into project.ext.appdata_path + '/.minecraft/mods'
+        }
+        exec {
+            commandLine project.ext.laucher_location
+        }
+    }
+}
