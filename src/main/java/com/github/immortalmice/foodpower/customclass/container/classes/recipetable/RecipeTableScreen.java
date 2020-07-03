@@ -11,8 +11,8 @@ import net.minecraft.util.text.ITextComponent;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
+import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
@@ -34,15 +34,15 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		List<Ingredient> currentIngredients = container.getIngredients();
+		List<ICookingElement> currentElements = container.getElements();
 
 		/* Make A Slot Circle With N Slots */
 		int[][] slotPos = container.getSlotPos();	
 		this.minecraft.getTextureManager().bindTexture(this.getSlotTexture());
 
-		for(int i = 0; i <= currentIngredients.size()-1; i ++){
-			Ingredient ingredient = currentIngredients.get(i); 
-			int[] slotPosInTexture = this.getSlotPosInTexture(ingredient.isEmpty() ? ingredient.getFoodType() : FoodTypes.NONE);
+		for(int i = 0; i <= currentElements.size()-1; i ++){
+			ICookingElement element = currentElements.get(i); 
+			int[] slotPosInTexture = this.getSlotPosInTexture(element instanceof FoodType ? (FoodType) element : FoodTypes.NONE);
 			
 			this.blit(
 				offsetX + slotPos[i][0] - 9, offsetY + slotPos[i][1] - 9

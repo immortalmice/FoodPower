@@ -11,9 +11,10 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.util.text.ITextComponent;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
+import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
-public class CookedFood extends ItemFoodBase{
+public class CookedFood extends ItemFoodBase implements ICookingElement{
     public CookedFood(){
         super(0, 0.0f, false);
     }
@@ -26,6 +27,11 @@ public class CookedFood extends ItemFoodBase{
     @Override
     public int getItemStackLimit(ItemStack stack){
     	return 1;
+    }
+
+    @Override
+    public ICookingElement.ElementType getElementType(){
+        return ICookingElement.ElementType.COOKED_FOOD;
     }
 
     /* 3 second rule! If you don't pickup in 3 seconds.....Eww */

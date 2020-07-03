@@ -19,7 +19,7 @@ import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.customclass.container.util.RecipeTableSlot;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
@@ -99,15 +99,15 @@ public class RecipeTableContainer extends ContainerBase{
 			this.inventorySlots.remove(38);
 		}
 
-		List<Ingredient> ingredientList = this.getIngredients();
-		this.ingredientsSlot.setSize(ingredientList.size());
+		List<ICookingElement> elementList = this.getElements();
+		this.ingredientsSlot.setSize(elementList.size());
 
 		/* Make A Slot Circle With N Slots */
 		int[][] slotPos = this.getSlotPos();
-		for(int i = 0; i <= ingredientList.size()-1; i ++){
+		for(int i = 0; i <= elementList.size()-1; i ++){
 			this.addSlot(new RecipeTableSlot(ingredientsSlot, i
 				, slotPos[i][0] - 8, slotPos[i][1] - 8
-				, ingredientList.get(i), this));
+				, elementList.get(i), this));
 		}
 		this.refreshScroll();
 	}
@@ -183,9 +183,9 @@ public class RecipeTableContainer extends ContainerBase{
 	}
 
 	/* Get ingreidient list of current pattern */
-	public List<Ingredient> getIngredients(){
+	public List<ICookingElement> getElements(){
 		CookingPattern currentPattern = CookingPatterns.list.get(this.index);
-		return currentPattern.getIngredients();
+		return currentPattern.getElements();
 	}
 
 	public ItemStack getScroll(boolean isUsedInMeal){
@@ -203,7 +203,7 @@ public class RecipeTableContainer extends ContainerBase{
 	}
 	/* Compute the coordinate list of circle */
 	public int[][] getSlotPos(){
-		int count = this.getIngredients().size();
+		int count = this.getElements().size();
 		int[][] result = new int[count][2];
 
 		float angle = 360 / count;

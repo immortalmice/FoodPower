@@ -9,13 +9,13 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
+import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
 import com.github.immortalmice.foodpower.customclass.flavor.FlavorType;
 import com.github.immortalmice.foodpower.customclass.food.Meal.MealEffectContainer;
-import com.github.immortalmice.foodpower.lists.FlavorTypes;
 
 /* Do not use ingrediant directly to create ItemStack, use Ingredient#asItem */
-public class Ingredient extends ItemFoodBase{
+public class Ingredient extends ItemFoodBase implements ICookingElement{
 	private FoodType foodType;
 	private FlavorType flavorType;
 	private FoodEffect effect;
@@ -46,17 +46,17 @@ public class Ingredient extends ItemFoodBase{
 
 		this.item = itemIn;
 	}
-	/* For Empty (Use In Present A Food With That Type) */
-	public Ingredient(FoodType ftIn){
-		this(0, 0.0f, ftIn, FlavorTypes.NONE, 1);
-	}
 
 	public boolean isEqual(Ingredient a){
 		return this.item.getRegistryName().equals(a.item.getRegistryName());
 	}
 
 	public boolean isTypeEqual(Ingredient a){
-		return this.foodType == a.foodType;
+		return this.isType(a.foodType);
+	}
+
+	public boolean isType(FoodType ft){
+		return this.foodType == ft;
 	}
 
     public boolean isEmpty(){
@@ -77,6 +77,11 @@ public class Ingredient extends ItemFoodBase{
 
 	public double getBaseAmount(){
 		return this.baseAmount;
+	}
+
+	@Override
+	public ICookingElement.ElementType getElementType(){
+		return ICookingElement.ElementType.INGREDIENT;
 	}
 
 	public void applyMealEffect(MealEffectContainer container, int level){
