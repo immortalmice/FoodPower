@@ -48,7 +48,7 @@ public class CookingPattern{
 		return;
 	}
 
-	public List<ICookingElement> getElements(){
+	public List<ICookingElement> getRootElements(){
 		List<ICookingElement> element = new ArrayList<ICookingElement>();
 		for(int i = 0; i <= this.elementList.size()-1; i ++){
 			if(this.elementList.get(i).isType(ICookingElement.ElementType.INGREDIENT)

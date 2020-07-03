@@ -99,7 +99,7 @@ public class RecipeTableContainer extends ContainerBase{
 			this.inventorySlots.remove(38);
 		}
 
-		List<ICookingElement> elementList = this.getElements();
+		List<ICookingElement> elementList = this.getCurrentRootElements();
 		this.ingredientsSlot.setSize(elementList.size());
 
 		/* Make A Slot Circle With N Slots */
@@ -183,9 +183,9 @@ public class RecipeTableContainer extends ContainerBase{
 	}
 
 	/* Get ingreidient list of current pattern */
-	public List<ICookingElement> getElements(){
+	public List<ICookingElement> getCurrentRootElements(){
 		CookingPattern currentPattern = CookingPatterns.list.get(this.index);
-		return currentPattern.getElements();
+		return currentPattern.getRootElements();
 	}
 
 	public ItemStack getScroll(boolean isUsedInMeal){
@@ -203,7 +203,7 @@ public class RecipeTableContainer extends ContainerBase{
 	}
 	/* Compute the coordinate list of circle */
 	public int[][] getSlotPos(){
-		int count = this.getElements().size();
+		int count = this.getCurrentRootElements().size();
 		int[][] result = new int[count][2];
 
 		float angle = 360 / count;

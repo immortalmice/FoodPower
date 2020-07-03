@@ -34,7 +34,7 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		List<ICookingElement> currentElements = container.getElements();
+		List<ICookingElement> currentElements = container.getCurrentRootElements();
 
 		/* Make A Slot Circle With N Slots */
 		int[][] slotPos = container.getSlotPos();	
