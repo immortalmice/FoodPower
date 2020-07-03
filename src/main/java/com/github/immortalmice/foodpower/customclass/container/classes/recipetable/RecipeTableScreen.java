@@ -1,5 +1,6 @@
 package com.github.immortalmice.foodpower.customclass.container.classes.recipetable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -12,6 +13,7 @@ import net.minecraft.util.text.ITextComponent;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
 import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
+import com.github.immortalmice.foodpower.customclass.container.util.RecipeTableSlot;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
@@ -62,6 +64,18 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		this.renderBackground();
 		super.render(mouseX, mouseY, partialTicks);
 		this.textBox.renderButton(mouseX, mouseY, partialTicks);
+
+		if(this.hoveredSlot instanceof RecipeTableSlot){
+			ICookingElement element = ((RecipeTableSlot) this.hoveredSlot).getSlotElement();
+			if(element instanceof FoodType){
+				ArrayList<String> tooltipStr = new ArrayList<String>();
+
+				tooltipStr.add(I18n.format("general.foodpower.food_type") 
+					+ " : " 
+					+ I18n.format("food_type.foodpower." + ((FoodType)element).getName()));
+				this.renderTooltip(tooltipStr, mouseX, mouseY);
+			}
+		}
 	}
 	@Override
 	public void init(){

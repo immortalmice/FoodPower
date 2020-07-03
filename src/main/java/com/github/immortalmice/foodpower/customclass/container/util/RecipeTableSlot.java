@@ -42,6 +42,10 @@ public class RecipeTableSlot extends SlotItemHandler{
 		container.refreshScroll();
 	}
 
+	public ICookingElement getSlotElement(){
+		return this.slotElement;
+	}
+
 	public void tryRegistIngrediant(ItemStack hold){
 		ItemStack result = this.getStack();
 
