@@ -10,7 +10,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
-import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
 import com.github.immortalmice.foodpower.customclass.flavor.FlavorType;
 import com.github.immortalmice.foodpower.customclass.food.Meal.MealEffectContainer;
 
@@ -18,7 +17,6 @@ import com.github.immortalmice.foodpower.customclass.food.Meal.MealEffectContain
 public class Ingredient extends ItemFoodBase implements ICookingElement{
 	private FoodType foodType;
 	private FlavorType flavorType;
-	private FoodEffect effect;
 	/* baseAmount is the value that this ingredient needed per meal in level 1 */
 	private double baseAmount;
 	/* Real Item that registed in game */
@@ -51,17 +49,9 @@ public class Ingredient extends ItemFoodBase implements ICookingElement{
 		return this.item.getRegistryName().equals(a.item.getRegistryName());
 	}
 
-	public boolean isTypeEqual(Ingredient a){
-		return this.isType(a.foodType);
-	}
-
 	public boolean isType(FoodType ft){
 		return this.foodType == ft;
 	}
-
-    public boolean isEmpty(){
-    	return this.item.getRegistryName() == null;
-    }
 
 	public FoodType getFoodType(){
 		return this.foodType;
@@ -69,10 +59,6 @@ public class Ingredient extends ItemFoodBase implements ICookingElement{
 
 	public FlavorType getFlavorType(){
 		return this.flavorType;
-	}
-
-	public FoodEffect getEffect(){
-		return this.effect;
 	}
 
 	public double getBaseAmount(){

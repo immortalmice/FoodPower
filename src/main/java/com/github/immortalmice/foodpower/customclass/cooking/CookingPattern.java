@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.immortalmice.foodpower.customclass.food.FoodType;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
-import com.github.immortalmice.foodpower.lists.Ingredients;
 
 /* Pattern means a collection of CookingStep in "cake", "salad", "fried rice"....etc */
 public class CookingPattern{
@@ -61,18 +58,6 @@ public class CookingPattern{
 			}
 		}
 		return element;
-	}
-
-	public List<ICookingElement> getAllPossibleIngredients(){
-		List<ICookingElement> returnList = new ArrayList<ICookingElement>();
-		for(ICookingElement patternElement : this.getElements()){
-			if(patternElement instanceof FoodType){
-				returnList.addAll(Ingredients.getIngredientsByType((FoodType)patternElement));
-			}else if(patternElement instanceof Ingredient){
-				returnList.add(patternElement);
-			}
-		}
-		return returnList;
 	}
 
 	public Meal getResult(){
