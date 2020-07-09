@@ -109,7 +109,7 @@ public class MealBakedModel extends BakedItemModel{
 				}
 			}
 			
-			boolean isTransparent = true;
+			boolean isTransparent;
 
 			/* Up & Down Side */
 			for(int ix = 0; ix <= 15; ix ++){
@@ -117,6 +117,7 @@ public class MealBakedModel extends BakedItemModel{
 				float xEnd = (ix + 1) / 16.0f;
 
 				/* Scan from Up to Bottom, find the pixel not transparent, use that to build Top quads */
+				isTransparent = true;
 				for(int iy = 0; iy <= 15; iy ++){
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null){
@@ -136,7 +137,9 @@ public class MealBakedModel extends BakedItemModel{
 						isTransparent = false;
 					}
 				}
+
 				/* Scan from Bottom to Up, find the pixel not transparent, use that to build Down quads */
+				isTransparent = true;
 				for(int iy = 15; iy >= 0; iy --){
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null){
@@ -164,6 +167,7 @@ public class MealBakedModel extends BakedItemModel{
 				float yEnd = (16 - iy) / 16.0f;
 
 				/* Scan from Left to Right, find the pixel not transparent, use that to build West quads */
+				isTransparent = true;
 				for(int ix = 0; ix <= 15; ix ++){
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null){
@@ -183,6 +187,7 @@ public class MealBakedModel extends BakedItemModel{
 					}
 				}
 				/* Scan from Right to Left, find the pixel not transparent, use that to build East quads */
+				isTransparent = true;
 				for(int ix = 15; ix >= 0; ix --){
 					TextureAtlasSprite sprite = MealBakedModel.findLastNotTransparent(ix, iy, sprites);
 					if(sprite == null){
