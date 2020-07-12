@@ -17,8 +17,8 @@ public class MarketScreen extends ScreenBase<MarketContainer>{
 		super(containerIn, inventoryIn, textIn);
 
 		this.textureFileName = "market";
-		this.xSize = 176;
-		this.ySize = 133;
+		this.xSize = 256;
+		this.ySize = 256;
 	}
 
 	@Override
@@ -31,9 +31,9 @@ public class MarketScreen extends ScreenBase<MarketContainer>{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		/* Draw Icon & name with good */
 		ItemStack item = new ItemStack(this.getContainer().getItem());
-		this.itemRenderer.renderItemAndEffectIntoGUI(item, 35, 15);
+		this.itemRenderer.renderItemAndEffectIntoGUI(item, 60, 80);
 		String itemName = I18n.format(item.getItem().getTranslationKey());
-		this.font.drawString(itemName, 45 - (this.font.getStringWidth(itemName) / 2), 35, 0x404040);
+		this.font.drawString(itemName, 70 - (this.font.getStringWidth(itemName) / 2), 100, 0x404040);
 	}
 
 	@Override
@@ -47,13 +47,13 @@ public class MarketScreen extends ScreenBase<MarketContainer>{
 		super.init();
 
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		this.addButton(new FPButton(offsetX + 20, offsetY + 15, 10, 15, 38, 19, "", (button) -> {
+		this.addButton(new FPButton(offsetX + 35, offsetY + 80, 10, 15, 38, 19, "", (button) -> {
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new MarketMessage(this.getContainer().getWindowId(), "Decrease Index")
 			);
 		}));
-		this.addButton(new FPButton(offsetX + 60, offsetY + 15, 10, 15, 38, 0, "", (button) -> {
+		this.addButton(new FPButton(offsetX + 90, offsetY + 80, 10, 15, 38, 0, "", (button) -> {
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new MarketMessage(this.getContainer().getWindowId(), "Increase Index")
