@@ -1,6 +1,8 @@
 package com.github.immortalmice.foodpower.bus;
 
 import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -43,6 +45,7 @@ public class ModEventHandlers{
 
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void onTextureStitch(TextureStitchEvent.Pre event){
 		if(event.getMap().getTextureLocation().equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)){
 			ModelHandler.registTextures(event);

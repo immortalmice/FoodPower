@@ -18,6 +18,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -70,6 +72,7 @@ public class ForgeEventHandlers{
 	}
 	
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void onItemTooltip(ItemTooltipEvent event){
 		Item item = event.getItemStack().getItem();
 		Ingredient ingredient = Ingredients.getIngredientByItem(item);
