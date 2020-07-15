@@ -26,7 +26,7 @@ public class RegistryHandler{
 		RegistryHandler.registAllEntity();
 		RegistryHandler.registAllContainer();
 		RegistryHandler.registAllEffect();
-		//RegistryHandler.registAllTileEntityType();
+		RegistryHandler.registAllTileEntityType();
 	}
 	public static void registAllItem(){
 		Ingredients.getRegister().register(RegistryHandler.BUS);

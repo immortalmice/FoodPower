@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.ActionResultType;
@@ -25,6 +26,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance.KitchenApplianceContainer;
+import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity;
 
 public class KitchenAppliance extends BlockBase{
 	private VoxelShape blockShape;
@@ -68,5 +70,15 @@ public class KitchenAppliance extends BlockBase{
 			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.PASS;
+	}
+
+	@Override
+	public boolean hasTileEntity(BlockState state){
+		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world){
+		return new KitchenApplianceTileEntity(this);
 	}
 }
