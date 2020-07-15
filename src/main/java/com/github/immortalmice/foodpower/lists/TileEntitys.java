@@ -13,6 +13,5 @@ import com.github.immortalmice.foodpower.customclass.tileentity.TileEntityPack;
 
 public class TileEntitys{
 	public static final DeferredRegister<TileEntityType<?>> REGISTER = new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, FoodPower.MODID);
-
 	public static final List<TileEntityPack<? extends TileEntityBase>> list = new ArrayList<TileEntityPack<? extends TileEntityBase>>();
 }
