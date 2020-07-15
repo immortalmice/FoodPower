@@ -154,7 +154,7 @@ public class ReflectList<TYPE, TARGET> implements List<TYPE>{
 	@Override
 	public <T> T[] toArray(T[] a) {
 		this.fetch();
-		return this.toArray(a);
+		return this.list.toArray(a);
 	}
 
 	/* DISABLE */
