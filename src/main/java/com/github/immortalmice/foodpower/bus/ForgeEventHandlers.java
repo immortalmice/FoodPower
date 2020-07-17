@@ -83,7 +83,7 @@ public class ForgeEventHandlers{
 	}
 
 	@SubscribeEvent
-	public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event){
+	public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject() instanceof PlayerEntity){
 			event.addCapability(new ResourceLocation(FoodPower.MODID, "pattern_exp_capability"), new FPPatternExpCapability.Provider());
 			event.addCapability(new ResourceLocation(FoodPower.MODID, "flavor_exp_capability"), new FPFlavorExpCapability.Provider());
