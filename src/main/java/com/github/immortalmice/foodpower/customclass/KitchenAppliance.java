@@ -58,14 +58,14 @@ public class KitchenAppliance extends BlockBase{
 			NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
 				@Override
 				public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){
-					return new KitchenApplianceContainer(windowId, playerInventory, KitchenAppliance.this);
+					return new KitchenApplianceContainer(windowId, playerInventory, posIn);
 				}
 				@Override
 				public ITextComponent getDisplayName(){
 					return new TranslationTextComponent(KitchenAppliance.this.getTranslationKey());
 				}
 			}, extraData -> {
-				extraData.writeResourceLocation(KitchenAppliance.this.getRegistryName());
+				extraData.writeBlockPos(posIn);
 			});
 			return ActionResultType.SUCCESS;
 		}
