@@ -50,7 +50,8 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 				offsetX + slotPos[i][0] - 9, offsetY + slotPos[i][1] - 9
 				, slotPosInTexture[0], slotPosInTexture[1]
 				, 18, 18);
-		}	
+		}
+		this.textBox.renderButton(mouseX, mouseY, partialTicks);
 	}
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
@@ -61,9 +62,7 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 	}
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks){
-		this.renderBackground();
 		super.render(mouseX, mouseY, partialTicks);
-		this.textBox.renderButton(mouseX, mouseY, partialTicks);
 
 		if(this.hoveredSlot instanceof RecipeTableSlot){
 			ICookingElement element = ((RecipeTableSlot) this.hoveredSlot).getSlotElement();
