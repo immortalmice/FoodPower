@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /* Fetch non-null fields values in TARGET class with TYPE */
-/* Work like a List (will call ReflectList#fetch first), but most of metohd are disabled */
+/* Work like a List (will call ReflectList#fetch first), but most of method are disabled */
 /* Will catch values when it found all fields are non-null */
 public class ReflectList<TYPE, TARGET> implements List<TYPE>{
 	private Class<TYPE> listType;
