@@ -15,4 +15,9 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 		this.xSize = 256;
 		this.ySize = 256;
 	}
+
+	@Override
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
+		this.font.drawString(Integer.toString(this.container.getTileEntity().getEnergyStored()), 10, 10, 0x404040);
+	}
 }
