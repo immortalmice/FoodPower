@@ -22,7 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class KitchenApplianceTileEntity extends TileEntityBase implements ITickableTileEntity{
 	private KitchenAppliance block;
-	private EnergyStorage energyStorage = new EnergyStorage(100000);
+	private EnergyStorage energyStorage = new EnergyStorage(1000000);
 	private int catchedEnergyStored = 0;
 
 	private static final String ENERGY_NBT_KEY = "forge_energy";
