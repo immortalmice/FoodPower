@@ -29,7 +29,7 @@ import com.github.immortalmice.foodpower.customclass.container.classes.kitchenap
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity;
 
 public class KitchenAppliance extends BlockBase{
-	private VoxelShape blockShape;
+	private final VoxelShape blockShape;
 
 	public KitchenAppliance(AxisAlignedBB blockAABBIn){
 		super(Block.Properties.create(Material.IRON)
