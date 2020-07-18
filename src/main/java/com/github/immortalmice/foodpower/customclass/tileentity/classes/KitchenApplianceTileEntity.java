@@ -75,7 +75,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull final Capability<T> cap, final @Nullable Direction side){
-		if(cap == CapabilityEnergy.ENERGY){
+		if(cap == CapabilityEnergy.ENERGY && this.block != null && this.block.isElectrical()){
 			return LazyOptional.of(() -> this.energyStorage).cast();
 		}
 		return super.getCapability(cap, side);
