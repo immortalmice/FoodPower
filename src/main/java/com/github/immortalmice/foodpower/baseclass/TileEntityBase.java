@@ -30,6 +30,14 @@ public class TileEntityBase extends TileEntity implements INamedContainerProvide
 	}
 
 	@Override
+	public CompoundNBT getUpdateTag(){
+		CompoundNBT nbt = new CompoundNBT();
+		return this.write(nbt);
+	}
+
+	/* No need to override IForgeTileEntity#handleUpdateTag, cause it works fine */
+
+	@Override
 	public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player) {
 		return null;
 	}
