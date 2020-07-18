@@ -59,7 +59,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				new ResourceLocation(nbt.getString(KitchenApplianceTileEntity.BLOCK_NBT_KEY)));
 			
 			if(nbtBlock != null && nbtBlock instanceof KitchenAppliance){
-				this.block = (KitchenAppliance) block;
+				this.block = (KitchenAppliance) nbtBlock;
 			}
 		}
 	}
