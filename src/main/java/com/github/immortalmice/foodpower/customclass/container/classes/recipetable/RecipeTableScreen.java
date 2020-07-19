@@ -81,14 +81,14 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		super.init();
 
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		this.addButton(new FPButton(offsetX + 20, offsetY + 15, 10, 15, 38, 19, "", (button) ->{
+		this.addButton(new FPButton(offsetX + 20, offsetY + 15, FPButton.ButtonType.WOOD_LEFT, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeTableMessage(this.container.getWindowId()
 					, "Set Index"
 					, "Decrease"));
 		}));
-		this.addButton(new FPButton(offsetX + this.xSize - 30, offsetY + 15, 10, 15, 38, 0, "", (button) ->{
+		this.addButton(new FPButton(offsetX + this.xSize - 30, offsetY + 15, FPButton.ButtonType.WOOD_RIGHT, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeTableMessage(this.container.getWindowId()

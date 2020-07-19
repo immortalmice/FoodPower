@@ -47,13 +47,13 @@ public class MarketScreen extends ScreenBase<MarketContainer>{
 		super.init();
 
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		this.addButton(new FPButton(offsetX + 35, offsetY + 35, 10, 18, 104, 20, "", (button) -> {
+		this.addButton(new FPButton(offsetX + 35, offsetY + 35, FPButton.ButtonType.WOOD_LEFT, (button) -> {
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new MarketMessage(this.getContainer().getWindowId(), "Decrease Index")
 			);
 		}));
-		this.addButton(new FPButton(offsetX + 90, offsetY + 35, 10, 18, 104, 0, "", (button) -> {
+		this.addButton(new FPButton(offsetX + 90, offsetY + 35, FPButton.ButtonType.WOOD_RIGHT, (button) -> {
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new MarketMessage(this.getContainer().getWindowId(), "Increase Index")

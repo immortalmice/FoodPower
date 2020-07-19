@@ -45,14 +45,14 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 
 		int offsetY = (this.height - this.ySize) / 2;
 		int centerX = this.width / 2;
-		this.addButton(new FPButton(centerX - 30, offsetY + 40, 10, 15, 38, 19, "", (button) ->{
+		this.addButton(new FPButton(centerX - 30, offsetY + 40, FPButton.ButtonType.STONE_LEFT, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
 					, "Set Amount Minus"));
 		}));
 
-		this.addButton(new FPButton(centerX + 20, offsetY + 40, 10, 15, 38, 0, "", (button) ->{
+		this.addButton(new FPButton(centerX + 20, offsetY + 40, FPButton.ButtonType.STONE_RIGHT, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
