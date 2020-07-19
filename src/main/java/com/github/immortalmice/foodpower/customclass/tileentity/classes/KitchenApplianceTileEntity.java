@@ -46,6 +46,10 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		return this.energyStorage.getEnergyStored();
 	}
 
+	public int getMaxEnergyStored(){
+		return this.energyStorage.getMaxEnergyStored();
+	}
+
 	@Override
 	public void read(CompoundNBT nbt){
 		super.read(nbt);
