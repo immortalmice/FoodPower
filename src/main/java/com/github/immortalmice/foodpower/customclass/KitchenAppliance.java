@@ -29,9 +29,14 @@ import com.github.immortalmice.foodpower.customclass.container.classes.kitchenap
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity;
 
 public class KitchenAppliance extends BlockBase{
-	private VoxelShape blockShape;
+	private final VoxelShape blockShape;
+	private final boolean isElectrical;
 
 	public KitchenAppliance(AxisAlignedBB blockAABBIn){
+		this(blockAABBIn, true);
+	}
+
+	public KitchenAppliance(AxisAlignedBB blockAABBIn, boolean isElectricalIn){
 		super(Block.Properties.create(Material.IRON)
 			.harvestLevel(2)
 			.harvestTool(ToolType.PICKAXE)
@@ -40,6 +45,7 @@ public class KitchenAppliance extends BlockBase{
 			.notSolid());
 
 		this.blockShape = Block.makeCuboidShape(blockAABBIn.minX, blockAABBIn.minY, blockAABBIn.minZ, blockAABBIn.maxX, blockAABBIn.maxY, blockAABBIn.maxZ);
+		this.isElectrical = isElectricalIn;
 	}
 
     @Override
@@ -80,5 +86,9 @@ public class KitchenAppliance extends BlockBase{
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world){
 		return new KitchenApplianceTileEntity(this);
+	}
+	
+	public boolean isElectrical(){
+		return this.isElectrical;
 	}
 }

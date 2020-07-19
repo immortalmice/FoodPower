@@ -22,7 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class KitchenApplianceTileEntity extends TileEntityBase implements ITickableTileEntity{
 	private KitchenAppliance block;
-	private EnergyStorage energyStorage = new EnergyStorage(100000);
+	private EnergyStorage energyStorage = new EnergyStorage(1000000);
 	private int catchedEnergyStored = 0;
 
 	private static final String ENERGY_NBT_KEY = "forge_energy";
@@ -59,7 +59,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				new ResourceLocation(nbt.getString(KitchenApplianceTileEntity.BLOCK_NBT_KEY)));
 			
 			if(nbtBlock != null && nbtBlock instanceof KitchenAppliance){
-				this.block = (KitchenAppliance) block;
+				this.block = (KitchenAppliance) nbtBlock;
 			}
 		}
 	}
@@ -75,7 +75,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull final Capability<T> cap, final @Nullable Direction side){
-		if(cap == CapabilityEnergy.ENERGY){
+		if(cap == CapabilityEnergy.ENERGY && this.block != null && this.block.isElectrical()){
 			return LazyOptional.of(() -> this.energyStorage).cast();
 		}
 		return super.getCapability(cap, side);

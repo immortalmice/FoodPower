@@ -1,11 +1,13 @@
 package com.github.immortalmice.foodpower.handlers;
 
 import com.github.immortalmice.foodpower.FoodPower;
+import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.message.classes.ShootPapayaSeedMessage;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.CowEntity;
@@ -17,7 +19,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.LogicalSide;
 
 public class IngredientHandler{
 	public static void setupAllEffect(){
@@ -79,8 +84,26 @@ public class IngredientHandler{
 		Ingredients.Items.MANGO.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addEffectInstance(new EffectInstance(Effects.HASTE, (level - 1) * 1500 + 600, level - 1));
 		});
-		Ingredients.Items.LEMON.setMealEffectBiConsumer((effectContainer, level) -> {
+		Ingredients.Items.LEMON.setInteractEffectBiConsumer((rawEvent, level) -> {
+			if(rawEvent instanceof PlayerInteractEvent.RightClickBlock && rawEvent.getSide() == LogicalSide.SERVER){
+				Block target = rawEvent.getWorld().getBlockState(rawEvent.getPos()).getBlock();
+				if(target instanceof KitchenAppliance && ((KitchenAppliance)target).isElectrical()){
+					TileEntity rawTileEntity = rawEvent.getWorld().getTileEntity(rawEvent.getPos());
+					if(rawTileEntity != null){
+						rawTileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent((capability) -> {
+							int result = capability.receiveEnergy(IngredientHandler.LEMON_ENERGY_REWORD[level-1], false);
 
+							if(result != 0 && !rawEvent.getPlayer().isCreative()){
+								rawEvent.getPlayer().getHeldItem(rawEvent.getHand()).shrink(1);
+							}
+
+							if(result != 0){
+								rawEvent.setCanceled(true);
+							}
+						});
+					}
+				}
+			}
 		});
 		Ingredients.Items.MINT.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.MINT_POWER, (level - 1) * 1500 + 600, level - 1));
@@ -214,4 +237,6 @@ public class IngredientHandler{
 
 		});
 	}
+
+	private static final int[] LEMON_ENERGY_REWORD = {10000, 50000, 500000};
 }
