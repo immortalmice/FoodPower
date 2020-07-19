@@ -34,11 +34,11 @@ public class MarketContainer extends ContainerBase{
 	}
 
 	public MarketContainer(int windowIdIn, PlayerInventory playerInventory){
-		super(Containers.ContainerTypes.MARKET, windowIdIn, new int[]{45, 145}, playerInventory);
+		super(Containers.ContainerTypes.MARKET, windowIdIn, new int[]{45, 100}, playerInventory);
 
 		this.windowId = windowIdIn;
 		items = new ItemStackHandler(2);
-		this.addSlot(emeraldSlot = new SlotItemHandler(items, 0, 143, 81){
+		this.addSlot(emeraldSlot = new SlotItemHandler(items, 0, 143, 36){
 			/* Can trade with nether star? Hey, I only want EMERALD */
 			@Override
 			public boolean isItemValid(ItemStack stack){
@@ -51,7 +51,7 @@ public class MarketContainer extends ContainerBase{
 				MarketContainer.this.refreshGood();
 			}
 		});
-		this.addSlot(new SlotItemHandler(items, 1, 189, 81){
+		this.addSlot(new SlotItemHandler(items, 1, 189, 36){
 			@Override
 			public boolean isItemValid(ItemStack stack){
 				return false;
