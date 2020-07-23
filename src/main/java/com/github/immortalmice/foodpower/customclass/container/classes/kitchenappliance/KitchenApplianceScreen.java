@@ -25,11 +25,6 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
-		this.font.drawString(Integer.toString(this.container.getTileEntity().getEnergyStored()), 10, 10, 0x404040);
-	}
-
-	@Override
 	public void render(int x, int y, float partialTick){
 		super.render(x, y, partialTick);
 		if(this.isElectricalCatch){
@@ -40,6 +35,16 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 			int xEnd = xStart + ELECTRIC_SLOT_WIDTH;
 			AbstractGui.fill(xStart, yStart
 					, xEnd, yEnd, -8323200);
+
+			if(x >= xStart && x <= xEnd
+				&& y >= yEnd - ELECTRIC_SLOT_HEIGHT && y <= yEnd){
+				KitchenApplianceTileEntity tileEntity = this.container.getTileEntity();
+				if(tileEntity != null){
+					String tooltipStr = Integer.toString(tileEntity.getEnergyStored()) + "FE";
+					tooltipStr += "/" + Integer.toString(tileEntity.getMaxEnergyStored()) + "FE";
+					this.renderTooltip(tooltipStr, x, y);
+				}
+			}
 		}
 	}
 
