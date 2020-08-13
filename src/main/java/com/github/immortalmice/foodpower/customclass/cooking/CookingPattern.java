@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
@@ -58,6 +61,16 @@ public class CookingPattern{
 			}
 		}
 		return element;
+	}
+
+	@Nullable
+	public CookingStep getStep(KitchenAppliance kitchenAppliance){
+		for(int i = 0; i <= this.steps.size()-1; i ++){
+			if(this.steps.get(i).getEquipment() == kitchenAppliance){
+				return this.steps.get(i);
+			}
+		}
+		return null;
 	}
 
 	public Meal getResult(){

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
+import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 
 /* Use equipment, fill with ingredients and get result */
 public class CookingStep{
@@ -35,5 +36,12 @@ public class CookingStep{
 	}
 	public CookedFood getResult(){
 		return this.result;
+	}
+
+	public boolean canContain(Ingredient ingredient){
+		for(int i = 0; i <= this.elements.size()-1; i ++){
+			if(this.elements.get(i).isMatch(ingredient)) return true;
+		}
+		return false;
 	}
 }

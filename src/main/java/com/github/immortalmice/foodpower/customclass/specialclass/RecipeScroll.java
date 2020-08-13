@@ -1,5 +1,6 @@
 package com.github.immortalmice.foodpower.customclass.specialclass;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
 import javax.annotation.Nullable;
@@ -30,10 +31,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
+import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
@@ -151,6 +154,53 @@ public class RecipeScroll extends ItemBase{
         RecipeScroll.calcuAllAmount(scroll);
 
         return nbt.getInt("output_amount");
+    }
+
+    @Nullable
+    public static CookingPattern getPattern(ItemStack scroll){
+        CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
+        if(scroll.getItem() instanceof RecipeScroll && nbt.contains("pattern")){
+            return CookingPatterns.getPatternByName(nbt.getString("pattern"));
+        }
+        return null;
+    }
+
+    public static List<ItemStack> getRequiredItemStacks(ItemStack scroll){
+        List<ItemStack> required = new ArrayList<ItemStack>();
+
+        CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
+        if(nbt.contains("ingredients")){
+            ListNBT list = (ListNBT)nbt.get("ingredients");
+            for(int i = 0; i <= list.size()-1; i ++){
+                CompoundNBT element = (CompoundNBT)list.get(i);
+
+                int amount = element.getInt("amount");
+
+                ResourceLocation res = new ResourceLocation(element.getString("name"));
+                Item item = ForgeRegistries.ITEMS.getValue(res);
+
+                if(item != null && item instanceof Ingredient && amount != 0){
+                    required.add(new ItemStack(item, amount));
+                }
+            }
+        }
+        return required;
+    }
+
+    public static List<ItemStack> getRequiredItemStacks(ItemStack scroll, KitchenAppliance kitchenAppliance){
+        List<ItemStack> required = new ArrayList<ItemStack>();
+        CookingPattern pattern = RecipeScroll.getPattern(scroll);
+        if(pattern != null){
+            List<ItemStack> allRequired = RecipeScroll.getRequiredItemStacks(scroll);
+            for(int i = 0; i <= allRequired.size()-1; i ++){
+                ItemStack stack = allRequired.get(i);
+                Ingredient ingredient = stack.getItem() instanceof Ingredient ? (Ingredient)stack.getItem() : null;
+                if(ingredient != null && pattern.getStep(kitchenAppliance).canContain(ingredient)){
+                    required.add(stack);
+                }
+            }
+        }
+        return required;
     }
 
 	/* Add information about pattern and ingrdient to tooltip */
