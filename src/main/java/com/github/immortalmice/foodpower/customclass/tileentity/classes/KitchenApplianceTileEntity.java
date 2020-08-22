@@ -133,6 +133,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		private ItemStackHandler outputHandler = new ItemStackHandler();
 		private ItemStackHandler ingredientHandler = new ItemStackHandler();
 
+		private List<ItemStack> requiredItemStacks;
+
 		private KitchenApplanceItemHandler(){
 
 		}
@@ -234,6 +236,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				switch(slot){
 					case 0:
 						this.scrollHandler.setStackInSlot(0, stack);
+						this.updateScrollInfo();
 						break;
 					case 1:
 						this.outputHandler.setStackInSlot(0, stack);
@@ -254,6 +257,14 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				}
 			}
 			return list;
+		}
+
+		private void updateScrollInfo(){
+			ItemStack scroll = this.getScroll();
+			if(scroll != null){
+				this.requiredItemStacks = RecipeScroll.getRequiredItemStacks(scroll, KitchenApplianceTileEntity.this.getBlock());
+				this.ingredientHandler.setSize(this.requiredItemStacks.size());
+			}
 		}
 	}
 }
