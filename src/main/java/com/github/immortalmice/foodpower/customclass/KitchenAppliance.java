@@ -85,6 +85,7 @@ public class KitchenAppliance extends BlockBase{
 
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player){
+		super.onBlockHarvested(world, pos, state, player);
 		TileEntity tileEntity = world.getTileEntity(pos);
 		if(tileEntity instanceof KitchenApplianceTileEntity){
 			KitchenApplanceItemHandler itemHandler = ((KitchenApplianceTileEntity) tileEntity).getItemHandler();
