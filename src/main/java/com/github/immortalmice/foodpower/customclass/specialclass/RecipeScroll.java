@@ -35,6 +35,7 @@ import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
@@ -192,13 +193,17 @@ public class RecipeScroll extends ItemBase{
         CookingPattern pattern = RecipeScroll.getPattern(scroll);
         if(pattern != null){
             List<ItemStack> allRequired = RecipeScroll.getRequiredItemStacks(scroll);
-            for(int i = 0; i <= allRequired.size()-1; i ++){
-                ItemStack stack = allRequired.get(i);
-                Ingredient ingredient = stack.getItem() instanceof Ingredient ? (Ingredient)stack.getItem() : null;
-                if(ingredient != null && pattern.getStep(kitchenAppliance).canContain(ingredient)){
-                    required.add(stack);
+            CookingStep step = pattern.getStep(kitchenAppliance);
+            if(step != null){
+                for(int i = 0; i <= allRequired.size()-1; i ++){
+                    ItemStack stack = allRequired.get(i);
+                    Ingredient ingredient = stack.getItem() instanceof Ingredient ? (Ingredient)stack.getItem() : null;
+                    if(ingredient != null && step.canContain(ingredient)){
+                        required.add(stack);
+                    }
                 }
             }
+            
         }
         return required;
     }
