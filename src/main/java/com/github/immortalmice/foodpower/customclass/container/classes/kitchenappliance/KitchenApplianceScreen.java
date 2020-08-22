@@ -1,10 +1,15 @@
 package com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance;
 
+import java.util.List;
+
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
+import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity;
 
 import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 
 public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer>{
@@ -45,6 +50,25 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 					this.renderTooltip(tooltipStr, x, y);
 				}
 			}
+		}
+	}
+
+	@Override
+	protected void renderHoveredToolTip(int mouseX, int mouseY){
+		if(this.minecraft.player.inventory.getItemStack().isEmpty()
+			&& this.hoveredSlot != null
+			&& this.hoveredSlot.getSlotIndex() == 0 // RecipeScroll Slot
+			&& this.hoveredSlot.getHasStack()){
+
+			ItemStack stack = this.hoveredSlot.getStack();
+			FontRenderer font = stack.getItem().getFontRenderer(stack);
+
+			List<String> text = this.getTooltipFromItem(stack);
+			text.add(TooltipUtil.translate("message.foodpower.tooltip_remove_before_take"));
+
+			this.renderTooltip(text, mouseX, mouseY, (font == null ? this.font : font));
+		}else{
+			super.renderHoveredToolTip(mouseX, mouseY);
 		}
 	}
 
