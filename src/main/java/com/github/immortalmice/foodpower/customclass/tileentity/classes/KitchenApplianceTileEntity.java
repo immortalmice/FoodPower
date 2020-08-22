@@ -1,5 +1,8 @@
 package com.github.immortalmice.foodpower.customclass.tileentity.classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -57,6 +60,10 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 	public int getMaxEnergyStored(){
 		return this.energyStorage.getMaxEnergyStored();
+	}
+
+	public boolean hasScroll(){
+		return !this.itemHandler.getScroll().isEmpty();
 	}
 
 	@Override
@@ -236,6 +243,17 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				}
 				KitchenApplianceTileEntity.this.markDirty();
 			}
+		}
+		
+		public List<ItemStack> getItems(){
+			List<ItemStack> list = new ArrayList<>();
+			for(int i = 0; i <= this.getSlots()-1; i ++){
+				ItemStack stack = this.getStackInSlot(i);
+				if(!stack.isEmpty()){
+					list.add(stack);
+				}
+			}
+			return list;
 		}
 	}
 }

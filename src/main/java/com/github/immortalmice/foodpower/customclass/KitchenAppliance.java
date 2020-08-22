@@ -4,11 +4,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -24,9 +26,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import java.util.List;
+
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance.KitchenApplianceContainer;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity;
+import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity.KitchenApplanceItemHandler;
 
 public class KitchenAppliance extends BlockBase{
 	private final VoxelShape blockShape;
@@ -76,6 +81,19 @@ public class KitchenAppliance extends BlockBase{
 			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.PASS;
+	}
+
+	@Override
+	public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player){
+		TileEntity tileEntity = world.getTileEntity(pos);
+		if(tileEntity instanceof KitchenApplianceTileEntity){
+			KitchenApplanceItemHandler itemHandler = ((KitchenApplianceTileEntity) tileEntity).getItemHandler();
+
+			List<ItemStack> list = itemHandler.getItems();
+			list.forEach((stack) -> {
+				world.addEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack));
+			});
+		}
 	}
 
 	@Override
