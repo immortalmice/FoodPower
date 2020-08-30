@@ -64,13 +64,14 @@ public class CookingPattern{
 	}
 
 	@Nullable
-	public CookingStep getStep(KitchenAppliance kitchenAppliance){
+	public List<CookingStep> getSteps(KitchenAppliance kitchenAppliance){
+		List<CookingStep> matchSteps = new ArrayList<CookingStep>();
 		for(int i = 0; i <= this.steps.size()-1; i ++){
 			if(this.steps.get(i).getEquipment() == kitchenAppliance){
-				return this.steps.get(i);
+				matchSteps.add(this.steps.get(i));
 			}
 		}
-		return null;
+		return matchSteps;
 	}
 
 	public Meal getResult(){

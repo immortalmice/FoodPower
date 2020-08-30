@@ -219,7 +219,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 							return stack.getItem() instanceof RecipeScroll
 								&& KitchenApplianceTileEntity.this.getBlock() != null
 								&& RecipeScroll.getPattern(stack) != null
-								&& RecipeScroll.getPattern(stack).getStep(KitchenApplianceTileEntity.this.getBlock()) != null;
+								&& !RecipeScroll.getPattern(stack).getSteps(KitchenApplianceTileEntity.this.getBlock()).isEmpty();
 						case 1:
 							return stack.getItem() instanceof CookedFood;
 						default:
