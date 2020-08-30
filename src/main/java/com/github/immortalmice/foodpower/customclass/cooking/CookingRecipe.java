@@ -2,6 +2,7 @@ package com.github.immortalmice.foodpower.customclass.cooking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -18,6 +19,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 /* A pattern fulfilled with selected ingredients & levels */
 public class CookingRecipe{
+	private final String ID;
 	private final CookingPattern pattern;
 	private String recipeName;
 	private List<Pair<ItemStack, Integer>> ingredients = new ArrayList<>();
@@ -35,10 +37,20 @@ public class CookingRecipe{
 		listIn.forEach((stack) -> {
 			this.ingredients.add(new Pair<>(stack, stack.getCount()));
 		});
+		this.ID = String.format("%08X", new Random().nextInt() & 0xFFFFFFFF);
 	}
 
 	public CookingRecipe(CookingPattern patternIn, List<ItemStack> listIn){
 		this(patternIn, listIn, "");
+	}
+
+	private CookingRecipe(CookingPattern patternIn, String IDIn){
+		this.pattern = patternIn;
+		this.ID = IDIn;
+	}
+
+	public String getID(){
+		return this.ID;
 	}
 
 	public CookingPattern getPattern(){
@@ -89,6 +101,7 @@ public class CookingRecipe{
 		nbt.putFloat("rand", recipe.rand);
 		nbt.putInt("output_amount", recipe.outputAmount);
 		nbt.putString("displayName", recipe.recipeName);
+		nbt.putString("id", recipe.ID);
 
 		ListNBT listNBT = new ListNBT();
 		recipe.ingredients.forEach((pair) -> {
@@ -109,10 +122,10 @@ public class CookingRecipe{
 
 	@Nullable
 	public static CookingRecipe read(CompoundNBT nbt){
-		if(nbt.contains("pattern") && nbt.contains("ingredients")){
+		if(nbt.contains("pattern") && nbt.contains("ingredients") && nbt.contains("id")){
 			CookingPattern pattern = CookingPatterns.getPatternByName(nbt.getString("pattern"));
 			if(pattern == null) return null;
-			final CookingRecipe recipe = new CookingRecipe(pattern, new ArrayList<>());
+			final CookingRecipe recipe = new CookingRecipe(pattern, nbt.getString("id"));
 
 			ListNBT listNBT = (ListNBT) nbt.get("ingredients");
 			listNBT.forEach((ele) -> {
