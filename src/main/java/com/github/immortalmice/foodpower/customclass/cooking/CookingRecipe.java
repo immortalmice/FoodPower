@@ -45,6 +45,11 @@ public class CookingRecipe{
 		String IS_INIT = "is_init";
 	}
 
+	/**
+	 * @param patternIn The CookingPattern.
+	 * @param listIn The list of ingredients, the count of each stack present the level of that ingredient.
+	 * @param nameIn The recipe's display name.
+	 */
 	public CookingRecipe(CookingPattern patternIn, List<ItemStack> listIn, String nameIn){
 		this.pattern = patternIn;
 		this.recipeName = nameIn;
