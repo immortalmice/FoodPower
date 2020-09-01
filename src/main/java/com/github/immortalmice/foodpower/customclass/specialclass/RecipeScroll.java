@@ -215,6 +215,15 @@ public class RecipeScroll extends ItemBase{
         return required;
     }
 
+    @Nullable
+    public static CookingRecipe getCookingRecipe(ItemStack stack){
+        CookingRecipe recipe = null;
+        if(stack.hasTag() && stack.getTag().contains("recipe")){
+            recipe = CookingRecipe.read((CompoundNBT) stack.getTag().get("recipe"));
+        }
+        return recipe;
+    }
+
 	/* Add information about pattern and ingrdient to tooltip */
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
