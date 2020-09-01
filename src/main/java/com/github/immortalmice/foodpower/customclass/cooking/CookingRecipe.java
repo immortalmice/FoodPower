@@ -41,6 +41,7 @@ public class CookingRecipe{
 		String INGREDIENTS = "ingredients";
 		String STACK = "stack";
 		String LEVEL = "level";
+		String IS_INIT = "is_init";
 	}
 
 	public CookingRecipe(CookingPattern patternIn, List<ItemStack> listIn, String nameIn){
@@ -81,6 +82,7 @@ public class CookingRecipe{
 			this.rarity = rarityIn;
 			this.rand = randIn;
 			this.setOutputAmount(this.outputAmount);
+			this.isInitialized = true;
 		}
 	}
 
@@ -114,6 +116,7 @@ public class CookingRecipe{
 		nbt.putInt(NBT_KEY.OUTPUT_AMOUNT, recipe.outputAmount);
 		nbt.putString(NBT_KEY.DISPLAY_NAME, recipe.recipeName);
 		nbt.putString(NBT_KEY.ID, recipe.ID);
+		nbt.putBoolean(NBT_KEY.IS_INIT, recipe.isInitialized);
 
 		ListNBT listNBT = new ListNBT();
 		recipe.ingredients.forEach((pair) -> {
@@ -154,8 +157,10 @@ public class CookingRecipe{
 			recipe.outputAmount = nbt.contains(NBT_KEY.OUTPUT_AMOUNT) ? nbt.getInt(NBT_KEY.OUTPUT_AMOUNT) : 1;
 			recipe.recipeName = nbt.contains(NBT_KEY.DISPLAY_NAME) ? nbt.getString(NBT_KEY.DISPLAY_NAME) : "";
 
-			recipe.initialize(nbt.contains(NBT_KEY.RARITY) ? nbt.getInt(NBT_KEY.RARITY) : 0
-				, nbt.contains(NBT_KEY.RAND) ? nbt.getFloat(NBT_KEY.RAND) : 1.1f);
+			if(nbt.contains(NBT_KEY.IS_INIT) && nbt.getBoolean(NBT_KEY.IS_INIT)){
+				recipe.initialize(nbt.contains(NBT_KEY.RARITY) ? nbt.getInt(NBT_KEY.RARITY) : 0
+					, nbt.contains(NBT_KEY.RAND) ? nbt.getFloat(NBT_KEY.RAND) : 1.1f);
+			}
 
 			return recipe;
 		}
