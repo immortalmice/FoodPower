@@ -105,17 +105,20 @@ public class RecipeScroll extends ItemBase{
 
     /* Calculate amount with single ingredient, Lv.1 amount*1, Lv.2 amount*2 and Lv.3 amount*4 */
     private static int calcuAmount(String ingredientName, int outputAmount, int level, Double rand, int rarity){
+        // TODO
         Ingredient ingredient = Ingredients.getIngredientByName(ingredientName);
         return ingredient == null ? 0 :
         		(int) Math.ceil(ingredient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand * RecipeScroll.RARITY_DISCOUNT[rarity]);
     }
 
     private static void calcuAllAmount(ItemStack scroll){
+        // TODO
         RecipeScroll.calcuAllAmount(scroll.hasTag() ? scroll.getTag() : new CompoundNBT());
     }
 
     /* Calculate amount with each ingredient */
     public static void calcuAllAmount(CompoundNBT nbt){
+        // TODO
         int ouputAmount = 1;
         int rarity = 0;
         double random = 1.1;
@@ -146,6 +149,7 @@ public class RecipeScroll extends ItemBase{
 
     /* dif may be negative */
     public static int addOutputAmount(ItemStack scroll, int dif){
+        // TODO
         CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
         int amount = (nbt.contains("output_amount") ? nbt.getInt("output_amount") : 0) + dif;
         if(amount <= 0) amount += 64;
@@ -159,6 +163,7 @@ public class RecipeScroll extends ItemBase{
 
     @Nullable
     public static CookingPattern getPattern(ItemStack scroll){
+        // TODO
         CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
         if(scroll.getItem() instanceof RecipeScroll && nbt.contains("pattern")){
             return CookingPatterns.getPatternByName(nbt.getString("pattern"));
@@ -167,6 +172,7 @@ public class RecipeScroll extends ItemBase{
     }
 
     public static List<ItemStack> getRequiredItemStacks(ItemStack scroll){
+        // TODO
         List<ItemStack> required = new ArrayList<ItemStack>();
 
         CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
@@ -189,6 +195,7 @@ public class RecipeScroll extends ItemBase{
     }
 
     public static List<ItemStack> getRequiredItemStacks(ItemStack scroll, KitchenAppliance kitchenAppliance){
+        // TODO
         List<ItemStack> required = new ArrayList<ItemStack>();
         CookingPattern pattern = RecipeScroll.getPattern(scroll);
         if(pattern != null){
@@ -266,6 +273,7 @@ public class RecipeScroll extends ItemBase{
     /* Open gui on right click, transfer nbt tag to construct container and screen */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn){
+        // TODO
         ItemStack stack = playerIn.getHeldEquipment().iterator().next();
         CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
 

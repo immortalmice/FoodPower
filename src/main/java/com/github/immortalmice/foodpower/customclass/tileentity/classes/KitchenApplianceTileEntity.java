@@ -263,6 +263,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 
 		private void updateScrollInfo(){
+			// TODO
 			ItemStack scroll = this.getScroll();
 			if(scroll != null){
 				this.requiredItemStacks = RecipeScroll.getRequiredItemStacks(scroll, KitchenApplianceTileEntity.this.getBlock());
