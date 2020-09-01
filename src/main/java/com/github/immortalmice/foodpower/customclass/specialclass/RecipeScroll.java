@@ -212,19 +212,17 @@ public class RecipeScroll extends ItemBase{
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
+
+        CookingRecipe recipe = RecipeScroll.getCookingRecipe(stack);
+        if(recipe == null) return;
+
         TooltipUtil tooltipHelper = new TooltipUtil(tooltip);
 
     	String patternStr = TooltipUtil.translate("general.foodpower.cooking_pattern") + " : ";
-    	CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
-    	if(nbt.contains("pattern")){
-    		patternStr += TooltipUtil.translate("pattern.foodpower." + nbt.getString("pattern"));
-    	}else{
-    		patternStr += TooltipUtil.translate("general.foodpower.none");
-    	}
+    	patternStr += TooltipUtil.translate("pattern.foodpower." + recipe.getPattern().getName());
     	tooltipHelper.add(patternStr);
-        if(nbt.contains("output_amount")){
-            tooltipHelper.addTranslate("message.foodpower.output_amount", nbt.getInt("output_amount"));
-        }
+
+        tooltipHelper.addTranslate("message.foodpower.output_amount", recipe.getOutputAmount());
 
         /* Whether player press down shift key or not */
         boolean moreInfo = Screen.hasShiftDown();
@@ -235,30 +233,14 @@ public class RecipeScroll extends ItemBase{
             return;
         }
 
-    	if(nbt.contains("ingredients")){
-            tooltipHelper.newBlankRow();
-    		tooltipHelper.addTranslate("general.foodpower.ingredients");
-    		ListNBT list = (ListNBT)nbt.get("ingredients");
-    		for(int i = 0; i <= list.size()-1; i ++){
-    			CompoundNBT element = (CompoundNBT) list.get(i);
-    			ResourceLocation res = new ResourceLocation(element.getString("name"));
-                Item item = ForgeRegistries.ITEMS.getValue(res);
-    			String ingredientStr = TooltipUtil.translate(item != null ? item.getTranslationKey() : "general.foodpower.none");
-    			ingredientStr += " [" + TooltipUtil.translate("general.foodpower.level") + element.getInt("level") + "]";
-                if(element.contains("amount"))
-                    ingredientStr += " (" + element.getInt("amount") + ")";
-    			tooltipHelper.addWithLeftSpace(ingredientStr);
-    		}
-    	}
+    	recipe.appendIngredientInfo(tooltipHelper);
     }
 
     @Override
     public ITextComponent getDisplayName(ItemStack stack){
-    	if(stack.hasTag() 
-    		&& stack.getTag().contains("displayName") 
-    		&& !stack.getTag().getString("displayName").isEmpty()){
-
-    		return new StringTextComponent(stack.getTag().getString("displayName"));
+        CookingRecipe recipe = RecipeScroll.getCookingRecipe(stack);
+    	if(recipe != null){
+    		return recipe.getDisplayName();
     	}
     	return new TranslationTextComponent("general.foodpower.unknown_recipe");
     }

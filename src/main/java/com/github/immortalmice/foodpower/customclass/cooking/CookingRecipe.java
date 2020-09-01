@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.mojang.datafixers.util.Pair;
@@ -70,11 +71,34 @@ public class CookingRecipe{
 		return this.pattern;
 	}
 
+	public int getOutputAmount(){
+		return this.outputAmount;
+	}
+
 	public ITextComponent getDisplayName(){
 		if(!this.recipeName.equals("")){
     		return new StringTextComponent(this.recipeName);
     	}
     	return new TranslationTextComponent("general.foodpower.unknown_recipe");
+	}
+
+	public void appendIngredientInfo(TooltipUtil tooltipHelper){
+		if(this.ingredients.size() != 0){
+            tooltipHelper.newBlankRow();
+    		tooltipHelper.addTranslate("general.foodpower.ingredients");
+
+    		this.ingredients.forEach((pair) -> {
+    			ItemStack stack = pair.getFirst();
+    			int level = pair.getSecond();
+
+    			String ingredientStr = TooltipUtil.translate(stack.getItem().getTranslationKey());
+    			ingredientStr += " [" + TooltipUtil.translate("general.foodpower.level") + level + "]";
+    			if(this.isInitialized)
+    				ingredientStr += " (" + stack.getCount() + ")";
+
+    			tooltipHelper.addWithLeftSpace(ingredientStr);
+    		});
+    	}
 	}
 
 	public void initialize(int rarityIn, float randIn){
