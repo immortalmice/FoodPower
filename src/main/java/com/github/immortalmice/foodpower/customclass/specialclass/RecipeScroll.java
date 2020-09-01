@@ -35,6 +35,7 @@ import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
@@ -71,21 +72,7 @@ public class RecipeScroll extends ItemBase{
 		ItemStack result = new ItemStack(Items.RECIPE_SCROLL);
 
 		CompoundNBT nbt = new CompoundNBT();
-
-		nbt.putString("pattern", patternIn.getName());
-		nbt.putString("displayName", nameIn);
-
-		ListNBT tagList = new ListNBT();
-		for(int i = 0; i <= listIn.size()-1; i ++){
-            if(listIn.get(i).isEmpty()) return ItemStack.EMPTY;
-			CompoundNBT element = new CompoundNBT();
-            Ingredient ingrdient = Ingredients.getIngredientByItem(listIn.get(i).getItem());
-            if(ingrdient == null) continue;
-			element.putString("name", ingrdient.asItem().getRegistryName().toString());
-			element.putInt("level", listIn.get(i).getCount());
-			tagList.add(element);
-		}
-		nbt.put("ingredients", tagList);
+		nbt.put("recipe", new CookingRecipe(patternIn, listIn, nameIn).write());
 
 		result.setTag(nbt);
 		return result;
@@ -93,14 +80,11 @@ public class RecipeScroll extends ItemBase{
 
     /* Set rarity and calculate ingredient amount in need */
     public static void initStack(ItemStack stack, int rarity, float rand){
-        CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
-
-        nbt.putInt("rarity", rarity);
-        nbt.putDouble("random", rand);
-        /* How many meals player want to cook? */
-        nbt.putInt("output_amount", 1);
-
-        RecipeScroll.calcuAllAmount(nbt);
+        CookingRecipe recipe = RecipeScroll.getCookingRecipe(stack);
+        if(recipe != null){
+            recipe.initialize(rarity, rand);
+            stack.getTag().put("recipe", recipe.write());
+        }
     }
 
     /* Calculate amount with single ingredient, Lv.1 amount*1, Lv.2 amount*2 and Lv.3 amount*4 */
