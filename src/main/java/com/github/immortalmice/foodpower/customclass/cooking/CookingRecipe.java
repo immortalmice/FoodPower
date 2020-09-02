@@ -76,6 +76,14 @@ public class CookingRecipe{
 		return this.pattern;
 	}
 
+	@Nullable
+	public static CookingPattern getPattern(CompoundNBT nbt){
+		if(nbt.contains(NBT_KEY.PATTERN)){
+			return CookingPatterns.getPatternByName(nbt.getString(NBT_KEY.PATTERN));
+		}
+		return null;
+	}
+
 	public int getOutputAmount(){
 		return this.outputAmount;
 	}

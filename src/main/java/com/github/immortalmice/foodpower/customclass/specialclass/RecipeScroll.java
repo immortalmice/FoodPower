@@ -38,7 +38,6 @@ import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
-import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
@@ -149,10 +148,8 @@ public class RecipeScroll extends ItemBase{
 
     @Nullable
     public static CookingPattern getPattern(ItemStack scroll){
-        // TODO
-        CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
-        if(scroll.getItem() instanceof RecipeScroll && nbt.contains("pattern")){
-            return CookingPatterns.getPatternByName(nbt.getString("pattern"));
+        if(scroll.hasTag() && scroll.getTag().contains(RecipeScroll.NBT_KEY_RECIPE)){
+            return CookingRecipe.getPattern((CompoundNBT) scroll.getTag().get(RecipeScroll.NBT_KEY_RECIPE));
         }
         return null;
     }
