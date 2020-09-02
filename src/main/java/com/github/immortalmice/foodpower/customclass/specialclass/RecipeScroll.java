@@ -93,11 +93,6 @@ public class RecipeScroll extends ItemBase{
         		(int) Math.ceil(ingredient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand * RecipeScroll.RARITY_DISCOUNT[rarity]);
     }
 
-    private static void calcuAllAmount(ItemStack scroll){
-        // TODO
-        RecipeScroll.calcuAllAmount(scroll.hasTag() ? scroll.getTag() : new CompoundNBT());
-    }
-
     /* Calculate amount with each ingredient */
     public static void calcuAllAmount(CompoundNBT nbt){
         // TODO
@@ -131,16 +126,16 @@ public class RecipeScroll extends ItemBase{
 
     /* dif may be negative */
     public static int addOutputAmount(ItemStack scroll, int dif){
-        // TODO
-        CompoundNBT nbt = scroll.hasTag() ? scroll.getTag() : new CompoundNBT();
-        int amount = (nbt.contains("output_amount") ? nbt.getInt("output_amount") : 0) + dif;
-        if(amount <= 0) amount += 64;
-        if(amount > 64) amount -= 64;
+        CookingRecipe recipe = RecipeScroll.readCookingRecipe(scroll);
+        if(recipe != null){
+            int amount = recipe.getOutputAmount() + dif;
+            if(amount <= 0) amount += 64;
+            if(amount > 64) amount -= 64;
 
-        nbt.putInt("output_amount", amount);
-        RecipeScroll.calcuAllAmount(scroll);
-
-        return nbt.getInt("output_amount");
+            recipe.setOutputAmount(amount);
+            RecipeScroll.writeCookingRecipe(scroll, recipe);
+        }
+        return 1;
     }
 
     @Nullable
