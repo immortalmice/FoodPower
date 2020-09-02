@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
+import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.item.ItemStack;
@@ -91,6 +92,13 @@ public class CookingRecipe{
 	public ITextComponent getDisplayName(){
 		if(!this.recipeName.equals("")){
     		return new StringTextComponent(this.recipeName);
+    	}
+    	return new TranslationTextComponent("general.foodpower.unknown_recipe");
+	}
+
+	public static ITextComponent getDisplayName(CompoundNBT nbt){
+		if(nbt.contains(NBT_KEY.DISPLAY_NAME) && !nbt.getString(NBT_KEY.DISPLAY_NAME).equals("")){
+    		return new StringTextComponent(nbt.getString(NBT_KEY.DISPLAY_NAME));
     	}
     	return new TranslationTextComponent("general.foodpower.unknown_recipe");
 	}

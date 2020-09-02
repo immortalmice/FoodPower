@@ -22,7 +22,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -198,11 +197,7 @@ public class RecipeScroll extends ItemBase{
 
     @Override
     public ITextComponent getDisplayName(ItemStack stack){
-        CookingRecipe recipe = RecipeScroll.readCookingRecipe(stack);
-    	if(recipe != null){
-    		return recipe.getDisplayName();
-    	}
-    	return new TranslationTextComponent("general.foodpower.unknown_recipe");
+    	return CookingRecipe.getDisplayName(RecipeScroll.getRecipeTag(stack));
     }
 
     /* Open gui on right click, transfer nbt tag to construct container and screen */
