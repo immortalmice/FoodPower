@@ -2,7 +2,6 @@ package com.github.immortalmice.foodpower.customclass.specialclass;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Math;
 import javax.annotation.Nullable;
 
 import net.minecraft.item.IItemPropertyGetter;
@@ -38,7 +37,6 @@ import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
-import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 public class RecipeScroll extends ItemBase{
@@ -59,7 +57,6 @@ public class RecipeScroll extends ItemBase{
                 return 0.0f; // Rarity WOOD
         }
     };
-    private static final float[] RARITY_DISCOUNT = {1.0f, 0.8f, 0.6f, 0.4f};
     public static final String NBT_KEY_RECIPE = "recipe";
 
 	public RecipeScroll(){
@@ -82,45 +79,6 @@ public class RecipeScroll extends ItemBase{
         if(recipe != null){
             recipe.initialize(rarity, rand);
             RecipeScroll.writeCookingRecipe(stack, recipe);
-        }
-    }
-
-    /* Calculate amount with single ingredient, Lv.1 amount*1, Lv.2 amount*2 and Lv.3 amount*4 */
-    private static int calcuAmount(String ingredientName, int outputAmount, int level, Double rand, int rarity){
-        // TODO
-        Ingredient ingredient = Ingredients.getIngredientByName(ingredientName);
-        return ingredient == null ? 0 :
-        		(int) Math.ceil(ingredient.getBaseAmount() * outputAmount * Math.pow(2, level - 1) * rand * RecipeScroll.RARITY_DISCOUNT[rarity]);
-    }
-
-    /* Calculate amount with each ingredient */
-    public static void calcuAllAmount(CompoundNBT nbt){
-        // TODO
-        int ouputAmount = 1;
-        int rarity = 0;
-        double random = 1.1;
-
-        if(!nbt.contains("output_amount") || !nbt.contains("rarity") || !nbt.contains("random")){
-            nbt.putInt("output_amount", ouputAmount);
-            nbt.putInt("rarity", rarity);
-            nbt.putDouble("random", random);
-        }
-
-        ouputAmount = nbt.getInt("output_amount");
-        rarity = nbt.getInt("rarity");
-        random = nbt.getDouble("random");
-
-        if(nbt.contains("ingredients")){
-            ListNBT list = (ListNBT)nbt.get("ingredients");
-            for(int i = 0; i <= list.size()-1; i ++){
-                CompoundNBT element = (CompoundNBT)list.get(i);
-                int amount = RecipeScroll.calcuAmount(element.getString("name")
-                    , ouputAmount
-                    , element.getInt("level")
-                    , random
-                    , rarity);
-                element.putInt("amount", amount);
-            }
         }
     }
 
@@ -248,23 +206,21 @@ public class RecipeScroll extends ItemBase{
     /* Open gui on right click, transfer nbt tag to construct container and screen */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn){
-        // TODO
         ItemStack stack = playerIn.getHeldEquipment().iterator().next();
-        CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
 
         /* ActionResultType.SUCCESS */
         if(worldIn.isRemote) return ActionResult.resultSuccess(stack);
         NetworkHooks.openGui((ServerPlayerEntity)playerIn, new INamedContainerProvider(){
             @Override
             public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity player){
-                return new RecipeScrollContainer(windowId, playerInventory, nbt);
+                return new RecipeScrollContainer(windowId, playerInventory, RecipeScroll.getRecipeTag(stack));
             }
             @Override
             public ITextComponent getDisplayName(){
                 return new StringTextComponent("");
             }
         }, extraData -> {
-            extraData.writeCompoundTag(nbt);
+            extraData.writeCompoundTag(RecipeScroll.getRecipeTag(stack));
         });
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
