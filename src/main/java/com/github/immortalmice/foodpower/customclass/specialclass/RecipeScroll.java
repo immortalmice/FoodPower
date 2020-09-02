@@ -71,11 +71,8 @@ public class RecipeScroll extends ItemBase{
 	/* create a ItemStack and set NBTTags with given information */
 	public static ItemStack create(CookingPattern patternIn, List<ItemStack> listIn, String nameIn){
 		ItemStack result = new ItemStack(Items.RECIPE_SCROLL);
+        RecipeScroll.writeCookingRecipe(result, new CookingRecipe(patternIn, listIn, nameIn));
 
-		CompoundNBT nbt = new CompoundNBT();
-		nbt.put(RecipeScroll.NBT_KEY_RECIPE, new CookingRecipe(patternIn, listIn, nameIn).write());
-
-		result.setTag(nbt);
 		return result;
 	}
 
@@ -84,7 +81,7 @@ public class RecipeScroll extends ItemBase{
         CookingRecipe recipe = RecipeScroll.readCookingRecipe(stack);
         if(recipe != null){
             recipe.initialize(rarity, rand);
-            stack.getTag().put(RecipeScroll.NBT_KEY_RECIPE, recipe.write());
+            RecipeScroll.writeCookingRecipe(stack, recipe);
         }
     }
 
@@ -205,6 +202,15 @@ public class RecipeScroll extends ItemBase{
             recipe = CookingRecipe.read((CompoundNBT) stack.getTag().get(RecipeScroll.NBT_KEY_RECIPE));
         }
         return recipe;
+    }
+
+    public static void writeCookingRecipe(ItemStack stack, CookingRecipe recipe){
+        CompoundNBT nbt = new CompoundNBT();
+        if(stack.hasTag()){
+            nbt = stack.getTag();
+        }
+        nbt.put(NBT_KEY_RECIPE, recipe.write());
+        stack.setTag(nbt);
     }
 
 	/* Add information about pattern and ingrdient to tooltip */
