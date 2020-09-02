@@ -92,6 +92,8 @@ public class RecipeScroll extends ItemBase{
 
             recipe.setOutputAmount(amount);
             RecipeScroll.writeCookingRecipe(scroll, recipe);
+
+            return amount;
         }
         return 1;
     }
