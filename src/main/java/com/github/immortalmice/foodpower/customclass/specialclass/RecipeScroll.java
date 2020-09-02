@@ -140,10 +140,7 @@ public class RecipeScroll extends ItemBase{
 
     @Nullable
     public static CookingPattern getPattern(ItemStack scroll){
-        if(scroll.hasTag() && scroll.getTag().contains(RecipeScroll.NBT_KEY_RECIPE)){
-            return CookingRecipe.getPattern((CompoundNBT) scroll.getTag().get(RecipeScroll.NBT_KEY_RECIPE));
-        }
-        return null;
+        return CookingRecipe.getPattern(RecipeScroll.getRecipeTag(scroll));
     }
 
     public static List<ItemStack> getRequiredItemStacks(ItemStack scroll){
@@ -190,13 +187,16 @@ public class RecipeScroll extends ItemBase{
         return required;
     }
 
+    public static CompoundNBT getRecipeTag(ItemStack stack){
+        if(stack.hasTag() && stack.getTag().contains(RecipeScroll.NBT_KEY_RECIPE)){
+            return (CompoundNBT) stack.getTag().get(RecipeScroll.NBT_KEY_RECIPE);
+        }
+        return new CompoundNBT();
+    }
+
     @Nullable
     public static CookingRecipe readCookingRecipe(ItemStack stack){
-        CookingRecipe recipe = null;
-        if(stack.hasTag() && stack.getTag().contains(RecipeScroll.NBT_KEY_RECIPE)){
-            recipe = CookingRecipe.read((CompoundNBT) stack.getTag().get(RecipeScroll.NBT_KEY_RECIPE));
-        }
-        return recipe;
+        return CookingRecipe.read(RecipeScroll.getRecipeTag(stack));
     }
 
     public static void writeCookingRecipe(ItemStack stack, CookingRecipe recipe){
