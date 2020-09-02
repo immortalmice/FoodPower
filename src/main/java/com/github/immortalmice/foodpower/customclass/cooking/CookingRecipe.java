@@ -138,16 +138,15 @@ public class CookingRecipe{
 			ItemStack stack = pair.getFirst();
 			int level = pair.getSecond();
 
-			if(stack.getItem() instanceof Ingredient){
-				Ingredient ingredient = (Ingredient) stack.getItem();
-
+			Ingredient ingredient = Ingredients.getIngredientByItem(stack.getItem());
+			if(ingredient != null){
 				float newCount = this.outputAmount;
 				newCount *= ingredient.getBaseAmount();
 				newCount *= Math.pow(2, level - 1);
 				newCount *= this.rand;
 				newCount *= CookingRecipe.RARITY_DISCOUNT[this.rarity];
 
-				stack.setCount((int) Math.ceil(newCount));
+				stack.setCount(Math.max((int) Math.ceil(newCount), 1));
 			}
 		});
 	}
