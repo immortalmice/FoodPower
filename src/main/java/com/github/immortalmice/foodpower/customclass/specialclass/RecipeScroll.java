@@ -61,6 +61,8 @@ public class RecipeScroll extends ItemBase{
         }
     };
     private static final float[] RARITY_DISCOUNT = {1.0f, 0.8f, 0.6f, 0.4f};
+    public static final String NBT_KEY_RECIPE = "recipe";
+
 	public RecipeScroll(){
 		super(new Item.Properties().maxStackSize(1));
 
@@ -72,7 +74,7 @@ public class RecipeScroll extends ItemBase{
 		ItemStack result = new ItemStack(Items.RECIPE_SCROLL);
 
 		CompoundNBT nbt = new CompoundNBT();
-		nbt.put("recipe", new CookingRecipe(patternIn, listIn, nameIn).write());
+		nbt.put(RecipeScroll.NBT_KEY_RECIPE, new CookingRecipe(patternIn, listIn, nameIn).write());
 
 		result.setTag(nbt);
 		return result;
@@ -83,7 +85,7 @@ public class RecipeScroll extends ItemBase{
         CookingRecipe recipe = RecipeScroll.getCookingRecipe(stack);
         if(recipe != null){
             recipe.initialize(rarity, rand);
-            stack.getTag().put("recipe", recipe.write());
+            stack.getTag().put(RecipeScroll.NBT_KEY_RECIPE, recipe.write());
         }
     }
 
@@ -202,8 +204,8 @@ public class RecipeScroll extends ItemBase{
     @Nullable
     public static CookingRecipe getCookingRecipe(ItemStack stack){
         CookingRecipe recipe = null;
-        if(stack.hasTag() && stack.getTag().contains("recipe")){
-            recipe = CookingRecipe.read((CompoundNBT) stack.getTag().get("recipe"));
+        if(stack.hasTag() && stack.getTag().contains(RecipeScroll.NBT_KEY_RECIPE)){
+            recipe = CookingRecipe.read((CompoundNBT) stack.getTag().get(RecipeScroll.NBT_KEY_RECIPE));
         }
         return recipe;
     }
