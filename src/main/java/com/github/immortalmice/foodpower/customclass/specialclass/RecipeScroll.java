@@ -81,7 +81,7 @@ public class RecipeScroll extends ItemBase{
 
     /* Set rarity and calculate ingredient amount in need */
     public static void initStack(ItemStack stack, int rarity, float rand){
-        CookingRecipe recipe = RecipeScroll.getCookingRecipe(stack);
+        CookingRecipe recipe = RecipeScroll.readCookingRecipe(stack);
         if(recipe != null){
             recipe.initialize(rarity, rand);
             stack.getTag().put(RecipeScroll.NBT_KEY_RECIPE, recipe.write());
@@ -199,7 +199,7 @@ public class RecipeScroll extends ItemBase{
     }
 
     @Nullable
-    public static CookingRecipe getCookingRecipe(ItemStack stack){
+    public static CookingRecipe readCookingRecipe(ItemStack stack){
         CookingRecipe recipe = null;
         if(stack.hasTag() && stack.getTag().contains(RecipeScroll.NBT_KEY_RECIPE)){
             recipe = CookingRecipe.read((CompoundNBT) stack.getTag().get(RecipeScroll.NBT_KEY_RECIPE));
@@ -212,7 +212,7 @@ public class RecipeScroll extends ItemBase{
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
     	super.addInformation(stack, worldIn, tooltip, flagIn);
 
-        CookingRecipe recipe = RecipeScroll.getCookingRecipe(stack);
+        CookingRecipe recipe = RecipeScroll.readCookingRecipe(stack);
         if(recipe == null) return;
 
         TooltipUtil tooltipHelper = new TooltipUtil(tooltip);
@@ -237,7 +237,7 @@ public class RecipeScroll extends ItemBase{
 
     @Override
     public ITextComponent getDisplayName(ItemStack stack){
-        CookingRecipe recipe = RecipeScroll.getCookingRecipe(stack);
+        CookingRecipe recipe = RecipeScroll.readCookingRecipe(stack);
     	if(recipe != null){
     		return recipe.getDisplayName();
     	}
