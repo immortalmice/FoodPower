@@ -67,6 +67,10 @@ public class CookingPattern{
 		return matchSteps;
 	}
 
+	public List<CookingStep> getSteps(){
+		return new ArrayList<>(this.steps);
+	}
+
 	public Meal getResult(){
 		return this.result;
 	}
