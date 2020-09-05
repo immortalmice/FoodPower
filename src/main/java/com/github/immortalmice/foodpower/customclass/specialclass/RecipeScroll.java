@@ -131,17 +131,16 @@ public class RecipeScroll extends ItemBase{
         CookingPattern pattern = RecipeScroll.getPattern(scroll);
         if(pattern != null){
             List<ItemStack> allRequired = RecipeScroll.getRequiredItemStacks(scroll);
-            CookingStep step = pattern.getStep(kitchenAppliance);
-            if(step != null){
+            List<CookingStep> steps = pattern.getSteps(kitchenAppliance);
+            if(!steps.isEmpty()){
                 for(int i = 0; i <= allRequired.size()-1; i ++){
                     ItemStack stack = allRequired.get(i);
                     Ingredient ingredient = stack.getItem() instanceof Ingredient ? (Ingredient)stack.getItem() : null;
-                    if(ingredient != null && step.canContain(ingredient)){
+                    if(ingredient != null && steps.get(0).canContain(ingredient)){
                         required.add(stack);
                     }
                 }
             }
-            
         }
         return required;
     }
