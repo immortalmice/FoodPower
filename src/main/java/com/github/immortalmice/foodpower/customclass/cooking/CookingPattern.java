@@ -19,7 +19,7 @@ public class CookingPattern{
 		
 		this.name = nameIn;
 		this.result = resultIn;
-		this.steps = new ArrayList<CookingStep>(Arrays.asList(stepsIn));
+		this.steps = Arrays.asList(stepsIn);
 
 		this.init();
 
