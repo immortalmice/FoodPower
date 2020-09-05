@@ -28,7 +28,7 @@ public class CookingStep{
 		}
 	}
 	public List<ICookingElement> getElements(){
-		return this.elements;
+		return new ArrayList<>(this.elements);
 	}
 
 	public KitchenAppliance getEquipment(){
