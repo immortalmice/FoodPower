@@ -86,6 +86,17 @@ public class CookingRecipe{
 		return null;
 	}
 
+	public int getRarity(){
+		return this.rarity;
+	}
+
+	public static int getRarity(CompoundNBT nbt){
+		if(nbt.contains(NBT_KEY.RARITY)){
+			return nbt.getInt(NBT_KEY.RARITY);
+		}
+		return 0;
+	}
+
 	public int getOutputAmount(){
 		return this.outputAmount;
 	}
