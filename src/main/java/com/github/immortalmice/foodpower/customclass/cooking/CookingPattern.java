@@ -4,32 +4,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 /* Pattern means a collection of CookingStep in "cake", "salad", "fried rice"....etc */
 public class CookingPattern{
-	private List<CookingStep> steps;
-	private Meal result;
-	private String name;
-	private List<ICookingElement> elementList = new ArrayList<ICookingElement>();
+	private final List<CookingStep> steps;
+	private final Meal result;
+	private final String name;
+	private final List<ICookingElement> elementList = new ArrayList<ICookingElement>();
 
 	public CookingPattern(String nameIn, Meal resultIn, CookingStep stepsIn[]){
 		
 		this.name = nameIn;
 		this.result = resultIn;
-		this.steps = new ArrayList<CookingStep>(Arrays.asList(stepsIn));
+		this.steps = Arrays.asList(stepsIn);
 
 		this.init();
 
 		CookingPatterns.list.add(this);
-	}
-
-	public CookingPattern(){
-		this.name = "EMPTY PATTERN";
 	}
 
 	public String getName(){
@@ -63,7 +57,6 @@ public class CookingPattern{
 		return element;
 	}
 
-	@Nullable
 	public List<CookingStep> getSteps(KitchenAppliance kitchenAppliance){
 		List<CookingStep> matchSteps = new ArrayList<CookingStep>();
 		for(int i = 0; i <= this.steps.size()-1; i ++){
@@ -72,6 +65,10 @@ public class CookingPattern{
 			}
 		}
 		return matchSteps;
+	}
+
+	public List<CookingStep> getSteps(){
+		return new ArrayList<>(this.steps);
 	}
 
 	public Meal getResult(){

@@ -46,4 +46,9 @@ public class CookedFood extends ItemFoodBase implements ICookingElement{
         }
         return false;
     }
+
+	public static boolean isMatchedID(ItemStack provide, String id){
+        // TODO
+		return true;
+	}
 }

@@ -40,10 +40,8 @@ import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 public class RecipeScroll extends ItemBase{
     private static final IItemPropertyGetter RARITY_GETTER = (stack, world, entity) -> {
-        CompoundNBT nbt = stack.hasTag() ? stack.getTag() : new CompoundNBT();
-
-        if(!nbt.contains("rarity")) return 0.0f; // Rarity WOOD
-        switch(nbt.getInt("rarity")){
+        int rarity = CookingRecipe.getRarity(RecipeScroll.getRecipeTag(stack));
+        switch(rarity){
             case 0:
                 return 0.0f; // Rarity WOOD
             case 1:

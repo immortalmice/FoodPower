@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
+import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
@@ -83,6 +84,17 @@ public class CookingRecipe{
 			return CookingPatterns.getPatternByName(nbt.getString(NBT_KEY.PATTERN));
 		}
 		return null;
+	}
+
+	public int getRarity(){
+		return this.rarity;
+	}
+
+	public static int getRarity(CompoundNBT nbt){
+		if(nbt.contains(NBT_KEY.RARITY)){
+			return nbt.getInt(NBT_KEY.RARITY);
+		}
+		return 0;
 	}
 
 	public int getOutputAmount(){
@@ -213,5 +225,27 @@ public class CookingRecipe{
 
 	public CompoundNBT write(){
 		return CookingRecipe.write(this);
+	}
+
+	private class StepRequest{
+		List<ItemStack> requireStacks = new ArrayList<>();
+
+		private void addRequire(ItemStack stack){
+			this.requireStacks.add(stack);
+		}
+
+		public boolean isSatisfied(List<ItemStack> provides){
+			return CookingRecipe.this.ingredients.stream().filter((pair) -> {
+				ItemStack request = pair.getFirst();
+
+				return provides.stream().filter((provide) -> {
+					boolean valid = provide.isItemEqual(request) && request.getCount() <= provide.getCount();
+					if(valid && request.getItem() instanceof CookedFood){
+						valid = CookedFood.isMatchedID(provide, CookingRecipe.this.ID);
+					}
+					return valid; // Provide stack can satisfy the request.
+				}).count() == 0; // Request not satisfied.
+			}).count() == 0; // No request is not satisfied => Satisfied.
+		}
 	}
 }

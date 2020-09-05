@@ -9,9 +9,9 @@ import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 
 /* Use equipment, fill with ingredients and get result */
 public class CookingStep{
-	private KitchenAppliance equipment;
-	private List<ICookingElement> elements = new ArrayList<ICookingElement>();
-	private CookedFood result;
+	private final KitchenAppliance equipment;
+	private final List<ICookingElement> elements = new ArrayList<ICookingElement>();
+	private final CookedFood result;
 
 	public CookingStep(KitchenAppliance equipmentIn, CookedFood resultIn, ICookingElement elementsIn[]){
 		this.equipment = equipmentIn;
@@ -28,7 +28,7 @@ public class CookingStep{
 		}
 	}
 	public List<ICookingElement> getElements(){
-		return this.elements;
+		return new ArrayList<>(this.elements);
 	}
 
 	public KitchenAppliance getEquipment(){
