@@ -2,12 +2,15 @@ package com.github.immortalmice.foodpower.customclass.cooking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
+import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
@@ -95,6 +98,56 @@ public class CookingRecipe{
 			return nbt.getInt(NBT_KEY.RARITY);
 		}
 		return 0;
+	}
+
+	public List<StepRequest> getRequiredItemStacksInSteps(){
+		if(!this.isInitialized) this.initialize(0, 1.1f);
+
+		final List<StepRequest> returnList = new ArrayList<>();
+		final List<ItemStack> copyOfIngredients = this.ingredients.stream().map((pair) -> {
+			return pair.getFirst();
+		}).collect(Collectors.toList());
+
+		// Fist filter out all ICookingElement is a CookedFood or Ingredient.
+		this.pattern.getSteps().forEach((step) -> {
+			final StepRequest stepRequest = new StepRequest();
+
+			step.getElements().forEach((element) -> {
+				if(element instanceof CookedFood){
+					stepRequest.add(new ItemStack((CookedFood) element));
+				}else if(element instanceof Ingredient){
+					Optional<ItemStack> opStack = copyOfIngredients.stream().filter((stack) -> {
+						return stack.getItem() == element;
+					}).findFirst();
+					if(opStack.isPresent()){
+						stepRequest.add(opStack.get());
+						copyOfIngredients.remove(opStack.get());
+					}
+				}
+			});
+
+			returnList.add(stepRequest);
+		});
+
+		// Then match the rest by FoodType
+		int index = 0;
+		for(CookingStep step : this.pattern.getSteps()){
+			final StepRequest stepRequest = returnList.get(index);
+			step.getElements().forEach((element) -> {
+				if(element instanceof FoodType){
+					Optional<ItemStack> opStack = copyOfIngredients.stream().filter((stack) -> {
+						return stack.getItem() instanceof Ingredient ? element.isMatch((Ingredient) stack.getItem()) : false;
+					}).findFirst();
+					if(opStack.isPresent()){
+						stepRequest.add(opStack.get());
+						copyOfIngredients.remove(opStack.get());
+					}
+				}
+			});
+
+			index ++;
+		}
+		return returnList;
 	}
 
 	public int getOutputAmount(){
@@ -228,10 +281,14 @@ public class CookingRecipe{
 	}
 
 	private class StepRequest{
-		List<ItemStack> requireStacks = new ArrayList<>();
+		private final List<ItemStack> requireStacks = new ArrayList<>();
 
-		private void addRequire(ItemStack stack){
+		private void add(ItemStack stack){
 			this.requireStacks.add(stack);
+		}
+
+		public List<ItemStack> getRequiredStacks(){
+			return new ArrayList<>(this.requireStacks);
 		}
 
 		public boolean isSatisfied(List<ItemStack> provides){
