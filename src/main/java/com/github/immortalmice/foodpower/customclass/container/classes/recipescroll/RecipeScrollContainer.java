@@ -48,6 +48,10 @@ public class RecipeScrollContainer extends ContainerBase{
 		}
 	}
 
+	public int getRarity(){
+		return this.recipe != null ? this.recipe.getRarity() : 0;
+	}
+
 	public String getScrollName(){
 		return this.recipe != null ? this.recipe.getDisplayName().getUnformattedComponentText() : I18n.format("general.foodpower.unknown_recipe");
 	}

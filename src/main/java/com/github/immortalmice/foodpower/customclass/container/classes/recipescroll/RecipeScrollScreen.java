@@ -14,6 +14,21 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 		super(containerIn, inventoryIn, textIn);
 
 		this.textureFileName = "recipe_scroll";
+		switch(this.container.getRarity()){
+			case 1:
+				this.textureFileName += "_iron";
+				break;
+			case 2:
+				this.textureFileName += "_gold";
+				break;
+			case 3:
+				this.textureFileName += "_diamond";
+				break;
+			case 0:
+			default:
+				this.textureFileName += "_wood";
+				break;
+		}
 		this.xSize = 256;
 		this.ySize = 256;
 	}
