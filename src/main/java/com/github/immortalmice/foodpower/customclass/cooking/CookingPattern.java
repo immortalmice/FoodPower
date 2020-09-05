@@ -12,10 +12,10 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
 /* Pattern means a collection of CookingStep in "cake", "salad", "fried rice"....etc */
 public class CookingPattern{
-	private List<CookingStep> steps;
-	private Meal result;
-	private String name;
-	private List<ICookingElement> elementList = new ArrayList<ICookingElement>();
+	private final List<CookingStep> steps;
+	private final Meal result;
+	private final String name;
+	private final List<ICookingElement> elementList = new ArrayList<ICookingElement>();
 
 	public CookingPattern(String nameIn, Meal resultIn, CookingStep stepsIn[]){
 		
@@ -26,10 +26,6 @@ public class CookingPattern{
 		this.init();
 
 		CookingPatterns.list.add(this);
-	}
-
-	public CookingPattern(){
-		this.name = "EMPTY PATTERN";
 	}
 
 	public String getName(){
