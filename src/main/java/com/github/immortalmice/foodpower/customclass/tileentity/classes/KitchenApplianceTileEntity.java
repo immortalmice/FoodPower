@@ -9,7 +9,9 @@ import javax.annotation.Nullable;
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 
 import net.minecraft.block.Block;
@@ -133,7 +135,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		private final ItemStackHandler outputHandler = new ItemStackHandler();
 		private final ItemStackHandler ingredientHandler = new ItemStackHandler();
 
-		private List<ItemStack> requiredItemStacks;
+		private List<StepRequest> requests = new ArrayList<>();
+		private int requestIndex = 0;
 
 		private KitchenApplanceItemHandler(){
 
@@ -145,6 +148,14 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				return stack;
 			}
 			return ItemStack.EMPTY;
+		}
+
+		@Nullable
+		private StepRequest getCurrentStepRequest(){
+			if(this.requestIndex >= 0 && this.requestIndex <= this.requests.size()-1){
+				return this.requests.get(this.requestIndex);
+			}
+			return null;
 		}
 
 		@Override
@@ -269,11 +280,15 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 
 		private void updateScrollInfo(){
-			// TODO
 			ItemStack scroll = this.getScroll();
 			if(scroll != null){
-				this.requiredItemStacks = RecipeScroll.getRequiredItemStacks(scroll, KitchenApplianceTileEntity.this.getBlock());
-				this.ingredientHandler.setSize(this.requiredItemStacks.size());
+				CookingRecipe recipe = RecipeScroll.readCookingRecipe(scroll);
+				if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
+					this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
+				}
+				this.requestIndex = 0;
+				StepRequest stepRequest = this.getCurrentStepRequest();
+				this.ingredientHandler.setSize(stepRequest != null ? stepRequest.getRequiredStacks().size() : 1);
 			}
 		}
 	}
