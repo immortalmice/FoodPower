@@ -178,6 +178,12 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		public ItemStack extractItem(int slot, int amount, boolean simulate){
 			ItemStack stack = this.getStackInSlot(slot);
 			if(!stack.isEmpty()){
+				if(slot == 0){
+					for(int i = 0; i <= this.ingredientHandler.getSlots()-1; i ++){
+						if(!this.ingredientHandler.getStackInSlot(i).isEmpty()) return ItemStack.EMPTY;
+					}
+				}
+
 				ItemStack extractStack = stack.copy();
 
 				int extractCount = Math.min(stack.getCount(), amount);
