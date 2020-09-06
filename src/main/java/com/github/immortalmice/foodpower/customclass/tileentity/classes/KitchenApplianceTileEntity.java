@@ -129,9 +129,9 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	}
 
 	public class KitchenApplanceItemHandler implements IItemHandler, IItemHandlerModifiable{
-		private ItemStackHandler scrollHandler = new ItemStackHandler();
-		private ItemStackHandler outputHandler = new ItemStackHandler();
-		private ItemStackHandler ingredientHandler = new ItemStackHandler();
+		private final ItemStackHandler scrollHandler = new ItemStackHandler();
+		private final ItemStackHandler outputHandler = new ItemStackHandler();
+		private final ItemStackHandler ingredientHandler = new ItemStackHandler();
 
 		private List<ItemStack> requiredItemStacks;
 
