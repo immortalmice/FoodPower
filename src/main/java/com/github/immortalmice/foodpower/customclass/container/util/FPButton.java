@@ -51,6 +51,10 @@ public class FPButton extends Button{
 	private final FPButton.ButtonType buttonType;
 	private static final ResourceLocation BUTTONS_TEXTURE_LOCATION = new ResourceLocation(FoodPower.MODID + ":textures/gui/container/button.png");
 
+	public FPButton(int x, int y, Button.IPressable onPress){
+		this(x, y, FPButton.ButtonType.WOOD_LEFT, onPress);
+	}
+
 	public FPButton(int x, int y, FPButton.ButtonType buttonTypeIn, Button.IPressable onPress){
 		super(x, y, buttonTypeIn.width, buttonTypeIn.height, "", onPress);
 
