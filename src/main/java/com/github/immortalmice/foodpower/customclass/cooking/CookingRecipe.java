@@ -307,6 +307,10 @@ public class CookingRecipe{
 			return this.equipment;
 		}
 
+		public String getRequestID(){
+			return CookingRecipe.this.ID;
+		}
+
 		public boolean isSatisfied(List<ItemStack> provides){
 			return CookingRecipe.this.ingredients.stream().filter((pair) -> {
 				ItemStack request = pair.getFirst();
