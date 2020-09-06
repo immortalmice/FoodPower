@@ -151,6 +151,12 @@ public class CookingRecipe{
 		return returnList;
 	}
 
+	public List<StepRequest> getStepReqests(KitchenAppliance applianceIn){
+		return this.getStepReqests().stream().filter((stepRequest) -> {
+			return stepRequest.getEquipment() == applianceIn;
+		}).collect(Collectors.toList());
+	}
+
 	public int getOutputAmount(){
 		return this.outputAmount;
 	}
