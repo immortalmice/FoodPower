@@ -280,7 +280,7 @@ public class CookingRecipe{
 		return CookingRecipe.write(this);
 	}
 
-	private class StepRequest{
+	public class StepRequest{
 		private final List<ItemStack> requireStacks = new ArrayList<>();
 
 		private void add(ItemStack stack){
