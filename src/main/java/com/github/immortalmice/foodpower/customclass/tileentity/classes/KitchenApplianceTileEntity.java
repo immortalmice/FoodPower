@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
-import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
@@ -238,12 +237,14 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 								&& RecipeScroll.getPattern(stack) != null
 								&& !RecipeScroll.getPattern(stack).getSteps(KitchenApplianceTileEntity.this.getBlock()).isEmpty();
 						case 1:
-							return stack.getItem() instanceof CookedFood;
+							return false;
 						default:
-							if(RecipeScroll.getRequiredItemStacks(this.getScroll()).get(slot - 2).getItem() == stack.getItem()){
+							StepRequest stepRequest = this.getCurrentStepRequest();
+							if(stepRequest != null){
+								return stepRequest.getRequiredStacks().get(slot - 2).getItem() == stack.getItem();
+							}else if(slot == 2){
 								return true;
 							}
-							return false;
 					}
 				}
 			}
