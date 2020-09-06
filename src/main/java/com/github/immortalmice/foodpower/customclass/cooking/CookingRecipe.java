@@ -101,7 +101,7 @@ public class CookingRecipe{
 		return 0;
 	}
 
-	public List<StepRequest> getRequiredItemStacksInSteps(){
+	public List<StepRequest> getStepReqests(){
 		if(!this.isInitialized) this.initialize(0, 1.1f);
 
 		final List<StepRequest> returnList = new ArrayList<>();
