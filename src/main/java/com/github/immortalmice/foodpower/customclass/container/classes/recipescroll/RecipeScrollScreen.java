@@ -58,16 +58,37 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 	public void init(){
 		super.init();
 
+		FPButton.ButtonType buttonTypeLeft, buttonTypeRight;
+		switch(this.container.getRarity()){
+			case 1:
+				buttonTypeLeft = FPButton.ButtonType.IRON_LEFT;
+				buttonTypeRight = FPButton.ButtonType.IRON_RIGHT;
+				break;
+			case 2:
+				buttonTypeLeft = FPButton.ButtonType.GOLD_LEFT;
+				buttonTypeRight = FPButton.ButtonType.GOLD_RIGHT;
+				break;
+			case 3:
+				buttonTypeLeft = FPButton.ButtonType.DIAMOND_LEFT;
+				buttonTypeRight = FPButton.ButtonType.DIAMOND_RIGHT;
+				break;
+			case 0:
+			default:
+				buttonTypeLeft = FPButton.ButtonType.WOOD_LEFT;
+				buttonTypeRight = FPButton.ButtonType.WOOD_RIGHT;
+				break;
+		}
+
 		int offsetY = (this.height - this.ySize) / 2;
 		int centerX = this.width / 2;
-		this.addButton(new FPButton(centerX - 30, offsetY + 40, FPButton.ButtonType.STONE_LEFT, (button) ->{
+		this.addButton(new FPButton(centerX - 30, offsetY + 40, buttonTypeLeft, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
 					, "Set Amount Minus"));
 		}));
 
-		this.addButton(new FPButton(centerX + 20, offsetY + 40, FPButton.ButtonType.STONE_RIGHT, (button) ->{
+		this.addButton(new FPButton(centerX + 20, offsetY + 40, buttonTypeRight, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
