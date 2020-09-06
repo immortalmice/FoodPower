@@ -11,6 +11,7 @@ import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
+import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 
 import net.minecraft.block.Block;
@@ -241,7 +242,12 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 						default:
 							StepRequest stepRequest = this.getCurrentStepRequest();
 							if(stepRequest != null){
-								return stepRequest.getRequiredStacks().get(slot - 2).getItem() == stack.getItem();
+								ItemStack request = stepRequest.getRequiredStacks().get(slot - 2);
+								if(request.getItem() == stack.getItem()){
+									if(request.getItem() instanceof CookedFood
+										&& !CookedFood.isMatchedID(stack, stepRequest.getRequestID())) return false;
+									return true;
+								}
 							}else if(slot == 2){
 								return true;
 							}
