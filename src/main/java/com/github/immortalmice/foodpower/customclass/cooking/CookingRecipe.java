@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
+import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
@@ -110,7 +111,7 @@ public class CookingRecipe{
 
 		// Fist filter out all ICookingElement is a CookedFood or Ingredient.
 		this.pattern.getSteps().forEach((step) -> {
-			final StepRequest stepRequest = new StepRequest();
+			final StepRequest stepRequest = new StepRequest(step.getEquipment());
 
 			step.getElements().forEach((element) -> {
 				if(element instanceof CookedFood){
@@ -281,7 +282,12 @@ public class CookingRecipe{
 	}
 
 	public class StepRequest{
+		private final KitchenAppliance equipment;
 		private final List<ItemStack> requireStacks = new ArrayList<>();
+
+		private StepRequest(KitchenAppliance equipmentIn){
+			this.equipment = equipmentIn;
+		}
 
 		private void add(ItemStack stack){
 			this.requireStacks.add(stack);
@@ -289,6 +295,10 @@ public class CookingRecipe{
 
 		public List<ItemStack> getRequiredStacks(){
 			return new ArrayList<>(this.requireStacks);
+		}
+
+		public KitchenAppliance getEquipment(){
+			return this.equipment;
 		}
 
 		public boolean isSatisfied(List<ItemStack> provides){
