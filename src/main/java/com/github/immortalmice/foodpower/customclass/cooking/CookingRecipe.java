@@ -123,6 +123,7 @@ public class CookingRecipe{
 					}).findFirst();
 					if(opStack.isPresent()){
 						stepRequest.addSampleAsRequest(opStack.get());
+						// Remove it so it won't be selected again.
 						copyOfIngredients.remove(opStack.get());
 					}
 				}
