@@ -8,10 +8,11 @@ import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
+import com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance.KitchenApplianceContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
-import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 
 import net.minecraft.block.Block;
@@ -242,12 +243,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 						default:
 							StepRequest stepRequest = this.getCurrentStepRequest();
 							if(stepRequest != null){
-								ItemStack request = stepRequest.getRequiredStacks().get(slot - 2);
-								if(request.getItem() == stack.getItem()){
-									if(request.getItem() instanceof CookedFood
-										&& !CookedFood.isMatchedID(stack, stepRequest.getRequestID())) return false;
-									return true;
-								}
+								ItemStackRequest request = stepRequest.getRequires().get(slot - 2);
+								return request.isMatched(stack);
 							}else if(slot == 2){
 								return true;
 							}
@@ -295,7 +292,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				}
 				this.requestIndex = 0;
 				StepRequest stepRequest = this.getCurrentStepRequest();
-				this.ingredientHandler.setSize(stepRequest != null ? stepRequest.getRequiredStacks().size() : 1);
+				this.ingredientHandler.setSize(stepRequest != null ? stepRequest.getRequires().size() : 1);
 			}
 		}
 	}

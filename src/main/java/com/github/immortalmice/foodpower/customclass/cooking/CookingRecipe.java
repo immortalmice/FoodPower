@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
@@ -115,13 +116,13 @@ public class CookingRecipe{
 
 			step.getElements().forEach((element) -> {
 				if(element instanceof CookedFood){
-					stepRequest.add(new ItemStack((CookedFood) element));
+					stepRequest.addSampleAsRequest(new ItemStack((CookedFood) element));
 				}else if(element instanceof Ingredient){
 					Optional<ItemStack> opStack = copyOfIngredients.stream().filter((stack) -> {
 						return stack.getItem() == element;
 					}).findFirst();
 					if(opStack.isPresent()){
-						stepRequest.add(opStack.get());
+						stepRequest.addSampleAsRequest(opStack.get());
 						copyOfIngredients.remove(opStack.get());
 					}
 				}
@@ -140,7 +141,7 @@ public class CookingRecipe{
 						return stack.getItem() instanceof Ingredient ? element.isMatch((Ingredient) stack.getItem()) : false;
 					}).findFirst();
 					if(opStack.isPresent()){
-						stepRequest.add(opStack.get());
+						stepRequest.addSampleAsRequest(opStack.get());
 						copyOfIngredients.remove(opStack.get());
 					}
 				}
@@ -289,18 +290,28 @@ public class CookingRecipe{
 
 	public class StepRequest{
 		private final KitchenAppliance equipment;
-		private final List<ItemStack> requireStacks = new ArrayList<>();
+		private final List<ItemStackRequest> requires = new ArrayList<>();
 
 		private StepRequest(KitchenAppliance equipmentIn){
 			this.equipment = equipmentIn;
 		}
 
-		private void add(ItemStack stack){
-			this.requireStacks.add(stack);
+		private void addSampleAsRequest(ItemStack sample){
+			Predicate<ItemStack> predicator = (stack) -> {
+				return stack.isItemEqualIgnoreDurability(sample);
+			};
+
+			if(sample.getItem() instanceof CookedFood){
+				predicator = predicator.and((stack) -> {
+					return CookedFood.isMatchedID(stack, CookingRecipe.this.ID);
+				});
+			}
+
+			this.requires.add(new ItemStackRequest(predicator, sample.getCount()));
 		}
 
-		public List<ItemStack> getRequiredStacks(){
-			return new ArrayList<>(this.requireStacks);
+		public List<ItemStackRequest> getRequires(){
+			return new ArrayList<>(this.requires);
 		}
 
 		public KitchenAppliance getEquipment(){
@@ -312,6 +323,7 @@ public class CookingRecipe{
 		}
 
 		public boolean isSatisfied(List<ItemStack> provides){
+			// TODO Is this still needed?
 			return CookingRecipe.this.ingredients.stream().filter((pair) -> {
 				ItemStack request = pair.getFirst();
 
@@ -323,6 +335,36 @@ public class CookingRecipe{
 					return valid; // Provide stack can satisfy the request.
 				}).count() == 0; // Request not satisfied.
 			}).count() == 0; // No request is not satisfied => Satisfied.
+		}
+	}
+
+	public static class ItemStackRequest{
+		private final Predicate<ItemStack> satisfyPredicator;
+		private final Predicate<ItemStack> matchPredicator;
+
+		private ItemStackRequest(Predicate<ItemStack> matchPredicatorIn, int satisfiedCountIn){
+			this(matchPredicatorIn, matchPredicatorIn.and(ItemStackRequest.COUNT_PREDICATOR(satisfiedCountIn)));
+		}
+
+		private ItemStackRequest(Predicate<ItemStack> matchPredicatorIn, Predicate<ItemStack> satisfyPredicatorIn){
+			this.matchPredicator = matchPredicatorIn;
+			this.satisfyPredicator = satisfyPredicatorIn;
+		}
+
+		// Return true when provide stack can be part of the request.
+		public boolean isMatched(ItemStack provide){
+			return this.matchPredicator.test(provide);
+		}
+
+		// Return true when provide stack can satisfied the request.
+		public boolean isSatisfied(ItemStack provide){
+			return this.satisfyPredicator.test(provide);
+		}
+
+		public static Predicate<ItemStack> COUNT_PREDICATOR(int satisfiedCount){
+			return (stack) -> {
+				return stack.getCount() >= satisfiedCount;
+			};
 		}
 	}
 }
