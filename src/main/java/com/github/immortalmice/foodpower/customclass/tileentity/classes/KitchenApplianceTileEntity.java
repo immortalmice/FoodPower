@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
-import com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance.KitchenApplianceContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
