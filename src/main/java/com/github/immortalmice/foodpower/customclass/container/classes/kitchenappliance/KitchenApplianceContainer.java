@@ -81,6 +81,10 @@ public class KitchenApplianceContainer extends ContainerBase{
 		return null;
 	}
 
+	@Nullable
+	public KitchenApplanceItemHandler getItemHandler(){
+		return this.itemHandler;
+	}
 
 	public List<ItemStackRequest> getCurrentItemRequests(){
 		StepRequest stepRequest = this.itemHandler != null ? this.itemHandler.getCurrentStepRequest() : null;
