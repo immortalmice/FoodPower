@@ -284,7 +284,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 		private void updateScrollInfo(){
 			ItemStack scroll = this.getScroll();
-			if(scroll != null){
+			if(!scroll.isEmpty()){
 				CookingRecipe recipe = RecipeScroll.readCookingRecipe(scroll);
 				if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
 					this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
@@ -292,6 +292,10 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				this.requestIndex = 0;
 				StepRequest stepRequest = this.getCurrentStepRequest();
 				this.ingredientHandler.setSize(stepRequest != null ? stepRequest.getRequires().size() : 1);
+			}else{
+				this.requests = new ArrayList<>();
+				this.requestIndex = 0;
+				this.ingredientHandler.setSize(1);
 			}
 		}
 	}
