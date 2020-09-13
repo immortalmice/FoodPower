@@ -68,12 +68,10 @@ public class KitchenApplianceContainer extends ContainerBase{
 			itemRequests.add(ItemStackRequest.EMPTY);
 		}
 
-		final int gap = (INGREDIENT_SLOT_CONTAINER_HEIGHT - itemRequests.size() * SLOT_HEIGHT) / (itemRequests.size() + 1);
+		int[][] pos = KitchenApplianceContainer.getSlotPos(itemRequests.size());
 
-		int cursor = INGREDIENT_SLOT_CONTAINER_TOP + gap;
 		for(int i = 0; i <= itemRequests.size()-1; i ++){
-			this.addSlot(new KitchenApplianceSlot(this.itemHandler, i + 2, INGREDIENT_SLOT_CONTAINER_LEFT, cursor, itemRequests.get(i)));
-			cursor += SLOT_HEIGHT + gap;
+			this.addSlot(new KitchenApplianceSlot(this.itemHandler, i + 2, pos[i][0], pos[i][1], itemRequests.get(i)));
 		}
 	}
 
@@ -88,5 +86,19 @@ public class KitchenApplianceContainer extends ContainerBase{
 			return this.tileEntity.getBlock();
 		}
 		return null;
+	}
+
+	/* Compute the coordinate list of ingredient slots */
+	public static int[][] getSlotPos(int count){
+		int[][] result = new int[count][2];
+		final int gap = (INGREDIENT_SLOT_CONTAINER_HEIGHT - count * SLOT_HEIGHT) / (count + 1);
+
+		int cursor = INGREDIENT_SLOT_CONTAINER_TOP + gap;
+		for(int i = 0; i <= count-1; i ++){
+			result[i][0] = INGREDIENT_SLOT_CONTAINER_LEFT;
+			result[i][1] = cursor;
+			cursor += SLOT_HEIGHT + gap;
+		}
+		return result;
 	}
 }
