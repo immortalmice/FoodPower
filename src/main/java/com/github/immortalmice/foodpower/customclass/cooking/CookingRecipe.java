@@ -340,6 +340,10 @@ public class CookingRecipe{
 	}
 
 	public static class ItemStackRequest{
+		public static final ItemStackRequest EMPTY = new ItemStackRequest((stack) -> {
+			return true;
+		}, 0);
+
 		private final Predicate<ItemStack> satisfyPredicator;
 		private final Predicate<ItemStack> matchPredicator;
 
