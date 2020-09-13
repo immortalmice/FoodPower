@@ -64,6 +64,10 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		return this.energyStorage.getMaxEnergyStored();
 	}
 
+	public KitchenApplanceItemHandler getItemHandler(){
+		return this.itemHandler;
+	}
+
 	public boolean hasScroll(){
 		return !this.itemHandler.getScroll().isEmpty();
 	}
@@ -124,10 +128,6 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				this.catchedEnergyStored = this.energyStorage.getEnergyStored();
 			}
 		}
-	}
-
-	public KitchenApplanceItemHandler getItemHandler(){
-		return this.itemHandler;
 	}
 
 	public class KitchenApplanceItemHandler implements IItemHandler, IItemHandlerModifiable{
