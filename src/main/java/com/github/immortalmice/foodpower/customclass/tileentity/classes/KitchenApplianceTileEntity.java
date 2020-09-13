@@ -151,7 +151,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 
 		@Nullable
-		private StepRequest getCurrentStepRequest(){
+		public StepRequest getCurrentStepRequest(){
 			if(this.requestIndex >= 0 && this.requestIndex <= this.requests.size()-1){
 				return this.requests.get(this.requestIndex);
 			}
