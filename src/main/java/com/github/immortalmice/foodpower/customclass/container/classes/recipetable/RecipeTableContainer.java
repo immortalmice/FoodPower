@@ -103,7 +103,7 @@ public class RecipeTableContainer extends ContainerBase{
 		this.ingredientsSlot.setSize(elementList.size());
 
 		/* Make A Slot Circle With N Slots */
-		int[][] slotPos = this.getSlotPos();
+		int[][] slotPos = RecipeTableContainer.getSlotPos(elementList.size());
 		for(int i = 0; i <= elementList.size()-1; i ++){
 			this.addSlot(new RecipeTableSlot(ingredientsSlot, i
 				, slotPos[i][0] - 8, slotPos[i][1] - 8
@@ -202,8 +202,7 @@ public class RecipeTableContainer extends ContainerBase{
 		return Meal.create(this.getScroll(true), amount);
 	}
 	/* Compute the coordinate list of circle */
-	public int[][] getSlotPos(){
-		int count = this.getCurrentRootElements().size();
+	public static int[][] getSlotPos(int count){
 		int[][] result = new int[count][2];
 
 		float angle = 360 / count;
