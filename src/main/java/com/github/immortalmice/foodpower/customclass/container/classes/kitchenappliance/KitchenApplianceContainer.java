@@ -3,7 +3,6 @@ package com.github.immortalmice.foodpower.customclass.container.classes.kitchena
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
@@ -16,7 +15,6 @@ import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenA
 import com.github.immortalmice.foodpower.lists.Containers;
 
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
