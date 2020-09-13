@@ -60,14 +60,7 @@ public class KitchenApplianceContainer extends ContainerBase{
 			this.inventorySlots.remove(38);
 		}
 
-		StepRequest stepRequest = this.itemHandler.getCurrentStepRequest();
-		List<ItemStackRequest> itemRequests = new ArrayList<>();
-		if(stepRequest != null){
-			itemRequests = stepRequest.getRequires();
-		}else{
-			itemRequests.add(ItemStackRequest.EMPTY);
-		}
-
+		List<ItemStackRequest> itemRequests = this.getCurrentItemRequests();
 		int[][] pos = KitchenApplianceContainer.getSlotPos(itemRequests.size());
 
 		for(int i = 0; i <= itemRequests.size()-1; i ++){
@@ -86,6 +79,18 @@ public class KitchenApplianceContainer extends ContainerBase{
 			return this.tileEntity.getBlock();
 		}
 		return null;
+	}
+
+
+	public List<ItemStackRequest> getCurrentItemRequests(){
+		StepRequest stepRequest = this.itemHandler != null ? this.itemHandler.getCurrentStepRequest() : null;
+		List<ItemStackRequest> itemRequests = new ArrayList<>();
+		if(stepRequest != null){
+			itemRequests = stepRequest.getRequires();
+		}else{
+			itemRequests.add(ItemStackRequest.EMPTY);
+		}
+		return itemRequests;
 	}
 
 	/* Compute the coordinate list of ingredient slots */
