@@ -46,10 +46,6 @@ public class KitchenApplianceContainer extends ContainerBase{
 			
 			this.addSlot(new SlotItemHandler(this.itemHandler, 0, 45, 119){
 				@Override
-				public void putStack(@Nonnull ItemStack stack){
-					super.putStack(stack);
-				}
-				@Override
 				public void onSlotChanged(){
 					KitchenApplianceContainer.this.updateSlot();
 				}
