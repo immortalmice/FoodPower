@@ -29,8 +29,8 @@ public class MealBakedModel extends BakedItemModel{
 	private TextureAtlasSprite baseSprite = null;
 	private List<TextureAtlasSprite> ingredientSprites = new ArrayList<TextureAtlasSprite>();
 	private TransformationMatrix transform;
-	/* Catch the result of quads, using a location combination */
-	private static Map<String, ImmutableList<BakedQuad>> catche = new HashMap<String, ImmutableList<BakedQuad>>();
+	/* Cache the result of quads, using a location combination */
+	private static Map<String, ImmutableList<BakedQuad>> cache = new HashMap<String, ImmutableList<BakedQuad>>();
 
 	private static float NORTH_Z = 7.496f / 16f;
 	private static float SOUTH_Z = 8.504f / 16f;
@@ -64,11 +64,11 @@ public class MealBakedModel extends BakedItemModel{
 	}
 
 	private ImmutableList<BakedQuad> genQuads(){
-		String catcheKey = this.getCatchKeyString();
+		String cacheKey = this.getCacheKeyString();
 
 		/* Check is this sprite location combination is already baked or not  */
-		if(MealBakedModel.catche.containsKey(catcheKey))
-			return MealBakedModel.catche.get(catcheKey);
+		if(MealBakedModel.cache.containsKey(cacheKey))
+			return MealBakedModel.cache.get(cacheKey);
 
 		ImmutableList.Builder<BakedQuad> quads = ImmutableList.builder();
 		List<TextureAtlasSprite> sprites = new ArrayList<TextureAtlasSprite>();
@@ -210,7 +210,7 @@ public class MealBakedModel extends BakedItemModel{
 		}
 
 		ImmutableList<BakedQuad> returnQuads = quads.build();
-		MealBakedModel.catche.put(catcheKey, returnQuads);
+		MealBakedModel.cache.put(cacheKey, returnQuads);
 
 		return returnQuads;
 	}
@@ -288,8 +288,8 @@ public class MealBakedModel extends BakedItemModel{
 		return new MealBakedModel(this, spritesIn);
 	}
 
-	/* Get a combination string of loactions, used in catche's key */
-	private String getCatchKeyString(){
+	/* Get a combination string of loactions, used in cache's key */
+	private String getCacheKeyString(){
 		List<String> locations = new ArrayList<String>();
 		if(this.baseSprite != null)
 			locations.add(this.baseSprite.getName().toString());
