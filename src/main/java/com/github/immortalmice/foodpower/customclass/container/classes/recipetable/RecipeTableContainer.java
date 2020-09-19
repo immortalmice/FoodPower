@@ -2,7 +2,6 @@ package com.github.immortalmice.foodpower.customclass.container.classes.recipeta
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Math;
 
 import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,6 +22,8 @@ import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
+import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Position2D;
+import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.RecipeTableSlotPos;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
@@ -36,8 +37,6 @@ public class RecipeTableContainer extends ContainerBase{
 	private final int windowId;
 	private boolean isCreative;
 
-	private static final int RADIUS = 40;
-	private static final int[] CENTER = {90, 80};
 	private static final int PATTERN_LIST_SIZE = CookingPatterns.list.size();
 
 	public RecipeTableContainer(int windowId, PlayerInventory inv, PacketBuffer extraData){
@@ -53,7 +52,7 @@ public class RecipeTableContainer extends ContainerBase{
 		this.scrollSlot = new ItemStackHandler(1);
 		this.ingredientsSlot = new ItemStackHandler(0);
 
-		this.addSlot(new SlotItemHandler(bookSlot, 0, 83, 72){
+		this.addSlot(new SlotItemHandler(bookSlot, 0, RecipeTableSlotPos.CENTER.translateToLeftTop().x, RecipeTableSlotPos.CENTER.translateToLeftTop().y){
 			/* Only Writable Book Accepted Here */
 			@Override
 			public boolean isItemValid(ItemStack stack){
@@ -103,10 +102,10 @@ public class RecipeTableContainer extends ContainerBase{
 		this.ingredientsSlot.setSize(elementList.size());
 
 		/* Make A Slot Circle With N Slots */
-		int[][] slotPos = RecipeTableContainer.getSlotPos(elementList.size());
+		List<Position2D> slotPos = RecipeTableSlotPos.provide(elementList.size());
 		for(int i = 0; i <= elementList.size()-1; i ++){
 			this.addSlot(new RecipeTableSlot(ingredientsSlot, i
-				, slotPos[i][0] - 8, slotPos[i][1] - 8
+				, slotPos.get(i).x, slotPos.get(i).y
 				, elementList.get(i), this));
 		}
 		this.refreshScroll();
@@ -200,22 +199,6 @@ public class RecipeTableContainer extends ContainerBase{
 
 	public ItemStack getFinishedMeal(int amount){
 		return Meal.create(this.getScroll(true), amount);
-	}
-	/* Compute the coordinate list of circle */
-	public static int[][] getSlotPos(int count){
-		int[][] result = new int[count][2];
-
-		float angle = 360 / count;
-		for(int i = 0; i <= count-1; i ++){
-
-			int[] slotPostInGui = {
-				(int)(RecipeTableContainer.CENTER[0] + RecipeTableContainer.RADIUS * Math.cos((angle * i - 90) * Math.PI / 180)),
-				(int)(RecipeTableContainer.CENTER[1] + RecipeTableContainer.RADIUS * Math.sin((angle * i - 90) * Math.PI / 180))
-			};
-
-			result[i] = slotPostInGui;
-		}
-		return result;
 	}
 
 	public int getIndex(){

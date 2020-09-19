@@ -12,6 +12,8 @@ import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemS
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity.KitchenApplanceItemHandler;
+import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.KitchenApplianceSlotPos;
+import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Position2D;
 import com.github.immortalmice.foodpower.lists.Containers;
 
 import net.minecraft.entity.player.PlayerInventory;
@@ -23,12 +25,6 @@ import net.minecraftforge.items.SlotItemHandler;
 public class KitchenApplianceContainer extends ContainerBase{
 	private KitchenApplianceTileEntity tileEntity;
 	private KitchenApplanceItemHandler itemHandler;
-
-	public static final int INGREDIENT_SLOT_CONTAINER_TOP = 16;
-	public static final int INGREDIENT_SLOT_CONTAINER_HEIGHT = 108;
-	public static final int INGREDIENT_SLOT_CONTAINER_LEFT = 72;
-
-	public static final int SLOT_HEIGHT = 18;
 
 	public KitchenApplianceContainer(int windowId, PlayerInventory playerInventory, PacketBuffer extraData){
 		this(windowId, playerInventory, extraData.readBlockPos());
@@ -61,10 +57,10 @@ public class KitchenApplianceContainer extends ContainerBase{
 		}
 
 		List<ItemStackRequest> itemRequests = this.getCurrentItemRequests();
-		int[][] pos = KitchenApplianceContainer.getSlotPos(itemRequests.size());
+		List<Position2D> pos = KitchenApplianceSlotPos.provide(itemRequests.size());
 
 		for(int i = 0; i <= itemRequests.size()-1; i ++){
-			this.addSlot(new KitchenApplianceSlot(this.itemHandler, i + 2, pos[i][0], pos[i][1], itemRequests.get(i)));
+			this.addSlot(new KitchenApplianceSlot(this.itemHandler, i + 2, pos.get(i).x, pos.get(i).y, itemRequests.get(i)));
 		}
 	}
 
@@ -95,19 +91,5 @@ public class KitchenApplianceContainer extends ContainerBase{
 			itemRequests.add(ItemStackRequest.EMPTY);
 		}
 		return itemRequests;
-	}
-
-	/* Compute the coordinate list of ingredient slots */
-	public static int[][] getSlotPos(int count){
-		int[][] result = new int[count][2];
-		final int gap = (INGREDIENT_SLOT_CONTAINER_HEIGHT - count * SLOT_HEIGHT) / (count + 1);
-
-		int cursor = INGREDIENT_SLOT_CONTAINER_TOP + gap;
-		for(int i = 0; i <= count-1; i ++){
-			result[i][0] = INGREDIENT_SLOT_CONTAINER_LEFT;
-			result[i][1] = cursor;
-			cursor += SLOT_HEIGHT + gap;
-		}
-		return result;
 	}
 }

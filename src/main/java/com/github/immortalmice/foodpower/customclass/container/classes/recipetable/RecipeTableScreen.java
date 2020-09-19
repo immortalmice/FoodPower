@@ -2,12 +2,12 @@ package com.github.immortalmice.foodpower.customclass.container.classes.recipeta
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 import com.github.immortalmice.foodpower.FoodPower;
@@ -17,6 +17,8 @@ import com.github.immortalmice.foodpower.customclass.container.util.RecipeTableS
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
+import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Position2D;
+import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.RecipeTableSlotPos;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
 
@@ -39,15 +41,15 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		List<ICookingElement> currentElements = container.getCurrentRootElements();
 
 		/* Make A Slot Circle With N Slots */
-		int[][] slotPos = RecipeTableContainer.getSlotPos(currentElements.size());	
-		this.minecraft.getTextureManager().bindTexture(this.getSlotTexture());
+		List<Position2D> slotPos = RecipeTableSlotPos.provide(currentElements.size()).stream().map((pos) -> pos.translate(-1)).collect(Collectors.toList());	
+		this.minecraft.getTextureManager().bindTexture(ScreenBase.SLOT_TEXTURE);
 
 		for(int i = 0; i <= currentElements.size()-1; i ++){
 			ICookingElement element = currentElements.get(i); 
 			int[] slotPosInTexture = this.getSlotPosInTexture(element instanceof FoodType ? (FoodType) element : FoodTypes.NONE);
 			
 			this.blit(
-				offsetX + slotPos[i][0] - 9, offsetY + slotPos[i][1] - 9
+				offsetX + slotPos.get(i).x, offsetY + slotPos.get(i).y
 				, slotPosInTexture[0], slotPosInTexture[1]
 				, 18, 18);
 		}
@@ -135,6 +137,7 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		}
 		return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
 	}
+	
 	private void onTextChanged(){
 		this.getContainer().setInputText(this.textBox.getText());
 		FoodPower.NETWORK.sendToServer(
@@ -144,10 +147,6 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		);
 	}
 
-    private ResourceLocation getSlotTexture(){
-    	String path = FoodPower.MODID + ":textures/gui/container/ingredient_block.png";
-    	return new ResourceLocation(path);
-    }
     /* Used in getting the position of texture with the food type */
     private int[] getSlotPosInTexture(FoodType foodType){
     	String name = foodType.getName();

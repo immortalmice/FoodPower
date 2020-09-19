@@ -1,10 +1,14 @@
 package com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity;
+import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.KitchenApplianceSlotPos;
+import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Position2D;
 
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
@@ -27,6 +31,24 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 		this.isElectricalCatch = this.container.getBlock() == null ? false : this.container.getBlock().isElectrical();
 		this.xSize = 256;
 		this.ySize = 256;
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
+		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+
+		List<ItemStackRequest> itemRequests = this.container.getCurrentItemRequests();
+		List<Position2D> slotPos = KitchenApplianceSlotPos.provide(itemRequests.size()).stream().map((pos) -> pos.translate(-1)).collect(Collectors.toList());
+		
+		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
+		this.minecraft.getTextureManager().bindTexture(ScreenBase.SLOT_TEXTURE);
+
+		for(int i = 0; i <= itemRequests.size()-1; i ++){
+			this.blit(
+				offsetX + slotPos.get(i).x, offsetY + slotPos.get(i).y
+				, 20, 40
+				, 18, 18);
+		}
 	}
 
 	@Override
