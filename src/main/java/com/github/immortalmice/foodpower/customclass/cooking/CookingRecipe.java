@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.function.Predicate;
+import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
@@ -18,7 +18,9 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.mojang.datafixers.util.Pair;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.text.ITextComponent;
@@ -298,17 +300,12 @@ public class CookingRecipe{
 		}
 
 		private void addSampleAsRequest(ItemStack sample){
-			Predicate<ItemStack> predicator = (stack) -> {
-				return stack.isItemEqualIgnoreDurability(sample);
-			};
-
-			if(sample.getItem() instanceof CookedFood){
-				predicator = predicator.and((stack) -> {
+			this.requires.add(new ItemStackRequest(sample.getItem(), sample.getCount(), (stack, matchMode) -> {
+				if(sample.getItem() instanceof CookedFood){
 					return CookedFood.isMatchedID(stack, CookingRecipe.this.ID);
-				});
-			}
-
-			this.requires.add(new ItemStackRequest(predicator, sample.getCount()));
+				}
+				return true;
+			}));
 		}
 
 		public List<ItemStackRequest> getRequires(){
@@ -340,36 +337,43 @@ public class CookingRecipe{
 	}
 
 	public static class ItemStackRequest{
-		public static final ItemStackRequest EMPTY = new ItemStackRequest((stack) -> {
-			return true;
-		}, 0);
+		public static final ItemStackRequest EMPTY = new ItemStackRequest(Items.AIR, 0);
 
-		private final Predicate<ItemStack> satisfyPredicator;
-		private final Predicate<ItemStack> matchPredicator;
+		private final Item item;
+		private final int amount;
+		private final BiPredicate<ItemStack, Boolean> otherConstraint;
 
-		private ItemStackRequest(Predicate<ItemStack> matchPredicatorIn, int satisfiedCountIn){
-			this(matchPredicatorIn, matchPredicatorIn.and(ItemStackRequest.COUNT_PREDICATOR(satisfiedCountIn)));
+		private ItemStackRequest(Item itemIn, int amountIn){
+			this(itemIn, amountIn, (stack, matchMode) -> {
+				return true;
+			});
 		}
 
-		private ItemStackRequest(Predicate<ItemStack> matchPredicatorIn, Predicate<ItemStack> satisfyPredicatorIn){
-			this.matchPredicator = matchPredicatorIn;
-			this.satisfyPredicator = satisfyPredicatorIn;
+		private ItemStackRequest(Item itemIn, int amountIn, BiPredicate<ItemStack, Boolean> otherConstraintIn){
+			this.item = itemIn;
+			this.amount = amountIn;
+			this.otherConstraint = otherConstraintIn;
 		}
 
 		// Return true when provide stack can be part of the request.
 		public boolean isMatched(ItemStack provide){
-			return this.matchPredicator.test(provide);
+			return provide.getItem() == this.item
+				&& this.otherConstraint.test(provide, true);
 		}
 
 		// Return true when provide stack can satisfied the request.
 		public boolean isSatisfied(ItemStack provide){
-			return this.satisfyPredicator.test(provide);
+			return provide.getItem() == this.item
+				&& provide.getCount() >= this.amount
+				&& this.otherConstraint.test(provide, false);
 		}
 
-		public static Predicate<ItemStack> COUNT_PREDICATOR(int satisfiedCount){
-			return (stack) -> {
-				return stack.getCount() >= satisfiedCount;
-			};
+		public Item getItem(){
+			return item;
+		}
+
+		public int getAmount(){
+			return amount;
 		}
 	}
 }
