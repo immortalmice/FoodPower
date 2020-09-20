@@ -103,6 +103,10 @@ public class CookingRecipe{
 		}
 		return 0;
 	}
+	
+	public boolean isInitialized(){
+		return this.isInitialized;
+	}
 
 	public List<StepRequest> getStepReqests(){
 		if(!this.isInitialized) this.initialize(0, 1.1f);

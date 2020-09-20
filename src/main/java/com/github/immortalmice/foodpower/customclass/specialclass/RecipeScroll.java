@@ -125,8 +125,12 @@ public class RecipeScroll extends ItemBase{
 
         TooltipUtil tooltipHelper = new TooltipUtil(tooltip);
 
+        if(recipe.isInitialized())
+        	tooltipHelper.add("(" + recipe.getID() + ")", new Style().setItalic(true).setColor(TextFormatting.GRAY));
+        
     	String patternStr = TooltipUtil.translate("general.foodpower.cooking_pattern") + " : ";
     	patternStr += TooltipUtil.translate("pattern.foodpower." + recipe.getPattern().getName());
+        tooltipHelper.newBlankRow();
     	tooltipHelper.add(patternStr);
 
         tooltipHelper.addTranslate("message.foodpower.output_amount", recipe.getOutputAmount());
