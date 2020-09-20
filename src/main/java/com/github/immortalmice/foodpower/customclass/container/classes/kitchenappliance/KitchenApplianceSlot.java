@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.container.util;
+package com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance;
 
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity.KitchenApplanceItemHandler;

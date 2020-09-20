@@ -13,7 +13,6 @@ import net.minecraft.util.text.ITextComponent;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
 import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
-import com.github.immortalmice.foodpower.customclass.container.util.RecipeTableSlot;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;

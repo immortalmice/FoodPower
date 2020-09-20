@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.container.util;
+package com.github.immortalmice.foodpower.customclass.container.classes.recipetable;
 
 import java.lang.Math;
 
@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
 import com.github.immortalmice.foodpower.lists.Ingredients;
-import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 
 /* Custom Slot, Design for Slots in Recipe Table */
