@@ -1,5 +1,6 @@
 package com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,16 +78,28 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 
 	@Override
 	protected void renderHoveredToolTip(int mouseX, int mouseY){
-		if(this.minecraft.player.inventory.getItemStack().isEmpty()
-			&& this.hoveredSlot != null
-			&& this.hoveredSlot.getSlotIndex() == 0 // RecipeScroll Slot
-			&& this.hoveredSlot.getHasStack()){
+		if(this.hoveredSlot != null){
 
-			ItemStack stack = this.hoveredSlot.getStack();
-			FontRenderer font = stack.getItem().getFontRenderer(stack);
+			FontRenderer font = null;
+			List<String> text = new ArrayList<>();
 
-			List<String> text = this.getTooltipFromItem(stack);
-			text.add(TooltipUtil.translate("message.foodpower.tooltip_remove_before_take"));
+			if(this.hoveredSlot.getHasStack()){
+				ItemStack stack = this.hoveredSlot.getStack();
+				font = stack.getItem().getFontRenderer(stack);
+				text = this.getTooltipFromItem(stack);
+			}
+
+			if(this.minecraft.player.inventory.getItemStack().isEmpty()
+				&& this.hoveredSlot.getSlotIndex() == 0 /* RecipeScroll Slot */){
+				
+				text.add(TooltipUtil.translate("message.foodpower.tooltip_remove_before_take"));
+			}else if(this.hoveredSlot instanceof KitchenApplianceSlot){
+
+				KitchenApplianceSlot slot = (KitchenApplianceSlot) this.hoveredSlot;
+				String itemStr = TooltipUtil.translate(slot.getRequest().getItem().getTranslationKey());
+
+				text.add(0, TooltipUtil.translate("message.foodpower.tooltip_required", itemStr, slot.getRequest().getAmount()));
+			}
 
 			this.renderTooltip(text, mouseX, mouseY, (font == null ? this.font : font));
 		}else{

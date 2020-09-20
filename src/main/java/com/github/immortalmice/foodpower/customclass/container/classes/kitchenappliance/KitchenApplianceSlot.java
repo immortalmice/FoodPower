@@ -21,4 +21,8 @@ public class KitchenApplianceSlot extends SlotItemHandler{
 	public boolean isSatisfied(){
 		return this.request.isSatisfied(this.getStack());
 	}
+
+	public ItemStackRequest getRequest() {
+		return request;
+	}
 }

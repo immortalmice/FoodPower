@@ -231,5 +231,6 @@
     "message.foodpower.tooltip_more_info": "按Shift顯示更多訊息",
     "message.foodpower.tooltip_exp_title": "獲取經驗值",
     "message.foodpower.output_amount": "製作數量 : %d",
-    "message.foodpower.tooltip_remove_before_take": "§4若要取出卷軸請先將所有物品移除"
+    "message.foodpower.tooltip_remove_before_take": "§4若要取出卷軸請先將所有物品移除",
+    "message.foodpower.tooltip_required": "§4需求： %s x %d"
 }
