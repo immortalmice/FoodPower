@@ -1,12 +1,19 @@
 package com.github.immortalmice.foodpower.customclass.container.classes.recipescroll;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
 import com.github.immortalmice.foodpower.customclass.message.classes.RecipeScrollMessage;
 
 public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
@@ -43,9 +50,22 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
 		String scrollName = this.getContainer().getScrollName();
-		String amount = Integer.toString(this.getContainer().getAmount());
 		this.font.drawString(scrollName, (this.xSize - this.font.getStringWidth(scrollName)) / 2, 20, 0x404040);
-		this.font.drawString(amount, (this.xSize - this.font.getStringWidth(amount)) / 2, 45, 0x404040);
+
+		List<String> stepStrings = this.getStepStrings();
+		List<Integer> heights = stepStrings.stream().map((str) -> this.font.getWordWrappedHeight(str, 180)).collect(Collectors.toList());
+		
+		int gap = (120 - heights.stream().reduce(0, Integer::sum)) / (stepStrings.size() - 1);
+		int cursor = 45;
+		
+		for(int i = 0; i <= stepStrings.size()-1; i ++){
+			this.font.drawSplitString(stepStrings.get(i), 38, cursor, 180, 0x404040);
+			cursor += gap + heights.get(i);
+		}
+
+		String amount = Integer.toString(this.getContainer().getAmount());
+		this.font.drawString(amount, 79 - this.font.getStringWidth(amount) / 2, 185, 0x404040);
+		
 	}
 
 	@Override
@@ -79,20 +99,45 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 				break;
 		}
 
+		int offsetX = (this.width - this.xSize) / 2;
 		int offsetY = (this.height - this.ySize) / 2;
-		int centerX = this.width / 2;
-		this.addButton(new FPButton(centerX - 30, offsetY + 40, buttonTypeLeft, (button) ->{
+		this.addButton(new FPButton(offsetX + 50, offsetY + 180, buttonTypeLeft, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
 					, "Set Amount Minus"));
 		}));
 
-		this.addButton(new FPButton(centerX + 20, offsetY + 40, buttonTypeRight, (button) ->{
+		this.addButton(new FPButton(offsetX + 100, offsetY + 180, buttonTypeRight, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
 					, "Set Amount Add"));
 		}));
+	}
+
+	private List<String> getStepStrings(){
+		List<StepRequest> stepRequests = this.container.getStepReqests();
+		List<String> returnStrings = new ArrayList<>();
+		String preTranslationKey = "recipe_scroll.foodpower." + this.container.getPatternName() + ".step";
+
+		for(int i = 0; i <= stepRequests.size()-1; i ++){
+			StepRequest stepRequest = stepRequests.get(i);
+			List<ItemStackRequest> requires = stepRequest.getRequires();
+
+			List<Object> args = new ArrayList<>();
+			requires.forEach((require) -> {
+				args.add(require.getAmount());
+				args.add(I18n.format(require.getItem().getTranslationKey()));
+			});
+
+			if(i == stepRequests.size()-1){
+				args.add(this.container.getAmount());
+			}
+
+			returnStrings.add(I18n.format(preTranslationKey + String.valueOf(i), args.toArray()));
+		}
+
+		return returnStrings;
 	}
 }
