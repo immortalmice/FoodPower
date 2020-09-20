@@ -121,7 +121,7 @@ public class CookingRecipe{
 					stepRequest.addSampleAsRequest(new ItemStack((CookedFood) element));
 				}else if(element instanceof Ingredient){
 					Optional<ItemStack> opStack = copyOfIngredients.stream().filter((stack) -> {
-						return stack.getItem() == element;
+						return stack.getItem() == ((Ingredient) element).asItem();
 					}).findFirst();
 					if(opStack.isPresent()){
 						stepRequest.addSampleAsRequest(opStack.get());
@@ -141,7 +141,8 @@ public class CookingRecipe{
 			step.getElements().forEach((element) -> {
 				if(element instanceof FoodType){
 					Optional<ItemStack> opStack = copyOfIngredients.stream().filter((stack) -> {
-						return stack.getItem() instanceof Ingredient ? element.isMatch((Ingredient) stack.getItem()) : false;
+						Ingredient ingredient = Ingredients.getIngredientByItem(stack.getItem());
+						return ingredient != null ? element.isMatch(ingredient) : false;
 					}).findFirst();
 					if(opStack.isPresent()){
 						stepRequest.addSampleAsRequest(opStack.get());
