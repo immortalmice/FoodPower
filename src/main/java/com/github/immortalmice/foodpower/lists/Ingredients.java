@@ -1,7 +1,5 @@
 package com.github.immortalmice.foodpower.lists;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
@@ -15,7 +13,6 @@ import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
-import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 /* All the ingredient need to be registed will list below. */
@@ -120,16 +117,6 @@ public class Ingredients{
 				return ingredient;
 		}
 		return null;
-	}
-
-	public static List<Ingredient> getIngredientsByType(FoodType foodType){
-		List<Ingredient> returnList = new ArrayList<Ingredient>();
-		for(Ingredient ingredient : Ingredients.list){
-			if(foodType == ingredient.getFoodType()){
-				returnList.add(ingredient);
-			}
-		}
-		return returnList;
 	}
 }
 
