@@ -206,7 +206,7 @@
     "message.foodpower.tooltip_required": "§4需求： %s x %d",
 
     "_comment": "食譜卷軸",
-    "recipe_scroll.foodpower.cake.step0": "首先，將%d份的%s過篩，並與%d顆%s、%d份%s、%d份的%s以及%d份%s放入萬用台進行攪拌。充分攪拌後，你會獲得1份麵糊。",
-    "recipe_scroll.foodpower.cake.step1": "將製作好的%d份%s放入預熱過的烤箱，用150度烤50分鐘，出爐後你會獲得1份蛋糕胚。",
-    "recipe_scroll.foodpower.cake.step2": "最後，將%d份%s放置在蛋糕轉盤架，加上%d份的%s以及%d份的%s作為裝飾。這樣美味可口的%d份蛋糕就完成拉！"
+    "recipe_scroll.foodpower.cake.step0": "1. 首先，將%d份的%s過篩，並與%d顆%s、%d份%s、%d份的%s以及%d個%s放入萬用台進行攪拌。充分攪拌後，你會獲得1份麵糊。",
+    "recipe_scroll.foodpower.cake.step1": "2. 將製作好的%d份%s放入預熱過的烤箱，用150度烤50分鐘，出爐後你會獲得1份蛋糕胚。",
+    "recipe_scroll.foodpower.cake.step2": "3. 最後，將%d份%s放置在蛋糕轉盤架，加上%d份的%s以及%d份的%s作為裝飾。這樣美味可口的%d份蛋糕就完成拉！"
 }
