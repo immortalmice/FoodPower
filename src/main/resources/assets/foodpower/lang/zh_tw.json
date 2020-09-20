@@ -41,7 +41,7 @@
     "item.foodpower.juice": "果汁",
 
     "item.foodpower.batter": "麵糊",
-    "item.foodpower.cake_base": "蛋糕基底",
+    "item.foodpower.cake_base": "蛋糕胚",
     "item.foodpower.flat_dough": "麵皮",
     "item.foodpower.raw_pizza": "生披薩",
     "item.foodpower.cooked_pizza": "熟披薩",
@@ -197,7 +197,7 @@
     "flavor_type.foodpower.nether": "§4地獄",
     "flavor_type.foodpower.ender": "§5終界",
 
-    "_comment": "Message",
+    "_comment": "訊息",
     "message.foodpower.give_food": "獲得料理成品",
     "message.foodpower.tooltip_more_info": "按Shift顯示更多訊息",
     "message.foodpower.tooltip_exp_title": "獲取經驗值",
