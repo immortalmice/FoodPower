@@ -55,8 +55,8 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 		List<String> stepStrings = this.getStepStrings();
 		List<Integer> heights = stepStrings.stream().map((str) -> this.font.getWordWrappedHeight(str, 180)).collect(Collectors.toList());
 		
-		int gap = (140 - heights.stream().reduce(0, Integer::sum)) / (stepStrings.size() + 1);
-		int cursor = 40 + gap;
+		int gap = Math.max((140 - heights.stream().reduce(0, Integer::sum)) / (stepStrings.size() + 1), 3);
+		int cursor = 36 + gap;
 		
 		for(int i = 0; i <= stepStrings.size()-1; i ++){
 			this.font.drawSplitString(stepStrings.get(i), 38, cursor, 180, 0x404040);
