@@ -206,7 +206,16 @@
     "message.foodpower.tooltip_required": "§4需求： %s x %d",
 
     "_comment": "食譜卷軸",
-    "recipe_scroll.foodpower.cake.step0": "1. 首先，將%d份的%s過篩，並與%d顆%s、%d份%s、%d份的%s以及%d個%s放入萬用台進行攪拌。充分攪拌後，你會獲得1份麵糊。",
-    "recipe_scroll.foodpower.cake.step1": "2. 將製作好的%d份%s放入預熱過的烤箱，用150度烤50分鐘，出爐後你會獲得1份蛋糕胚。",
-    "recipe_scroll.foodpower.cake.step2": "3. 最後，將%d份%s放置在蛋糕轉盤架，加上%d份的%s以及%d份的%s作為裝飾。這樣美味可口的%d份蛋糕就完成拉！"
+    "recipe_scroll.foodpower.cake.step0": "1. 首先，將§c§l%d份的%s§r過篩，並與§c§l%d顆%s§r、§c§l%d份%s§r、§c§l%d份的%s§r以及§c§l%d個%s§r放入萬用台進行攪拌。充分攪拌後，你會獲得1份麵糊。",
+    "recipe_scroll.foodpower.cake.step1": "2. 將製作好的§c§l%d份%s§r放入預熱過的烤箱，用150度烤50分鐘，出爐後你會獲得1份蛋糕胚。",
+    "recipe_scroll.foodpower.cake.step2": "3. 最後，將§c§l%d份%s§r放置在蛋糕轉盤架，加上§c§l%d份的%s§r以及§c§l%d份的%s§r作為裝飾。這樣美味可口的%d份蛋糕就完成拉！",
+    
+    "recipe_scroll.foodpower.pizza.step0": "1. 在砧板上用你的堅硬好夥伴擀麵棍將§c§l%d份的%s§r桿成一份麵皮。",
+    "recipe_scroll.foodpower.pizza.step1": "2. 再來，將剛剛的§c§l%d份%s§r放上萬用台，在上面放上§c§l%d份的%s§r、均勻塗上§c§l%d份的%s§r以及§c§l%d片%s§r，也別忘了你可能很討厭的§c§l%d份%s§r，最後你會獲得一片生披薩。",
+    "recipe_scroll.foodpower.pizza.step2": "3. 將§c§l%d片%s§r放入烤箱，用200度直至麵皮呈現金黃色，大約烤十分鐘後你就可以出爐一片熟披薩。",
+    "recipe_scroll.foodpower.pizza.step3": "4. 將出爐的§c§l%d片的%s§r放上砧板後用刀切，就可以切成%d片方便入口的披薩啦！",
+
+    "recipe_scroll.foodpower.sandwich.step0": "1. 將辛苦製作出來的§c§l%d份%s§r塞入鐵盒後放進烤箱，用210度烘烤40分鐘，之後就可以出爐一個柴犬色的吐司。",
+    "recipe_scroll.foodpower.sandwich.step1": "2. 之後將一個柴犬，喔不，我是說§c§l%d個%s§r在砧板上切成一份三角形的吐司片。記得切除吐司邊，這樣你就不會把它和柴犬搞混了。",
+    "recipe_scroll.foodpower.sandwich.step2": "3. 最後，將§c§l%d份的%s§r完美的和§c§l%d片%s§r、§c§l%d份%s§r和§c§l%d份的%s§r在萬用台上結合，這樣你就會獲得%d份的三明治了！"
 }
