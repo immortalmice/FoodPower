@@ -55,8 +55,8 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 		List<String> stepStrings = this.getStepStrings();
 		List<Integer> heights = stepStrings.stream().map((str) -> this.font.getWordWrappedHeight(str, 180)).collect(Collectors.toList());
 		
-		int gap = (120 - heights.stream().reduce(0, Integer::sum)) / (stepStrings.size() - 1);
-		int cursor = 45;
+		int gap = (140 - heights.stream().reduce(0, Integer::sum)) / (stepStrings.size() + 1);
+		int cursor = 40 + gap;
 		
 		for(int i = 0; i <= stepStrings.size()-1; i ++){
 			this.font.drawSplitString(stepStrings.get(i), 38, cursor, 180, 0x404040);
@@ -64,7 +64,7 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 		}
 
 		String amount = Integer.toString(this.getContainer().getAmount());
-		this.font.drawString(amount, 79 - this.font.getStringWidth(amount) / 2, 185, 0x404040);
+		this.font.drawString(amount, 70 - this.font.getStringWidth(amount) / 2, 195, 0x404040);
 		
 	}
 
@@ -101,14 +101,14 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 
 		int offsetX = (this.width - this.xSize) / 2;
 		int offsetY = (this.height - this.ySize) / 2;
-		this.addButton(new FPButton(offsetX + 50, offsetY + 180, buttonTypeLeft, (button) ->{
+		this.addButton(new FPButton(offsetX + 40, offsetY + 190, buttonTypeLeft, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
 					, "Set Amount Minus"));
 		}));
 
-		this.addButton(new FPButton(offsetX + 100, offsetY + 180, buttonTypeRight, (button) ->{
+		this.addButton(new FPButton(offsetX + 90, offsetY + 190, buttonTypeRight, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
