@@ -132,18 +132,7 @@ public class CookingRecipe{
 						// Remove it so it won't be selected again.
 						copyOfIngredients.remove(opStack.get());
 					}
-				}
-			});
-
-			returnList.add(stepRequest);
-		});
-
-		// Then match the rest by FoodType
-		int index = 0;
-		for(CookingStep step : this.pattern.getSteps()){
-			final StepRequest stepRequest = returnList.get(index);
-			step.getElements().forEach((element) -> {
-				if(element instanceof FoodType){
+				}else if(element instanceof FoodType){
 					Optional<ItemStack> opStack = copyOfIngredients.stream().filter((stack) -> {
 						Ingredient ingredient = Ingredients.getIngredientByItem(stack.getItem());
 						return ingredient != null ? element.isMatch(ingredient) : false;
@@ -155,8 +144,9 @@ public class CookingRecipe{
 				}
 			});
 
-			index ++;
-		}
+			returnList.add(stepRequest);
+		});
+		
 		return returnList;
 	}
 
