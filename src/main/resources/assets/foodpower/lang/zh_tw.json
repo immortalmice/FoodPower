@@ -225,5 +225,18 @@
     "recipe_scroll.foodpower.ice_cream.step3": "4. 最後再次的回到我們的萬用台，為你的§c§l%d份%s§r加上§c§l%d份%s§r作為裝飾，這樣§2§l%d份的冰淇淋§r就完成了，沒吃完記得放回冰箱.......不過我想應該是不用啦。",
 
     "recipe_scroll.foodpower.fried_rice.step0": "1. 將§c§l%d份的%s§r以及§c§l%d桶的%s§r放入電鍋之中，按下開關就可以去睡午覺了。一覺醒來，打開電鍋等水蒸氣散去之後，你會得到一份粒粒分明的飯。",
-    "recipe_scroll.foodpower.fried_rice.step1": "2. 再平底鍋之中，加入§c§l%d份%s§r和§c§l%d片%s§r，炒熟之後就可以加入§c§l%d份%s§r的以及§c§l%d份%s§r和§c§l%d份%s§r做為調味，拌至顏色均勻後加入§c§l%d份的%s§r，等菜熟之後就可以關火，這樣你就可以獲得§2§l%d份的炒飯§r了！"
+    "recipe_scroll.foodpower.fried_rice.step1": "2. 再平底鍋之中，加入§c§l%d份%s§r和§c§l%d片%s§r，炒熟之後就可以加入§c§l%d份%s§r的以及§c§l%d份%s§r和§c§l%d份%s§r做為調味，拌至顏色均勻後加入§c§l%d份的%s§r，等菜熟之後就可以關火，這樣你就可以獲得§2§l%d份的炒飯§r了！",
+
+    "recipe_scroll.foodpower.noodle_soup.step0": "1. 準備好§c§l%d份的%s§r，在砧板上用刀背敲啊敲，就可以得到麵皮。",
+    "recipe_scroll.foodpower.noodle_soup.step1": "2. 接著，一樣在砧板上，把剛才做好的§c§l%d份%s§r用刀子切啊切，你就可以做出麵條，嗯，一根根單著，真好。",
+    "recipe_scroll.foodpower.noodle_soup.step2": "3. 現在，移駕到湯鍋旁，把§c§l%d份%s§r、§c§l%d桶%s§r、§c§l%d份%s§r、§c§l%d份%s§r、§c§l%d片%s§r、§c§l%d份%s§r全部丟進去攪一攪，等到開始飄出香味的時候，你就得到了§2§l%d份湯麵§r囉。",
+
+    "recipe_scroll.foodpower.honey_toast.step0": "1. 拿出你預備好的§c§l%d份的%s§r，放進吐司模具裡面，再放到烤箱裡用210度烘烤40分鐘，就可以拿到一份熱騰騰的金黃色吐司，真香。",
+    "recipe_scroll.foodpower.honey_toast.step1": "2. 接下來到萬用台上，放上剛才烤好的§c§l%d條的%s§r，在外層抹上§c§l%d罐的%s§r和§c§l%d份的%s§r，最後在放上§c§l%d份的%s§r以及§c§l%d份的%s§r，噹啷，香香甜甜的§2§l%d份蜜糖吐司§r就完成啦。",
+
+    "recipe_scroll.foodpower.salad.step0": "1. §c§l%d份%s§r、§c§l%d片%s§r和§c§l%d份%s§r，萬用台裡攪一攪，這樣就是§2§l%d份沙拉§r。看，比叫你家那隻貓咪不要把玻璃杯推下桌容易多了。喔不，§l我剛剛是不是聽到玻璃杯破掉的聲音了？§r",
+
+    "recipe_scroll.foodpower.juice.step0": "1. 首先，將§c§l%d顆的%s§r放到果汁機裡面，開始讓果汁機用力的打碎它，大約五十秒後，一份原汁就完成了。",
+    "recipe_scroll.foodpower.juice.step1": "2. 找出你的§c§l%d桶的%s§r，放進冰箱裡冰它個透心涼，恭喜你得到了一份冰冰涼的冰塊。",
+    "recipe_scroll.foodpower.juice.step2": "3. 最後，拿出剛才做好的§c§l%d份的%s§r和§c§l%d份的%s§r，再加入§c§l%d份的%s§r，順口又不油膩的§2§l%d份果汁§r就做好了。"
 }
