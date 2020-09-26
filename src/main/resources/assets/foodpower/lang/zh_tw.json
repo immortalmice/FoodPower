@@ -208,14 +208,22 @@
     "_comment": "食譜卷軸",
     "recipe_scroll.foodpower.cake.step0": "1. 首先，將§c§l%d份的%s§r過篩，並與§c§l%d顆%s§r、§c§l%d份%s§r、§c§l%d份的%s§r以及§c§l%d個%s§r放入萬用台進行攪拌。充分攪拌後，你會獲得1份麵糊。",
     "recipe_scroll.foodpower.cake.step1": "2. 將製作好的§c§l%d份%s§r放入預熱過的烤箱，用150度烤50分鐘，出爐後你會獲得1份蛋糕胚。",
-    "recipe_scroll.foodpower.cake.step2": "3. 最後，將§c§l%d份%s§r放置在蛋糕轉盤架，加上§c§l%d份的%s§r以及§c§l%d份的%s§r作為裝飾。這樣美味可口的%d份蛋糕就完成拉！",
+    "recipe_scroll.foodpower.cake.step2": "3. 最後，將§c§l%d份%s§r放置在蛋糕轉盤架，加上§c§l%d份的%s§r以及§c§l%d份的%s§r作為裝飾。這樣美味可口的§2§l%d份蛋糕§r就完成拉！",
     
     "recipe_scroll.foodpower.pizza.step0": "1. 在砧板上用你的堅硬好夥伴擀麵棍將§c§l%d份的%s§r桿成一份麵皮。",
-    "recipe_scroll.foodpower.pizza.step1": "2. 再來，將剛剛的§c§l%d份%s§r放上萬用台，在上面放上§c§l%d份的%s§r、均勻塗上§c§l%d份的%s§r以及§c§l%d片%s§r，也別忘了你可能很討厭的§c§l%d份%s§r，最後你會獲得一片生披薩。",
-    "recipe_scroll.foodpower.pizza.step2": "3. 將§c§l%d片%s§r放入烤箱，用200度直至麵皮呈現金黃色，大約烤十分鐘後你就可以出爐一片熟披薩。",
-    "recipe_scroll.foodpower.pizza.step3": "4. 將出爐的§c§l%d片的%s§r放上砧板後用刀切，就可以切成%d片方便入口的披薩啦！",
+    "recipe_scroll.foodpower.pizza.step1": "2. 再來，將剛剛的§c§l%d份%s§r放上萬用台，在上面放上§c§l%d份的%s§r、均勻塗上§c§l%d份的%s§r以及§c§l%d片%s§r，也別忘了你可能很討厭的§c§l%d份%s§r，最後你會獲得一份生披薩。",
+    "recipe_scroll.foodpower.pizza.step2": "3. 將§c§l%d份%s§r放入烤箱，用200度直至麵皮呈現金黃色，大約烤十分鐘後你就可以出爐一份熟披薩。",
+    "recipe_scroll.foodpower.pizza.step3": "4. 將出爐的§c§l%d份的%s§r放上砧板後用刀切，就可以切成§2§l%d片方便入口的披薩§r啦！",
 
     "recipe_scroll.foodpower.sandwich.step0": "1. 將辛苦製作出來的§c§l%d份%s§r塞入鐵盒後放進烤箱，用210度烘烤40分鐘，之後就可以出爐一個柴犬色的吐司。",
     "recipe_scroll.foodpower.sandwich.step1": "2. 之後將一個柴犬，喔不，我是說§c§l%d個%s§r在砧板上切成一份三角形的吐司片。記得切除吐司邊，這樣你就不會把它和柴犬搞混了。",
-    "recipe_scroll.foodpower.sandwich.step2": "3. 最後，將§c§l%d份的%s§r完美的和§c§l%d片%s§r、§c§l%d份%s§r和§c§l%d份的%s§r在萬用台上結合，這樣你就會獲得%d份的三明治了！"
+    "recipe_scroll.foodpower.sandwich.step2": "3. 最後，將§c§l%d份的%s§r完美的和§c§l%d片%s§r、§c§l%d份%s§r和§c§l%d份的%s§r在萬用台上結合，這樣你就會獲得§2§l%d份的三明治§r了！",
+
+    "recipe_scroll.foodpower.ice_cream.step0": "1. 首先，先將你辛苦種出的§c§l%d顆%s§r放入果汁機中，為他默哀五秒後按下啟動鍵，五十秒後你便會獲得一份原汁。",
+    "recipe_scroll.foodpower.ice_cream.step1": "2. 將§c§l%d份的%s§r、§c§l%d桶%s§r和§c§l%d份的%s§r放進萬用台上，攪拌至顏色均勻後那就是一份完美的混和果汁了。",
+    "recipe_scroll.foodpower.ice_cream.step2": "3. 把剛剛的§c§l%d份%s§r放入冰箱冷凍庫，去看看你心愛的直播主開台，等到他關台後一份冰淇淋基底應該就在冷凍庫等待你了。",
+    "recipe_scroll.foodpower.ice_cream.step3": "4. 最後再次的回到我們的萬用台，為你的§c§l%d份%s§r加上§c§l%d份%s§r作為裝飾，這樣§2§l%d份的冰淇淋§r就完成了，沒吃完記得放回冰箱.......不過我想應該是不用啦。",
+
+    "recipe_scroll.foodpower.fried_rice.step0": "1. 將§c§l%d份的%s§r以及§c§l%d桶的%s§r放入電鍋之中，按下開關就可以去睡午覺了。一覺醒來，打開電鍋等水蒸氣散去之後，你會得到一份粒粒分明的飯。",
+    "recipe_scroll.foodpower.fried_rice.step1": "2. 再平底鍋之中，加入§c§l%d份%s§r和§c§l%d片%s§r，炒熟之後就可以加入§c§l%d份%s§r的以及§c§l%d份%s§r和§c§l%d份%s§r做為調味，拌至顏色均勻後加入§c§l%d份的%s§r，等菜熟之後就可以關火，這樣你就可以獲得§2§l%d份的炒飯§r了！"
 }
