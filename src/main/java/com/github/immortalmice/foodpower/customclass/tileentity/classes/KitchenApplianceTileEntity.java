@@ -9,9 +9,9 @@ import javax.annotation.Nullable;
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
-import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
+import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 
 import net.minecraft.block.Block;
@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
@@ -27,8 +28,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -66,10 +65,6 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 	public KitchenApplanceItemHandler getItemHandler(){
 		return this.itemHandler;
-	}
-
-	public boolean hasScroll(){
-		return !this.itemHandler.getScroll().isEmpty();
 	}
 
 	@Override
@@ -130,24 +125,20 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 	}
 
-	public class KitchenApplanceItemHandler implements IItemHandler, IItemHandlerModifiable{
-		private final ItemStackHandler scrollHandler = new ItemStackHandler();
-		private final ItemStackHandler outputHandler = new ItemStackHandler();
-		private final ItemStackHandler ingredientHandler = new ItemStackHandler();
-
+	public class KitchenApplanceItemHandler extends ItemStackHandler{
 		private List<StepRequest> requests = new ArrayList<>();
 		private int requestIndex = 0;
 
 		private KitchenApplanceItemHandler(){
-
+			// 0: scroll slot
+			// 1: output slot
+			// 2~: ingredient slot(s)
+			super(2);
 		}
 
-		private ItemStack getScroll(){
-			ItemStack stack = this.scrollHandler.getStackInSlot(0);
-			if(!stack.isEmpty() && stack.getItem() instanceof RecipeScroll){
-				return stack;
-			}
-			return ItemStack.EMPTY;
+		@Nullable
+		private CookingRecipe getRecipe(){
+			return RecipeScroll.readCookingRecipe(this.getStackInSlot(0));
 		}
 
 		@Nullable
@@ -157,74 +148,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			}
 			return null;
 		}
-
-		@Override
-		public int getSlots(){
-			// Cause scroll & output slot always exist. 
-			return 2 + ingredientHandler.getSlots();
-		}
-
-		@Override
-		public ItemStack getStackInSlot(int slot) {
-			if(slot >= 0 && slot <= this.getSlots()-1){
-				switch(slot){
-					case 0:
-						return this.scrollHandler.getStackInSlot(0);
-					case 1:
-						return this.outputHandler.getStackInSlot(0);
-					default:
-						return this.ingredientHandler.getStackInSlot(slot - 2);
-				}
-			}
-			return ItemStack.EMPTY;
-		}
-
-		@Override
-		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate){
-			KitchenApplianceTileEntity.this.markDirty();
-			return ItemStack.EMPTY;
-		}
-
-		@Override
-		public ItemStack extractItem(int slot, int amount, boolean simulate){
-			ItemStack stack = this.getStackInSlot(slot);
-			if(!stack.isEmpty()){
-				if(slot == 0){
-					for(int i = 0; i <= this.ingredientHandler.getSlots()-1; i ++){
-						if(!this.ingredientHandler.getStackInSlot(i).isEmpty()) return ItemStack.EMPTY;
-					}
-				}
-
-				ItemStack extractStack = stack.copy();
-
-				int extractCount = Math.min(stack.getCount(), amount);
-				extractStack.setCount(extractCount);
-
-				if(!simulate){
-					stack.setCount(stack.getCount() - extractCount);
-					KitchenApplianceTileEntity.this.markDirty();
-				}
-				return extractStack;
-			}
-			return ItemStack.EMPTY;
-		}
-
-		@Override
-		public int getSlotLimit(int slot) {
-			if(slot < 0 || slot > this.getSlots()-1){
-				return 0;
-			}else{
-				switch(slot){
-					case 0:
-						return 1;
-					case 1:
-						return 64;
-					default:
-						return 1024;
-				}
-			}
-		}
-
+		
 		@Override
 		public boolean isItemValid(int slot, ItemStack stack) {
 			if(!stack.isEmpty()){
@@ -250,30 +174,12 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 					}
 				}
 			}
-			return false;
+			return true;
 		}
 
-		@Override
-		public void setStackInSlot(int slot, ItemStack stack) {
-			if(slot >= 0 && slot <= this.getSlots()-1){
-				switch(slot){
-					case 0:
-						this.scrollHandler.setStackInSlot(0, stack);
-						this.updateScrollInfo();
-						break;
-					case 1:
-						this.outputHandler.setStackInSlot(0, stack);
-						break;
-					default:
-						this.ingredientHandler.setStackInSlot(slot - 2, stack);
-				}
-				KitchenApplianceTileEntity.this.markDirty();
-			}
-		}
-		
 		public List<ItemStack> getItems(){
 			List<ItemStack> list = new ArrayList<>();
-			for(int i = 0; i <= this.getSlots()-1; i ++){
+			for(int i = 0; i <= 1; i ++){
 				ItemStack stack = this.getStackInSlot(i);
 				if(!stack.isEmpty()){
 					list.add(stack);
@@ -282,21 +188,55 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			return list;
 		}
 
-		private void updateScrollInfo(){
-			ItemStack scroll = this.getScroll();
-			if(!scroll.isEmpty()){
-				CookingRecipe recipe = RecipeScroll.readCookingRecipe(scroll);
-				if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
-					this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
+		@Override
+		protected void onContentsChanged(int slot){
+			if(slot == 0){
+				CookingRecipe recipe = this.getRecipe();
+				if(recipe != null){
+					if(KitchenApplianceTileEntity.this.getBlock() != null){
+						this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
+					}
+					this.requestIndex = 0;
+
+					StepRequest stepRequest = this.getCurrentStepRequest();
+					this.setSize((stepRequest != null ? stepRequest.getRequires().size() : 0) + 2);
+				}else{
+					this.requests.clear();
+					this.requestIndex = 0;
+					this.setSize(2);
 				}
-				this.requestIndex = 0;
-				StepRequest stepRequest = this.getCurrentStepRequest();
-				this.ingredientHandler.setSize(stepRequest != null ? stepRequest.getRequires().size() : 1);
-			}else{
-				this.requests = new ArrayList<>();
-				this.requestIndex = 0;
-				this.ingredientHandler.setSize(1);
 			}
+		}
+
+		@Override
+		public void setSize(int size){
+			if(size >= 0){
+				NonNullList<ItemStack> newStacks = NonNullList.withSize(size, ItemStack.EMPTY);
+				int end = Math.min(newStacks.size() - 1, this.stacks.size() - 1);
+				for(int i = 0; i <= end; i ++){
+					newStacks.set(i, this.stacks.get(i));
+				}
+				this.stacks = newStacks;
+			}
+		}
+
+		@Override
+		public void setStackInSlot(int slot, ItemStack stack) {
+			if(slot >= 0 && slot <= 1){
+				super.setStackInSlot(slot, stack);
+				KitchenApplianceTileEntity.this.markDirty();
+			}else if(slot >= 2 && slot <= this.stacks.size()-1){
+				// TODO
+			}
+		}
+
+		@Override
+		@Nonnull
+		public ItemStack getStackInSlot(int slot){
+			if(slot >= 0 && slot <= this.stacks.size() - 1){
+				return this.stacks.get(slot);
+			}
+			return ItemStack.EMPTY;
 		}
 	}
 }
