@@ -14,6 +14,7 @@ import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
 import com.github.immortalmice.foodpower.customclass.food.Ingredient;
+import com.github.immortalmice.foodpower.customclass.util.ItemStackNBT;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.mojang.datafixers.util.Pair;
@@ -240,7 +241,7 @@ public class CookingRecipe{
 			ItemStack stack = pair.getFirst();
 			int level = pair.getSecond();
 
-			element.put(NBT_KEY.STACK, stack.write(new CompoundNBT()));
+			element.put(NBT_KEY.STACK, ItemStackNBT.write(stack));
 			element.putInt(NBT_KEY.LEVEL, level);
 
 			listNBT.add(element);
@@ -262,7 +263,7 @@ public class CookingRecipe{
 			listNBT.forEach((ele) -> {
 				CompoundNBT element = (CompoundNBT) ele;
 				if(element.contains(NBT_KEY.STACK) && element.contains(NBT_KEY.LEVEL)){
-					ItemStack stack = ItemStack.read((CompoundNBT) element.get(NBT_KEY.STACK));
+					ItemStack stack = ItemStackNBT.read((CompoundNBT) element.get(NBT_KEY.STACK));
 					int level = element.getInt(NBT_KEY.LEVEL);
 
 					recipe.ingredients.add(new Pair<>(stack, level));
