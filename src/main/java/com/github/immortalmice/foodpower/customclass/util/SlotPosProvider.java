@@ -13,13 +13,15 @@ public class SlotPosProvider{
 	public static List<Position2D> CIRCLE(Position2D center, int radius, int count){
 		List<Position2D> result = new ArrayList<>();
 
-		float angle = 360 / count;
-		for(int i = 0; i <= count-1; i ++){
-			Position2D pos = new Position2D(
-				(int)(center.x + radius * Math.cos((angle * i - 90) * Math.PI / 180)),
-				(int)(center.y + radius * Math.sin((angle * i - 90) * Math.PI / 180))
-			);
-			result.add(pos.translateToLeftTop());
+		if(count > 0){
+			float angle = 360 / count;
+			for(int i = 0; i <= count-1; i ++){
+				Position2D pos = new Position2D(
+					(int)(center.x + radius * Math.cos((angle * i - 90) * Math.PI / 180)),
+					(int)(center.y + radius * Math.sin((angle * i - 90) * Math.PI / 180))
+				);
+				result.add(pos.translateToLeftTop());
+			}
 		}
 		return result;
 	}
