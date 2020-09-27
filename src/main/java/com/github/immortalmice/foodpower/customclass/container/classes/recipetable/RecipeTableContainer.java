@@ -144,6 +144,7 @@ public class RecipeTableContainer extends ContainerBase{
 
     @Override
 	public ItemStack transferStackInSlot(PlayerEntity entityPlayer, int fromSlot){
+		// TODO
 		return ItemStack.EMPTY;
 	}
 
