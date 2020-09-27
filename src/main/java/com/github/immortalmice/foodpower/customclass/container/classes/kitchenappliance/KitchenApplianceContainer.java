@@ -83,12 +83,9 @@ public class KitchenApplianceContainer extends ContainerBase{
 
 	public List<ItemStackRequest> getCurrentItemRequests(){
 		StepRequest stepRequest = this.itemHandler != null ? this.itemHandler.getCurrentStepRequest() : null;
-		List<ItemStackRequest> itemRequests = new ArrayList<>();
 		if(stepRequest != null){
-			itemRequests = stepRequest.getRequires();
-		}else{
-			itemRequests.add(ItemStackRequest.EMPTY);
+			return stepRequest.getRequires();
 		}
-		return itemRequests;
+		return new ArrayList<>();
 	}
 }
