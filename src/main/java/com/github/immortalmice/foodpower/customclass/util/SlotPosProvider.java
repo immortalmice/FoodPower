@@ -99,9 +99,9 @@ public class SlotPosProvider{
 		private static final Map<Integer, List<Position2D>> cache = new HashMap<>();
 
 		public static List<Position2D> provide(int count){
-			// if(KitchenApplianceSlotPos.cache.containsKey(count)){
-			// 	return KitchenApplianceSlotPos.cache.get(count);
-			// }
+			if(KitchenApplianceSlotPos.cache.containsKey(count)){
+				return KitchenApplianceSlotPos.cache.get(count);
+			}
 
 			List<Position2D> pos = SlotPosProvider.DICE(
 				KitchenApplianceSlotPos.ORIGIN,
