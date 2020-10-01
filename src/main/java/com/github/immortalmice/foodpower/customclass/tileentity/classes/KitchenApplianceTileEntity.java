@@ -126,6 +126,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	}
 
 	public class KitchenApplanceItemHandler extends ItemStackHandler{
+		private List<ItemStack> ingredients;
+
 		private List<StepRequest> requests = new ArrayList<>();
 		private int requestIndex = 0;
 
@@ -192,14 +194,14 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		protected void onContentsChanged(int slot){
 			if(slot == 0){
 				CookingRecipe recipe = this.getRecipe();
-				if(recipe != null){
-					if(KitchenApplianceTileEntity.this.getBlock() != null){
-						this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
-					}
+				if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
+					this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
 					this.requestIndex = 0;
 
 					StepRequest stepRequest = this.getCurrentStepRequest();
-					this.setSize((stepRequest != null ? stepRequest.getRequires().size() : 0) + 2);
+					int size = (stepRequest != null ? stepRequest.getRequires().size() : 0) + 2;
+					this.setSize(size);
+					ingredients = NonNullList.withSize(size, ItemStack.EMPTY);
 				}else{
 					this.requests.clear();
 					this.requestIndex = 0;
