@@ -199,14 +199,19 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 					this.requestIndex = 0;
 
 					StepRequest stepRequest = this.getCurrentStepRequest();
-					int size = (stepRequest != null ? stepRequest.getRequires().size() : 0) + 2;
-					this.setSize(size);
-					ingredients = NonNullList.withSize(size, ItemStack.EMPTY);
-				}else{
-					this.requests.clear();
-					this.requestIndex = 0;
-					this.setSize(2);
+					if(stepRequest != null){
+						List<ItemStackRequest> requests = stepRequest.getRequires();
+						this.setSize(requests.size() + 2);
+						ingredients = NonNullList.withSize(requests.size(), ItemStack.EMPTY);
+						for(int i = 2; i <= this.stacks.size() - 1; i ++){
+							this.stacks.set(i, new ItemStack(requests.get(i - 2).getItem()));
+						}
+						return;
+					}
 				}
+				this.requests.clear();
+				this.requestIndex = 0;
+				this.setSize(2);
 			}
 		}
 

@@ -15,7 +15,10 @@ import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Kitche
 import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Position2D;
 import com.github.immortalmice.foodpower.lists.Containers;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -79,6 +82,15 @@ public class KitchenApplianceContainer extends ContainerBase{
 	@Nullable
 	public KitchenApplanceItemHandler getItemHandler(){
 		return this.itemHandler;
+	}
+
+	@Override
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
+		if(slotId >= 38){
+			// TODO
+			return ItemStack.EMPTY;
+		}
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 
 	public List<ItemStackRequest> getCurrentItemRequests(){
