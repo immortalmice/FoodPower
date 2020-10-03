@@ -22,7 +22,7 @@ public class KitchenApplianceSlot extends SlotItemHandler{
 		return this.request.isSatisfied(((KitchenApplanceItemHandler)this.getItemHandler()).getRealStack(this.getSlotIndex()));
 	}
 
-	public ItemStackRequest getRequest() {
+	public ItemStackRequest getRequest(){
 		return request;
 	}
 }
