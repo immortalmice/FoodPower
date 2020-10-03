@@ -245,5 +245,12 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			}
 			return ItemStack.EMPTY;
 		}
+
+		public ItemStack getRealStack(int slot){
+			if(slot <= 1){
+				return this.getStackInSlot(slot);
+			}
+			return this.ingredients.get(slot - 2);
+		}
 	}
 }
