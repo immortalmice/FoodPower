@@ -203,7 +203,7 @@
     "message.foodpower.tooltip_exp_title": "獲取經驗值",
     "message.foodpower.output_amount": "製作數量 : %d",
     "message.foodpower.tooltip_remove_before_take": "§4若要取出卷軸請先將所有物品移除",
-    "message.foodpower.tooltip_required": "§4需求： %s x %d",
+    "message.foodpower.tooltip_required": " §8§o(需求： %d / %d)§r",
 
     "_comment": "食譜卷軸",
     "recipe_scroll.foodpower.cake.step0": "1. 首先，將§c§l%d份的%s§r過篩，並與§c§l%d顆%s§r、§c§l%d份%s§r、§c§l%d份的%s§r以及§c§l%d個%s§r放入萬用台進行攪拌。充分攪拌後，你會獲得1份麵糊。",

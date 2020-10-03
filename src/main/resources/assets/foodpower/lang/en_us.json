@@ -203,5 +203,5 @@
     "message.foodpower.tooltip_exp_title": "Gain Experience",
     "message.foodpower.output_amount": "Amount To Make : %d",
     "message.foodpower.tooltip_remove_before_take": "§4Please remove all items before taking this scroll out",
-    "message.foodpower.tooltip_required": "§4Required： %s x %d"
+    "message.foodpower.tooltip_required": "§8§o(Required： %d / %d)§r"
 }
