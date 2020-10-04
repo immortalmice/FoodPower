@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -165,9 +166,11 @@ public class RecipeTableContainer extends ContainerBase{
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity playerIn){
 		Slot slot = this.getSlot(slotId);
 		if(slotId >= 38 && slotId <= this.ingredientsSlot.getSlots() + 37){
-			if(slot instanceof RecipeTableSlot){
+			if(slot instanceof RecipeTableSlot && clickTypeIn == ClickType.PICKUP){
 				RecipeTableSlot currentSlot = (RecipeTableSlot) slot;
-				currentSlot.tryRegistIngrediant(playerIn.inventory.getItemStack());
+				// diff = Left Clicked: +1, Right Clicked: -1
+				int diff = (Container.getDragEvent(dragType) * 2 - 1) * -1;
+				currentSlot.tryRegistIngrediant(playerIn.inventory.getItemStack(), diff);
 			}
 			return ItemStack.EMPTY;
 		}else if(slotId == 37){
