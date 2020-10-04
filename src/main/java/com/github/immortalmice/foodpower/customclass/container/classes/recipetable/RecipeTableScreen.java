@@ -67,7 +67,7 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 
 		if(this.hoveredSlot instanceof RecipeTableSlot){
 			ICookingElement element = ((RecipeTableSlot) this.hoveredSlot).getSlotElement();
-			if(element instanceof FoodType){
+			if(element instanceof FoodType && !this.hoveredSlot.getHasStack()){
 				ArrayList<String> tooltipStr = new ArrayList<String>();
 
 				tooltipStr.add(I18n.format("general.foodpower.food_type") 
