@@ -111,9 +111,9 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 			}
 
 			this.renderTooltip(text, mouseX, mouseY, (font == null ? this.font : font));
-		}else{
-			super.renderHoveredToolTip(mouseX, mouseY);
+			return;
 		}
+		super.renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	private int getElectricSlotFillHeight(){
