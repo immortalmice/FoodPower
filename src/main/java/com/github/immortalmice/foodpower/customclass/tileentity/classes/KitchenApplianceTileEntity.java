@@ -197,7 +197,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 					if(stepRequest != null){
 						List<ItemStackRequest> requests = stepRequest.getRequires();
 						this.setSize(requests.size() + 2);
-						ingredients = NonNullList.withSize(requests.size(), ItemStack.EMPTY);
+						this.ingredients = NonNullList.withSize(requests.size(), ItemStack.EMPTY);
 						for(int i = 2; i <= this.stacks.size() - 1; i ++){
 							this.stacks.set(i, new ItemStack(requests.get(i - 2).getItem()));
 						}
