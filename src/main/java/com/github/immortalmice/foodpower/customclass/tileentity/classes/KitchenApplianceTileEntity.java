@@ -12,12 +12,14 @@ import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
+import com.github.immortalmice.foodpower.customclass.util.ItemStackNBT;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
@@ -252,5 +254,36 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			}
 			return this.ingredients.get(slot - 2);
 		}
+
+	    @Override
+    	public CompoundNBT serializeNBT(){
+    		CompoundNBT nbt = super.serializeNBT();
+    		ListNBT ingredientsNBT = new ListNBT();
+    		this.ingredients.forEach(stack -> {
+    			ingredientsNBT.add(ItemStackNBT.write(stack));
+    		});
+    		nbt.put("ingredients", ingredientsNBT);
+    		nbt.putInt("request_index", this.requestIndex);
+    		return nbt;
+    	}
+
+    	@Override
+    	public void deserializeNBT(CompoundNBT nbt){
+    		super.deserializeNBT(nbt);
+    		ListNBT ingredientsNBT = (ListNBT) nbt.get("ingredients");
+    		if(ingredientsNBT != null){
+    			this.ingredients = new ArrayList<>();
+    			for(int i = 0; i <= ingredientsNBT.size()-1; i ++){
+    				this.ingredients.add(ItemStackNBT.read(ingredientsNBT.getCompound(i)));
+    			}
+    		}
+    		this.requestIndex = nbt.getInt("request_index");
+    		
+    		this.cacheScroll = this.getStackInSlot(0);
+    		CookingRecipe recipe = this.getRecipe();
+    		if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
+    			this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
+    		}
+    	}
 	}
 }
