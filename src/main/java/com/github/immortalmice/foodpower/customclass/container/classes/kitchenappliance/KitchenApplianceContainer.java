@@ -88,13 +88,14 @@ public class KitchenApplianceContainer extends ContainerBase{
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
 		if(slotId >= 38 && this.itemHandler != null){
 			ItemStack held = player.inventory.getItemStack();
+			ItemStack result = ItemStack.EMPTY;
 			if(!held.isEmpty()){
-				ItemStack remaining = this.itemHandler.insertItem(slotId - 36, held, false);
-				player.inventory.setItemStack(remaining);
-				return remaining;
+				result = this.itemHandler.insertItem(slotId - 36, held, false);
+			}else{
+				result = this.itemHandler.extractItem(slotId - 36, 64, false);
 			}
-			// TODO
-			return ItemStack.EMPTY;
+			player.inventory.setItemStack(result);
+			return result;
 		}
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}

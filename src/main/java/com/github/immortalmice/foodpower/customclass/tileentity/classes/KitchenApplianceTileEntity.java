@@ -265,6 +265,26 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	    }
 
 	    @Override
+	    @Nonnull
+	    public ItemStack extractItem(int slot, int amount, boolean simulate){
+	    	// Extract scroll when ingredient exist IS NOT ALLOWED
+	    	if(slot == 0
+	    		&& amount > 0
+	    		&& this.ingredients.stream().filter(stack -> !stack.isEmpty()).findFirst().isPresent()
+	    	) return ItemStack.EMPTY;
+
+	    	if(slot <= 1 || slot > this.stacks.size() - 1) return super.extractItem(slot, amount, simulate);
+
+	    	ItemStack currentStack = this.getRealStack(slot);
+	    	ItemStack extractStack = new ItemStack(currentStack.getItem(), Math.min(currentStack.getCount(), amount));
+	    	if(!simulate){
+	    		this.ingredients.set(slot - 2, new ItemStack(currentStack.getItem(), currentStack.getCount() - extractStack.getCount()));
+	    		KitchenApplianceTileEntity.this.markDirty();
+	    	}
+	    	return extractStack;
+	    }
+
+	    @Override
     	public CompoundNBT serializeNBT(){
     		CompoundNBT nbt = super.serializeNBT();
     		ListNBT ingredientsNBT = new ListNBT();
