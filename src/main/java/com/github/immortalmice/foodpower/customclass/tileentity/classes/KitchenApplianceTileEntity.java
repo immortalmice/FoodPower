@@ -73,14 +73,6 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	public void read(CompoundNBT nbt){
 		super.read(nbt);
 
-		if(nbt.contains(KitchenApplianceTileEntity.ENERGY_NBT_KEY)){
-			CapabilityEnergy.ENERGY.readNBT(this.energyStorage, null, nbt.get(KitchenApplianceTileEntity.ENERGY_NBT_KEY));
-		}
-
-		if(nbt.contains(KitchenApplianceTileEntity.ITEM_NBT_KEY)){
-			CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(this.itemHandler, null, nbt.get(KitchenApplianceTileEntity.ITEM_NBT_KEY));
-		}
-		
 		if(nbt.contains(KitchenApplianceTileEntity.BLOCK_NBT_KEY)){
 			Block nbtBlock = ForgeRegistries.BLOCKS.getValue(
 				new ResourceLocation(nbt.getString(KitchenApplianceTileEntity.BLOCK_NBT_KEY)));
@@ -89,15 +81,23 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				this.block = (KitchenAppliance) nbtBlock;
 			}
 		}
+		
+		if(nbt.contains(KitchenApplianceTileEntity.ENERGY_NBT_KEY)){
+			CapabilityEnergy.ENERGY.readNBT(this.energyStorage, null, nbt.get(KitchenApplianceTileEntity.ENERGY_NBT_KEY));
+		}
+
+		if(nbt.contains(KitchenApplianceTileEntity.ITEM_NBT_KEY)){
+			this.itemHandler.deserializeNBT((CompoundNBT) nbt.get(KitchenApplianceTileEntity.ITEM_NBT_KEY));
+		}
 	}
 
 	@Override
 	public CompoundNBT write(CompoundNBT nbt){
-		nbt.put(KitchenApplianceTileEntity.ENERGY_NBT_KEY, CapabilityEnergy.ENERGY.writeNBT(this.energyStorage, null));
-		nbt.put(KitchenApplianceTileEntity.ITEM_NBT_KEY, CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(this.itemHandler, null));
 		if(this.block != null){
 			nbt.putString(KitchenApplianceTileEntity.BLOCK_NBT_KEY, this.block.getRegistryName().toString());
 		}
+		nbt.put(KitchenApplianceTileEntity.ENERGY_NBT_KEY, CapabilityEnergy.ENERGY.writeNBT(this.energyStorage, null));
+		nbt.put(KitchenApplianceTileEntity.ITEM_NBT_KEY, this.itemHandler.serializeNBT());
 		return super.write(nbt);
 	}
 
