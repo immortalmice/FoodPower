@@ -99,7 +99,7 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 			}else if(this.hoveredSlot instanceof KitchenApplianceSlot){
 
 				KitchenApplianceSlot slot = (KitchenApplianceSlot) this.hoveredSlot;
-				int current = this.container.getItemHandler() == null ? this.container.getItemHandler().getRealStack(slot.getSlotIndex()).getCount() : 0;
+				int current = this.container.getItemHandler() != null ? this.container.getItemHandler().getRealStack(slot.getSlotIndex()).getCount() : 0;
 				
 				String titleStr = TooltipUtil.translate("message.foodpower.tooltip_required", current, slot.getRequest().getAmount());
 
