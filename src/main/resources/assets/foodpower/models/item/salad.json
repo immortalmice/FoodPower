@@ -6,11 +6,24 @@
 	},
 	"ingredients": {
 		"base": "foodpower:meals/salad/salad_base",
+
 		"minecraft:beef": "foodpower:meals/salad/salad_beef",
-		"foodpower:cabbage": "foodpower:meals/salad/salad_cabbage",
 		"minecraft:chicken": "foodpower:meals/salad/salad_chicken",
+		"minecraft:mutton": "foodpower:meals/salad/salad_mutton",
+		"minecraft:porkchop": "foodpower:meals/salad/salad_porkchop",
+		"minecraft:rabbit": "foodpower:meals/salad/salad_rabbit",
+
+		"foodpower:cabbage": "foodpower:meals/salad/salad_cabbage",
+		"foodpower:tomato": "foodpower:meals/salad/salad_tomato",
+		"foodpower:corn": "foodpower:meals/salad/salad_corn",
+		"minecraft:potato": "foodpower:meals/salad/salad_potato",
+		"minecraft:pumpkin": "foodpower:meals/salad/salad_pumpkin",
+
 		"foodpower:ketchup": "foodpower:meals/salad/salad_ketchup",
 		"foodpower:sauce": "foodpower:meals/salad/salad_sauce",
-		"foodpower:tomato": "foodpower:meals/salad/salad_tomato"	
+		"minecraft:dragon_breath": "foodpower:meals/salad/salad_dragon_breath",
+		"minecraft:experience_bottle": "foodpower:meals/salad/salad_experience_bottle",
+		"minecraft:ghast_tear": "foodpower:meals/salad/salad_ghast_tear",
+		"minecraft:honey_bottle": "foodpower:meals/salad/salad_honey"
 	}
 }
