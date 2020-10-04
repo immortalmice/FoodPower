@@ -223,16 +223,6 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 
 		@Override
-		public void setStackInSlot(int slot, ItemStack stack) {
-			if(slot >= 0 && slot <= 1){
-				super.setStackInSlot(slot, stack);
-				KitchenApplianceTileEntity.this.markDirty();
-			}else if(slot >= 2 && slot <= this.stacks.size()-1){
-				// TODO
-			}
-		}
-
-		@Override
 		@Nonnull
 		public ItemStack getStackInSlot(int slot){
 			if(slot >= 0 && slot <= this.stacks.size() - 1){
