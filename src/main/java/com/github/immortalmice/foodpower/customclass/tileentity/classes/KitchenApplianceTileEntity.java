@@ -241,6 +241,29 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			return this.ingredients.get(slot - 2);
 		}
 
+		@Override
+	    @Nonnull
+	    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate){
+	    	if(slot <= 1 || slot > this.stacks.size() - 1) return super.insertItem(slot, stack, simulate);
+	    	if(!isItemValid(slot, stack)) return stack;
+
+	    	StepRequest step = this.getCurrentStepRequest();
+	    	if(step != null){
+	    		ItemStackRequest request = step.getRequires().get(slot - 2);
+	    		int requiredAmount = request.getAmount();
+		    	int acceptAmount = Math.min(stack.getCount(), requiredAmount - this.getRealStack(slot).getCount());
+
+		    	ItemStack remain = stack.copy();
+		    	remain.setCount(stack.getCount() - acceptAmount);
+		    	if(!simulate){
+		    		this.ingredients.set(slot - 2, new ItemStack(request.getItem(), this.ingredients.get(slot - 2).getCount() + acceptAmount));
+		    		KitchenApplianceTileEntity.this.markDirty();
+		    	}
+	    		return remain;
+	    	}
+	    	return stack;
+	    }
+
 	    @Override
     	public CompoundNBT serializeNBT(){
     		CompoundNBT nbt = super.serializeNBT();
