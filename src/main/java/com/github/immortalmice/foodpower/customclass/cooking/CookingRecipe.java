@@ -94,6 +94,19 @@ public class CookingRecipe{
 		return null;
 	}
 
+	public List<Pair<ItemStack, Integer>> getIngredients(){
+		List<Pair<ItemStack, Integer>> returnList = new ArrayList<>();
+
+		this.ingredients.forEach(pair -> {
+			ItemStack copy = pair.getFirst().copy();
+			int level = pair.getSecond();
+			
+			returnList.add(new Pair<>(copy, level));
+		});
+
+		return returnList;
+	}
+
 	public int getRarity(){
 		return this.rarity;
 	}
