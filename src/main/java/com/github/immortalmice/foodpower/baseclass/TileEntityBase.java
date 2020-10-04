@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.baseclass;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.util.Constants;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -45,5 +46,11 @@ public class TileEntityBase extends TileEntity implements INamedContainerProvide
 	@Override
 	public ITextComponent getDisplayName() {
 		return null;
+	}
+	
+	@Override
+	public void markDirty(){
+		super.markDirty();
+		this.world.notifyBlockUpdate(this.pos, this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
 	}
 }

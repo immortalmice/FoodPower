@@ -16,7 +16,6 @@ import com.github.immortalmice.foodpower.customclass.util.ItemStackNBT;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -25,7 +24,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
@@ -115,13 +113,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	@Override
 	public void tick(){
 		if(this.hasWorld() && !this.world.isRemote){
-			BlockState blockState = this.getBlockState();
-
 			if(this.energyStorage.getEnergyStored() != this.catchedEnergyStored){
-				
-				this.world.notifyBlockUpdate(this.pos, blockState, blockState, Constants.BlockFlags.BLOCK_UPDATE);
 				this.markDirty();
-
 				this.catchedEnergyStored = this.energyStorage.getEnergyStored();
 			}
 		}
