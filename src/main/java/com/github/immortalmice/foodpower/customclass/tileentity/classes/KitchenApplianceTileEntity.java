@@ -121,7 +121,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	}
 
 	public class KitchenApplanceItemHandler extends ItemStackHandler{
-		private List<ItemStack> ingredients;
+		private List<ItemStack> ingredients = new ArrayList<>();
 
 		private List<StepRequest> requests = new ArrayList<>();
 		private int requestIndex = 0;
