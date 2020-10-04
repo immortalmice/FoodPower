@@ -18,6 +18,8 @@
 		"foodpower:corn": "foodpower:meals/salad/salad_corn",
 		"minecraft:potato": "foodpower:meals/salad/salad_potato",
 		"minecraft:pumpkin": "foodpower:meals/salad/salad_pumpkin",
+		"minecraft:beetroot": "foodpower:meals/salad/salad_beetroot",
+		"minecraft:carrot": "foodpower:meals/salad/salad_carrot",
 
 		"foodpower:ketchup": "foodpower:meals/salad/salad_ketchup",
 		"foodpower:sauce": "foodpower:meals/salad/salad_sauce",
