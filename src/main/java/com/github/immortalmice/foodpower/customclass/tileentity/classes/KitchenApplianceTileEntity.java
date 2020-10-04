@@ -125,6 +125,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 		private List<StepRequest> requests = new ArrayList<>();
 		private int requestIndex = 0;
+		
+		private ItemStack cacheScroll = ItemStack.EMPTY;
 
 		private KitchenApplanceItemHandler(){
 			// 0: scroll slot
@@ -187,7 +189,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 		@Override
 		protected void onContentsChanged(int slot){
-			if(slot == 0){
+			if(slot == 0 && !ItemStack.areItemStacksEqual(this.cacheScroll, this.getStackInSlot(0))){
+				this.cacheScroll = this.getStackInSlot(0);
 				CookingRecipe recipe = this.getRecipe();
 				if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
 					this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
