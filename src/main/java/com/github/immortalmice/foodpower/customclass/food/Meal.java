@@ -25,8 +25,10 @@ import net.minecraft.world.World;
 
 import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.flavor.FlavorType;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
+import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
@@ -41,23 +43,30 @@ public class Meal extends CookedFood{
 
 	/* create a ItemStack and set NBTTags with given RecipeScroll */
 	public static ItemStack create(ItemStack scrollIn, int amount){
-		CompoundNBT scrollNBT = scrollIn.getTag();
-		if(scrollNBT != null && scrollNBT.contains("pattern")){
-			CookingPattern pattern = CookingPatterns.getPatternByName(scrollNBT.getString("pattern"));
-			Meal meal = pattern != null ? pattern.getResult() : null;
-			if(meal != null){
-				ItemStack result = new ItemStack(meal, amount);
+        CookingRecipe recipe = RecipeScroll.readCookingRecipe(scrollIn);
+		if(recipe != null){
+			CookingPattern pattern = recipe.getPattern();
+			ItemStack result = new ItemStack(pattern.getResult(), amount);
 
-				CompoundNBT mealNBT = new CompoundNBT();
-				mealNBT.putString("pattern", scrollNBT.getString("pattern"));
-				mealNBT.putString("displayName", scrollNBT.getString("displayName"));
-				mealNBT.put("ingredients", scrollNBT.get("ingredients").copy());
-				result.setTag(mealNBT);
+			CompoundNBT mealNBT = new CompoundNBT();
+			mealNBT.putString("pattern", pattern.getName());
+			mealNBT.putString("displayName", recipe.getDisplayName().getUnformattedComponentText());
+			
+			List<Pair<ItemStack, Integer>> ingredients = recipe.getIngredients();
+			ListNBT listNBT = new ListNBT();
+			ingredients.forEach(pair -> {
+				CompoundNBT nbt = new CompoundNBT();
+				nbt.putString("name", pair.getFirst().getItem().getRegistryName().toString());
+				nbt.putInt("level", pair.getSecond());
+				listNBT.add(nbt);
+			});
+			mealNBT.put("ingredients", listNBT);
+			
+			result.setTag(mealNBT);
 
-                Meal.calculateAndAssignExpPoints(result);
+            Meal.calculateAndAssignExpPoints(result);
 
-				return result;
-			}
+			return result;
 		}
 		return ItemStack.EMPTY;
 	}
