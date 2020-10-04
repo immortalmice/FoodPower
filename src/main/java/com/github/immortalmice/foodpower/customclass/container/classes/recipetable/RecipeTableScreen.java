@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
+import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
@@ -77,6 +80,22 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 			}
 		}
 	}
+	
+	@Override
+	protected void renderHoveredToolTip(int mouseX, int mouseY){
+		if(this.hoveredSlot instanceof RecipeTableSlot && this.hoveredSlot.getHasStack()){
+			ItemStack stack = this.hoveredSlot.getStack();
+			FontRenderer font = stack.getItem().getFontRenderer(stack);
+			List<String> text = this.getTooltipFromItem(stack);
+			
+			text.add("");
+			text.add(TooltipUtil.translate("message.foodpower.tooltip_recipe_table_operations"));
+			this.renderTooltip(text, mouseX, mouseY, (font == null ? this.font : font));
+			return;
+		}
+		super.renderHoveredToolTip(mouseX, mouseY);
+	}
+	
 	@Override
 	public void init(){
 		super.init();

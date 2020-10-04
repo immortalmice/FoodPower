@@ -203,5 +203,6 @@
     "message.foodpower.tooltip_exp_title": "Gain Experience",
     "message.foodpower.output_amount": "Amount To Make : %d",
     "message.foodpower.tooltip_remove_before_take": "§4Please remove all items before taking this scroll out",
-    "message.foodpower.tooltip_required": "§8§o(Required： %d / %d)§r"
+    "message.foodpower.tooltip_required": "§8§o(Required： %d / %d)§r",
+    "message.foodpower.tooltip_recipe_table_operations": "§7§o(Left Click To Increase Level, Right To Decrease)"
 }
