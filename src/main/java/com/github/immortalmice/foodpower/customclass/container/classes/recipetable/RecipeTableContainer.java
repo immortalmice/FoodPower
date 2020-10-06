@@ -144,8 +144,22 @@ public class RecipeTableContainer extends ContainerBase{
 	}
 
     @Override
-	public ItemStack transferStackInSlot(PlayerEntity entityPlayer, int fromSlot){
-		// TODO
+	public ItemStack transferStackInSlot(PlayerEntity player, int from){
+		Slot fromSlot = this.inventorySlots.get(from);
+		ItemStack copy = fromSlot.getStack().copy();
+
+		if(fromSlot != null && fromSlot.getHasStack() && fromSlot.getStack().getItem() == Items.WRITABLE_BOOK){
+			if(
+				// From scroll slot
+				(from == 36 && this.mergeItemStack(fromSlot.getStack(), 0, 36, false)) ||
+				// From player inventory 
+				(from < 36 && this.scrollSlot.getStackInSlot(0).isEmpty() && this.mergeItemStack(fromSlot.getStack(), 36, 37, true))
+			){
+				// Merge success
+				this.refreshScroll();
+				return copy;
+			}
+		}
 		return ItemStack.EMPTY;
 	}
 
