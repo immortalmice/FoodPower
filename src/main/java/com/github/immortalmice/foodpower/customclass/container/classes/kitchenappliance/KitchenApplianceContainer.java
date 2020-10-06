@@ -18,6 +18,7 @@ import com.github.immortalmice.foodpower.lists.Containers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
@@ -87,13 +88,27 @@ public class KitchenApplianceContainer extends ContainerBase{
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
 		if(slotId >= 38 && this.itemHandler != null){
-			// TODO right clicked?
-			ItemStack held = player.inventory.getItemStack();
-			ItemStack result = ItemStack.EMPTY;
-			if(!held.isEmpty()){
-				result = this.itemHandler.insertItem(slotId - 36, held, false);
+			
+			// Left Click default
+			ItemStack insertStack = player.inventory.getItemStack().copy();
+			int extractAmount = 64;
+			
+			// Right Click 
+			if(Container.getDragEvent(dragType) == 1){
+				insertStack.setCount(1);
+				extractAmount = 1;
+			}
+			
+			ItemStack result = player.inventory.getItemStack().copy();
+			// Insertion when mouse holding a stack
+			if(!player.inventory.getItemStack().isEmpty()){
+				int realInsertAmount = insertStack.getCount() - this.itemHandler.insertItem(slotId - 36, insertStack, false).getCount();
+				int resultAmount = player.inventory.getItemStack().getCount() - realInsertAmount;
+				result.setCount(resultAmount);
+				
+			// Extraction when mouse not holding a stack
 			}else{
-				result = this.itemHandler.extractItem(slotId - 36, 64, false);
+				result = this.itemHandler.extractItem(slotId - 36, extractAmount, false);
 			}
 			player.inventory.setItemStack(result);
 			return result;
