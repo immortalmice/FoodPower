@@ -100,10 +100,10 @@ public class MarketContainer extends ContainerBase{
 		if(slot != null && slot.getHasStack() && !slot.getStack().isEmpty()){
 			ItemStack current = slot.getStack();
 			previous = current.copy();
-			// Custom behaviour
+			// Custom behavior
 			if(fromSlot < 36){
-				// From Container Inventory to Player Inventory
-				if (!this.mergeItemStack(current, 36, 38, true))
+				// From Player Inventory to Container Inventory
+				if(!this.mergeItemStack(current, 36, 38, true))
 				    return ItemStack.EMPTY;
 			}else if(fromSlot == 37){
 				Slot emerald = this.inventorySlots.get(37);
@@ -114,11 +114,11 @@ public class MarketContainer extends ContainerBase{
 						return ItemStack.EMPTY;
 				}
 			}else{
-					// From Player Inventory to Coontainer Inventory
-				if (!this.mergeItemStack(current, 0, 36, false))
+				// From Container Inventory to Player Inventory
+				if(!this.mergeItemStack(current, 0, 36, false))
 				    return ItemStack.EMPTY;
 			}
-			// Custom behaviour
+			// Custom behavior
 			if (current.isEmpty() && current.getCount() == 0)
 				slot.putStack(ItemStack.EMPTY);
 			else
