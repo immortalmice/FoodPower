@@ -95,7 +95,7 @@ public class MarketContainer extends ContainerBase{
 	@Override
 	public ItemStack transferStackInSlot(PlayerEntity entityPlayer, int fromSlot){
 		ItemStack previous = ItemStack.EMPTY;
-		Slot slot = (Slot) this.inventorySlots.get(fromSlot);
+		Slot slot = this.inventorySlots.get(fromSlot);
 
 		if(slot != null && slot.getHasStack() && !slot.getStack().isEmpty()){
 			ItemStack current = slot.getStack();
