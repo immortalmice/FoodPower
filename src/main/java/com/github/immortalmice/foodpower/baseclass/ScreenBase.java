@@ -32,11 +32,6 @@ public class ScreenBase<T extends ContainerBase> extends ContainerScreen<T>{
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
-
-	}
-
-	@Override
 	public void render(int mouseX, int mouseY, float partialTicks){
 		this.renderBackground();
 		super.render(mouseX, mouseY, partialTicks);
