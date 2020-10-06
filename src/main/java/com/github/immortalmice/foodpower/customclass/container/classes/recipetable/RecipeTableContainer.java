@@ -123,6 +123,7 @@ public class RecipeTableContainer extends ContainerBase{
 		book.setCount(book.getCount() - 1);
 		this.bookSlot.setStackInSlot(0, book);
 		this.refreshScroll();
+		this.detectAndSendChanges();
 		return;
 	}
 
