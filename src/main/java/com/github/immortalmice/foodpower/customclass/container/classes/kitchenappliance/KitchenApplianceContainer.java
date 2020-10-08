@@ -2,6 +2,7 @@ package com.github.immortalmice.foodpower.customclass.container.classes.kitchena
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -14,6 +15,7 @@ import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenA
 import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.KitchenApplianceSlotPos;
 import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Position2D;
 import com.github.immortalmice.foodpower.lists.Containers;
+import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -118,8 +120,36 @@ public class KitchenApplianceContainer extends ContainerBase{
 	}
 	
 	@Override
-	public ItemStack transferStackInSlot(PlayerEntity playerIn, int index){
-		// TODO
+	public ItemStack transferStackInSlot(PlayerEntity playerIn, int from){
+		Slot fromSlot = this.inventorySlots.get(from);
+		if(from < 36 && fromSlot.getHasStack()){
+			// Move scroll into KitchenAppliance
+			if(fromSlot.getStack().getItem() == Items.RECIPE_SCROLL && !this.getScrollSlot().getHasStack()){
+				this.getScrollSlot().putStack(fromSlot.getStack());
+				fromSlot.putStack(ItemStack.EMPTY);
+			// Insert ingredient into KitchenAppliance
+			}else{
+				List<KitchenApplianceSlot> slots = this.inventorySlots.stream().filter(slot -> slot instanceof KitchenApplianceSlot).map(slot -> (KitchenApplianceSlot) slot).collect(Collectors.toList());
+				for(int i = 0; i <= slots.size()-1; i ++){
+					KitchenApplianceSlot slot = slots.get(i);
+					if(slot.getRequest().isMatched(fromSlot.getStack())){
+						ItemStack remainStack = slot.getItemHandler().insertItem(slot.getSlotIndex(), fromSlot.getStack(), false);
+						fromSlot.putStack(remainStack);
+						break;
+					}
+				}
+			}
+		}else if(playerIn.inventory.getFirstEmptyStack() != -1){
+			int emptySlot = playerIn.inventory.getFirstEmptyStack();
+			ItemStack extractStack = ItemStack.EMPTY;
+			if(fromSlot instanceof KitchenApplianceSlot){
+				extractStack = this.itemHandler.extractItem(fromSlot.getSlotIndex(), 64, false);
+			}else if(from == 36){
+				extractStack = this.itemHandler.extractItem(0, 1, false);
+			}
+			playerIn.inventory.setInventorySlotContents(emptySlot, extractStack);
+		}
+		this.updateSlot();
 		return ItemStack.EMPTY;
 	}
 
