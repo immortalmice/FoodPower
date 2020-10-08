@@ -87,14 +87,14 @@ public class KitchenApplianceContainer extends ContainerBase{
 
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player){
-		if(slotId >= 38 && this.itemHandler != null){
+		if(slotId >= 38 && this.itemHandler != null && clickTypeIn != ClickType.QUICK_MOVE){
 			
 			// Left Click default
 			ItemStack insertStack = player.inventory.getItemStack().copy();
 			int extractAmount = 64;
 			
 			// Right Click 
-			if(Container.getDragEvent(dragType) == 1){
+			if(Container.getDragEvent(dragType) == 1 && clickTypeIn != ClickType.QUICK_CRAFT){
 				insertStack.setCount(1);
 				extractAmount = 1;
 			}
