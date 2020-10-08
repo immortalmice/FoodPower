@@ -19,6 +19,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
@@ -128,5 +129,9 @@ public class KitchenApplianceContainer extends ContainerBase{
 			return stepRequest.getRequires();
 		}
 		return new ArrayList<>();
+	}
+
+	protected Slot getScrollSlot(){
+		return this.inventorySlots.get(36);
 	}
 }
