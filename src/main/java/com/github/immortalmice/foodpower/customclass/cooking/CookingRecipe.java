@@ -328,21 +328,6 @@ public class CookingRecipe{
 		public String getRequestID(){
 			return CookingRecipe.this.ID;
 		}
-
-		public boolean isSatisfied(List<ItemStack> provides){
-			// TODO Is this still needed?
-			return CookingRecipe.this.ingredients.stream().filter((pair) -> {
-				ItemStack request = pair.getFirst();
-
-				return provides.stream().filter((provide) -> {
-					boolean valid = provide.isItemEqual(request) && request.getCount() <= provide.getCount();
-					if(valid && request.getItem() instanceof CookedFood){
-						valid = CookedFood.isMatchedID(provide, CookingRecipe.this.ID);
-					}
-					return valid; // Provide stack can satisfy the request.
-				}).count() == 0; // Request not satisfied.
-			}).count() == 0; // No request is not satisfied => Satisfied.
-		}
 	}
 
 	public static class ItemStackRequest{
