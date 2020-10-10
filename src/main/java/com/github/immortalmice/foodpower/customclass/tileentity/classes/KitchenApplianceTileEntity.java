@@ -149,7 +149,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 		
 		@Override
-		public boolean isItemValid(int slot, ItemStack stack) {
+		public boolean isItemValid(int slot, ItemStack stack){
 			if(!stack.isEmpty()){
 				if(slot < 0 || slot > this.getSlots()-1){
 					return false;
