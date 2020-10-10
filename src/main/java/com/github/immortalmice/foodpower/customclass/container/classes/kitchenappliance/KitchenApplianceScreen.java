@@ -93,7 +93,7 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 			}
 
 			if(this.minecraft.player.inventory.getItemStack().isEmpty()
-				&& this.hoveredSlot.getSlotIndex() == 0 /* RecipeScroll Slot */){
+				&& this.hoveredSlot.slotNumber == 36 /* RecipeScroll Slot */){
 				
 				text.add(TooltipUtil.translate("message.foodpower.tooltip_remove_before_take"));
 			}else if(this.hoveredSlot instanceof KitchenApplianceSlot){
