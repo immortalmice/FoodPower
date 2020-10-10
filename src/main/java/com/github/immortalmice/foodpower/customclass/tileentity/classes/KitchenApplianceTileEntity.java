@@ -140,6 +140,21 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			return RecipeScroll.readCookingRecipe(this.getStackInSlot(0));
 		}
 
+		public boolean isCurrentRequestSatisfied(){
+			StepRequest request = this.getCurrentStepRequest();
+			if(request != null){
+				List<ItemStackRequest> requires = request.getRequires();
+				for(int i = 0; i <= requires.size()-1; i ++){
+					if(i > this.ingredients.size()-1 ||
+						!requires.get(i).isSatisfied(this.ingredients.get(i))){
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+
 		@Nullable
 		public StepRequest getCurrentStepRequest(){
 			if(this.requestIndex >= 0 && this.requestIndex <= this.requests.size()-1){
