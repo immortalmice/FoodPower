@@ -127,6 +127,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		private int requestIndex = 0;
 		
 		private ItemStack cacheScroll = ItemStack.EMPTY;
+		private boolean isSatisfiedCache = false;
+		private boolean isSatisfiedCacheModified = true;
 
 		private KitchenApplanceItemHandler(){
 			// 0: scroll slot
@@ -141,17 +143,23 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 
 		public boolean isCurrentRequestSatisfied(){
+			if(!this.isSatisfiedCacheModified) return this.isSatisfiedCache;
+
 			StepRequest request = this.getCurrentStepRequest();
+			this.isSatisfiedCacheModified = false;
 			if(request != null){
 				List<ItemStackRequest> requires = request.getRequires();
 				for(int i = 0; i <= requires.size()-1; i ++){
 					if(i > this.ingredients.size()-1 ||
 						!requires.get(i).isSatisfied(this.ingredients.get(i))){
+						this.isSatisfiedCache = false;
 						return false;
 					}
 				}
+				this.isSatisfiedCache = true;
 				return true;
 			}
+			this.isSatisfiedCache = false;
 			return false;
 		}
 
@@ -204,6 +212,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 		@Override
 		protected void onContentsChanged(int slot){
+			this.isSatisfiedCacheModified = true;
 			if(slot == 0 && !ItemStack.areItemStacksEqual(this.cacheScroll, this.getStackInSlot(0))){
 				this.cacheScroll = this.getStackInSlot(0);
 				CookingRecipe recipe = this.getRecipe();
@@ -272,6 +281,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		    	remain.setCount(stack.getCount() - acceptAmount);
 		    	if(!simulate){
 		    		this.ingredients.set(slot - 2, new ItemStack(request.getItem(), this.ingredients.get(slot - 2).getCount() + acceptAmount));
+		    		this.isSatisfiedCacheModified = true;
 		    		KitchenApplianceTileEntity.this.markDirty();
 		    	}
 	    		return remain;
@@ -294,6 +304,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	    	ItemStack extractStack = new ItemStack(currentStack.getItem(), Math.min(currentStack.getCount(), amount));
 	    	if(!simulate){
 	    		this.ingredients.set(slot - 2, new ItemStack(currentStack.getItem(), currentStack.getCount() - extractStack.getCount()));
+	    		this.isSatisfiedCacheModified = true;
 	    		KitchenApplianceTileEntity.this.markDirty();
 	    	}
 	    	return extractStack;
