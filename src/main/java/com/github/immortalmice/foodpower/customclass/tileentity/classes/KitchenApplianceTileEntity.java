@@ -34,8 +34,22 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class KitchenApplianceTileEntity extends TileEntityBase implements ITickableTileEntity{
 	private KitchenAppliance block;
 	private KitchenApplanceItemHandler itemHandler = new KitchenApplanceItemHandler();
-	private EnergyStorage energyStorage = new EnergyStorage(1000000);
-	private int catchedEnergyStored = 0;
+	private EnergyStorage energyStorage = new EnergyStorage(1000000){
+		@Override
+		public int receiveEnergy(int maxReceive, boolean simulate){
+			if(!simulate){
+				KitchenApplianceTileEntity.this.markDirty();
+			}
+			return super.receiveEnergy(maxReceive, simulate);
+		}
+		@Override
+		public int extractEnergy(int maxExtract, boolean simulate){
+			if(!simulate){
+				KitchenApplianceTileEntity.this.markDirty();
+			}
+			return super.extractEnergy(maxExtract, simulate);
+		}
+	};
 
 	private static final String ENERGY_NBT_KEY = "forge_energy";
 	private static final String BLOCK_NBT_KEY = "kitchen_appliance_block";
@@ -112,12 +126,6 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 	@Override
 	public void tick(){
-		if(this.hasWorld() && !this.world.isRemote){
-			if(this.energyStorage.getEnergyStored() != this.catchedEnergyStored){
-				this.markDirty();
-				this.catchedEnergyStored = this.energyStorage.getEnergyStored();
-			}
-		}
 	}
 
 	public class KitchenApplanceItemHandler extends ItemStackHandler{
