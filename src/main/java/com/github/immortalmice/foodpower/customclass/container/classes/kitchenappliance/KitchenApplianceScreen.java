@@ -15,6 +15,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.energy.EnergyStorage;
 
 public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer>{
 	private static final int ELECTRIC_SLOT_X = 18, ELECTRIC_SLOT_Y = 18;
@@ -71,8 +72,9 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 				&& y >= yEnd - ELECTRIC_SLOT_HEIGHT && y <= yEnd){
 				KitchenApplianceTileEntity tileEntity = this.container.getTileEntity();
 				if(tileEntity != null){
-					String tooltipStr = Integer.toString(tileEntity.getEnergyStored()) + "FE";
-					tooltipStr += "/" + Integer.toString(tileEntity.getMaxEnergyStored()) + "FE";
+					EnergyStorage storage = tileEntity.getEnergyStorage();
+					String tooltipStr = Integer.toString(storage.getEnergyStored()) + "FE";
+					tooltipStr += "/" + Integer.toString(storage.getMaxEnergyStored()) + "FE";
 					this.renderTooltip(tooltipStr, x, y);
 				}
 			}
@@ -119,7 +121,8 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 	private int getElectricSlotFillHeight(){
 		KitchenApplianceTileEntity tileEntity = this.container.getTileEntity();
 		if(tileEntity != null){
-			float ratio = (float) tileEntity.getEnergyStored() / tileEntity.getMaxEnergyStored();
+			EnergyStorage storage = tileEntity.getEnergyStorage();
+			float ratio = (float) storage.getEnergyStored() / storage.getMaxEnergyStored();
 			return Math.round(KitchenApplianceScreen.ELECTRIC_SLOT_HEIGHT * ratio);
 		}
 		return 0;
