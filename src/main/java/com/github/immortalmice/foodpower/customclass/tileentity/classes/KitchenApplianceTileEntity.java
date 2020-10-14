@@ -69,12 +69,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		return this.block;
 	}
 
-	public int getEnergyStored(){
-		return this.energyStorage.getEnergyStored();
-	}
-
-	public int getMaxEnergyStored(){
-		return this.energyStorage.getMaxEnergyStored();
+	public EnergyStorage getEnergyStorage(){
+		return this.energyStorage;
 	}
 
 	public KitchenApplanceItemHandler getItemHandler(){
