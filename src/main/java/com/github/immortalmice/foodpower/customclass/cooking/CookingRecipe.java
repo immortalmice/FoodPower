@@ -173,6 +173,13 @@ public class CookingRecipe{
 	public int getOutputAmount(){
 		return this.outputAmount;
 	}
+	
+	public static int getOutputAmount(CompoundNBT nbt){
+		if(nbt.contains(NBT_KEY.OUTPUT_AMOUNT)){
+			return nbt.getInt(NBT_KEY.OUTPUT_AMOUNT);
+		}
+		return -1;
+	}
 
 	public ITextComponent getDisplayName(){
 		if(!this.recipeName.equals("")){
