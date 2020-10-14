@@ -2,6 +2,7 @@ package com.github.immortalmice.foodpower.customclass.tileentity.classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -11,6 +12,7 @@ import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
+import com.github.immortalmice.foodpower.customclass.food.CookedFood;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.util.ItemStackNBT;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
@@ -50,10 +52,16 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			return super.extractEnergy(maxExtract, simulate);
 		}
 	};
+	
+	private int progress = 0;
 
 	private static final String ENERGY_NBT_KEY = "forge_energy";
 	private static final String BLOCK_NBT_KEY = "kitchen_appliance_block";
 	private static final String ITEM_NBT_KEY = "item_handler";
+	private static final String PROGRESS_NBT_KEY = "progress";
+	
+	public static final Function<Integer, Integer> requiredTicksFun = amount -> 180 + amount * 30;
+	public static final int energyPerTick = 500;
 
 	public KitchenApplianceTileEntity(){
 		this(null);
@@ -71,6 +79,10 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 	public EnergyStorage getEnergyStorage(){
 		return this.energyStorage;
+	}
+	
+	public int getProgress(){
+		return this.progress;
 	}
 
 	public KitchenApplanceItemHandler getItemHandler(){
@@ -97,6 +109,10 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		if(nbt.contains(KitchenApplianceTileEntity.ITEM_NBT_KEY)){
 			this.itemHandler.deserializeNBT((CompoundNBT) nbt.get(KitchenApplianceTileEntity.ITEM_NBT_KEY));
 		}
+		
+		if(nbt.contains(KitchenApplianceTileEntity.PROGRESS_NBT_KEY)){
+			this.progress = nbt.getInt(KitchenApplianceTileEntity.PROGRESS_NBT_KEY);
+		}
 	}
 
 	@Override
@@ -106,6 +122,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 		nbt.put(KitchenApplianceTileEntity.ENERGY_NBT_KEY, CapabilityEnergy.ENERGY.writeNBT(this.energyStorage, null));
 		nbt.put(KitchenApplianceTileEntity.ITEM_NBT_KEY, this.itemHandler.serializeNBT());
+		nbt.putInt(KitchenApplianceTileEntity.PROGRESS_NBT_KEY, this.progress);
 		return super.write(nbt);
 	}
 
@@ -122,6 +139,35 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 
 	@Override
 	public void tick(){
+		if(this.world.isRemote) return;
+
+		boolean isModified = false;
+		
+		if(this.itemHandler.isCurrentRequestSatisfied() && this.itemHandler.getStackInSlot(1).isEmpty() && this.block != null){
+			if(this.block.isElectrical() && this.energyStorage.getEnergyStored() >= KitchenApplianceTileEntity.energyPerTick){
+				this.energyStorage.extractEnergy(KitchenApplianceTileEntity.energyPerTick, false);
+				this.progress ++;
+				isModified = true;
+			}else if(!this.block.isElectrical()){
+				this.progress ++;
+				isModified = true;
+			}
+		}else{
+			if(this.progress != 0){
+				this.progress = 0;
+				isModified = true;
+			}
+		}
+		
+		StepRequest stepRequest = this.itemHandler.getCurrentStepRequest();
+		if(stepRequest != null && this.progress >= KitchenApplianceTileEntity.requiredTicksFun.apply(stepRequest.getOutputAmount())){
+			this.progress = 0;
+			this.itemHandler.ingredients = NonNullList.withSize(stepRequest.getRequires().size(), ItemStack.EMPTY);
+			this.itemHandler.setStackInSlot(1, CookedFood.getItemStack(stepRequest.getResult(), stepRequest.getOutputAmount()));
+			isModified = true;
+		}
+		
+		if(isModified) this.markDirty();
 	}
 
 	public class KitchenApplanceItemHandler extends ItemStackHandler{

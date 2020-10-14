@@ -51,4 +51,9 @@ public class CookedFood extends ItemFoodBase implements ICookingElement{
         // TODO
 		return true;
 	}
+
+	public static ItemStack getItemStack(CookedFood result, int outputAmount){
+		// TODO
+		return new ItemStack(result);
+	}
 }
