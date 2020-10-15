@@ -11,6 +11,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.util.text.ITextComponent;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
+import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
@@ -52,8 +53,8 @@ public class CookedFood extends ItemFoodBase implements ICookingElement{
 		return true;
 	}
 
-	public static ItemStack getItemStack(CookedFood result, int outputAmount){
+	public static ItemStack create(StepRequest stepRequest){
 		// TODO
-		return new ItemStack(result);
+		return new ItemStack(stepRequest.getResult());
 	}
 }

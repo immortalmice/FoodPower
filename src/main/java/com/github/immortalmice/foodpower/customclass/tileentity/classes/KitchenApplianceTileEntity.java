@@ -13,6 +13,7 @@ import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
 import com.github.immortalmice.foodpower.customclass.food.CookedFood;
+import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.util.ItemStackNBT;
 import com.github.immortalmice.foodpower.lists.TileEntitys;
@@ -163,7 +164,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		if(stepRequest != null && this.progress >= KitchenApplianceTileEntity.requiredTicksFun.apply(stepRequest.getOutputAmount())){
 			this.progress = 0;
 			this.itemHandler.ingredients = NonNullList.withSize(stepRequest.getRequires().size(), ItemStack.EMPTY);
-			this.itemHandler.setStackInSlot(1, CookedFood.getItemStack(stepRequest.getResult(), stepRequest.getOutputAmount()));
+			ItemStack result = stepRequest.getResult() instanceof Meal ? Meal.create(this.itemHandler.cacheScroll) : CookedFood.create(stepRequest);
+			this.itemHandler.setStackInSlot(1, result);
 			isModified = true;
 		}
 		
