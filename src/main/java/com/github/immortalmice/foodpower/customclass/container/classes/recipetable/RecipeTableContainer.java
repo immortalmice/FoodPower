@@ -216,7 +216,7 @@ public class RecipeTableContainer extends ContainerBase{
 	}
 
 	public ItemStack getFinishedMeal(int amount){
-		return Meal.create(this.getScroll(true), amount);
+		return Meal.create(this.getScroll(true));
 	}
 
 	public int getIndex(){

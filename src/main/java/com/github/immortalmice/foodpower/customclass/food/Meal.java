@@ -42,11 +42,11 @@ public class Meal extends CookedFood{
 	}
 
 	/* create a ItemStack and set NBTTags with given RecipeScroll */
-	public static ItemStack create(ItemStack scrollIn, int amount){
+	public static ItemStack create(ItemStack scrollIn){
         CookingRecipe recipe = RecipeScroll.readCookingRecipe(scrollIn);
 		if(recipe != null){
 			CookingPattern pattern = recipe.getPattern();
-			ItemStack result = new ItemStack(pattern.getResult(), amount);
+			ItemStack result = new ItemStack(pattern.getResult(), recipe.getOutputAmount());
 
 			CompoundNBT mealNBT = new CompoundNBT();
 			mealNBT.putString("pattern", pattern.getName());
