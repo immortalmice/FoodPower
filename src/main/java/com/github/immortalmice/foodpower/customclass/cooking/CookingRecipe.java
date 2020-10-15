@@ -320,7 +320,7 @@ public class CookingRecipe{
 		private void addSampleAsRequest(ItemStack sample){
 			this.requires.add(new ItemStackRequest(sample.getItem(), sample.getCount(), (stack, matchMode) -> {
 				if(sample.getItem() instanceof CookedFood){
-					return CookedFood.isMatchedID(stack, CookingRecipe.this.ID, this.outputAmount);
+					return CookedFood.isMatchedWith(stack, CookingRecipe.this.ID, CookingRecipe.this.outputAmount);
 				}
 				return true;
 			}));
