@@ -132,7 +132,7 @@ public class CookingRecipe{
 
 		// Fist filter out all ICookingElement is a CookedFood or Ingredient.
 		this.pattern.getSteps().forEach((step) -> {
-			final StepRequest stepRequest = new StepRequest(step.getEquipment(), step.getResult(), this.outputAmount);
+			final StepRequest stepRequest = new StepRequest(step.getEquipment(), step.getResult());
 
 			step.getElements().forEach((element) -> {
 				if(element instanceof CookedFood){
@@ -311,12 +311,10 @@ public class CookingRecipe{
 		private final KitchenAppliance equipment;
 		private final List<ItemStackRequest> requires = new ArrayList<>();
 		private final CookedFood result;
-		private final int outputAmount;
 
-		private StepRequest(KitchenAppliance equipmentIn, CookedFood resultIn, int outputAmountIn){
+		private StepRequest(KitchenAppliance equipmentIn, CookedFood resultIn){
 			this.equipment = equipmentIn;
 			this.result = resultIn;
-			this.outputAmount = outputAmountIn;
 		}
 
 		private void addSampleAsRequest(ItemStack sample){
@@ -341,7 +339,7 @@ public class CookingRecipe{
 		}
 		
 		public int getOutputAmount(){
-			return this.outputAmount;
+			return CookingRecipe.this.outputAmount;
 		}
 
 		public String getRequestID(){
