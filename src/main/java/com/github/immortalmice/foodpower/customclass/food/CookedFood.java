@@ -9,9 +9,12 @@ import net.minecraft.world.World;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
+import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
@@ -22,6 +25,19 @@ public class CookedFood extends ItemFoodBase implements ICookingElement{
 
 	@Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn){
+		CompoundNBT nbt = stack.getTag();
+		if(nbt != null){
+			TooltipUtil tooltipHelper = new TooltipUtil(tooltip);
+			
+			if(nbt.contains("id")){
+				tooltipHelper.add("(" + nbt.getString("id") + ")", new Style().setItalic(true).setColor(TextFormatting.GRAY));
+			}
+			
+			if(nbt.contains("output_amount")){
+				tooltipHelper.newBlankRow();
+				tooltipHelper.addTranslate("message.foodpower.output_amount", nbt.getInt("output_amount"));
+			}
+		}
     	return;
     }
 
@@ -54,7 +70,13 @@ public class CookedFood extends ItemFoodBase implements ICookingElement{
 	}
 
 	public static ItemStack create(StepRequest stepRequest){
-		// TODO
-		return new ItemStack(stepRequest.getResult());
+		ItemStack result = new ItemStack(stepRequest.getResult());
+		
+		CompoundNBT nbt = new CompoundNBT();
+		nbt.putInt("output_amount", stepRequest.getOutputAmount());
+		nbt.putString("id", stepRequest.getRequestID());
+		result.setTag(nbt);
+		
+		return result;
 	}
 }
