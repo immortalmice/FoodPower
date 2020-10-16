@@ -15,7 +15,7 @@ import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 
-/* Used to trasfer RecipeTableScreen data to update */
+/* Used to transfer RecipeTableScreen data to update */
 public class RecipeTableMessage extends MessageBase<RecipeTableMessage>{
 	private String action, message;
 	private int windowId;
