@@ -51,7 +51,7 @@ public class ReflectList<TYPE, TARGET> implements List<TYPE>{
 					if(!fuzzyMode){
 						accept = field.getType() == this.listType;
 					}else{
-						accept = field.getType().isAssignableFrom(this.listType);
+						accept = this.listType.isAssignableFrom(field.getType());
 					}
 					
 					if(accept){
