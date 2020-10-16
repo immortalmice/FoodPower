@@ -14,7 +14,7 @@ import com.github.immortalmice.foodpower.customclass.container.classes.recipescr
 import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingRecipe.StepRequest;
-import com.github.immortalmice.foodpower.customclass.message.classes.RecipeScrollMessage;
+import com.github.immortalmice.foodpower.customclass.message.RecipeScrollMessage;
 
 public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 	public RecipeScrollScreen(RecipeScrollContainer containerIn, PlayerInventory inventoryIn, ITextComponent textIn){

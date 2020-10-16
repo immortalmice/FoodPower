@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.message.classes;
+package com.github.immortalmice.foodpower.customclass.message;
 
 import java.util.function.Supplier;
 
@@ -6,7 +6,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.MessageBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketContainer;
 
@@ -51,16 +50,6 @@ public class MarketMessage extends MessageBase<MarketMessage>{
 			}
 		}
 		ctx.get().setPacketHandled(true);
-	}
-
-	@Override
-	public void registMessage(int i){
-		FoodPower.NETWORK.registerMessage(
-			i
-			, MarketMessage.class
-			, MarketMessage::encode
-			, MarketMessage::decode
-			, MarketMessage::handle);
 	}
 
 	public String getMessage(){

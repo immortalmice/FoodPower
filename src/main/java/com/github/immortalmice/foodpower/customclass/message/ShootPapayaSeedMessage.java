@@ -1,8 +1,7 @@
-package com.github.immortalmice.foodpower.customclass.message.classes;
+package com.github.immortalmice.foodpower.customclass.message;
 
 import java.util.function.Supplier;
 
-import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.MessageBase;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.specialclass.PapayaSeedEntity;
@@ -48,15 +47,4 @@ public class ShootPapayaSeedMessage extends MessageBase<ShootPapayaSeedMessage>{
 			}
 		}
 	}
-
-	@Override
-	public void registMessage(int i) {
-		FoodPower.NETWORK.registerMessage(
-			i
-			, ShootPapayaSeedMessage.class
-			, ShootPapayaSeedMessage::encode
-			, ShootPapayaSeedMessage::decode
-			, ShootPapayaSeedMessage::handle);
-	}
-
 }

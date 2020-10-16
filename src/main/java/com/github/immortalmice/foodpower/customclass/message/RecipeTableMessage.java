@@ -1,4 +1,4 @@
-package com.github.immortalmice.foodpower.customclass.message.classes;
+package com.github.immortalmice.foodpower.customclass.message;
 
 import java.util.function.Supplier;
 
@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.server.ServerWorld;
 
-import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.MessageBase;
 import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableContainer;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
@@ -92,16 +91,6 @@ public class RecipeTableMessage extends MessageBase<RecipeTableMessage>{
 			}
 		}
 		ctx.get().setPacketHandled(true);
-	}
-
-	@Override
-	public void registMessage(int i) {
-		FoodPower.NETWORK.registerMessage(
-			i
-			, RecipeTableMessage.class
-			, RecipeTableMessage::encode
-			, RecipeTableMessage::decode
-			, RecipeTableMessage::handle);
 	}
 
 	public int getWindowId(){

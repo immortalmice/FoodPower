@@ -18,7 +18,7 @@ import com.github.immortalmice.foodpower.customclass.client.TooltipUtil;
 import com.github.immortalmice.foodpower.customclass.container.util.FPButton;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.FoodType;
-import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
+import com.github.immortalmice.foodpower.customclass.message.RecipeTableMessage;
 import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Position2D;
 import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.RecipeTableSlotPos;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;

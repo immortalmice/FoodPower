@@ -3,7 +3,7 @@ package com.github.immortalmice.foodpower.handlers;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
-import com.github.immortalmice.foodpower.customclass.message.classes.ShootPapayaSeedMessage;
+import com.github.immortalmice.foodpower.customclass.message.ShootPapayaSeedMessage;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 

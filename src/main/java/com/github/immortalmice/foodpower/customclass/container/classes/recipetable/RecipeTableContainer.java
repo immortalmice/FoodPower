@@ -20,7 +20,7 @@ import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.customclass.food.Meal;
-import com.github.immortalmice.foodpower.customclass.message.classes.RecipeTableMessage;
+import com.github.immortalmice.foodpower.customclass.message.RecipeTableMessage;
 import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.Position2D;
 import com.github.immortalmice.foodpower.customclass.util.SlotPosProvider.RecipeTableSlotPos;
