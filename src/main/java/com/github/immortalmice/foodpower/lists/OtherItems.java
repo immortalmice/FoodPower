@@ -10,9 +10,9 @@ import net.minecraftforge.registries.ObjectHolder;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
-import com.github.immortalmice.foodpower.customclass.specialclass.DirtyFood;
-import com.github.immortalmice.foodpower.customclass.specialclass.RecipeScroll;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
+import com.github.immortalmice.foodpower.specialclass.DirtyFood;
+import com.github.immortalmice.foodpower.specialclass.RecipeScroll;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 /* All the other items in mod need to be registed will list below */
 public class OtherItems{

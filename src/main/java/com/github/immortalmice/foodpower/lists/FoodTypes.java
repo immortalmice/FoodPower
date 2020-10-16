@@ -3,7 +3,7 @@ package com.github.immortalmice.foodpower.lists;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.immortalmice.foodpower.customclass.food.FoodType;
+import com.github.immortalmice.foodpower.types.FoodType;
 
 public class FoodTypes{
 	public static final List<FoodType> list = new ArrayList<FoodType>();

@@ -24,10 +24,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.List;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.capability.classes.FPFlavorExpCapability;
-import com.github.immortalmice.foodpower.customclass.capability.classes.FPPatternExpCapability;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
-import com.github.immortalmice.foodpower.customclass.food.Meal;
+import com.github.immortalmice.foodpower.capability.implement.FPFlavorExpCapability;
+import com.github.immortalmice.foodpower.capability.implement.FPPatternExpCapability;
+import com.github.immortalmice.foodpower.food.Ingredient;
+import com.github.immortalmice.foodpower.food.Meal;
 import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;

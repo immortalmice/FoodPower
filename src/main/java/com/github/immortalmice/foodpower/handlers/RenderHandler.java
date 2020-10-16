@@ -10,13 +10,13 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
-import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
-import com.github.immortalmice.foodpower.customclass.crop.CropBlock;
-import com.github.immortalmice.foodpower.customclass.tree.TreeSaplingBush;
+import com.github.immortalmice.foodpower.crop.CropBlock;
 import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
 import com.github.immortalmice.foodpower.lists.OtherEntitys;
 import com.github.immortalmice.foodpower.lists.Trees;
+import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
+import com.github.immortalmice.foodpower.tree.TreeSaplingBush;
 
 public class RenderHandler{
 	public static void setupClient(){

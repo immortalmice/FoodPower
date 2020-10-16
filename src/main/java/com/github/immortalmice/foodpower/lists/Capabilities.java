@@ -3,9 +3,9 @@ package com.github.immortalmice.foodpower.lists;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
-import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPPatternExpCapability;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
-import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPFlavorExpCapability;
+import com.github.immortalmice.foodpower.capability.interfaces.IFPFlavorExpCapability;
+import com.github.immortalmice.foodpower.capability.interfaces.IFPPatternExpCapability;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 public class Capabilities{
 	@SuppressWarnings("rawtypes")

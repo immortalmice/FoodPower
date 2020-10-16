@@ -12,9 +12,9 @@ import net.minecraftforge.registries.ObjectHolder;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.BlockBase;
-import com.github.immortalmice.foodpower.customclass.specialclass.Market;
-import com.github.immortalmice.foodpower.customclass.specialclass.RecipeTable;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
+import com.github.immortalmice.foodpower.specialclass.Market;
+import com.github.immortalmice.foodpower.specialclass.RecipeTable;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 /* All the other blocks in mod need to be registed will list below */
 public class OtherBlocks{

@@ -9,8 +9,8 @@ import net.minecraft.potion.Effect;
 import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.effect.FoodEffect;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
+import com.github.immortalmice.foodpower.effect.FoodEffect;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 public class Effects{
 	public static final ReflectList<FoodEffect, FoodEffects> list = new ReflectList<FoodEffect, FoodEffects>(FoodEffect.class, FoodEffects.class);

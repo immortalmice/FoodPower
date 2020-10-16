@@ -1,10 +1,10 @@
 package com.github.immortalmice.foodpower.handlers;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
-import com.github.immortalmice.foodpower.customclass.food.Meal;
-import com.github.immortalmice.foodpower.customclass.message.ShootPapayaSeedMessage;
+import com.github.immortalmice.foodpower.food.Meal;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
+import com.github.immortalmice.foodpower.message.ShootPapayaSeedMessage;
+import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
 import net.minecraft.block.Block;

@@ -5,7 +5,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.model.meal.MealModelLoader;
+import com.github.immortalmice.foodpower.model.meal.MealModelLoader;
 
 public class ModelHandler{
 	public static void registLoader(){

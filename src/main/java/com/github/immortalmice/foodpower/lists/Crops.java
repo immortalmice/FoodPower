@@ -10,9 +10,9 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.crop.CropSeed;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
-import com.github.immortalmice.foodpower.customclass.crop.CropBlock;
+import com.github.immortalmice.foodpower.crop.CropBlock;
+import com.github.immortalmice.foodpower.crop.CropSeed;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 public class Crops{
 	public static final ReflectList<CropBlock, Blocks> blockList = new ReflectList<CropBlock, Blocks>(CropBlock.class, Blocks.class);

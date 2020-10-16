@@ -1,11 +1,11 @@
 package com.github.immortalmice.foodpower.lists;
 
 import com.github.immortalmice.foodpower.baseclass.MessageBase;
-import com.github.immortalmice.foodpower.customclass.message.MarketMessage;
-import com.github.immortalmice.foodpower.customclass.message.RecipeScrollMessage;
-import com.github.immortalmice.foodpower.customclass.message.RecipeTableMessage;
-import com.github.immortalmice.foodpower.customclass.message.ShootPapayaSeedMessage;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
+import com.github.immortalmice.foodpower.message.MarketMessage;
+import com.github.immortalmice.foodpower.message.RecipeScrollMessage;
+import com.github.immortalmice.foodpower.message.RecipeTableMessage;
+import com.github.immortalmice.foodpower.message.ShootPapayaSeedMessage;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 
 public class Messages{

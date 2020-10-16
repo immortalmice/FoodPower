@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.github.immortalmice.foodpower.customclass.flavor.FlavorType;
+import com.github.immortalmice.foodpower.types.FlavorType;
 
 public class FlavorTypes{
 	public static final List<FlavorType> list = new ArrayList<FlavorType>();

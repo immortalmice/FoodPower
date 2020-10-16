@@ -9,8 +9,8 @@ import net.minecraftforge.registries.ObjectHolder;
 import java.util.function.Supplier;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.food.Meal;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
+import com.github.immortalmice.foodpower.food.Meal;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 public class Meals{
 	public static final ReflectList<Meal, Items> list = new ReflectList<Meal, Items>(Meal.class, Items.class);

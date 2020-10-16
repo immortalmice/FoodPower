@@ -1,7 +1,7 @@
 package com.github.immortalmice.foodpower.lists;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.specialclass.PapayaSeedEntity;
+import com.github.immortalmice.foodpower.entity.PapayaSeedEntity;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;

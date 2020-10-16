@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
 
+import com.github.immortalmice.foodpower.cooking.CookingPattern;
+import com.github.immortalmice.foodpower.cooking.CookingStep;
+import com.github.immortalmice.foodpower.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances.Blocks;
-import com.github.immortalmice.foodpower.customclass.cooking.CookingStep;
-import com.github.immortalmice.foodpower.customclass.cooking.ICookingElement;
-import com.github.immortalmice.foodpower.customclass.cooking.CookingPattern;
 
 public class CookingPatterns{
 	public static List<CookingPattern> list = new ArrayList<CookingPattern>();

@@ -8,10 +8,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
-import com.github.immortalmice.foodpower.customclass.capability.classes.FPFlavorExpCapability;
-import com.github.immortalmice.foodpower.customclass.capability.classes.FPPatternExpCapability;
-import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPFlavorExpCapability;
-import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPPatternExpCapability;
+import com.github.immortalmice.foodpower.capability.implement.FPFlavorExpCapability;
+import com.github.immortalmice.foodpower.capability.implement.FPPatternExpCapability;
+import com.github.immortalmice.foodpower.capability.interfaces.IFPFlavorExpCapability;
+import com.github.immortalmice.foodpower.capability.interfaces.IFPPatternExpCapability;
 
 public class CapabilityHandler{
 	public static void registAllCapabilities(){

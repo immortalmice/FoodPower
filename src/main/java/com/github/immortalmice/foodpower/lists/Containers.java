@@ -10,15 +10,15 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ObjectHolder;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.container.ContainerPack;
-import com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance.KitchenApplianceContainer;
-import com.github.immortalmice.foodpower.customclass.container.classes.kitchenappliance.KitchenApplianceScreen;
-import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketContainer;
-import com.github.immortalmice.foodpower.customclass.container.classes.market.MarketScreen;
-import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollContainer;
-import com.github.immortalmice.foodpower.customclass.container.classes.recipescroll.RecipeScrollScreen;
-import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableContainer;
-import com.github.immortalmice.foodpower.customclass.container.classes.recipetable.RecipeTableScreen;
+import com.github.immortalmice.foodpower.container.ContainerPack;
+import com.github.immortalmice.foodpower.container.kitchenappliance.KitchenApplianceContainer;
+import com.github.immortalmice.foodpower.container.kitchenappliance.KitchenApplianceScreen;
+import com.github.immortalmice.foodpower.container.market.MarketContainer;
+import com.github.immortalmice.foodpower.container.market.MarketScreen;
+import com.github.immortalmice.foodpower.container.recipescroll.RecipeScrollContainer;
+import com.github.immortalmice.foodpower.container.recipescroll.RecipeScrollScreen;
+import com.github.immortalmice.foodpower.container.recipetable.RecipeTableContainer;
+import com.github.immortalmice.foodpower.container.recipetable.RecipeTableScreen;
 
 public class Containers{
 	public static final DeferredRegister<ContainerType<?>> REGISTER = new DeferredRegister<ContainerType<?>>(ForgeRegistries.CONTAINERS, FoodPower.MODID);

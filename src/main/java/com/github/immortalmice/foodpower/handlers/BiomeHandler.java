@@ -8,8 +8,8 @@ import net.minecraft.world.gen.placement.Placement;
 
 import java.util.Collection;
 
-import com.github.immortalmice.foodpower.customclass.tree.FPTree;
 import com.github.immortalmice.foodpower.lists.Trees;
+import com.github.immortalmice.foodpower.tree.FPTree;
 
 /* Add Tree Features To Corresponding Biomes */
 public class BiomeHandler{

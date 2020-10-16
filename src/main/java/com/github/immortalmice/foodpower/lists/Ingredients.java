@@ -12,8 +12,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.food.Ingredient;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
+import com.github.immortalmice.foodpower.food.Ingredient;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 /* All the ingredient need to be registed will list below. */
 /* Do not use ingrediant directly to create ItemStack, use Ingredient#asItem */

@@ -12,8 +12,8 @@ import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.KitchenAppliance;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
+import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 /* All the KitchenAppliances need to be registed will list below. */
 public class KitchenAppliances{

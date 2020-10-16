@@ -11,10 +11,10 @@ import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.customclass.tree.FPTree;
-import com.github.immortalmice.foodpower.customclass.tree.TreeSaplingBush;
-import com.github.immortalmice.foodpower.customclass.util.ReflectList;
-import com.github.immortalmice.foodpower.customclass.tree.TreeLeave;
+import com.github.immortalmice.foodpower.tree.FPTree;
+import com.github.immortalmice.foodpower.tree.TreeLeave;
+import com.github.immortalmice.foodpower.tree.TreeSaplingBush;
+import com.github.immortalmice.foodpower.util.ReflectList;
 
 public class Trees{
 	public static final ReflectList<FPTree, Trees> list = new ReflectList<FPTree, Trees>(FPTree.class, Trees.class);

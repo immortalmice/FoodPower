@@ -10,8 +10,8 @@ import net.minecraftforge.registries.DeferredRegister;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.TileEntityBase;
-import com.github.immortalmice.foodpower.customclass.tileentity.TileEntityPack;
-import com.github.immortalmice.foodpower.customclass.tileentity.classes.KitchenApplianceTileEntity;
+import com.github.immortalmice.foodpower.tileentity.KitchenApplianceTileEntity;
+import com.github.immortalmice.foodpower.tileentity.TileEntityPack;
 
 public class TileEntitys{
 	public static final DeferredRegister<TileEntityType<?>> REGISTER = new DeferredRegister<TileEntityType<?>>(ForgeRegistries.TILE_ENTITIES, FoodPower.MODID);
