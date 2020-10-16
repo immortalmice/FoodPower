@@ -9,7 +9,7 @@ import com.github.immortalmice.foodpower.customclass.capability.interfaces.IFPFl
 
 public class Capabilities{
 	@SuppressWarnings("rawtypes")
-	public static final ReflectList<Capability, Capabilities> list = new ReflectList<Capability, Capabilities>(Capability.class, Capabilities.class, null);
+	public static final ReflectList<Capability, Capabilities> list = new ReflectList<Capability, Capabilities>(Capability.class, Capabilities.class);
 
 	@CapabilityInject(IFPPatternExpCapability.class)
 	public static final Capability<IFPPatternExpCapability> PATTERN_EXP_CAPABILITY = null;

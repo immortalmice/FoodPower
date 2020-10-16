@@ -17,6 +17,14 @@ public class ReflectList<TYPE, TARGET> implements List<TYPE>{
 	private boolean fuzzyMode = false;
 	private boolean allFetched = false;
 	private List<TYPE> list = new ArrayList<TYPE>();
+	
+	public ReflectList(Class<TYPE> listTypeIn, Class<TARGET> targetClassIn){
+		this(listTypeIn, targetClassIn, null, false);
+	}
+	
+	public ReflectList(Class<TYPE> listTypeIn, Class<TARGET> targetClassIn, boolean fuzzyModeIn){
+		this(listTypeIn, targetClassIn, null, fuzzyModeIn);
+	}
 
 	public ReflectList(Class<TYPE> listTypeIn, Class<TARGET> targetClassIn, TARGET targetInstanceIn){
 		this(listTypeIn, targetClassIn, targetInstanceIn, false);

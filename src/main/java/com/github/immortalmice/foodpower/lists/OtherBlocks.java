@@ -18,7 +18,7 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 /* All the other blocks in mod need to be registed will list below */
 public class OtherBlocks{
-	public static final ReflectList<BlockBase, Blocks> list = new ReflectList<BlockBase, Blocks>(BlockBase.class, Blocks.class, null, true);
+	public static final ReflectList<BlockBase, Blocks> list = new ReflectList<BlockBase, Blocks>(BlockBase.class, Blocks.class, true);
 
 	@ObjectHolder(FoodPower.MODID)
 	public static class Blocks{

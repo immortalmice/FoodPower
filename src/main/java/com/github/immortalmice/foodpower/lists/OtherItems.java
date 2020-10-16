@@ -16,7 +16,7 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 /* All the other items in mod need to be registed will list below */
 public class OtherItems{
-	public static final ReflectList<ItemBase, Items> list = new ReflectList<ItemBase, Items>(ItemBase.class, Items.class, null, true);
+	public static final ReflectList<ItemBase, Items> list = new ReflectList<ItemBase, Items>(ItemBase.class, Items.class, true);
 
 	@ObjectHolder(FoodPower.MODID)
 	public static class Items{

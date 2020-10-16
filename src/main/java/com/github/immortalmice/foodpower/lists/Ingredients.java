@@ -18,7 +18,7 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 /* All the ingredient need to be registed will list below. */
 /* Do not use ingrediant directly to create ItemStack, use Ingredient#asItem */
 public class Ingredients{
-	public static final ReflectList<Ingredient, Items> list = new ReflectList<Ingredient, Items>(Ingredient.class, Items.class, null);
+	public static final ReflectList<Ingredient, Items> list = new ReflectList<Ingredient, Items>(Ingredient.class, Items.class);
 
 	public static class Items{
 		/* Mod Ingrediants */

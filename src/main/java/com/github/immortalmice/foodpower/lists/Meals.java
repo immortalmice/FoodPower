@@ -13,7 +13,7 @@ import com.github.immortalmice.foodpower.customclass.food.Meal;
 import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 public class Meals{
-	public static final ReflectList<Meal, Items> list = new ReflectList<Meal, Items>(Meal.class, Items.class, null);
+	public static final ReflectList<Meal, Items> list = new ReflectList<Meal, Items>(Meal.class, Items.class);
 
 	@ObjectHolder(FoodPower.MODID)
 	public static class Items{

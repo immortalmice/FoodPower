@@ -15,8 +15,8 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 import com.github.immortalmice.foodpower.customclass.crop.CropBlock;
 
 public class Crops{
-	public static final ReflectList<CropBlock, Blocks> blockList = new ReflectList<CropBlock, Blocks>(CropBlock.class, Blocks.class, null);
-	public static final ReflectList<CropSeed, Items> itemList = new ReflectList<CropSeed, Items>(CropSeed.class, Items.class, null);
+	public static final ReflectList<CropBlock, Blocks> blockList = new ReflectList<CropBlock, Blocks>(CropBlock.class, Blocks.class);
+	public static final ReflectList<CropSeed, Items> itemList = new ReflectList<CropSeed, Items>(CropSeed.class, Items.class);
 
 	@ObjectHolder(FoodPower.MODID)
 	public static class Blocks{

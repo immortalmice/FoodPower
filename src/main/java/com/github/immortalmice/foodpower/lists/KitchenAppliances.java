@@ -17,7 +17,7 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 
 /* All the KitchenAppliances need to be registed will list below. */
 public class KitchenAppliances{
-	public static final ReflectList<KitchenAppliance, Blocks> list = new ReflectList<KitchenAppliance, Blocks>(KitchenAppliance.class, Blocks.class, null);
+	public static final ReflectList<KitchenAppliance, Blocks> list = new ReflectList<KitchenAppliance, Blocks>(KitchenAppliance.class, Blocks.class);
 	
 	@ObjectHolder(FoodPower.MODID)
 	public static class Blocks{

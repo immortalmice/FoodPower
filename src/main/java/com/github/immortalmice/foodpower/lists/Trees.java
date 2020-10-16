@@ -17,9 +17,9 @@ import com.github.immortalmice.foodpower.customclass.util.ReflectList;
 import com.github.immortalmice.foodpower.customclass.tree.TreeLeave;
 
 public class Trees{
-	public static final ReflectList<FPTree, Trees> list = new ReflectList<FPTree, Trees>(FPTree.class, Trees.class, null);
-	public static final ReflectList<TreeLeave, Blocks> leaveList = new ReflectList<TreeLeave, Blocks>(TreeLeave.class, Blocks.class, null);
-	public static final ReflectList<TreeSaplingBush, Blocks> saplingBushList = new ReflectList<TreeSaplingBush, Blocks>(TreeSaplingBush.class, Blocks.class, null);
+	public static final ReflectList<FPTree, Trees> list = new ReflectList<FPTree, Trees>(FPTree.class, Trees.class);
+	public static final ReflectList<TreeLeave, Blocks> leaveList = new ReflectList<TreeLeave, Blocks>(TreeLeave.class, Blocks.class);
+	public static final ReflectList<TreeSaplingBush, Blocks> saplingBushList = new ReflectList<TreeSaplingBush, Blocks>(TreeSaplingBush.class, Blocks.class);
 
 	public static final FPTree ORANGE = new FPTree("orange");
 	public static final FPTree KIWI = new FPTree("kiwi");
