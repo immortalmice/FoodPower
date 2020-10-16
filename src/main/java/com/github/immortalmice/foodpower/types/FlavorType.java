@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
 
+// TODO Use enum
 public class FlavorType{
 	private String name;
 	private FlavorType oppositeFlavor;
