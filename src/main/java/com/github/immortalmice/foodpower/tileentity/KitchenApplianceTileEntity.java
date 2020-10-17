@@ -343,7 +343,9 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		    	ItemStack remain = stack.copy();
 		    	remain.setCount(stack.getCount() - acceptAmount);
 		    	if(!simulate){
-		    		this.ingredients.set(slot - 2, new ItemStack(request.getItem(), this.ingredients.get(slot - 2).getCount() + acceptAmount));
+		    		ItemStack insertStack = stack.copy();
+		    		insertStack.setCount(this.ingredients.get(slot - 2).getCount() + acceptAmount);
+		    		this.ingredients.set(slot - 2, insertStack);
 		    		this.isSatisfiedCacheModified = true;
 		    		KitchenApplianceTileEntity.this.markDirty();
 		    	}
@@ -358,15 +360,19 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	    	// Extract scroll when ingredient exist IS NOT ALLOWED
 	    	if(slot == 0
 	    		&& amount > 0
-	    		&& this.ingredients.stream().filter(stack -> !stack.isEmpty()).findFirst().isPresent()
+	    		&& !this.isIngredientsEmpty()
 	    	) return ItemStack.EMPTY;
 
 	    	if(slot <= 1 || slot > this.stacks.size() - 1) return super.extractItem(slot, amount, simulate);
 
 	    	ItemStack currentStack = this.getRealStack(slot);
-	    	ItemStack extractStack = new ItemStack(currentStack.getItem(), Math.min(currentStack.getCount(), amount));
+	    	ItemStack extractStack = currentStack.copy();
+	    	extractStack.setCount(Math.min(currentStack.getCount(), amount));
+	    	
 	    	if(!simulate){
-	    		this.ingredients.set(slot - 2, new ItemStack(currentStack.getItem(), currentStack.getCount() - extractStack.getCount()));
+	    		ItemStack remainStack = currentStack.copy();
+	    		remainStack.setCount(currentStack.getCount() - extractStack.getCount());
+	    		this.ingredients.set(slot - 2, remainStack);
 	    		this.isSatisfiedCacheModified = true;
 	    		KitchenApplianceTileEntity.this.markDirty();
 	    	}
