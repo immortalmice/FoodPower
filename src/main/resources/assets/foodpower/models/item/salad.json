@@ -26,7 +26,11 @@
 				"minecraft:beetroot": "foodpower:meals/salad/salad_beetroot",
 				"minecraft:carrot": "foodpower:meals/salad/salad_carrot",
 				"foodpower:spinach": "foodpower:meals/salad/salad_spinach",
-				"minecraft:kelp": "foodpower:meals/salad/salad_kelp"
+				"minecraft:kelp": "foodpower:meals/salad/salad_kelp",
+				"minecraft:brown_mushroom": "foodpower:meals/salad/salad_brown_mushroom",
+        		"minecraft:red_mushroom": "foodpower:meals/salad/salad_red_mushroom",
+        		"minecraft:nether_wart": "foodpower:meals/salad/salad_nether_wart",
+        		"foodpower:chili": "foodpower:meals/salad/salad_chili"
 			}
 		}, {
 			"type": "seasoning",
