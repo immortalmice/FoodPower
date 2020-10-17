@@ -13,10 +13,10 @@ public class Messages{
 	@SuppressWarnings("rawtypes")
 	public static ReflectList<MessageBase, Messages> list = new ReflectList<MessageBase, Messages>(MessageBase.class, Messages.class, true);
 
-	public static MarketMessage MARKET = new MarketMessage();
-	public static RecipeTableMessage RECIPE_TABLE = new RecipeTableMessage();
-	public static RecipeScrollMessage RECIPE_SCROLL = new RecipeScrollMessage();
-	public static ShootPapayaSeedMessage SHOOT_PAPAYA_SEED = new ShootPapayaSeedMessage();
+	public static final MarketMessage MARKET = new MarketMessage();
+	public static final RecipeTableMessage RECIPE_TABLE = new RecipeTableMessage();
+	public static final RecipeScrollMessage RECIPE_SCROLL = new RecipeScrollMessage();
+	public static final ShootPapayaSeedMessage SHOOT_PAPAYA_SEED = new ShootPapayaSeedMessage();
 
 	/* Regist all messages in list(s) and will call this method in CommonProxy */
 	public static void registAllMessage(){
