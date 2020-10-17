@@ -193,6 +193,10 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		private CookingRecipe getRecipe(){
 			return RecipeScroll.readCookingRecipe(this.getStackInSlot(0));
 		}
+		
+		public int getRequestIndex(){
+			return requestIndex;
+		}
 
 		public boolean isCurrentRequestSatisfied(){
 			if(!this.isSatisfiedCacheModified) return this.isSatisfiedCache;
