@@ -285,6 +285,19 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			}
 		}
 		
+		public boolean isIngredientsEmpty(){
+			return !this.ingredients.stream().filter(stack -> !stack.isEmpty()).findFirst().isPresent();
+		}
+		
+		public void rollRequestIndex(){
+			if(!this.requests.isEmpty()){
+				++ this.requestIndex;
+				this.requestIndex %= this.requests.size();
+				this.updateIngredientsSlots();
+				KitchenApplianceTileEntity.this.markDirty();
+			}
+		}
+
 		@Override
 		protected void onContentsChanged(int slot){
 			this.isSatisfiedCacheModified = true;
