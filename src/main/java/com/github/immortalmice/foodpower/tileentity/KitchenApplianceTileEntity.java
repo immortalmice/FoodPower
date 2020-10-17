@@ -328,7 +328,12 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			if(slot <= 1){
 				return this.getStackInSlot(slot);
 			}
-			return this.ingredients.get(slot - 2);
+			
+			try{
+				return this.ingredients.get(slot - 2);
+			}catch(IndexOutOfBoundsException e){
+				return ItemStack.EMPTY;
+			}
 		}
 
 		@Override
