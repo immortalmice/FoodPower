@@ -224,6 +224,13 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		}
 		
 		@Override
+	    public void setStackInSlot(int slot, @Nonnull ItemStack stack){
+			if(slot >= 0 && slot < this.stacks.size()){
+				super.setStackInSlot(slot, stack);
+			}
+		}
+		
+		@Override
 		public boolean isItemValid(int slot, ItemStack stack){
 			if(!stack.isEmpty()){
 				if(slot < 0 || slot > this.getSlots()-1){
