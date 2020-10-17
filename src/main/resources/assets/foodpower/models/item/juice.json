@@ -1,5 +1,10 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "juice"
+	"textures": {
+		"particle": "foodpower:meals/juice/juice_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/juice/juice_base"
+	}
 }
