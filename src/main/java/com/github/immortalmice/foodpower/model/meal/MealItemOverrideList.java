@@ -44,12 +44,12 @@ public class MealItemOverrideList extends ItemOverrideList{
 
 			if(nbt.contains("ingredients")){
 				List<TextureAtlasSprite> selectedSprites = new ArrayList<TextureAtlasSprite>();
+				List<TypedTextures> muttableTypedTextures = Lists.newArrayList(this.materials);
 				ListNBT list = (ListNBT) nbt.get("ingredients");
 				for(INBT ele : list){
 					CompoundNBT element = (CompoundNBT)ele;
 					String ingredientName = element.getString("name");
 					
-					List<TypedTextures> muttableTypedTextures = Lists.newArrayList(this.materials);
 					for(TypedTextures typedTextures : muttableTypedTextures){
 						TextureAtlasSprite sprite = typedTextures.getSprite(ingredientName, this.spriteGetter);
 						if(sprite != null){
