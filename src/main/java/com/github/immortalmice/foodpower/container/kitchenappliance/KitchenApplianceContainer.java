@@ -25,6 +25,7 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -51,6 +52,18 @@ public class KitchenApplianceContainer extends ContainerBase{
 				}
 			});
 			this.addSlot(new SlotItemHandler(this.itemHandler, 1, 175, 64));
+			
+			this.trackInt(new IntReferenceHolder() {
+				@Override
+				public void set(int p_221494_1_) {
+					KitchenApplianceContainer.this.updateSlot();
+				}
+				
+				@Override
+				public int get() {
+					return KitchenApplianceContainer.this.itemHandler.getRequestIndex();
+				}
+			});
 
 			this.updateSlot();
 		}
