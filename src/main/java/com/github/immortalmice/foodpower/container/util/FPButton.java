@@ -27,7 +27,9 @@ public class FPButton extends Button{
 		DIAMOND_UP (18, 10, 212, 0, 212, 12),
 		DIAMOND_DOWN (18, 10, 192, 0, 192, 12),
 		DIAMOND_RIGHT (10, 18, 232, 0, 244, 0),
-		DIAMOND_LEFT (10, 18, 232, 20, 244, 20);
+		DIAMOND_LEFT (10, 18, 232, 20, 244, 20),
+		
+		SWITCH(19, 18, 0, 32, 0, 32);
 
 		public final int width, height;
 		public final int textureOffsetX, textureOffsetY;
