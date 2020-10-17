@@ -65,8 +65,16 @@ public class CookedFood extends ItemFoodBase implements ICookingElement{
     }
 
 	public static boolean isMatchedWith(ItemStack provide, String id, int outputAmount){
-        // TODO
-		return true;
+		if(provide.hasTag()){
+			CompoundNBT nbt = provide.getTag();
+			if(nbt.contains("id") && nbt.contains("output_amount")
+				&& id.equals(nbt.getString("id"))
+				&& outputAmount == nbt.getInt("output_amount")){
+				
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static ItemStack create(StepRequest stepRequest){
