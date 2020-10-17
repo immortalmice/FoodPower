@@ -273,6 +273,18 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 			return list;
 		}
 
+		private void updateIngredientsSlots() {
+			StepRequest stepRequest = this.getCurrentStepRequest();
+			if(stepRequest != null){
+				List<ItemStackRequest> requests = stepRequest.getRequires();
+				this.setSize(requests.size() + 2);
+				this.ingredients = NonNullList.withSize(requests.size(), ItemStack.EMPTY);
+				for(int i = 2; i <= this.stacks.size() - 1; i ++){
+					this.stacks.set(i, new ItemStack(requests.get(i - 2).getItem()));
+				}
+			}
+		}
+		
 		@Override
 		protected void onContentsChanged(int slot){
 			this.isSatisfiedCacheModified = true;
@@ -282,17 +294,8 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
 					this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
 					this.requestIndex = 0;
-
-					StepRequest stepRequest = this.getCurrentStepRequest();
-					if(stepRequest != null){
-						List<ItemStackRequest> requests = stepRequest.getRequires();
-						this.setSize(requests.size() + 2);
-						this.ingredients = NonNullList.withSize(requests.size(), ItemStack.EMPTY);
-						for(int i = 2; i <= this.stacks.size() - 1; i ++){
-							this.stacks.set(i, new ItemStack(requests.get(i - 2).getItem()));
-						}
-						return;
-					}
+					this.updateIngredientsSlots();
+					return;
 				}
 				this.requests.clear();
 				this.requestIndex = 0;
