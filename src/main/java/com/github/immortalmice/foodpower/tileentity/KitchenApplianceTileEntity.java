@@ -270,6 +270,11 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 					list.add(stack);
 				}
 			}
+			this.ingredients.forEach((stack) -> {
+				if(!stack.isEmpty()){
+					list.add(stack);
+				}
+			});
 			return list;
 		}
 
