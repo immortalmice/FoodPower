@@ -5,6 +5,22 @@
 		"particle": "foodpower:meals/juice/juice_base"
 	},
 	"ingredients": {
-		"base": "foodpower:meals/juice/juice_base"
+		"base": "foodpower:meals/juice/juice_base",
+
+		"parts": [{
+			"type": "fruit",
+			"textures": {
+				"foodpower:kiwi": "foodpower:meals/juice/juice_kiwi_juice",
+				"foodpower:mango": "foodpower:meals/juice/juice_mango_juice",
+				"foodpower:papaya": "foodpower:meals/juice/juice_papaya_juice"
+			}
+		}, {
+			"type": "fruit",
+			"textures": {
+				"foodpower:kiwi": "foodpower:meals/juice/juice_kiwi_slice",
+				"foodpower:mango": "foodpower:meals/juice/juice_mango_slice",
+				"foodpower:papaya": "foodpower:meals/juice/juice_papaya_slice"
+			}
+		}]
 	}
 }
