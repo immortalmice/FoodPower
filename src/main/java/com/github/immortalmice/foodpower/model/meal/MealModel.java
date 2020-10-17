@@ -1,11 +1,15 @@
 package com.github.immortalmice.foodpower.model.meal;
 
-import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import com.github.immortalmice.foodpower.model.meal.MealModelLoader.TypedTextures;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.client.renderer.TransformationMatrix;
@@ -26,12 +30,12 @@ import net.minecraftforge.client.model.geometry.IModelGeometry;
 
 @SuppressWarnings("deprecation")
 public class MealModel implements IModelGeometry<MealModel>{
-	private Map<String, Material> materials = new HashMap<>();
+	private ResourceLocation baseMaterial;
+	private ImmutableList<TypedTextures> typedTexturesList;
 
-	public MealModel(Map<String, ResourceLocation> map){
-		for(Map.Entry<String, ResourceLocation> entry : map.entrySet()){
-			materials.put(entry.getKey(), new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, entry.getValue()));
-		}
+	public MealModel(ResourceLocation baseMaterialIn, ImmutableList<TypedTextures> typedTexturesListIn){
+		this.typedTexturesList = typedTexturesListIn;
+		this.baseMaterial = baseMaterialIn;
 	}
 
 	@Override
@@ -51,7 +55,7 @@ public class MealModel implements IModelGeometry<MealModel>{
 		TransformationMatrix transform = modelTransform.getRotation();
 
         /* Vanillad BakedItemModel but with custom MealItemOverrideList, used in store data, it'll display nothing */
-		return new MealBakedModel(this.materials, spriteGetter, particle, transformMap, transform, owner.isSideLit());
+		return new MealBakedModel(this.baseMaterial, this.typedTexturesList, spriteGetter, particle, transformMap, transform, owner.isSideLit());
 	}
 
 	@Override
@@ -59,6 +63,11 @@ public class MealModel implements IModelGeometry<MealModel>{
 		, Function<ResourceLocation, IUnbakedModel> modelGetter
 		, Set<Pair<String, String>> missingTextureErrors){
 
-		return this.materials.values();
+//		return this.typedTexturesList.stream().map(
+//				typedTexture -> typedTexture.getTextures()
+//			).flatMap(
+//				textures -> textures.values().map(location -> new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, location)).stream()
+//			).collect(Collectors.toList());
+		return new ArrayList<>();
 	}
 }

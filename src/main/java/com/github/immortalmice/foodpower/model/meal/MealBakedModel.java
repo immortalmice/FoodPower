@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import javax.annotation.Nullable;
+
+import com.github.immortalmice.foodpower.model.meal.MealModelLoader.TypedTextures;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -17,10 +19,12 @@ import net.minecraft.client.renderer.TransformationMatrix;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.model.Material;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.MissingTextureSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 
 /* Do not use this baked model directly, it'll display nothing, use MealBakedModel#getNewBakedItemModel */
@@ -39,7 +43,9 @@ public class MealBakedModel extends BakedItemModel{
 	private static float COLOR_G = 1.0f;
 	private static float COLOR_B = 1.0f;
 
-	public MealBakedModel(Map<String, Material> materials
+	public MealBakedModel(
+		ResourceLocation baseMateriallocaiton
+		, ImmutableList<TypedTextures> materials
 		, Function<Material, TextureAtlasSprite> spriteGetter, TextureAtlasSprite particle
 		, ImmutableMap<TransformType, TransformationMatrix> transformMap
 		, TransformationMatrix transformIn, boolean isSideLit){
@@ -47,11 +53,9 @@ public class MealBakedModel extends BakedItemModel{
 
 		this.transform = transformIn;
 
-		if(materials.containsKey("base")){
-			TextureAtlasSprite sprite = spriteGetter.apply(materials.get("base"));
-			if(!sprite.getName().equals(MissingTextureSprite.getLocation())){
-				this.baseSprite = sprite;
-			}
+		TextureAtlasSprite sprite = spriteGetter.apply(new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, baseMateriallocaiton));
+		if(!sprite.getName().equals(MissingTextureSprite.getLocation())){
+			this.baseSprite = sprite;
 		}
 	}
 
