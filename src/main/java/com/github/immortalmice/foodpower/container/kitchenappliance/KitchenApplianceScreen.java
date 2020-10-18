@@ -57,6 +57,9 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 				, 18, 18
 			);
 		}
+		
+		int arrowWidth = this.container.getTileEntity().getProgressInPercentage() * 28 / 100;
+		this.blit(offsetX + 138, offsetY + 62, 48, 0, arrowWidth, 20);
 	}
 
 	@Override
