@@ -117,7 +117,7 @@ public class IngredientHandler{
 			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.FERMENTED_ENDEREYE_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.DOUGH.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(Effects.RESISTANCE, (level - 1) * 1500 + 600, (int)Math.floor(Math.pow(2.0d, (double) level - 1)) - 1));
 		});
 		Ingredients.Items.TOMATO.setMealEffectBiConsumer((effectContainer, level) -> {
 
