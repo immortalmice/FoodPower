@@ -50,11 +50,11 @@ public class ForgeEventHandlers{
 	public static void onLootLoad(LootTableLoadEvent event){
 		/* Add crop seeds into vanilla grass drop */
 		ResourceLocation eventResourceLocation = event.getName();
-		if(eventResourceLocation.equals(new ResourceLocation("minecraft", "grass"))) {
+		if(eventResourceLocation.equals(new ResourceLocation("minecraft", "blocks/grass"))) {
 			event.getTable().addPool(
 				LootPool.builder().addEntry(
 					TableLootEntry.builder(
-						new ResourceLocation(FoodPower.MODID, "grass")))
+						new ResourceLocation(FoodPower.MODID, "inject/grass")))
 				.build());
 		}
 	}
