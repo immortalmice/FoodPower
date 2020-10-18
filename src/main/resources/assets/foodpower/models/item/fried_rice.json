@@ -1,5 +1,12 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "fried_rice"
+	"textures": {
+		"particle": "foodpower:meals/fried_rice/fried_rice_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/fried_rice/fried_rice_base",
+
+		"parts": []
+	}
 }

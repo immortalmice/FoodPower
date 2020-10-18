@@ -1,5 +1,12 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "honey_toast"
+	"textures": {
+		"particle": "foodpower:meals/honey_toast/honey_toast_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/honey_toast/honey_toast_base",
+
+		"parts": []
+	}
 }

@@ -1,5 +1,12 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "noodle_soup"
+	"textures": {
+		"particle": "foodpower:meals/noodle_soup/noodle_soup_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/noodle_soup/noodle_soup_base",
+
+		"parts": []
+	}
 }
