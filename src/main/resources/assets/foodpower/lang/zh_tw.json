@@ -239,6 +239,6 @@
 
     "recipe_scroll.foodpower.juice.step0": "1. 首先，將§c§l%d顆的%s§r放到§1果汁機§r裡面，開始讓果汁機用力的打碎它，大約五十秒後，一份原汁就完成了。",
     "recipe_scroll.foodpower.juice.step1": "2. 找出你的§c§l%d桶的%s§r，放進§1冰箱§r裡冰它個透心涼，恭喜你得到了一份冰冰涼的冰塊。",
-    "recipe_scroll.foodpower.juice.step2": "3. 再來，拿出剛才做好的§c§l%d份的%s§r和§c§l%d份的%s§r放入§1雪客機§r，再加入§c§l%d份的%s§r，經過一震噪音後你就會獲得一份混和果汁。",
+    "recipe_scroll.foodpower.juice.step2": "3. 再來，拿出剛才做好的§c§l%d份的%s§r和§c§l%d份的%s§r放入§1雪客機§r，再加入§c§l%d份的%s§r，經過一陣噪音後你就會獲得一份混和果汁。",
     "recipe_scroll.foodpower.juice.step3": "4. 拿出玻璃杯，將§c§l%d份的%s§r和切片過後的§c§l%d份%s§r在§1萬用台§r上組合，順口又不油膩的§2§l%d份果汁§r就做好了。"
 }
