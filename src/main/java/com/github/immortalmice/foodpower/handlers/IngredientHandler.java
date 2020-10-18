@@ -9,6 +9,7 @@ import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.CowEntity;
@@ -120,7 +121,13 @@ public class IngredientHandler{
 			effectContainer.addEffectInstance(new EffectInstance(Effects.RESISTANCE, (level - 1) * 1500 + 600, (int)Math.floor(Math.pow(2.0d, (double) level - 1)) - 1));
 		});
 		Ingredients.Items.TOMATO.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addExtraBehavior(() ->{
+				LivingEntity living = effectContainer.getEntityLiving();
+				if(!living.world.isRemote){
+					double heal = Math.floor(Math.pow(2.0d, (double) level));
+					living.heal((float) heal);
+				}
+			});
 		});
 		Ingredients.Items.KETCHUP.setMealEffectBiConsumer((effectContainer, level) -> {
 
