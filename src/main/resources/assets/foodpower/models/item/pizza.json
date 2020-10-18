@@ -1,5 +1,12 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "pizza"
+	"textures": {
+		"particle": "foodpower:meals/pizza/pizza_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/pizza/pizza_base",
+
+		"parts": []
+	}
 }

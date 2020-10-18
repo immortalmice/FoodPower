@@ -1,5 +1,12 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "cake"
+	"textures": {
+		"particle": "foodpower:meals/cake/cake_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/cake/cake_base",
+
+		"parts": []
+	}
 }

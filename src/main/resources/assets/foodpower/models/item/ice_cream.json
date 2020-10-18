@@ -1,5 +1,12 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "ice_cream"
+	"textures": {
+		"particle": "foodpower:meals/ice_cream/ice_cream_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/ice_cream/ice_cream_base",
+
+		"parts": []
+	}
 }

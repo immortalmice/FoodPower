@@ -1,5 +1,12 @@
 {
 	"parent": "item/generated",
 	"loader": "foodpower:meal",
-	"name": "sandwich"
+	"textures": {
+		"particle": "foodpower:meals/sandwich/sandwich_base"
+	},
+	"ingredients": {
+		"base": "foodpower:meals/sandwich/sandwich_base",
+
+		"parts": []
+	}
 }
