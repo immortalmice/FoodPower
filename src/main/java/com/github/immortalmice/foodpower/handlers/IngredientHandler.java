@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.handlers;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.food.Meal;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
+import com.github.immortalmice.foodpower.message.ShootEnderPearlMessage;
 import com.github.immortalmice.foodpower.message.ShootPapayaSeedMessage;
 import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.lists.Ingredients;
@@ -108,11 +109,15 @@ public class IngredientHandler{
 		Ingredients.Items.MINT.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.MINT_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
-		Ingredients.Items.FERMENTED_ENDEREYE.setMealEffectBiConsumer((effectContainer, level) -> {
-
+		Ingredients.Items.FERMENTED_ENDEREYE.setInteractEffectBiConsumer((rawEvent, level) -> {
+			if(level >= 2 && rawEvent instanceof PlayerInteractEvent.LeftClickEmpty){
+				FoodPower.NETWORK.sendToServer(new ShootEnderPearlMessage());
+			}
+		}).setMealEffectBiConsumer((effectContainer, level) -> {
+			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.FERMENTED_ENDEREYE_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.DOUGH.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(Effects.RESISTANCE, (level - 1) * 1500 + 600, (int)Math.floor(Math.pow(2.0d, (double) level - 1)) - 1));
 		});
 		Ingredients.Items.TOMATO.setMealEffectBiConsumer((effectContainer, level) -> {
 

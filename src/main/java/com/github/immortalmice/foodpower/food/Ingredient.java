@@ -77,10 +77,10 @@ public class Ingredient extends ItemFoodBase implements ICookingElement{
 		return;
 	}
 
-	public void setMealEffectBiConsumer(BiConsumer<MealEffectContainer, Integer> consumerIn){
+	public Ingredient setMealEffectBiConsumer(BiConsumer<MealEffectContainer, Integer> consumerIn){
 		if(this.mealEffectBiConsumer == null)
 			this.mealEffectBiConsumer = consumerIn;
-		return;
+		return this;
 	}
 
 	public void applyInteractEffect(PlayerInteractEvent event, int level){
@@ -89,10 +89,10 @@ public class Ingredient extends ItemFoodBase implements ICookingElement{
 		return;
 	}
 
-	public void setInteractEffectBiConsumer(BiConsumer<PlayerInteractEvent, Integer> consumerIn){
+	public Ingredient setInteractEffectBiConsumer(BiConsumer<PlayerInteractEvent, Integer> consumerIn){
 		if(this.interactEffectBiConsumer == null)
 			this.interactEffectBiConsumer = consumerIn;
-		return;
+		return this;
 	}
 
 	public Item asItem(){

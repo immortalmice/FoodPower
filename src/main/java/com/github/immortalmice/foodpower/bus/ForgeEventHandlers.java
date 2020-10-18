@@ -2,6 +2,7 @@ package com.github.immortalmice.foodpower.bus;
 
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -112,6 +114,19 @@ public class ForgeEventHandlers{
 		if(!player.world.isRemote && player.isPotionActive(FoodEffects.MINT_POWER)){
 			int level = player.getActivePotionEffect(FoodEffects.MINT_POWER).getAmplifier();
 			FrostWalkerEnchantment.freezeNearby(player, player.world, player.getPosition(), level);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onEnderTeleport(EnderTeleportEvent event){
+		LivingEntity living = event.getEntityLiving();
+		if(!living.world.isRemote && living instanceof PlayerEntity && living.isPotionActive(FoodEffects.FERMENTED_ENDEREYE_POWER)){
+			int level = living.getActivePotionEffect(FoodEffects.FERMENTED_ENDEREYE_POWER).getAmplifier();
+			
+			float damage = event.getAttackDamage() / 2;
+			if(level >= 2) damage = 0;
+			
+			event.setAttackDamage(damage);
 		}
 	}
 }
