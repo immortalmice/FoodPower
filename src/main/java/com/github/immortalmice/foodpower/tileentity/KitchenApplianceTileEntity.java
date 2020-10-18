@@ -85,6 +85,14 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 	public int getProgress(){
 		return this.progress;
 	}
+	
+	public int getProgressInPercentage(){
+		StepRequest stepRequest = this.itemHandler.getCurrentStepRequest();
+		if(stepRequest != null){
+			return this.progress * 100 / KitchenApplianceTileEntity.requiredTicksFun.apply(stepRequest.getOutputAmount());
+		}
+		return 0;
+	}
 
 	public KitchenApplanceItemHandler getItemHandler(){
 		return this.itemHandler;
