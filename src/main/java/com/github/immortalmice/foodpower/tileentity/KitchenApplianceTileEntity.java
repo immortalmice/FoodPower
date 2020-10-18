@@ -299,6 +299,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				++ this.requestIndex;
 				this.requestIndex %= this.requests.size();
 				this.updateIngredientsSlots();
+				this.isSatisfiedCacheModified = true;
 				KitchenApplianceTileEntity.this.markDirty();
 			}
 		}
@@ -434,6 +435,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
     		if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
     			this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
     		}
+			this.isSatisfiedCacheModified = true;
     	}
 	}
 }

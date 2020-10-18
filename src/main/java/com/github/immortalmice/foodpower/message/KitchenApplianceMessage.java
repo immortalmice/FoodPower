@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.message;
 import java.util.function.Supplier;
 
 import com.github.immortalmice.foodpower.baseclass.MessageBase;
+import com.github.immortalmice.foodpower.container.kitchenappliance.KitchenApplianceContainer;
 import com.github.immortalmice.foodpower.tileentity.KitchenApplianceTileEntity;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -43,6 +44,9 @@ public class KitchenApplianceMessage extends MessageBase<KitchenApplianceMessage
 			if(t instanceof KitchenApplianceTileEntity){
 				KitchenApplianceTileEntity tileEntity = (KitchenApplianceTileEntity) t;
 				tileEntity.getItemHandler().rollRequestIndex();
+				if(player.openContainer instanceof KitchenApplianceContainer){
+					((KitchenApplianceContainer) player.openContainer).updateSlot();
+				}
 			}
 		}
 		ctx.get().setPacketHandled(true);
