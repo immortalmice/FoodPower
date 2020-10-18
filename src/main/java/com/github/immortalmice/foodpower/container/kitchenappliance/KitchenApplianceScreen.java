@@ -47,7 +47,7 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 		List<Position2D> slotPos = KitchenApplianceSlotPos.provide(slots.size()).stream().map((pos) -> pos.translate(-1)).collect(Collectors.toList());
 		
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		this.minecraft.getTextureManager().bindTexture(ScreenBase.SLOT_TEXTURE);
+		this.minecraft.getTextureManager().bindTexture(ScreenBase.UI_KIT_TEXTURE);
 
 		for(int i = 0; i <= slots.size()-1; i ++){
 			Position2D slotTexturePos = slots.get(i).isSatisfied() ? new Position2D(0, 0) : new Position2D(20, 0);

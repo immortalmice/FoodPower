@@ -44,7 +44,7 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 
 		/* Make A Slot Circle With N Slots */
 		List<Position2D> slotPos = RecipeTableSlotPos.provide(currentElements.size()).stream().map((pos) -> pos.translate(-1)).collect(Collectors.toList());	
-		this.minecraft.getTextureManager().bindTexture(ScreenBase.SLOT_TEXTURE);
+		this.minecraft.getTextureManager().bindTexture(ScreenBase.UI_KIT_TEXTURE);
 
 		for(int i = 0; i <= currentElements.size()-1; i ++){
 			ICookingElement element = currentElements.get(i); 

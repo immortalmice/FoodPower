@@ -10,7 +10,7 @@ import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 public class ScreenBase<T extends ContainerBase> extends ContainerScreen<T>{
-	public static final ResourceLocation SLOT_TEXTURE = new ResourceLocation(FoodPower.MODID + ":textures/gui/container/ingredient_block.png");
+	public static final ResourceLocation UI_KIT_TEXTURE = new ResourceLocation(FoodPower.MODID + ":textures/gui/container/ui_kits.png");
 
 	protected String textureFileName = "default";
 
