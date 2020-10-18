@@ -5,6 +5,7 @@ import com.github.immortalmice.foodpower.message.KitchenApplianceMessage;
 import com.github.immortalmice.foodpower.message.MarketMessage;
 import com.github.immortalmice.foodpower.message.RecipeScrollMessage;
 import com.github.immortalmice.foodpower.message.RecipeTableMessage;
+import com.github.immortalmice.foodpower.message.ShootEnderPearlMessage;
 import com.github.immortalmice.foodpower.message.ShootPapayaSeedMessage;
 import com.github.immortalmice.foodpower.util.ReflectList;
 
@@ -19,6 +20,7 @@ public class Messages{
 	public static final RecipeScrollMessage RECIPE_SCROLL = new RecipeScrollMessage();
 	public static final ShootPapayaSeedMessage SHOOT_PAPAYA_SEED = new ShootPapayaSeedMessage();
 	public static final KitchenApplianceMessage KITCHEN_APPLIANCE = new KitchenApplianceMessage();
+	public static final ShootEnderPearlMessage SHOOT_ENDER_PEARL = new ShootEnderPearlMessage();
 
 	/* Regist all messages in list(s) and will call this method in CommonProxy */
 	public static void registAllMessage(){
