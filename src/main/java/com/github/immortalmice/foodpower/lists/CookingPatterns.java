@@ -104,13 +104,16 @@ public class CookingPatterns{
 	
 	public static CookingPattern JUICE = new CookingPattern("juice", Meals.Items.JUICE, new CookingStep[]{
 		new CookingStep(Blocks.JUICER, CookedFoods.Items.RAW_JUICE, new ICookingElement[]{
-			FoodTypes.FRUIT, FoodTypes.FRUIT
+			FoodTypes.FRUIT
 		}),
 		new CookingStep(Blocks.REFRIGERATOR, CookedFoods.Items.ICE, new ICookingElement[]{
 			Ingredients.Items.WATER_BUCKET
 		}),
-		new CookingStep(Blocks.SHAKER, Meals.Items.JUICE, new ICookingElement[]{
+		new CookingStep(Blocks.SHAKER, CookedFoods.Items.MIXED_JUICE, new ICookingElement[]{
 			CookedFoods.Items.RAW_JUICE, CookedFoods.Items.ICE, Ingredients.Items.SUGAR
+		}),
+		new CookingStep(Blocks.UNIVERSAL_STATION, Meals.Items.JUICE, new ICookingElement[]{
+			CookedFoods.Items.MIXED_JUICE, FoodTypes.FRUIT
 		})
 	});
 

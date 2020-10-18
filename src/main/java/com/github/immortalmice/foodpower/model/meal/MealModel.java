@@ -1,7 +1,6 @@
 package com.github.immortalmice.foodpower.model.meal;
 
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -9,7 +8,6 @@ import java.util.stream.Collectors;
 import com.github.immortalmice.foodpower.model.meal.MealModelLoader.TypedTextures;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.client.renderer.TransformationMatrix;
@@ -63,11 +61,12 @@ public class MealModel implements IModelGeometry<MealModel>{
 		, Function<ResourceLocation, IUnbakedModel> modelGetter
 		, Set<Pair<String, String>> missingTextureErrors){
 
-//		return this.typedTexturesList.stream().map(
-//				typedTexture -> typedTexture.getTextures()
-//			).flatMap(
-//				textures -> textures.values().map(location -> new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, location)).stream()
-//			).collect(Collectors.toList());
-		return new ArrayList<>();
+		return this.typedTexturesList.stream().map(
+				typedTexture -> typedTexture.getTextures()
+			).flatMap(
+				textures -> textures.values().stream().map(
+						location -> new Material(AtlasTexture.LOCATION_BLOCKS_TEXTURE, location)
+				)
+			).collect(Collectors.toList());
 	}
 }

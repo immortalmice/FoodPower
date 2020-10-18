@@ -163,6 +163,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		StepRequest stepRequest = this.itemHandler.getCurrentStepRequest();
 		if(stepRequest != null && this.progress >= KitchenApplianceTileEntity.requiredTicksFun.apply(stepRequest.getOutputAmount())){
 			this.progress = 0;
+			// TODO extract bucket
 			this.itemHandler.ingredients = NonNullList.withSize(stepRequest.getRequires().size(), ItemStack.EMPTY);
 			ItemStack result = stepRequest.getResult() instanceof Meal ? Meal.create(this.itemHandler.cacheScroll) : CookedFood.create(stepRequest);
 			this.itemHandler.setStackInSlot(1, result);
@@ -299,6 +300,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 				++ this.requestIndex;
 				this.requestIndex %= this.requests.size();
 				this.updateIngredientsSlots();
+				this.isSatisfiedCacheModified = true;
 				KitchenApplianceTileEntity.this.markDirty();
 			}
 		}
@@ -434,6 +436,7 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
     		if(recipe != null && KitchenApplianceTileEntity.this.getBlock() != null){
     			this.requests = recipe.getStepReqests(KitchenApplianceTileEntity.this.getBlock());
     		}
+			this.isSatisfiedCacheModified = true;
     	}
 	}
 }

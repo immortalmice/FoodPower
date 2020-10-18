@@ -1,5 +1,6 @@
 package com.github.immortalmice.foodpower.bus;
 
+import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -14,6 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -31,6 +33,7 @@ import com.github.immortalmice.foodpower.food.Meal;
 import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
+import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
 public class ForgeEventHandlers{
@@ -48,14 +51,19 @@ public class ForgeEventHandlers{
 
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event){
-		/* Add crop seeds into vanilla grass drop */
-		ResourceLocation eventResourceLocation = event.getName();
-		if(eventResourceLocation.equals(new ResourceLocation("minecraft", "grass"))) {
-			event.getTable().addPool(
-				LootPool.builder().addEntry(
-					TableLootEntry.builder(
-						new ResourceLocation(FoodPower.MODID, "grass")))
-				.build());
+		final String[] modifyLootTables = new String[]{
+			"grass", "ice", "packed_ice", "blue_ice"
+		};
+		
+		for(String name : modifyLootTables){
+			ResourceLocation eventResourceLocation = event.getName();
+			if(eventResourceLocation.equals(new ResourceLocation("minecraft", "blocks/" + name))) {
+				event.getTable().addPool(
+					LootPool.builder().addEntry(
+						TableLootEntry.builder(
+							new ResourceLocation(FoodPower.MODID, "inject/" + name)))
+					.build());
+			}
 		}
 	}
 
@@ -95,6 +103,15 @@ public class ForgeEventHandlers{
 		/* Copy capability data to new player */
 		for(Capability<?> cap : Capabilities.list){
 			CapabilityHandler.copyCapabilityData(event.getOriginal(), event.getPlayer(), cap);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerTick(PlayerTickEvent event){
+		PlayerEntity player = event.player;
+		if(!player.world.isRemote && player.isPotionActive(FoodEffects.MINT_POWER)){
+			int level = player.getActivePotionEffect(FoodEffects.MINT_POWER).getAmplifier();
+			FrostWalkerEnchantment.freezeNearby(player, player.world, player.getPosition(), level);
 		}
 	}
 }

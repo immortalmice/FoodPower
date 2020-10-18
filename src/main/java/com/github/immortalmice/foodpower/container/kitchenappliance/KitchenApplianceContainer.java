@@ -70,7 +70,7 @@ public class KitchenApplianceContainer extends ContainerBase{
 	}
 
 	/* Dynamic ingredient slots */
-	private void updateSlot(){
+	public void updateSlot(){
 		while(this.inventorySlots.size() > 38){
 			this.inventorySlots.remove(38);
 		}
