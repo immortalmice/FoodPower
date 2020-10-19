@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.bus;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,6 +19,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -127,6 +129,21 @@ public class ForgeEventHandlers{
 			if(level >= 2) damage = 0;
 			
 			event.setAttackDamage(damage);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onAttackEntity(AttackEntityEvent event){
+		PlayerEntity player = event.getPlayer();
+		if(!player.world.isRemote && player.isPotionActive(FoodEffects.KETCHUP_POWER) && event.getTarget() instanceof MobEntity){
+			int level = player.getActivePotionEffect(FoodEffects.KETCHUP_POWER).getAmplifier();
+			MobEntity entity = (MobEntity) event.getTarget();
+			float probability = player.world.rand.nextFloat();
+			if((level == 0 && probability <= 0.2)
+				|| (level == 1 && probability <= 0.5)
+				|| (level >= 2)){
+				entity.setAttackTarget(null);
+			}
 		}
 	}
 }
