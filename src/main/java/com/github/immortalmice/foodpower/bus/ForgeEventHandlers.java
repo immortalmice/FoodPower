@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,6 +23,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -170,6 +172,48 @@ public class ForgeEventHandlers{
 						break;
 					}
 				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onLivingAttack(LivingAttackEvent event){
+		Entity sourceEntity = event.getSource().getTrueSource();
+		LivingEntity target = event.getEntityLiving();
+		if(target instanceof PlayerEntity
+			&& sourceEntity instanceof LivingEntity
+			&& !target.world.isRemote
+			&& ((PlayerEntity) target).isPotionActive(FoodEffects.RICE_POWER)){
+			
+			LivingEntity source = (LivingEntity) sourceEntity;
+			int level = ((PlayerEntity) target).getActivePotionEffect(FoodEffects.RICE_POWER).getAmplifier();
+			ItemStack selectedArmor = ItemStack.EMPTY;
+			int damage = 0;
+			float probability = 0;
+			switch(level){
+				case 2:
+					if(source.hasItemInSlot(EquipmentSlotType.CHEST)){
+						selectedArmor = source.getItemStackFromSlot(EquipmentSlotType.CHEST);
+					}else if(source.hasItemInSlot(EquipmentSlotType.HEAD)){
+						selectedArmor = source.getItemStackFromSlot(EquipmentSlotType.HEAD);
+					}
+					damage = 80;
+					probability = 0.6f;
+				case 1:
+					if(source.hasItemInSlot(EquipmentSlotType.LEGS) && selectedArmor.isEmpty()){
+						selectedArmor = source.getItemStackFromSlot(EquipmentSlotType.LEGS);
+					}
+					damage = damage != 0 ? damage : 40;
+					probability = probability != 0 ? probability : 0.4f;
+				case 0:
+					if(source.hasItemInSlot(EquipmentSlotType.FEET) && selectedArmor.isEmpty()){
+						selectedArmor = source.getItemStackFromSlot(EquipmentSlotType.FEET);
+					}
+					damage = damage != 0 ? damage :  20;
+					probability = probability != 0 ? probability : 0.2f;
+			}
+			if(!selectedArmor.isEmpty() && source.world.rand.nextFloat() <= probability){
+				selectedArmor.damageItem(damage, (LivingEntity) source, entity -> {});
 			}
 		}
 	}

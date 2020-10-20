@@ -142,7 +142,7 @@ public class IngredientHandler{
 
 		});
 		Ingredients.Items.RICE.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.RICE_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.CHEESE.setMealEffectBiConsumer((effectContainer, level) -> {
 
