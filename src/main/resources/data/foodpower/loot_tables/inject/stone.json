@@ -1,0 +1,69 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [{
+				"conditions": [{
+						"condition": "entity_properties",
+						"entity": "this",
+						"predicate": {
+							"effects": {
+								"foodpower:salt_power": {
+									"amplifier": 0
+								}
+							}
+						}
+					}, {
+						"condition": "random_chance",
+						"chance": 0.01
+				}],
+				"type": "item",
+				"name": "foodpower:salt",
+				"weight": 1,
+				"quality": 1.0
+			}, {
+				"conditions": [{
+						"condition": "entity_properties",
+						"entity": "this",
+						"predicate": {
+							"effects": {
+								"foodpower:salt_power": {
+									"amplifier": 1
+								}
+							}
+						}
+					}, {
+						"condition": "random_chance",
+						"chance": 0.03
+				}],
+				"type": "item",
+				"name": "foodpower:salt",
+				"weight": 1,
+				"quality": 1.0
+			}, {
+				"conditions": [{
+						"condition": "entity_properties",
+						"entity": "this",
+						"predicate": {
+							"effects": {
+								"foodpower:salt_power": {
+									"amplifier": 2
+								}
+							}
+						}
+					}, {
+						"condition": "random_chance",
+						"chance": 0.05
+				}],
+				"type": "item",
+				"name": "foodpower:salt",
+				"weight": 1,
+				"quality": 1.0,
+				"functions": [{
+					"function": "set_count",
+					"count": 2
+				}]
+			}]
+		}
+	]
+}

@@ -60,7 +60,7 @@ public class ForgeEventHandlers{
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event){
 		final String[] modifyLootTables = new String[]{
-			"grass", "ice", "packed_ice", "blue_ice"
+			"grass", "ice", "packed_ice", "blue_ice", "stone"
 		};
 		
 		for(String name : modifyLootTables){
