@@ -5,12 +5,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,6 +26,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -143,6 +147,29 @@ public class ForgeEventHandlers{
 				|| (level == 1 && probability <= 0.5)
 				|| (level >= 2)){
 				entity.setAttackTarget(null);
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onItemCrafted(ItemCraftedEvent event){
+		PlayerEntity player = event.getPlayer();
+		if(!player.world.isRemote && player.isPotionActive(FoodEffects.SAUCE_POWER)){
+			int level = player.getActivePotionEffect(FoodEffects.SAUCE_POWER).getAmplifier();
+			float probability = player.world.rand.nextFloat();
+			IInventory inventory = event.getInventory();
+			for(int i = 0; i <= inventory.getSizeInventory()-1; i ++){
+				ItemStack stack = inventory.getStackInSlot(i);
+				if(stack.getItem() == Items.BROWN_DYE){
+					if((level == 0 && probability <= 0.1)
+						|| (level == 1 && probability <= 0.3)
+						|| (level >= 2 && probability <= 0.6)){
+
+						player.inventory.placeItemBackInInventory(player.world, new ItemStack(Items.BROWN_DYE));
+						player.openContainer.detectAndSendChanges();
+						break;
+					}
+				}
 			}
 		}
 	}

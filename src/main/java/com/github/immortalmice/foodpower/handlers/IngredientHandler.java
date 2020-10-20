@@ -133,7 +133,7 @@ public class IngredientHandler{
 			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.KETCHUP_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.SAUCE.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.SAUCE_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.SALT.setMealEffectBiConsumer((effectContainer, level) -> {
 
