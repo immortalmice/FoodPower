@@ -188,32 +188,37 @@ public class ForgeEventHandlers{
 			LivingEntity source = (LivingEntity) sourceEntity;
 			int level = ((PlayerEntity) target).getActivePotionEffect(FoodEffects.RICE_POWER).getAmplifier();
 			ItemStack selectedArmor = ItemStack.EMPTY;
+			EquipmentSlotType selectedType = null;
 			int damage = 0;
 			float probability = 0;
 			switch(level){
 				case 2:
 					if(source.hasItemInSlot(EquipmentSlotType.CHEST)){
-						selectedArmor = source.getItemStackFromSlot(EquipmentSlotType.CHEST);
+						selectedType = EquipmentSlotType.CHEST;
 					}else if(source.hasItemInSlot(EquipmentSlotType.HEAD)){
-						selectedArmor = source.getItemStackFromSlot(EquipmentSlotType.HEAD);
+						selectedType = EquipmentSlotType.HEAD;
 					}
 					damage = 80;
-					probability = 0.6f;
+					probability = 1f;
 				case 1:
 					if(source.hasItemInSlot(EquipmentSlotType.LEGS) && selectedArmor.isEmpty()){
-						selectedArmor = source.getItemStackFromSlot(EquipmentSlotType.LEGS);
+						selectedType = EquipmentSlotType.LEGS;
 					}
 					damage = damage != 0 ? damage : 40;
-					probability = probability != 0 ? probability : 0.4f;
+					probability = probability != 0 ? probability : 1f;
 				case 0:
 					if(source.hasItemInSlot(EquipmentSlotType.FEET) && selectedArmor.isEmpty()){
-						selectedArmor = source.getItemStackFromSlot(EquipmentSlotType.FEET);
+						selectedType = EquipmentSlotType.FEET;
 					}
 					damage = damage != 0 ? damage :  20;
-					probability = probability != 0 ? probability : 0.2f;
+					probability = probability != 0 ? probability : 1f;
 			}
+			selectedArmor = selectedType == null ? selectedArmor : source.getItemStackFromSlot(selectedType);
+			final EquipmentSlotType type = selectedType;
 			if(!selectedArmor.isEmpty() && source.world.rand.nextFloat() <= probability){
-				selectedArmor.damageItem(damage, (LivingEntity) source, entity -> {});
+				selectedArmor.damageItem(damage, (LivingEntity) source, entity -> {
+					entity.sendBreakAnimation(type);;
+				});
 			}
 		}
 	}
