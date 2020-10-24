@@ -13,6 +13,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import com.github.immortalmice.foodpower.crop.CropBlock;
 import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.lists.KitchenAppliances;
+import com.github.immortalmice.foodpower.lists.OtherBlocks;
 import com.github.immortalmice.foodpower.lists.OtherEntitys;
 import com.github.immortalmice.foodpower.lists.Trees;
 import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
@@ -34,6 +35,7 @@ public class RenderHandler{
 		for(TreeSaplingBush block : Trees.saplingBushList){
 			RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
 		}
+		RenderTypeLookup.setRenderLayer(OtherBlocks.Blocks.CHEESE_COBWEB, RenderType.getCutoutMipped());
 	}
 
 	private static void registEntityRenderer(){

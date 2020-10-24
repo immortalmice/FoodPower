@@ -4,14 +4,18 @@ import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -24,6 +28,7 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -34,6 +39,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.capability.implement.FPFlavorExpCapability;
@@ -45,6 +51,7 @@ import com.github.immortalmice.foodpower.handlers.CommandHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
+import com.github.immortalmice.foodpower.lists.OtherBlocks;
 
 public class ForgeEventHandlers{
 	private static final IEventBus BUS = MinecraftForge.EVENT_BUS;
@@ -220,6 +227,54 @@ public class ForgeEventHandlers{
 					entity.sendBreakAnimation(type);;
 				});
 			}
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	@SubscribeEvent
+	public static void onLivingSetAttackTarget(LivingSetAttackTargetEvent event){
+		LivingEntity entity = event.getEntityLiving();
+		LivingEntity target = event.getTarget();
+		if(target != null && !target.world.isRemote && target.isPotionActive(FoodEffects.CHEESE_POWER) && entity instanceof CreeperEntity){
+			CompoundNBT tag = target.getPersistentData();
+			int cooldown = tag.contains("cheese_cobweb_cooldown") ? tag.getInt("cheese_cobweb_cooldown") : 0;
+			if(cooldown > 0){
+				cooldown --;
+				tag.putInt("cheese_cobweb_cooldown", cooldown);
+				return;
+			}
+			
+			int level = target.getActivePotionEffect(FoodEffects.CHEESE_POWER).getAmplifier();
+			World world = entity.world;
+			Consumer<BlockPos> trySetCobweb = pos -> {
+				if(world.getBlockState(pos).isAir()){
+					world.setBlockState(pos, OtherBlocks.Blocks.CHEESE_COBWEB.getDefaultState());
+				}
+			};
+			switch(level){
+				case 0:
+					if(world.rand.nextFloat() <= 0.2f){
+						trySetCobweb.accept(entity.getPosition());
+					}
+					break;
+				case 1:
+					if(world.rand.nextFloat() <= 0.5f){
+						trySetCobweb.accept(entity.getPosition());
+					}
+					break;
+				case 2:
+					int i = -1, j = -1;
+					while(i <= 1){
+						BlockPos pos = entity.getPosition().add(i, 0, j);
+						trySetCobweb.accept(pos);
+						j ++;
+						if(j > 1){
+							i ++;
+							j = -1;
+						}
+					}
+			}
+			tag.putInt("cheese_cobweb_cooldown", 200);
 		}
 	}
 }

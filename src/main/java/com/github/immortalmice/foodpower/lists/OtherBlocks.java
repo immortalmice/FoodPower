@@ -3,6 +3,8 @@ package com.github.immortalmice.foodpower.lists;
 import java.util.function.Supplier;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.WebBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -23,7 +25,8 @@ public class OtherBlocks{
 	@ObjectHolder(FoodPower.MODID)
 	public static class Blocks{
 		public static final Market MARKET = null;
-		public static final RecipeTable RECIPE_TABLE = null;	
+		public static final RecipeTable RECIPE_TABLE = null;
+		public static final WebBlock CHEESE_COBWEB = null;
 	}
 
 	public static DeferredRegister<Block> getBlockRegister(){
@@ -40,6 +43,7 @@ class OtherBlocksRegistry{
 
 	public static final RegistryObject<Block> OBJ_BLOCK_MARKET = OtherBlocksRegistry.registerBlock("market", () -> new Market());
 	public static final RegistryObject<Block> OBJ_BLOCK_RECIPE_TABLE = OtherBlocksRegistry.registerBlock("recipe_table", () -> new RecipeTable());
+	public static final RegistryObject<Block> OBJ_BLOCK_CHEESE_COBWEB = OtherBlocksRegistry.registerBlock("cheese_cobweb", () -> new WebBlock(Block.Properties.create(Material.WEB).doesNotBlockMovement().hardnessAndResistance(4.0F)));
 
 	public static final RegistryObject<Item> OBJ_ITEM_MARKET = OtherBlocksRegistry.registerItem("market", () -> new BlockItem(OtherBlocksRegistry.OBJ_BLOCK_MARKET.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
 	public static final RegistryObject<Item> OBJ_ITEM_RECIPE_TABLE = OtherBlocksRegistry.registerItem("recipe_table", () -> new BlockItem(OtherBlocksRegistry.OBJ_BLOCK_RECIPE_TABLE.get(), new Item.Properties().group(FPCreativeTabs.BLOCK_TAB)));
