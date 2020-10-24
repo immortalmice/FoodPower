@@ -15,7 +15,8 @@
 				"foodpower:papaya": "foodpower:meals/juice/juice_papaya_juice",
 				"minecraft:melon": "foodpower:meals/juice/juice_melon_juice",
 				"foodpower:orange": "foodpower:meals/juice/juice_orange_juice",
-				"foodpower:lemon": "foodpower:meals/juice/juice_lemon_juice"
+				"foodpower:lemon": "foodpower:meals/juice/juice_lemon_juice",
+				"minecraft:apple": "foodpower:meals/juice/juice_apple_juice"
 			}
 		}, {
 			"type": "fruit",
@@ -25,7 +26,8 @@
 				"foodpower:papaya": "foodpower:meals/juice/juice_papaya_slice",
 				"minecraft:melon": "foodpower:meals/juice/juice_melon_slice",
 				"foodpower:orange": "foodpower:meals/juice/juice_orange_slice",
-				"foodpower:lemon": "foodpower:meals/juice/juice_lemon_slice"
+				"foodpower:lemon": "foodpower:meals/juice/juice_lemon_slice",
+				"minecraft:apple": "foodpower:meals/juice/juice_apple_slice"
 			}
 		}]
 	}
