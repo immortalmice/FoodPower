@@ -28,6 +28,7 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -275,6 +276,24 @@ public class ForgeEventHandlers{
 					}
 			}
 			tag.putInt("cheese_cobweb_cooldown", 200);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onLivingDamaged(LivingDamageEvent event){
+		Entity sourceEntity = event.getSource().getTrueSource();
+		
+		if(sourceEntity instanceof PlayerEntity
+			&& !sourceEntity.world.isRemote
+			&& ((PlayerEntity) sourceEntity).isPotionActive(FoodEffects.CHILI_POWER)){
+			
+			int level = ((PlayerEntity) sourceEntity).getActivePotionEffect(FoodEffects.CHILI_POWER).getAmplifier();
+			boolean isApproved = false;
+			if(level >= 2 || sourceEntity == event.getSource().getImmediateSource()){
+				isApproved = true;
+			}
+			
+			if(isApproved) event.setAmount(event.getAmount() + (level + 1) * 2);
 		}
 	}
 }
