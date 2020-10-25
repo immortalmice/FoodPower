@@ -16,7 +16,8 @@
 				"minecraft:melon": "foodpower:meals/juice/juice_melon_juice",
 				"foodpower:orange": "foodpower:meals/juice/juice_orange_juice",
 				"foodpower:lemon": "foodpower:meals/juice/juice_lemon_juice",
-				"minecraft:apple": "foodpower:meals/juice/juice_apple_juice"
+				"minecraft:apple": "foodpower:meals/juice/juice_apple_juice",
+				"minecraft:chorus_fruit": "foodpower:meals/juice/juice_chorus_fruit_juice"
 			}
 		}, {
 			"type": "fruit",
@@ -27,7 +28,8 @@
 				"minecraft:melon": "foodpower:meals/juice/juice_melon_slice",
 				"foodpower:orange": "foodpower:meals/juice/juice_orange_slice",
 				"foodpower:lemon": "foodpower:meals/juice/juice_lemon_slice",
-				"minecraft:apple": "foodpower:meals/juice/juice_apple_slice"
+				"minecraft:apple": "foodpower:meals/juice/juice_apple_slice",
+				"minecraft:chorus_fruit": "foodpower:meals/juice/juice_chorus_fruit_slice"
 			}
 		}]
 	}
