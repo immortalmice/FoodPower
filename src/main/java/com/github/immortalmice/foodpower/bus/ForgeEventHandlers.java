@@ -16,8 +16,6 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,6 +47,7 @@ import com.github.immortalmice.foodpower.food.Ingredient;
 import com.github.immortalmice.foodpower.food.Meal;
 import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
+import com.github.immortalmice.foodpower.handlers.LootTableHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
@@ -69,20 +68,7 @@ public class ForgeEventHandlers{
 
 	@SubscribeEvent
 	public static void onLootLoad(LootTableLoadEvent event){
-		final String[] modifyLootTables = new String[]{
-			"grass", "ice", "packed_ice", "blue_ice", "stone"
-		};
-		
-		for(String name : modifyLootTables){
-			ResourceLocation eventResourceLocation = event.getName();
-			if(eventResourceLocation.equals(new ResourceLocation("minecraft", "blocks/" + name))) {
-				event.getTable().addPool(
-					LootPool.builder().addEntry(
-						TableLootEntry.builder(
-							new ResourceLocation(FoodPower.MODID, "inject/" + name)))
-					.build());
-			}
-		}
+		LootTableHandler.modify(event);
 	}
 
 	@SubscribeEvent
