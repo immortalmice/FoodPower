@@ -7,6 +7,17 @@
 	"ingredients": {
 		"base": "foodpower:meals/ice_cream/ice_cream_base",
 
-		"parts": []
+		"parts": [{
+			"type": "fruit",
+			"textures": {
+				"foodpower:kiwi": "foodpower:meals/ice_cream/ice_cream_kiwi",
+				"foodpower:papaya": "foodpower:meals/ice_cream/ice_cream_papaya"
+			}
+		}, {
+			"type": "sweet",
+			"textures": {
+				"foodpower:mint": "foodpower:meals/ice_cream/ice_cream_mint"
+			}
+		}]
 	}
 }
