@@ -157,7 +157,18 @@ public class IngredientHandler{
 			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CABBAGE_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.FLOUR.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			switch(level){
+				case 1:
+					effectContainer.addHungerMultiplier(1.2f);
+					break;
+				case 2:
+					effectContainer.addHungerMultiplier(1.5f);
+					break;
+				case 3:
+					effectContainer.addHungerMultiplier(2.0f);
+					break;
+			}
+			
 		});
 		Ingredients.Items.CORN.setMealEffectBiConsumer((effectContainer, level) -> {
 
