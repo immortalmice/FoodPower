@@ -90,7 +90,7 @@ public class Ingredients{
 		public static final Ingredient HONEY_BOTTLE = new Ingredient("honey_bottle", net.minecraft.item.Items.HONEY_BOTTLE, FoodTypes.SEASONING, FlavorTypes.SWEET, 1.9);
 		public static final Ingredient KELP = new Ingredient("kelp", net.minecraft.item.Items.KELP, FoodTypes.VEGETABLE, FlavorTypes.SALTY, 1.75);
 		public static final Ingredient RABBIT = new Ingredient("rabbit", net.minecraft.item.Items.RABBIT, FoodTypes.MEAT, FlavorTypes.NONE, 1.1);
-		public static final Ingredient SWEET_BERRIES = new Ingredient("sweet_berries", net.minecraft.item.Items.SWEET_BERRIES, FoodTypes.FRUIT, FlavorTypes.SWEET, 1.7);
+		public static final Ingredient SWEET_BERRIES = new Ingredient("sweet_berries", net.minecraft.item.Items.SWEET_BERRIES, FoodTypes.SWEET, FlavorTypes.SWEET, 1.7);
 		public static final Ingredient MAGMA_CREAM = new Ingredient("magma_cream", net.minecraft.item.Items.MAGMA_CREAM, FoodTypes.SWEET, FlavorTypes.NETHER, 0.8);
 		public static final Ingredient GHAST_TEAR = new Ingredient("ghast_tear", net.minecraft.item.Items.GHAST_TEAR, FoodTypes.SEASONING, FlavorTypes.NETHER, 0.7);
 		public static final Ingredient DRAGON_BREATH = new Ingredient("dragon_breath", net.minecraft.item.Items.DRAGON_BREATH, FoodTypes.SEASONING, FlavorTypes.ENDER, 1);
