@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.IInventory;
@@ -135,14 +136,31 @@ public class ForgeEventHandlers{
 	@SubscribeEvent
 	public static void onAttackEntity(AttackEntityEvent event){
 		PlayerEntity player = event.getPlayer();
-		if(!player.world.isRemote && player.isPotionActive(FoodEffects.KETCHUP_POWER) && event.getTarget() instanceof MobEntity){
-			int level = player.getActivePotionEffect(FoodEffects.KETCHUP_POWER).getAmplifier();
-			MobEntity entity = (MobEntity) event.getTarget();
-			float probability = player.world.rand.nextFloat();
-			if((level == 0 && probability <= 0.2)
-				|| (level == 1 && probability <= 0.5)
-				|| (level >= 2)){
-				entity.setAttackTarget(null);
+		if(!player.world.isRemote){
+			if(player.isPotionActive(FoodEffects.KETCHUP_POWER) && event.getTarget() instanceof MobEntity){
+				int level = player.getActivePotionEffect(FoodEffects.KETCHUP_POWER).getAmplifier();
+				MobEntity entity = (MobEntity) event.getTarget();
+				float probability = player.world.rand.nextFloat();
+				if((level == 0 && probability <= 0.2)
+					|| (level == 1 && probability <= 0.5)
+					|| (level >= 2)){
+					entity.setAttackTarget(null);
+				}
+			}else if(player.isPotionActive(FoodEffects.CORN_POWER) && event.getTarget() instanceof ZombieVillagerEntity){
+				int level = player.getActivePotionEffect(FoodEffects.CORN_POWER).getAmplifier();
+				ZombieVillagerEntity entity = (ZombieVillagerEntity) event.getTarget();
+				float probability = player.world.rand.nextFloat();
+				
+				if((level == 0 && probability <= 0.15)
+					|| (level == 1 && probability <= 0.45)
+					|| (level >= 2 && probability <= 0.8)){
+					
+					CompoundNBT nbt = new CompoundNBT();
+					nbt.putInt("ConversionTime", 200);
+					nbt.putUniqueId("ConversionPlayer", PlayerEntity.getUUID(player.getGameProfile()));
+					
+					entity.readAdditional(nbt);
+				}
 			}
 		}
 	}

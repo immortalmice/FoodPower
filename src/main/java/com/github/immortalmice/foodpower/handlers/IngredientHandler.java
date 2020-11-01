@@ -171,7 +171,7 @@ public class IngredientHandler{
 			
 		});
 		Ingredients.Items.CORN.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CORN_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.CREAM.setMealEffectBiConsumer((effectContainer, level) -> {
 
