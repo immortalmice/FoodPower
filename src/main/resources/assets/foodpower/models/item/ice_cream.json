@@ -22,7 +22,9 @@
 		}, {
 			"type": "sweet",
 			"textures": {
-				"foodpower:mint": "foodpower:meals/ice_cream/ice_cream_mint"
+				"foodpower:mint": "foodpower:meals/ice_cream/ice_cream_mint",
+				"minecraft:cocoa_beans": "foodpower:meals/ice_cream/ice_cream_cocoa_beans",
+				"minecraft:sweet_berries": "foodpower:meals/ice_cream/ice_cream_sweet_berries"
 			}
 		}]
 	}
