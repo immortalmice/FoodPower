@@ -13,7 +13,10 @@
 				"foodpower:kiwi": "foodpower:meals/ice_cream/ice_cream_kiwi",
 				"foodpower:papaya": "foodpower:meals/ice_cream/ice_cream_papaya",
 				"foodpower:mango": "foodpower:meals/ice_cream/ice_cream_mango",
-				"minecraft:melon": "foodpower:meals/ice_cream/ice_cream_melon"
+				"minecraft:melon": "foodpower:meals/ice_cream/ice_cream_melon",
+				"foodpower:orange": "foodpower:meals/ice_cream/ice_cream_orange",
+				"foodpower:lemon": "foodpower:meals/ice_cream/ice_cream_lemon",
+				"minecraft:apple": "foodpower:meals/ice_cream/ice_cream_apple"
 			}
 		}, {
 			"type": "sweet",
