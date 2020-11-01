@@ -1,0 +1,18 @@
+{
+	"type": "foodpower:cabbage_effect",
+	"conditions": [{
+		"condition": "entity_properties",
+		"entity": "THIS",
+		"predicate": {
+			"effects": {
+				"foodpower:cabbage_power": {
+					"amplifier": {
+						"min": 0
+					}
+				}
+			}
+		}	
+	}],
+	"probabilities": [0.5, 1, 1],
+	"bonus": [1, 1, 2]
+}
