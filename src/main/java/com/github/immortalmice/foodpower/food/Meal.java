@@ -136,6 +136,7 @@ public class Meal extends CookedFood{
         for(Ingredient ingredient : ingredientList){
             int level = Meal.getIngredientLevel(ingredientNBT, ingredient);
             ingredient.applyMealEffect(container, level);
+            levelSum += level;
         }
 
         container.setHunger(levelSum).setSaturation(1.2f);
