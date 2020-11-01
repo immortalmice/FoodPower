@@ -16,7 +16,8 @@
 				"minecraft:melon": "foodpower:meals/ice_cream/ice_cream_melon",
 				"foodpower:orange": "foodpower:meals/ice_cream/ice_cream_orange",
 				"foodpower:lemon": "foodpower:meals/ice_cream/ice_cream_lemon",
-				"minecraft:apple": "foodpower:meals/ice_cream/ice_cream_apple"
+				"minecraft:apple": "foodpower:meals/ice_cream/ice_cream_apple",
+				"minecraft:chorus_fruit": "foodpower:meals/ice_cream/ice_cream_chorus_fruit"
 			}
 		}, {
 			"type": "sweet",
