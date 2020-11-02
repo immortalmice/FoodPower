@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ObjectHolder;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ItemBase;
+import com.github.immortalmice.foodpower.specialclass.CreamShield;
 import com.github.immortalmice.foodpower.specialclass.DirtyFood;
 import com.github.immortalmice.foodpower.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.util.ReflectList;
@@ -23,6 +24,7 @@ public class OtherItems{
 		public static final DirtyFood DIRTY_FOOD = null;
 		public static final RecipeScroll RECIPE_SCROLL = null;
 		public static final Item PAPAYA_SEED = null;
+		public static final CreamShield CREAM_SHIELD = null;
 	}
 	
 	public static DeferredRegister<Item> getRegister(){
@@ -36,6 +38,7 @@ class OtherItemsRegistry{
 	public static final RegistryObject<Item> OBJ_DIRTY_FOOD = OtherItemsRegistry.register("dirty_food", () -> new DirtyFood());
 	public static final RegistryObject<Item> OBJ_RECIPE_SCROLL = OtherItemsRegistry.register("recipe_scroll", () -> new RecipeScroll());
 	public static final RegistryObject<Item> OBJ_PAPAYA_SEED = OtherItemsRegistry.register("papaya_seed", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> OBJ_CREAM_SHIELD = OtherItemsRegistry.register("cream_shield", () -> new CreamShield());
 
 	private static RegistryObject<Item> register(String name, Supplier<Item> sup){
 		return OtherItemsRegistry.REGISTER.register(name, sup);
