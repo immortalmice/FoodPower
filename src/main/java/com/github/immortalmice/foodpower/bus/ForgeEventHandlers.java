@@ -1,5 +1,8 @@
 package com.github.immortalmice.foodpower.bus;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -17,6 +20,7 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -111,12 +115,31 @@ public class ForgeEventHandlers{
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event){
 		PlayerEntity player = event.player;
-		if(!player.world.isRemote && player.isPotionActive(FoodEffects.MINT_POWER)){
-			int level = player.getActivePotionEffect(FoodEffects.MINT_POWER).getAmplifier();
-			FrostWalkerEnchantment.freezeNearby(player, player.world, player.getPosition(), level);
+		if(!player.world.isRemote){
+			if(player.isPotionActive(FoodEffects.MINT_POWER)) {
+				int level = player.getActivePotionEffect(FoodEffects.MINT_POWER).getAmplifier();
+				FrostWalkerEnchantment.freezeNearby(player, player.world, player.getPosition(), level);
+			}else if(player.isPotionActive(FoodEffects.SPINACH_POWER)) {
+				int level = player.getActivePotionEffect(FoodEffects.SPINACH_POWER).getAmplifier();
+				int range = (int) Math.pow(2, level);
+				BlockPos pos = player.getPosition();
+				Float probability = (new Float[]{0.05f, 0.1f, 0.2f})[Math.min(level, 2)];
+				for(int y = pos.getY() - 1; y <= pos.getY() + 1; y ++) {
+					for(int x = pos.getX() - range; x <= pos.getX() + range; x ++) {
+						for(int z = pos.getZ() - range; z <= pos.getZ() + range; z ++) {
+							BlockState state = player.world.getBlockState(new BlockPos(x, y, z));
+							Block block = state.getBlock();
+							if(block instanceof CropsBlock && player.world.rand.nextFloat() <= probability) {
+								block.tick(state, (ServerWorld) player.world, new BlockPos(x, y, z), player.world.rand);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	

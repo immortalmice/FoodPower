@@ -151,7 +151,7 @@ public class IngredientHandler{
 			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CHILI_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.SPINACH.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.SPINACH_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.CABBAGE.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CABBAGE_POWER, (level - 1) * 1500 + 600, level - 1));
