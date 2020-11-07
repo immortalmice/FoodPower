@@ -3,8 +3,8 @@ package com.github.immortalmice.foodpower.loot;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.immortalmice.foodpower.lists.Crops;
 import com.github.immortalmice.foodpower.lists.Effects;
+import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.google.gson.JsonObject;
 
 import net.minecraft.block.BlockState;
@@ -45,7 +45,13 @@ public class CabbageEffectModifier extends LootModifier {
 					|| item == Items.CARROT
 					|| item == Items.POTATO
 					|| item == Items.WHEAT
-					|| Crops.itemList.contains(item)){
+					|| item == Ingredients.Items.MINT
+					|| item == Ingredients.Items.TOMATO
+					|| item == Ingredients.Items.RICE
+					|| item == Ingredients.Items.CHILI
+					|| item == Ingredients.Items.SPINACH
+					|| item == Ingredients.Items.CABBAGE
+					|| item == Ingredients.Items.CORN){
 					
 					if(entity.world.rand.nextFloat() <= this.probabilities.get(level > 2 ? 2 : level)) {
 						stack.grow(this.bonus.get(level > 2 ? 2 : level));
