@@ -7,6 +7,7 @@ import com.github.immortalmice.foodpower.message.ShootEnderPearlMessage;
 import com.github.immortalmice.foodpower.message.ShootPapayaSeedMessage;
 import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.lists.Ingredients;
+import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.LivingEntity;
@@ -174,7 +175,15 @@ public class IngredientHandler{
 			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CORN_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.CREAM.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addExtraBehavior(() -> {
+				if(!effectContainer.getEntityLiving().world.isRemote && effectContainer.getEntityLiving() instanceof PlayerEntity) {
+					PlayerEntity player = (PlayerEntity) effectContainer.getEntityLiving();
+					int durability = 220 - (new int[]{ 40, 120, 220 })[Math.min(level - 1, 2)];
+					ItemStack shield = new ItemStack(Items.CREAM_SHIELD);
+					shield.setDamage(durability);
+					player.inventory.placeItemBackInInventory(player.world, shield);
+				}
+			});
 		});
 
 		/* Vanilla Ingrediants */
