@@ -1,0 +1,71 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"conditions": [{
+						"condition": "entity_properties",
+						"entity": "this",
+						"predicate": {
+							"effects": {
+								"foodpower:melon_power": {
+									"amplifier": 0
+								}
+							}
+						}
+					}, {
+						"condition": "random_chance",
+						"chance": 0.15
+					}],
+					"type": "item",
+					"name": "minecraft:glistering_melon_slice",
+					"weight": 1,
+					"quality": 1.0
+				}, {
+					"conditions": [{
+						"condition": "entity_properties",
+						"entity": "this",
+						"predicate": {
+							"effects": {
+								"foodpower:melon_power": {
+									"amplifier": 1
+								}
+							}
+						}
+					}, {
+						"condition": "random_chance",
+						"chance": 0.25
+					}],
+					"type": "item",
+					"name": "minecraft:glistering_melon_slice",
+					"weight": 1,
+					"quality": 1.0
+				}, {
+					"conditions": [{
+						"condition": "entity_properties",
+						"entity": "this",
+						"predicate": {
+							"effects": {
+								"foodpower:melon_power": {
+									"amplifier": 2
+								}
+							}
+						}
+					}, {
+						"condition": "random_chance",
+						"chance": 0.4
+					}],
+					"type": "item",
+					"name": "minecraft:glistering_melon_slice",
+					"weight": 1,
+					"quality": 1.0,
+					"functions": [{
+						"function": "set_count",
+						"count": 2
+					}]
+				}
+			]
+		}
+	]
+}

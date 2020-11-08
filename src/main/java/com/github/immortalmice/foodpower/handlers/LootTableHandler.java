@@ -63,11 +63,12 @@ public class LootTableHandler{
 	
 	static {
 		LootTableHandler.modifiers.addAll(Arrays.asList(
-				LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("grass").build(),
-				LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("ice").build(),
-				LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("packed_ice").build(),
-				LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("blue_ice").build(),
-				LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("stone").build()
+			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("grass").build(),
+			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("ice").build(),
+			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("packed_ice").build(),
+			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("blue_ice").build(),
+			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("stone").build(),
+			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("melon").build()
 		));
 	}
 
