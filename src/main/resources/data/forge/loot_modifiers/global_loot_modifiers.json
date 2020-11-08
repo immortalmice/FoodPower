@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"entries": [
-		"foodpower:cabbage_effect"
+		"foodpower:cabbage_effect",
+		"foodpower:apple_effect"
 	]
 }

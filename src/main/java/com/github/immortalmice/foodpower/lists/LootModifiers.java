@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.lists;
 import java.util.function.Supplier;
 
 import com.github.immortalmice.foodpower.FoodPower;
+import com.github.immortalmice.foodpower.loot.AppleEffectModifier;
 import com.github.immortalmice.foodpower.loot.CabbageEffectModifier;
 
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
@@ -24,8 +25,9 @@ public class LootModifiers {
 
 class LootModifiersRegistry {
 	public static final DeferredRegister<GlobalLootModifierSerializer<?>> REGISTER = new DeferredRegister<GlobalLootModifierSerializer<?>>(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, FoodPower.MODID);
-	
+
 	public static final RegistryObject<GlobalLootModifierSerializer<?>> OBJ_CABBAGE_EFFECT = LootModifiersRegistry.register("cabbage_effect", () -> new CabbageEffectModifier.Serializer());
+	public static final RegistryObject<GlobalLootModifierSerializer<?>> OBJ_APPLE_EFFECT = LootModifiersRegistry.register("apple_effect", () -> new AppleEffectModifier.Serializer());
 			
 	private static RegistryObject<GlobalLootModifierSerializer<?>> register(String name, Supplier<GlobalLootModifierSerializer<?>> sup){
 		return LootModifiersRegistry.REGISTER.register(name, sup);

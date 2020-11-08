@@ -188,7 +188,7 @@ public class IngredientHandler{
 
 		/* Vanilla Ingrediants */
 		Ingredients.Items.APPLE.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.APPLE_POWER, (level - 1) * 1500 + 600, level - 1));
 		});
 		Ingredients.Items.MELON.setMealEffectBiConsumer((effectContainer, level) -> {
 
