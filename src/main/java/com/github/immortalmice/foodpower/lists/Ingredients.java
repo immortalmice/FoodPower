@@ -68,7 +68,7 @@ public class Ingredients{
 		public static final Ingredient CREAM = null;
 
 		/* Vanilla Ingrediants */
-		public static final Ingredient APPLE = new Ingredient("apple", net.minecraft.item.Items.APPLE, FoodTypes.FRUIT, FlavorTypes.SOUR, 1.25);
+		public static final Ingredient APPLE = new Ingredient("apple", net.minecraft.item.Items.APPLE, FoodTypes.FRUIT, FlavorTypes.SOUR, 0.8);
 		public static final Ingredient MELON = new Ingredient("melon", net.minecraft.item.Items.MELON, FoodTypes.FRUIT, FlavorTypes.SWEET, 0.85);
 		public static final Ingredient PUMPKIN = new Ingredient("pumpkin", Blocks.PUMPKIN.asItem(), FoodTypes.VEGETABLE, FlavorTypes.NONE, 0.8);
 		public static final Ingredient CARROT = new Ingredient("carrot", net.minecraft.item.Items.CARROT, FoodTypes.VEGETABLE, FlavorTypes.SWEET, 1.25);
