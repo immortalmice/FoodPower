@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -263,46 +264,54 @@ public class ForgeEventHandlers{
 	public static void onLivingSetAttackTarget(LivingSetAttackTargetEvent event){
 		LivingEntity entity = event.getEntityLiving();
 		LivingEntity target = event.getTarget();
-		if(target != null && !target.world.isRemote && target.isPotionActive(FoodEffects.CHEESE_POWER) && entity instanceof CreeperEntity){
-			CompoundNBT tag = target.getPersistentData();
-			int cooldown = tag.contains("cheese_cobweb_cooldown") ? tag.getInt("cheese_cobweb_cooldown") : 0;
-			if(cooldown > 0){
-				cooldown --;
-				tag.putInt("cheese_cobweb_cooldown", cooldown);
-				return;
-			}
-			
-			int level = target.getActivePotionEffect(FoodEffects.CHEESE_POWER).getAmplifier();
-			World world = entity.world;
-			Consumer<BlockPos> trySetCobweb = pos -> {
-				if(world.getBlockState(pos).isAir()){
-					world.setBlockState(pos, OtherBlocks.Blocks.CHEESE_COBWEB.getDefaultState());
+		if(target != null && !target.world.isRemote){
+			if(target.isPotionActive(FoodEffects.CHEESE_POWER) && entity instanceof CreeperEntity) {
+				CompoundNBT tag = target.getPersistentData();
+				int cooldown = tag.contains("cheese_cobweb_cooldown") ? tag.getInt("cheese_cobweb_cooldown") : 0;
+				if(cooldown > 0){
+					cooldown --;
+					tag.putInt("cheese_cobweb_cooldown", cooldown);
+					return;
 				}
-			};
-			switch(level){
-				case 0:
-					if(world.rand.nextFloat() <= 0.2f){
-						trySetCobweb.accept(entity.getPosition());
+				
+				int level = target.getActivePotionEffect(FoodEffects.CHEESE_POWER).getAmplifier();
+				World world = entity.world;
+				Consumer<BlockPos> trySetCobweb = pos -> {
+					if(world.getBlockState(pos).isAir()){
+						world.setBlockState(pos, OtherBlocks.Blocks.CHEESE_COBWEB.getDefaultState());
 					}
-					break;
-				case 1:
-					if(world.rand.nextFloat() <= 0.5f){
-						trySetCobweb.accept(entity.getPosition());
-					}
-					break;
-				case 2:
-					int i = -1, j = -1;
-					while(i <= 1){
-						BlockPos pos = entity.getPosition().add(i, 0, j);
-						trySetCobweb.accept(pos);
-						j ++;
-						if(j > 1){
-							i ++;
-							j = -1;
+				};
+				switch(level){
+					case 0:
+						if(world.rand.nextFloat() <= 0.2f){
+							trySetCobweb.accept(entity.getPosition());
 						}
-					}
+						break;
+					case 1:
+						if(world.rand.nextFloat() <= 0.5f){
+							trySetCobweb.accept(entity.getPosition());
+						}
+						break;
+					case 2:
+						int i = -1, j = -1;
+						while(i <= 1){
+							BlockPos pos = entity.getPosition().add(i, 0, j);
+							trySetCobweb.accept(pos);
+							j ++;
+							if(j > 1){
+								i ++;
+								j = -1;
+							}
+						}
+				}
+				tag.putInt("cheese_cobweb_cooldown", 200);
+			}else if(target.isPotionActive(FoodEffects.PUMPKIN_POWER) && entity instanceof EndermanEntity){
+				int level = target.getActivePotionEffect(FoodEffects.PUMPKIN_POWER).getAmplifier();
+				float probability = (new float[]{ 0.2f, 0.6f, 1.0f })[Math.min(level, 2)];
+				if(target.world.rand.nextFloat() <= probability) {
+					((EndermanEntity) entity).setAttackTarget(null);
+				}
 			}
-			tag.putInt("cheese_cobweb_cooldown", 200);
 		}
 	}
 	
