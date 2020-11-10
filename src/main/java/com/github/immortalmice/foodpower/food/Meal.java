@@ -344,6 +344,11 @@ public class Meal extends CookedFood{
             this.saturation = saturationIn;
             return this;
         }
+        
+        public MealEffectContainer addDefaultEffectInstance(Effect effectIn, int level){
+        	this.addEffectInstance(new EffectInstance(effectIn, (level - 1) * 1500 + 600, level - 1));
+        	return this;
+        }
 
         public MealEffectContainer addEffectInstance(EffectInstance effectInstanceIn){
             this.effectInstances.add(effectInstanceIn);

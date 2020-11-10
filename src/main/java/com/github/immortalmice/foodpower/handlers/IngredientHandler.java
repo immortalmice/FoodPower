@@ -72,7 +72,7 @@ public class IngredientHandler{
 			}
 		});
 		Ingredients.Items.KIWI.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(Effects.HEALTH_BOOST, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(Effects.HEALTH_BOOST, level);
 			if(level == 3){
 				effectContainer.addExtraBehavior(() -> {
 					effectContainer.getEntityLiving().heal(2.0f);
@@ -85,7 +85,7 @@ public class IngredientHandler{
 			}
 		});
 		Ingredients.Items.MANGO.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(Effects.HASTE, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(Effects.HASTE, level);
 		});
 		Ingredients.Items.LEMON.setInteractEffectBiConsumer((rawEvent, level) -> {
 			if(rawEvent instanceof PlayerInteractEvent.RightClickBlock && rawEvent.getSide() == LogicalSide.SERVER){
@@ -109,14 +109,14 @@ public class IngredientHandler{
 			}
 		});
 		Ingredients.Items.MINT.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.MINT_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.MINT_POWER, level);
 		});
 		Ingredients.Items.FERMENTED_ENDEREYE.setInteractEffectBiConsumer((rawEvent, level) -> {
 			if(level >= 2 && rawEvent instanceof PlayerInteractEvent.LeftClickEmpty){
 				FoodPower.NETWORK.sendToServer(new ShootEnderPearlMessage());
 			}
 		}).setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.FERMENTED_ENDEREYE_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.FERMENTED_ENDEREYE_POWER, level);
 		});
 		Ingredients.Items.DOUGH.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addEffectInstance(new EffectInstance(Effects.RESISTANCE, (level - 1) * 1500 + 600, (int)Math.floor(Math.pow(2.0d, (double) level - 1)) - 1));
@@ -131,31 +131,31 @@ public class IngredientHandler{
 			});
 		});
 		Ingredients.Items.KETCHUP.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.KETCHUP_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.KETCHUP_POWER, level);
 		});
 		Ingredients.Items.SAUCE.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.SAUCE_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.SAUCE_POWER, level);
 		});
 		Ingredients.Items.SALT.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.SALT_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.SALT_POWER, level);
 		});
 		Ingredients.Items.OIL.setMealEffectBiConsumer((effectContainer, level) -> {
 
 		});
 		Ingredients.Items.RICE.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.RICE_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.RICE_POWER, level);
 		});
 		Ingredients.Items.CHEESE.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CHEESE_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.CHEESE_POWER, level);
 		});
 		Ingredients.Items.CHILI.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CHILI_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.CHILI_POWER, level);
 		});
 		Ingredients.Items.SPINACH.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.SPINACH_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.SPINACH_POWER, level);
 		});
 		Ingredients.Items.CABBAGE.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CABBAGE_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.CABBAGE_POWER, level);
 		});
 		Ingredients.Items.FLOUR.setMealEffectBiConsumer((effectContainer, level) -> {
 			switch(level){
@@ -172,7 +172,7 @@ public class IngredientHandler{
 			
 		});
 		Ingredients.Items.CORN.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.CORN_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.CORN_POWER, level);
 		});
 		Ingredients.Items.CREAM.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addExtraBehavior(() -> {
@@ -188,10 +188,10 @@ public class IngredientHandler{
 
 		/* Vanilla Ingrediants */
 		Ingredients.Items.APPLE.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.APPLE_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.APPLE_POWER, level);
 		});
 		Ingredients.Items.MELON.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addEffectInstance(new EffectInstance(FoodEffects.MELON_POWER, (level - 1) * 1500 + 600, level - 1));
+			effectContainer.addDefaultEffectInstance(FoodEffects.MELON_POWER, level);
 		});
 		Ingredients.Items.PUMPKIN.setMealEffectBiConsumer((effectContainer, level) -> {
 
