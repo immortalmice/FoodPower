@@ -25,7 +25,8 @@
 				"foodpower:mint": "foodpower:meals/ice_cream/ice_cream_mint",
 				"minecraft:cocoa_beans": "foodpower:meals/ice_cream/ice_cream_cocoa_beans",
 				"minecraft:sweet_berries": "foodpower:meals/ice_cream/ice_cream_sweet_berries",
-				"minecraft:magma_cream": "foodpower:meals/ice_cream/ice_cream_magma_cream"
+				"minecraft:magma_cream": "foodpower:meals/ice_cream/ice_cream_magma_cream",
+				"foodpower:fermented_endereye": "foodpower:meals/ice_cream/ice_cream_fermented_endereye"
 			}
 		}]
 	}
