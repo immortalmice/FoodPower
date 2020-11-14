@@ -68,7 +68,8 @@ public class LootTableHandler{
 			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("packed_ice").build(),
 			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("blue_ice").build(),
 			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("stone").build(),
-			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("melon").build()
+			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("melon").build(),
+			LootTableHandler.Modifier.builder().type(Modifier.ModifyType.INJECT).name("carrots").build()
 		));
 	}
 

@@ -197,7 +197,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.PUMPKIN_POWER, level);
 		});
 		Ingredients.Items.CARROT.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.CARROT_POWER, level);
 		});
 		Ingredients.Items.POTATO.setMealEffectBiConsumer((effectContainer, level) -> {
 
