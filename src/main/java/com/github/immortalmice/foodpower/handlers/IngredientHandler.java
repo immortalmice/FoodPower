@@ -200,7 +200,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.CARROT_POWER, level);
 		});
 		Ingredients.Items.POTATO.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.POTATO_POWER, level);
 		});
 		Ingredients.Items.BEETROOT.setMealEffectBiConsumer((effectContainer, level) -> {
 

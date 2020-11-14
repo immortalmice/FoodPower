@@ -18,6 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -170,7 +172,8 @@ public class ForgeEventHandlers{
 					|| (level >= 2)){
 					entity.setAttackTarget(null);
 				}
-			}else if(player.isPotionActive(FoodEffects.CORN_POWER) && event.getTarget() instanceof ZombieVillagerEntity){
+			}
+			if(player.isPotionActive(FoodEffects.CORN_POWER) && event.getTarget() instanceof ZombieVillagerEntity){
 				int level = player.getActivePotionEffect(FoodEffects.CORN_POWER).getAmplifier();
 				ZombieVillagerEntity entity = (ZombieVillagerEntity) event.getTarget();
 				float probability = player.world.rand.nextFloat();
@@ -185,6 +188,10 @@ public class ForgeEventHandlers{
 					
 					entity.readAdditional(nbt);
 				}
+			}
+			if(player.isPotionActive(FoodEffects.POTATO_POWER) && event.getTarget() instanceof MobEntity){
+				int level = (int) Math.pow(2, player.getActivePotionEffect(FoodEffects.POTATO_POWER).getAmplifier());
+				((MobEntity) event.getTarget()).addPotionEffect(new EffectInstance(Effects.POISON, 100, level - 1));
 			}
 		}
 	}
