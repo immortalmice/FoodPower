@@ -12,6 +12,11 @@
 			"textures": {
 				"foodpower:kiwi": "foodpower:meals/honey_toast/honey_toast_kiwi"
 			}
+		}, {
+			"type": "sweet", 
+			"textures": {
+				"foodpower:mint": "foodpower:meals/honey_toast/honey_toast_mint"
+			}
 		}]
 	}
 }
