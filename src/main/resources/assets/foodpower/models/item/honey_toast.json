@@ -7,6 +7,11 @@
 	"ingredients": {
 		"base": "foodpower:meals/honey_toast/honey_toast_base",
 
-		"parts": []
+		"parts": [{
+			"type": "fruit",
+			"textures": {
+				"foodpower:kiwi": "foodpower:meals/honey_toast/honey_toast_kiwi"
+			}
+		}]
 	}
 }
