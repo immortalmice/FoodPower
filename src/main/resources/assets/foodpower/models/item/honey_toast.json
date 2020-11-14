@@ -10,7 +10,8 @@
 		"parts": [{
 			"type": "fruit",
 			"textures": {
-				"foodpower:kiwi": "foodpower:meals/honey_toast/honey_toast_kiwi"
+				"foodpower:kiwi": "foodpower:meals/honey_toast/honey_toast_kiwi",
+				"foodpower:papaya": "foodpower:meals/honey_toast/honey_toast_papaya"
 			}
 		}, {
 			"type": "sweet", 
