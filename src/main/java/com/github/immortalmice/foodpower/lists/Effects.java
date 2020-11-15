@@ -5,6 +5,8 @@ import java.util.function.Supplier;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -84,8 +86,8 @@ class EffectRegistry{
 	public static final RegistryObject<Effect> OBJ_CARROT_POWER = EffectRegistry.foodEffectRegister("carrot_power", () -> new FoodEffect(0xFFAA33));;
 	public static final RegistryObject<Effect> OBJ_POTATO_POWER = EffectRegistry.foodEffectRegister("potato_power", () -> new FoodEffect(0xFFDDAA));;
 	public static final RegistryObject<Effect> OBJ_BEETROOT_POWER = EffectRegistry.foodEffectRegister("beetroot_power", () -> new FoodEffect(0xFF5511));;
-	public static final RegistryObject<Effect> OBJ_BROWN_MUSHROOM_POWER = EffectRegistry.foodEffectRegister("brown_mushroom_power", () -> new FoodEffect(0xAA7700));;
-	public static final RegistryObject<Effect> OBJ_RED_MUSHROOM_POWER = EffectRegistry.foodEffectRegister("red_mushroom_power", () -> new FoodEffect(0xE63F00));;
+	public static final RegistryObject<Effect> OBJ_BROWN_MUSHROOM_POWER = EffectRegistry.foodEffectRegister("brown_mushroom_power", () -> new FoodEffect(0xAA7700, PlayerEntity.REACH_DISTANCE, 1, Operation.ADDITION));
+	public static final RegistryObject<Effect> OBJ_RED_MUSHROOM_POWER = EffectRegistry.foodEffectRegister("red_mushroom_power", () -> new FoodEffect(0xE63F00, PlayerEntity.REACH_DISTANCE, 1, Operation.ADDITION));;
 	public static final RegistryObject<Effect> OBJ_EGG_POWER = EffectRegistry.foodEffectRegister("egg_power", () -> new FoodEffect(0xDDDDDD));;
 	public static final RegistryObject<Effect> OBJ_MILK_BUCKET_POWER = EffectRegistry.foodEffectRegister("milk_bucket_power", () -> new FoodEffect(0xFFFFFF));;
 	public static final RegistryObject<Effect> OBJ_PORKCHOP_POWER = EffectRegistry.foodEffectRegister("porkchop_power", () -> new FoodEffect(0xFFCCCC));;

@@ -211,10 +211,10 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.BEETROOT_POWER, level);
 		});
 		Ingredients.Items.BROWN_MUSHROOM.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.BROWN_MUSHROOM_POWER, level);
 		});
 		Ingredients.Items.RED_MUSHROOM.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.RED_MUSHROOM_POWER, level);
 		});
 		Ingredients.Items.EGG.setMealEffectBiConsumer((effectContainer, level) -> {
 
