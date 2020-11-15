@@ -12,7 +12,8 @@
 			"textures": {
 				"foodpower:kiwi": "foodpower:meals/honey_toast/honey_toast_kiwi",
 				"foodpower:papaya": "foodpower:meals/honey_toast/honey_toast_papaya",
-				"foodpower:mango": "foodpower:meals/honey_toast/honey_toast_mango"
+				"foodpower:mango": "foodpower:meals/honey_toast/honey_toast_mango",
+				"minecraft:melon": "foodpower:meals/honey_toast/honey_toast_melon"
 			}
 		}, {
 			"type": "sweet", 
