@@ -178,10 +178,15 @@ public class IngredientHandler{
 			effectContainer.addExtraBehavior(() -> {
 				if(!effectContainer.getEntityLiving().world.isRemote && effectContainer.getEntityLiving() instanceof PlayerEntity) {
 					PlayerEntity player = (PlayerEntity) effectContainer.getEntityLiving();
-					int durability = 220 - (new int[]{ 40, 120, 220 })[Math.min(level - 1, 2)];
-					ItemStack shield = new ItemStack(Items.CREAM_SHIELD);
-					shield.setDamage(durability);
-					player.inventory.placeItemBackInInventory(player.world, shield);
+					int durability = (new int[]{ 40, 120, 220 })[Math.min(level - 1, 2)];
+					ItemStack offhandStack = player.inventory.offHandInventory.get(0);
+					if(!offhandStack.isEmpty() && offhandStack.getItem() == Items.CREAM_SHIELD) {
+						offhandStack.setDamage(220 - Math.min(durability +  220 - offhandStack.getDamage(), 220));
+					} else {
+						ItemStack shield = new ItemStack(Items.CREAM_SHIELD);
+						shield.setDamage(220 - durability);
+						player.inventory.placeItemBackInInventory(player.world, shield);
+					}
 				}
 			});
 		});
