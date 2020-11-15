@@ -13,7 +13,8 @@
 				"foodpower:kiwi": "foodpower:meals/honey_toast/honey_toast_kiwi",
 				"foodpower:papaya": "foodpower:meals/honey_toast/honey_toast_papaya",
 				"foodpower:mango": "foodpower:meals/honey_toast/honey_toast_mango",
-				"minecraft:melon": "foodpower:meals/honey_toast/honey_toast_melon"
+				"minecraft:melon": "foodpower:meals/honey_toast/honey_toast_melon",
+				"foodpower:orange": "foodpower:meals/honey_toast/honey_toast_orange"
 			}
 		}, {
 			"type": "sweet", 
