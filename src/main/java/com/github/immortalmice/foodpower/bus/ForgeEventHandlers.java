@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.merchant.IMerchant;
@@ -13,7 +14,9 @@ import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.EggEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.MerchantContainer;
@@ -37,6 +40,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
@@ -126,8 +130,6 @@ public class ForgeEventHandlers{
 		}
 	}
 
-
-	
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event){
@@ -371,6 +373,23 @@ public class ForgeEventHandlers{
 				}
 			}catch(Exception e) {
 				System.out.print(e);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onProjectileImpact(ProjectileImpactEvent event) {
+		if(!event.getEntity().world.isRemote && event.getEntity() instanceof EggEntity){
+			LivingEntity player = ((EggEntity) event.getEntity()).getThrower();
+			if(player instanceof PlayerEntity && player.isPotionActive(FoodEffects.EGG_POWER)) {
+				int level = player.getActivePotionEffect(FoodEffects.EGG_POWER).getAmplifier();
+				float probability = (new float[]{0.2f, 0.5f, 1.0f})[Math.min(level, 2)];
+				if(player.world.rand.nextFloat() <= probability) {
+					ChickenEntity chickenentity = EntityType.CHICKEN.create(event.getEntity().world);
+					chickenentity.setGrowingAge(-24000);
+					chickenentity.setLocationAndAngles(event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), event.getEntity().rotationYaw, 0.0F);
+					event.getEntity().world.addEntity(chickenentity);
+				}
 			}
 		}
 	}

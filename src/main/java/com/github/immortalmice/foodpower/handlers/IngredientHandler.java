@@ -217,7 +217,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.RED_MUSHROOM_POWER, level);
 		});
 		Ingredients.Items.EGG.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.EGG_POWER, level);
 		});
 		Ingredients.Items.MILK_BUCKET.setMealEffectBiConsumer((effectContainer, level) -> {
 
