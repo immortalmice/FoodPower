@@ -223,7 +223,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.MILK_BUCKET_POWER, level);
 		});
 		Ingredients.Items.PORKCHOP.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.PORKCHOP_POWER, level);
 		});
 		Ingredients.Items.BEEF.setMealEffectBiConsumer((effectContainer, level) -> {
 

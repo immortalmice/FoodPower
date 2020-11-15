@@ -13,8 +13,10 @@ import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.EndermanEntity;
+import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.EggEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -239,45 +241,63 @@ public class ForgeEventHandlers{
 	public static void onLivingAttack(LivingAttackEvent event){
 		Entity sourceEntity = event.getSource().getTrueSource();
 		LivingEntity target = event.getEntityLiving();
-		if(target instanceof PlayerEntity
-			&& sourceEntity instanceof LivingEntity
-			&& !target.world.isRemote
-			&& ((PlayerEntity) target).isPotionActive(FoodEffects.RICE_POWER)){
-			
-			LivingEntity source = (LivingEntity) sourceEntity;
-			int level = ((PlayerEntity) target).getActivePotionEffect(FoodEffects.RICE_POWER).getAmplifier();
-			ItemStack selectedArmor = ItemStack.EMPTY;
-			EquipmentSlotType selectedType = null;
-			int damage = 0;
-			float probability = 0;
-			switch(level){
-				case 2:
-					if(source.hasItemInSlot(EquipmentSlotType.CHEST)){
-						selectedType = EquipmentSlotType.CHEST;
-					}else if(source.hasItemInSlot(EquipmentSlotType.HEAD)){
-						selectedType = EquipmentSlotType.HEAD;
-					}
-					damage = 80;
-					probability = 1f;
-				case 1:
-					if(source.hasItemInSlot(EquipmentSlotType.LEGS) && selectedArmor.isEmpty()){
-						selectedType = EquipmentSlotType.LEGS;
-					}
-					damage = damage != 0 ? damage : 40;
-					probability = probability != 0 ? probability : 1f;
-				case 0:
-					if(source.hasItemInSlot(EquipmentSlotType.FEET) && selectedArmor.isEmpty()){
-						selectedType = EquipmentSlotType.FEET;
-					}
-					damage = damage != 0 ? damage :  20;
-					probability = probability != 0 ? probability : 1f;
-			}
-			selectedArmor = selectedType == null ? selectedArmor : source.getItemStackFromSlot(selectedType);
-			final EquipmentSlotType type = selectedType;
-			if(!selectedArmor.isEmpty() && source.world.rand.nextFloat() <= probability){
-				selectedArmor.damageItem(damage, (LivingEntity) source, entity -> {
-					entity.sendBreakAnimation(type);;
-				});
+		if(!target.world.isRemote){
+			if(target.isPotionActive(FoodEffects.RICE_POWER)
+				&& sourceEntity instanceof LivingEntity
+				&& target instanceof PlayerEntity){
+				
+				LivingEntity source = (LivingEntity) sourceEntity;
+				int level = target.getActivePotionEffect(FoodEffects.RICE_POWER).getAmplifier();
+				ItemStack selectedArmor = ItemStack.EMPTY;
+				EquipmentSlotType selectedType = null;
+				int damage = 0;
+				float probability = 0;
+				switch(level){
+					case 2:
+						if(source.hasItemInSlot(EquipmentSlotType.CHEST)){
+							selectedType = EquipmentSlotType.CHEST;
+						}else if(source.hasItemInSlot(EquipmentSlotType.HEAD)){
+							selectedType = EquipmentSlotType.HEAD;
+						}
+						damage = 80;
+						probability = 1f;
+					case 1:
+						if(source.hasItemInSlot(EquipmentSlotType.LEGS) && selectedArmor.isEmpty()){
+							selectedType = EquipmentSlotType.LEGS;
+						}
+						damage = damage != 0 ? damage : 40;
+						probability = probability != 0 ? probability : 1f;
+					case 0:
+						if(source.hasItemInSlot(EquipmentSlotType.FEET) && selectedArmor.isEmpty()){
+							selectedType = EquipmentSlotType.FEET;
+						}
+						damage = damage != 0 ? damage :  20;
+						probability = probability != 0 ? probability : 1f;
+				}
+				selectedArmor = selectedType == null ? selectedArmor : source.getItemStackFromSlot(selectedType);
+				final EquipmentSlotType type = selectedType;
+				if(!selectedArmor.isEmpty() && source.world.rand.nextFloat() <= probability){
+					selectedArmor.damageItem(damage, (LivingEntity) source, entity -> {
+						entity.sendBreakAnimation(type);;
+					});
+				}
+			}else if(
+				sourceEntity instanceof PlayerEntity
+				&& ((PlayerEntity) sourceEntity).isPotionActive(FoodEffects.PORKCHOP_POWER)
+				&& target instanceof ZombieEntity){
+				
+				int level = ((PlayerEntity) sourceEntity).getActivePotionEffect(FoodEffects.PORKCHOP_POWER).getAmplifier();
+				float probability = (new float[]{ 0.05f, 0.15f, 0.35f })[Math.min(level, 2)];
+				
+				if(target.world.rand.nextFloat() <= probability){
+					BlockPos pos = target.getPosition();
+		            World world = target.world;
+		            
+		            PigEntity pig = new PigEntity(EntityType.PIG, world);
+		            pig.setPosition(pos.getX(), pos.getY(), pos.getZ());
+		            target.remove(false);
+		            world.addEntity(pig);
+				}
 			}
 		}
 	}
