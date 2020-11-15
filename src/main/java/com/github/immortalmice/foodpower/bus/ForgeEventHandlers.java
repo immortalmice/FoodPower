@@ -7,15 +7,20 @@ import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.merchant.IMerchant;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.MerchantContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.MerchantOffers;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.potion.EffectInstance;
@@ -38,9 +43,11 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -60,6 +67,7 @@ import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.OtherBlocks;
+
 
 public class ForgeEventHandlers{
 	private static final IEventBus BUS = MinecraftForge.EVENT_BUS;
@@ -117,6 +125,8 @@ public class ForgeEventHandlers{
 			CapabilityHandler.copyCapabilityData(event.getOriginal(), event.getPlayer(), cap);
 		}
 	}
+
+
 	
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
@@ -337,6 +347,31 @@ public class ForgeEventHandlers{
 			}
 			
 			if(isApproved) event.setAmount(event.getAmount() + (level + 1) * 2);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onContainerOpen(PlayerContainerEvent.Open event) {
+		if(event.getContainer() instanceof MerchantContainer && event.getPlayer().isPotionActive(FoodEffects.BEETROOT_POWER)) {
+			MerchantContainer container = (MerchantContainer) event.getContainer();
+			int level = event.getPlayer().getActivePotionEffect(FoodEffects.BEETROOT_POWER).getAmplifier();
+			float discount = (new float[]{0.1f, 0.25f, 0.5f})[Math.min(level, 2)];
+			try{
+				IMerchant merchant = ObfuscationReflectionHelper.getPrivateValue(MerchantContainer.class, container, "field_75178_e");
+				if(merchant instanceof VillagerEntity && ((VillagerEntity) merchant).getVillagerData().getProfession() == VillagerProfession.FARMER) {
+					MerchantOffers offers = container.getOffers();
+					offers.forEach(offer -> {
+						if(offer.getSellingStack().getItem() == Items.EMERALD) {
+							ItemStack buy = !offer.getBuyingStackFirst().isEmpty() ? offer.getBuyingStackFirst() : offer.getBuyingStackSecond();
+							int price = !buy.isEmpty() ? buy.getCount() : 0;
+							int specialPrice = (int) (price * discount);
+							offer.setSpecialPrice(offer.getSpecialPrice() - specialPrice);
+						}
+					});
+				}
+			}catch(Exception e) {
+				System.out.print(e);
+			}
 		}
 	}
 }

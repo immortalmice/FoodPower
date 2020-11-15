@@ -203,7 +203,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.POTATO_POWER, level);
 		});
 		Ingredients.Items.BEETROOT.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.BEETROOT_POWER, level);
 		});
 		Ingredients.Items.BROWN_MUSHROOM.setMealEffectBiConsumer((effectContainer, level) -> {
 
