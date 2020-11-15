@@ -26,12 +26,15 @@ import net.minecraft.item.Items;
 import net.minecraft.item.MerchantOffers;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,6 +48,7 @@ import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
+import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
@@ -390,6 +394,28 @@ public class ForgeEventHandlers{
 					chickenentity.setLocationAndAngles(event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), event.getEntity().rotationYaw, 0.0F);
 					event.getEntity().world.addEntity(chickenentity);
 				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onPotionApplicable(PotionApplicableEvent event) {
+		if(!event.getEntityLiving().world.isRemote && event.getEntityLiving().isPotionActive(FoodEffects.MILK_BUCKET_POWER)){
+			int level = event.getEntityLiving().getActivePotionEffect(FoodEffects.MILK_BUCKET_POWER).getAmplifier();
+			Effect effect = event.getPotionEffect().getPotion();
+			if((level == 0
+				&& (effect == Effects.NAUSEA
+					|| effect == Effects.WEAKNESS
+					|| effect == Effects.SLOWNESS))
+			|| (level == 1
+				&& (effect == Effects.NAUSEA
+					|| effect == Effects.WEAKNESS
+					|| effect == Effects.SLOWNESS
+					|| effect == Effects.MINING_FATIGUE
+					|| effect == Effects.BLINDNESS)
+			|| (level >= 2 && effect.getEffectType() == EffectType.HARMFUL))) {
+				
+				event.setResult(Result.DENY);
 			}
 		}
 	}
