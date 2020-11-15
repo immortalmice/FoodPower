@@ -11,7 +11,8 @@
 			"type": "fruit",
 			"textures": {
 				"foodpower:kiwi": "foodpower:meals/honey_toast/honey_toast_kiwi",
-				"foodpower:papaya": "foodpower:meals/honey_toast/honey_toast_papaya"
+				"foodpower:papaya": "foodpower:meals/honey_toast/honey_toast_papaya",
+				"foodpower:mango": "foodpower:meals/honey_toast/honey_toast_mango"
 			}
 		}, {
 			"type": "sweet", 
