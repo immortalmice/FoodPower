@@ -34,6 +34,7 @@ import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.eventbus.api.Event.Result;
@@ -56,6 +57,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -63,6 +65,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.github.immortalmice.foodpower.FoodPower;
@@ -436,6 +439,36 @@ public class ForgeEventHandlers{
 			|| (level >= 2 && effect.getEffectType() == EffectType.HARMFUL))) {
 				
 				event.setResult(Result.DENY);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
+		World world = event.getWorld();
+		if(!world.isRemote) {
+			Optional<PlayerEntity> player = event.getAffectedEntities().stream()
+				.filter(entity -> {
+					return entity instanceof PlayerEntity && ((PlayerEntity) entity).isPotionActive(FoodEffects.CHICKEN_POWER);
+				})
+				.map(entity -> (PlayerEntity) entity)
+				.findFirst();
+			
+			if(player.isPresent() && event.getExplosion().getExplosivePlacedBy() instanceof CreeperEntity) {
+				int level = player.get().getActivePotionEffect(FoodEffects.CHICKEN_POWER).getAmplifier();
+				float probability = (new float[]{0.05f, 0.15f, 0.35f})[Math.min(level, 2)];
+				
+				if(world.rand.nextFloat() <= probability) {
+					event.getAffectedBlocks().clear();
+					event.getAffectedEntities().clear();
+					Explosion explosion = event.getExplosion();
+					for(int i = 1; i <= 3; i ++) {
+						ChickenEntity chicken = new ChickenEntity(EntityType.CHICKEN, world);
+						chicken.setPosition(explosion.getPosition().x + world.rand.nextDouble() - 0.5, explosion.getPosition().y + 0.5, explosion.getPosition().z + world.rand.nextDouble() - 0.5);
+						world.addEntity(chicken);
+					}
+				}
+				
 			}
 		}
 	}

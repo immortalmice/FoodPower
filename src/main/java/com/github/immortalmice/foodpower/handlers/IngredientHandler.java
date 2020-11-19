@@ -229,7 +229,7 @@ public class IngredientHandler{
 
 		});
 		Ingredients.Items.CHICKEN.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.CHICKEN_POWER, level);
 		});
 		Ingredients.Items.MUTTON.setMealEffectBiConsumer((effectContainer, level) -> {
 
