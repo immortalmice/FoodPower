@@ -19,18 +19,24 @@ import com.github.immortalmice.foodpower.specialclass.RecipeScroll;
 import com.github.immortalmice.foodpower.util.ItemStackNBT;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -171,7 +177,45 @@ public class KitchenApplianceTileEntity extends TileEntityBase implements ITicka
 		StepRequest stepRequest = this.itemHandler.getCurrentStepRequest();
 		if(stepRequest != null && this.progress >= KitchenApplianceTileEntity.requiredTicksFun.apply(stepRequest.getOutputAmount())){
 			this.progress = 0;
-			// TODO extract bucket
+			// Extract bucket
+			int bucketAmount = 0;
+			for(int i = 0; i <= this.itemHandler.ingredients.size()-1; i ++) {
+				ItemStack stack = this.itemHandler.ingredients.get(i);
+				if(stack.getItem().getContainerItem(stack).getItem() instanceof BucketItem) {
+					bucketAmount += this.itemHandler.ingredients.get(i).getCount();
+				}
+			}
+			if(bucketAmount > 0) {
+				ItemStack buckets = new ItemStack(Items.BUCKET, bucketAmount);
+				int[][] offsets = new int[][] {
+					{0, 1, 0},
+					{0, -1, 0},
+					{0, 0, 1},
+					{0, 0, -1},
+					{1, 0, 0},
+					{-1, 0, 0}
+				};
+				boolean inserted = false;
+				for(int i = 0; i <= 5; i ++) {
+					BlockPos newPos = new BlockPos(this.pos.getX() + offsets[i][0], this.pos.getY() + offsets[i][1], this.pos.getZ() + offsets[i][2]);
+					TileEntity tileEntity = this.world.getTileEntity(newPos);
+					LazyOptional<IItemHandler> optional = tileEntity != null ? tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.byIndex(i)) : null;
+					if(optional != null && optional.isPresent()) {
+						IItemHandler handler = optional.orElse(null);
+						for(int j = 0; j <= handler.getSlots()-1; j ++) {
+							buckets = handler.insertItem(j, buckets, false);
+							if(buckets.isEmpty()) {
+								inserted = true;
+								break;
+							}
+						}
+					}
+				}
+				if(!inserted) {
+					ItemEntity itemEntity = new ItemEntity(this.world, this.pos.getX(), this.pos.getY() + 1, this.pos.getZ(), buckets);
+					this.world.addEntity(itemEntity);
+				}
+			}
 			this.itemHandler.ingredients = NonNullList.withSize(stepRequest.getRequires().size(), ItemStack.EMPTY);
 			ItemStack result = stepRequest.getResult() instanceof Meal ? Meal.create(this.itemHandler.cacheScroll) : CookedFood.create(stepRequest);
 			this.itemHandler.setStackInSlot(1, result);
