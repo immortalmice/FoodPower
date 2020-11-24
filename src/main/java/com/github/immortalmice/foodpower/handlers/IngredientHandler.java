@@ -235,7 +235,7 @@ public class IngredientHandler{
 
 		});
 		Ingredients.Items.CHORUS_FRUIT.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.CHORUS_FRUIT_POWER, level);
 		});
 		Ingredients.Items.COCOA_BEANS.setMealEffectBiConsumer((effectContainer, level) -> {
 

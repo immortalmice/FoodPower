@@ -34,6 +34,7 @@ import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -416,6 +417,26 @@ public class ForgeEventHandlers{
 					chickenentity.setGrowingAge(-24000);
 					chickenentity.setLocationAndAngles(event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), event.getEntity().rotationYaw, 0.0F);
 					event.getEntity().world.addEntity(chickenentity);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onArrowImpact(ProjectileImpactEvent.Arrow event) {
+		if(event.getRayTraceResult() instanceof EntityRayTraceResult &&
+			((EntityRayTraceResult) event.getRayTraceResult()).getEntity() instanceof PlayerEntity &&
+			((PlayerEntity) ((EntityRayTraceResult) event.getRayTraceResult()).getEntity()).isPotionActive(FoodEffects.CHORUS_FRUIT_POWER)) {
+			
+			PlayerEntity player = (PlayerEntity) ((EntityRayTraceResult) event.getRayTraceResult()).getEntity();
+			int level = player.getActivePotionEffect(FoodEffects.CHORUS_FRUIT_POWER).getAmplifier();
+			float probability = (new float[]{0.3f, 0.6f, 0.9f})[Math.min(level, 2)];
+			
+			if(player.world.rand.nextFloat() <= probability) {
+				event.setCanceled(true);
+				
+				if(level <= 1) {
+					Items.CHORUS_FRUIT.onItemUseFinish(ItemStack.EMPTY, player.world, player);
 				}
 			}
 		}
