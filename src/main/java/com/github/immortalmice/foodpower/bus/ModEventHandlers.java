@@ -7,6 +7,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -14,6 +15,7 @@ import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.Messages;
 import com.github.immortalmice.foodpower.handlers.BiomeHandler;
 import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
+import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 import com.github.immortalmice.foodpower.handlers.IngredientHandler;
 import com.github.immortalmice.foodpower.handlers.ModelHandler;
 import com.github.immortalmice.foodpower.handlers.RenderHandler;
@@ -49,6 +51,13 @@ public class ModEventHandlers{
 	public static void onTextureStitch(TextureStitchEvent.Pre event){
 		if(event.getMap().getTextureLocation().equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)){
 			ModelHandler.registTextures(event);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onModConfigEvent(final ModConfig.ModConfigEvent event) {
+		if(event.getConfig().getSpec() == ConfigHandler.CLIENT_SPEC) {
+			ConfigHandler.CLIENT.bake();
 		}
 	}
 }

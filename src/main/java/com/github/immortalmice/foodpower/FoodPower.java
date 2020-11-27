@@ -6,6 +6,7 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import com.github.immortalmice.foodpower.bus.ModEventHandlers;
+import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 import com.github.immortalmice.foodpower.handlers.RegistryHandler;
 
 @Mod(FoodPower.MODID)
@@ -24,5 +25,6 @@ public class FoodPower{
     public FoodPower(){
     	ModEventHandlers.registAllEvent();
         RegistryHandler.registAll();
+        ConfigHandler.registConfigs();
     }
 }

@@ -2,6 +2,8 @@ package com.github.immortalmice.foodpower.effect;
 
 import java.util.UUID;
 
+import com.github.immortalmice.foodpower.handlers.ConfigHandler;
+
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.potion.Effect;
@@ -17,5 +19,12 @@ public class FoodEffect extends Effect{
 		this(liquidColorIn);
 		
 		this.addAttributesModifier(attributeIn, UUID.randomUUID().toString(), amountIn, operationIn);
+	}
+	
+	@Override
+	public int getLiquidColor() {
+		if(ConfigHandler.CLIENT.doShowFoodEffectBubble)
+			return super.getLiquidColor();
+		return 0;
 	}
 }
