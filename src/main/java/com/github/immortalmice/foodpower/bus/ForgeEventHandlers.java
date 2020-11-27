@@ -76,6 +76,7 @@ import com.github.immortalmice.foodpower.food.Ingredient;
 import com.github.immortalmice.foodpower.food.Meal;
 import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
 import com.github.immortalmice.foodpower.handlers.CommandHandler;
+import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 import com.github.immortalmice.foodpower.handlers.LootTableHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
@@ -108,7 +109,10 @@ public class ForgeEventHandlers{
 			ListNBT nbt = Meal.getIngredientsListNBT(stack);
 			List<Ingredient> ingrdients = Meal.getIngredients(nbt);
 			for(Ingredient ingredient : ingrdients){
-				ingredient.applyInteractEffect(event, Meal.getIngredientLevel(nbt, ingredient));
+				Boolean isDisabled = ConfigHandler.SERVER.disables.get(ingredient.asItem().getRegistryName().getPath());
+	        	if(isDisabled == null || !isDisabled) {
+	        		ingredient.applyInteractEffect(event, Meal.getIngredientLevel(nbt, ingredient));
+	        	}
 			}
 		}
 	}

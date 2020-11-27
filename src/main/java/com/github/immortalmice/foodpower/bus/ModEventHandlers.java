@@ -58,6 +58,8 @@ public class ModEventHandlers{
 	public static void onModConfigEvent(final ModConfig.ModConfigEvent event) {
 		if(event.getConfig().getSpec() == ConfigHandler.CLIENT_SPEC) {
 			ConfigHandler.CLIENT.bake();
+		}else if(event.getConfig().getSpec() == ConfigHandler.SERVER_SPEC) {
+			ConfigHandler.SERVER.bake();
 		}
 	}
 }

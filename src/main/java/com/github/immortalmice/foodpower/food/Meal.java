@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import com.github.immortalmice.foodpower.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.cooking.CookingRecipe;
 import com.github.immortalmice.foodpower.food.CookedFood;
+import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
@@ -134,9 +135,12 @@ public class Meal extends CookedFood{
 
         int levelSum = 0;
         for(Ingredient ingredient : ingredientList){
-            int level = Meal.getIngredientLevel(ingredientNBT, ingredient);
-            ingredient.applyMealEffect(container, level);
-            levelSum += level;
+        	Boolean isDisabled = ConfigHandler.SERVER.disables.get(ingredient.asItem().getRegistryName().getPath());
+        	if(isDisabled == null || !isDisabled) {
+        		int level = Meal.getIngredientLevel(ingredientNBT, ingredient);
+                ingredient.applyMealEffect(container, level);
+                levelSum += level;
+        	}
         }
 
         container.setHunger(levelSum).setSaturation(1.2f);
