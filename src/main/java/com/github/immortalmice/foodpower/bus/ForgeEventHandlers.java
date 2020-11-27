@@ -221,8 +221,8 @@ public class ForgeEventHandlers{
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onItemCrafted(ItemCraftedEvent event){
 		PlayerEntity player = event.getPlayer();
-		if(!player.world.isRemote && player.isPotionActive(FoodEffects.SAUCE_POWER)){
-			int level = player.getActivePotionEffect(FoodEffects.SAUCE_POWER).getAmplifier();
+		if(!player.world.isRemote && player.isPotionActive(FoodEffects.COCOA_BEANS_POWER)){
+			int level = player.getActivePotionEffect(FoodEffects.COCOA_BEANS_POWER).getAmplifier();
 			float probability = player.world.rand.nextFloat();
 			IInventory inventory = event.getInventory();
 			for(int i = 0; i <= inventory.getSizeInventory()-1; i ++){
