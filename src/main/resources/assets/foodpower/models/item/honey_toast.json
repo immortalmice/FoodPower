@@ -24,7 +24,8 @@
 			"textures": {
 				"foodpower:mint": "foodpower:meals/honey_toast/honey_toast_mint",
 				"minecraft:cocoa_beans": "foodpower:meals/honey_toast/honey_toast_cocoa_beans",
-				"minecraft:sweet_berries": "foodpower:meals/honey_toast/honey_toast_sweet_berries"
+				"minecraft:sweet_berries": "foodpower:meals/honey_toast/honey_toast_sweet_berries",
+				"minecraft:magma_cream": "foodpower:meals/honey_toast/honey_toast_magma_cream"
 			}
 		}]
 	}
