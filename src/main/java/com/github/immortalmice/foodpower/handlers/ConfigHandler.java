@@ -9,9 +9,12 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.CaseFormat;
 
 import com.github.immortalmice.foodpower.FoodPower;
+import com.github.immortalmice.foodpower.util.LevelPointConverter;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 
@@ -61,7 +64,32 @@ public class ConfigHandler {
 		public Map<String, Boolean> disables = new HashMap<>();
 		public final Map<String, BooleanValue> disableValues = new HashMap<>();
 		
+		public int patternExpBase;
+		public double patternExpFactor;
+		public IntValue patternExpBaseValue;
+		public DoubleValue patternExpFactorValue;
+		
+		public int flavorExpBase;
+		public double flavorExpFactor;
+		public IntValue flavorExpBaseValue;
+		public DoubleValue flavorExpFactorValue;
+		
 		public ServerConfig(ForgeConfigSpec.Builder builder) {
+			builder.push("Capability levels");
+			this.patternExpBaseValue = builder
+					.comment("The points consum by pattern level 1.")
+					.defineInRange("patternExpBase", 10, 0, 100000);
+			this.patternExpFactorValue = builder
+				.comment("The factor applied to points that consum by new pattern level.")
+				.defineInRange("patternExpFactor", 1.1d, 1, 1000);
+			this.flavorExpBaseValue = builder
+				.comment("The points consum by flavor level 1.")
+				.defineInRange("flavorExpBase", 5, 0, 100000);
+			this.flavorExpFactorValue = builder
+				.comment("The factor applied to points that consum by new flavor level.")
+				.defineInRange("flavorExpFactor", 1.1d, 1, 1000);
+			builder.pop();
+			
 			builder.push("Disable ingredient effects");
 			ServerConfig.ingredients.forEach(ingredient -> {
 				disableValues.put(ingredient, builder
@@ -77,6 +105,14 @@ public class ConfigHandler {
 			this.disableValues.forEach((ingredient, value) -> {
 				this.disables.put(ingredient, value.get());
 			});
+			
+			this.patternExpBase = this.patternExpBaseValue.get();
+			this.patternExpFactor = this.patternExpFactorValue.get();
+			LevelPointConverter.PATTERN_CONVERTER = new LevelPointConverter(this.patternExpBase, (float) this.patternExpFactor);
+			
+			this.flavorExpBase = this.flavorExpBaseValue.get();
+			this.flavorExpFactor = this.flavorExpFactorValue.get();
+			LevelPointConverter.FLAVOR_CONVERTER = new LevelPointConverter(this.flavorExpBase, (float) this.flavorExpFactor);
 		}
 	}
 }
