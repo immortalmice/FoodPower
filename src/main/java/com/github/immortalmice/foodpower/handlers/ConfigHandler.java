@@ -77,8 +77,8 @@ public class ConfigHandler {
 		public ServerConfig(ForgeConfigSpec.Builder builder) {
 			builder.push("Capability levels");
 			this.patternExpBaseValue = builder
-					.comment("The points consum by pattern level 1.")
-					.defineInRange("patternExpBase", 10, 0, 100000);
+				.comment("The points consum by pattern level 1.")
+				.defineInRange("patternExpBase", 10, 0, 100000);
 			this.patternExpFactorValue = builder
 				.comment("The factor applied to points that consum by new pattern level.")
 				.defineInRange("patternExpFactor", 1.1d, 1, 1000);
