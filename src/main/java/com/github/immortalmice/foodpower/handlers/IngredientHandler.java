@@ -258,7 +258,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.HONEY_BOTTLE_POWER, level);
 		});
 		Ingredients.Items.KELP.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addEffectInstance(new EffectInstance(Effects.WATER_BREATHING, (level - 1) * 1500 + 600, 0));
 		});
 		Ingredients.Items.RABBIT.setMealEffectBiConsumer((effectContainer, level) -> {
 
