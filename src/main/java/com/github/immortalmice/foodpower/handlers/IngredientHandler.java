@@ -255,7 +255,7 @@ public class IngredientHandler{
 				effectContainer.addEffectDuationMultiplier(2.5f);
 		});
 		Ingredients.Items.HONEY_BOTTLE.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.HONEY_BOTTLE_POWER, level);
 		});
 		Ingredients.Items.KELP.setMealEffectBiConsumer((effectContainer, level) -> {
 

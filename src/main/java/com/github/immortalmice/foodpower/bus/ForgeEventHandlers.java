@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.IMerchant;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
@@ -32,6 +33,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.Effects;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.EntityRayTraceResult;
@@ -44,6 +46,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.extensions.IForgeItemStack;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
@@ -113,6 +116,26 @@ public class ForgeEventHandlers{
 	        	if(isDisabled == null || !isDisabled) {
 	        		ingredient.applyInteractEffect(event, Meal.getIngredientLevel(nbt, ingredient));
 	        	}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+		PlayerEntity player = event.getPlayer();
+		if(!player.world.isRemote && player.isPotionActive(FoodEffects.HONEY_BOTTLE_POWER)) {
+			BlockPos pos = event.getPos();
+			BlockState state = player.world.getBlockState(pos);
+			int level = player.getActivePotionEffect(FoodEffects.HONEY_BOTTLE_POWER).getAmplifier();
+			if(state.get(BlockStateProperties.HONEY_LEVEL) == 5) {
+				ItemEntity itemEntity = null;
+				if(event.getItemStack().getItem() == Items.SHEARS) {
+					itemEntity = new ItemEntity(player.world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.HONEYCOMB, level + 1));
+				}else if(event.getItemStack().getItem() == Items.GLASS_BOTTLE) {
+					itemEntity = new ItemEntity(player.world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.HONEY_BOTTLE, level));
+				}
+				if(itemEntity != null)
+					player.world.addEntity(itemEntity);
 			}
 		}
 	}
