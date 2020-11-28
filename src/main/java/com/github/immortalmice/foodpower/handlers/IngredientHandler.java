@@ -247,7 +247,12 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(Effects.FIRE_RESISTANCE, level);
 		});
 		Ingredients.Items.NETHER_WART.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			if(level == 1)
+				effectContainer.addEffectDuationMultiplier(1.2f);
+			else if(level == 2)
+				effectContainer.addEffectDuationMultiplier(1.8f);
+			else if(level >= 3)
+				effectContainer.addEffectDuationMultiplier(2.5f);
 		});
 		Ingredients.Items.HONEY_BOTTLE.setMealEffectBiConsumer((effectContainer, level) -> {
 
