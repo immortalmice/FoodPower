@@ -39,7 +39,6 @@ public class ConfigHandler {
 	
 	public static class ClientConfig {
 		public boolean doShowFoodEffectBubble;
-		
 		public final BooleanValue doShowFoodEffectBubbleValue;
 		
 		public ClientConfig(ForgeConfigSpec.Builder builder) {
@@ -60,10 +59,10 @@ public class ConfigHandler {
 		);
 		
 		public Map<String, Boolean> disables = new HashMap<>();
-		public final Map<String, BooleanValue> disableValues = new HashMap<>(); 
+		public final Map<String, BooleanValue> disableValues = new HashMap<>();
 		
 		public ServerConfig(ForgeConfigSpec.Builder builder) {
-			builder.push("disable ingredient effects");
+			builder.push("Disable ingredient effects");
 			ServerConfig.ingredients.forEach(ingredient -> {
 				disableValues.put(ingredient, builder
 					.comment("")
@@ -75,10 +74,9 @@ public class ConfigHandler {
 		}
 		
 		public void bake() {
-			disableValues.forEach((ingredient, value) -> {
-				disables.put(ingredient, value.get());
+			this.disableValues.forEach((ingredient, value) -> {
+				this.disables.put(ingredient, value.get());
 			});
-			System.out.print("Baked");
 		}
 	}
 }
