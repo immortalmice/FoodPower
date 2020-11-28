@@ -244,7 +244,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(Effects.SPEED, level);
 		});
 		Ingredients.Items.WATER_BUCKET.setMealEffectBiConsumer((effectContainer, level) -> {
-			effectContainer.addDefaultEffectInstance(Effects.FIRE_RESISTANCE, level);
+			effectContainer.addEffectInstance(new EffectInstance(Effects.FIRE_RESISTANCE, (level - 1) * 1500 + 600, 0));
 		});
 		Ingredients.Items.NETHER_WART.setMealEffectBiConsumer((effectContainer, level) -> {
 			if(level == 1)
