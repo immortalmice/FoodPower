@@ -22,7 +22,8 @@
 		}, {
 			"type": "sweet", 
 			"textures": {
-				"foodpower:mint": "foodpower:meals/honey_toast/honey_toast_mint"
+				"foodpower:mint": "foodpower:meals/honey_toast/honey_toast_mint",
+				"minecraft:cocoa_beans": "foodpower:meals/honey_toast/honey_toast_cocoa_beans"
 			}
 		}]
 	}
