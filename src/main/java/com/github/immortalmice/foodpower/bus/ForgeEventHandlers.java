@@ -127,7 +127,7 @@ public class ForgeEventHandlers{
 			BlockPos pos = event.getPos();
 			BlockState state = player.world.getBlockState(pos);
 			int level = player.getActivePotionEffect(FoodEffects.HONEY_BOTTLE_POWER).getAmplifier();
-			if(state.get(BlockStateProperties.HONEY_LEVEL) == 5) {
+			if(state.getProperties().contains(BlockStateProperties.HONEY_LEVEL) && state.get(BlockStateProperties.HONEY_LEVEL) == 5) {
 				ItemEntity itemEntity = null;
 				if(event.getItemStack().getItem() == Items.SHEARS) {
 					itemEntity = new ItemEntity(player.world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.HONEYCOMB, level + 1));
