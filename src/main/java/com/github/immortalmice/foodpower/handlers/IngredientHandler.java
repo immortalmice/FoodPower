@@ -241,7 +241,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.COCOA_BEANS_POWER, level);
 		});
 		Ingredients.Items.SUGAR.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(Effects.SPEED, level);
 		});
 		Ingredients.Items.WATER_BUCKET.setMealEffectBiConsumer((effectContainer, level) -> {
 
