@@ -261,7 +261,7 @@ public class IngredientHandler{
 			effectContainer.addEffectInstance(new EffectInstance(Effects.WATER_BREATHING, (level - 1) * 1500 + 600, 0));
 		});
 		Ingredients.Items.RABBIT.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(Effects.JUMP_BOOST, level);
 		});
 		Ingredients.Items.SWEET_BERRIES.setMealEffectBiConsumer((effectContainer, level) -> {
 
