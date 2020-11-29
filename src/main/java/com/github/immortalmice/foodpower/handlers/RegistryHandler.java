@@ -3,6 +3,7 @@ package com.github.immortalmice.foodpower.handlers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import com.github.immortalmice.foodpower.lists.Bosses;
 import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.CookedFoods;
 import com.github.immortalmice.foodpower.lists.Crops;
@@ -47,6 +48,7 @@ public class RegistryHandler{
 		OtherBlocks.getBlockRegister().register(RegistryHandler.BUS);
 	}
 	public static void registAllEntity(){
+		Bosses.getEntityTypeRegister().register(RegistryHandler.BUS);
 		OtherEntitys.getRegister().register(RegistryHandler.BUS);
 	}
 	public static void registAllContainer(){

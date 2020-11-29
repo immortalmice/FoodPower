@@ -42,7 +42,7 @@ public class ModEventHandlers{
 	public static void onClientSetup(FMLClientSetupEvent event){
 		Containers.registAllScreen();
 		RenderHandler.setupClient();
-		ModelHandler.registLoader();
+		ModelHandler.setupClient();
 	}
 
 	@SuppressWarnings("deprecation")

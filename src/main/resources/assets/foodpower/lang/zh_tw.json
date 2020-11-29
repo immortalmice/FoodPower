@@ -113,6 +113,9 @@
 
     "_comment": "=======================實體=======================",
 
+    "_comment": "Boss",
+    "entity.foodpower.sour_boss": "酸王",
+
     "_comment": "其他實體",
     "entity.foodpower.papaya_seed": "木瓜子",
 

@@ -113,6 +113,9 @@
 
     "_comment": "=======================ENTITY=======================",
 
+    "_comment": "Boss",
+    "entity.foodpower.sour_boss": "Sour Boss",
+
     "_comment": "Other Entity",
     "entity.foodpower.papaya_seed": "Papaya Seed",
 
