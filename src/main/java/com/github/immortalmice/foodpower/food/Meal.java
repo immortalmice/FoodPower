@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 
 import com.github.immortalmice.foodpower.cooking.CookingPattern;
 import com.github.immortalmice.foodpower.cooking.CookingRecipe;
-import com.github.immortalmice.foodpower.food.CookedFood;
 import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;

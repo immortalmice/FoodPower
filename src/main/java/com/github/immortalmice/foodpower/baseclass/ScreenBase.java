@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 import com.github.immortalmice.foodpower.FoodPower;
-import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 public class ScreenBase<T extends ContainerBase> extends ContainerScreen<T>{

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
-import com.github.immortalmice.foodpower.container.recipescroll.RecipeScrollContainer;
 import com.github.immortalmice.foodpower.container.util.FPButton;
 import com.github.immortalmice.foodpower.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.cooking.CookingRecipe.StepRequest;

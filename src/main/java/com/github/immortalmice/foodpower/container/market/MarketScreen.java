@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerInventory;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
-import com.github.immortalmice.foodpower.container.market.MarketContainer;
 import com.github.immortalmice.foodpower.container.util.FPButton;
 import com.github.immortalmice.foodpower.message.MarketMessage;
 
