@@ -261,7 +261,7 @@ public class Meal extends CookedFood{
         return null;
     }
 
-    private static Map<String, Integer> getFlavorExp(ItemStack stack){
+    public static Map<String, Integer> getFlavorExp(ItemStack stack){
         Map<String, Integer> map = new HashMap<>();
 
         if(stack.hasTag() && stack.getTag().contains("flavor_exp")){
