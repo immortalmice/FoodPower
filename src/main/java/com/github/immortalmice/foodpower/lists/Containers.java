@@ -11,6 +11,8 @@ import net.minecraftforge.registries.ObjectHolder;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.container.ContainerPack;
+import com.github.immortalmice.foodpower.container.chefcard.ChefCardContainer;
+import com.github.immortalmice.foodpower.container.chefcard.ChefCardScreen;
 import com.github.immortalmice.foodpower.container.kitchenappliance.KitchenApplianceContainer;
 import com.github.immortalmice.foodpower.container.kitchenappliance.KitchenApplianceScreen;
 import com.github.immortalmice.foodpower.container.market.MarketContainer;
@@ -28,6 +30,7 @@ public class Containers{
 	public static final ContainerPack<RecipeTableContainer> RECIPE_TABLE_PACK = new ContainerPack<RecipeTableContainer>("recipe_table", RecipeTableContainer::new);
 	public static final ContainerPack<RecipeScrollContainer> RECIPE_SCROLL_PACK = new ContainerPack<RecipeScrollContainer>("recipe_scroll", RecipeScrollContainer::new);
 	public static final ContainerPack<KitchenApplianceContainer> KITCHEN_APPLIANCE_PACK = new ContainerPack<KitchenApplianceContainer>("kitchen_appliance", KitchenApplianceContainer::new);
+	public static final ContainerPack<ChefCardContainer> CHEF_CARD_PACK = new ContainerPack<>("chef_card", ChefCardContainer::new);
 
 	@ObjectHolder(FoodPower.MODID)
 	public static class ContainerTypes{
@@ -35,6 +38,7 @@ public class Containers{
 		public static final ContainerType<RecipeTableContainer> RECIPE_TABLE = null;
 		public static final ContainerType<RecipeScrollContainer> RECIPE_SCROLL = null;
 		public static final ContainerType<KitchenApplianceContainer> KITCHEN_APPLIANCE = null;
+		public static final ContainerType<ChefCardContainer> CHEF_CARD = null;
 	}
 
 	public static void registAllScreen(){
@@ -42,5 +46,6 @@ public class Containers{
 		ScreenManager.registerFactory(Containers.ContainerTypes.RECIPE_TABLE, RecipeTableScreen::new);
 		ScreenManager.registerFactory(Containers.ContainerTypes.RECIPE_SCROLL, RecipeScrollScreen::new);
 		ScreenManager.registerFactory(Containers.ContainerTypes.KITCHEN_APPLIANCE, KitchenApplianceScreen::new);
+		ScreenManager.registerFactory(Containers.ContainerTypes.CHEF_CARD, ChefCardScreen::new);
 	}
 }
