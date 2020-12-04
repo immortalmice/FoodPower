@@ -21,8 +21,8 @@ import com.github.immortalmice.foodpower.lists.FoodTypes;
 import com.github.immortalmice.foodpower.message.RecipeTableMessage;
 import com.github.immortalmice.foodpower.types.FoodType;
 import com.github.immortalmice.foodpower.util.TooltipUtil;
-import com.github.immortalmice.foodpower.util.SlotPosProvider.Position2D;
-import com.github.immortalmice.foodpower.util.SlotPosProvider.RecipeTableSlotPos;
+import com.github.immortalmice.foodpower.util.PosProvider.Position2D;
+import com.github.immortalmice.foodpower.util.PosProvider.RecipeTableSlotPos;
 
 public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 	private TextFieldWidget textBox;

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class SlotPosProvider{
+public class PosProvider{
 	public static final int SLOT_SIZE = 18;
 
 	public static List<Position2D> CIRCLE(Position2D center, int radius, int count){
@@ -65,9 +65,9 @@ public class SlotPosProvider{
 			return result.stream().map(pos -> pos.translateToLeftTop()).collect(Collectors.toList());
 		}
 		// Use circle shape when count is not in [1, 6]
-		return SlotPosProvider.CIRCLE(
+		return PosProvider.CIRCLE(
 			center,
-			Math.min(width, height) - SlotPosProvider.SLOT_SIZE,
+			Math.min(width, height) - PosProvider.SLOT_SIZE,
 			count
 		);
 	}
@@ -83,7 +83,7 @@ public class SlotPosProvider{
 				return RecipeTableSlotPos.cache.get(count);
 			}
 			
-			List<Position2D> pos = SlotPosProvider.CIRCLE(
+			List<Position2D> pos = PosProvider.CIRCLE(
 				RecipeTableSlotPos.CENTER,
 				RecipeTableSlotPos.RADIUS,
 				count
@@ -105,7 +105,7 @@ public class SlotPosProvider{
 				return KitchenApplianceSlotPos.cache.get(count);
 			}
 
-			List<Position2D> pos = SlotPosProvider.DICE(
+			List<Position2D> pos = PosProvider.DICE(
 				KitchenApplianceSlotPos.ORIGIN,
 				KitchenApplianceSlotPos.WIDTH,
 				KitchenApplianceSlotPos.HEIGHT,
@@ -140,7 +140,7 @@ public class SlotPosProvider{
 		}
 
 		public Position2D translateToLeftTop(){
-			return this.translate(SlotPosProvider.SLOT_SIZE / 2 * -1);
+			return this.translate(PosProvider.SLOT_SIZE / 2 * -1);
 		}
 	}
 }

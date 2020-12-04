@@ -14,8 +14,8 @@ import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.tileentity.KitchenApplianceTileEntity;
 import com.github.immortalmice.foodpower.tileentity.KitchenApplianceTileEntity.KitchenApplanceItemHandler;
-import com.github.immortalmice.foodpower.util.SlotPosProvider.KitchenApplianceSlotPos;
-import com.github.immortalmice.foodpower.util.SlotPosProvider.Position2D;
+import com.github.immortalmice.foodpower.util.PosProvider.KitchenApplianceSlotPos;
+import com.github.immortalmice.foodpower.util.PosProvider.Position2D;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
