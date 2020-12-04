@@ -6,12 +6,10 @@ import java.util.Map.Entry;
 
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
 import com.github.immortalmice.foodpower.cooking.CookingPattern;
-import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
 import com.github.immortalmice.foodpower.types.FlavorType;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
 
@@ -38,35 +36,24 @@ public class ChefCardScreen extends ScreenBase<ChefCardContainer> {
 		PATTERN_COLORS.put(CookingPatterns.JUICE, 0x55FFFF);
 	}
 	
-	private Map<FlavorType, Integer> flavorExps = new HashMap<>();
-	private Map<CookingPattern, Integer> patternExps = new HashMap<>();
-	
 	public ChefCardScreen(ChefCardContainer containerIn, PlayerInventory inventoryIn, ITextComponent textIn) {
 		super(containerIn, inventoryIn, textIn);
 		
 		this.textureFileName = "chef_card";
 		this.xSize = 256;
 		this.ySize = 128;
-		
-		PlayerEntity player = inventoryIn.player;
-		player.getCapability(Capabilities.FLAVOR_EXP_CAPABILITY).ifPresent(cap -> {
-			this.flavorExps = cap.getAllExpLevel();
-		});
-		player.getCapability(Capabilities.PATTERN_EXP_CAPABILITY).ifPresent(cap -> {
-			this.patternExps = cap.getAllExpLevel();
-		});
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		int y = 0;
-		for(Entry<FlavorType, Integer> entry : this.flavorExps.entrySet()) {
+		for(Entry<FlavorType, Integer> entry : this.container.getFlavorExp().entrySet()) {
 			this.drawString(this.font, entry.getKey().getName() + String.valueOf(entry.getValue()), 0, y, FLAVOR_COLORS.get(entry.getKey()));
 			y += 20;
 		}
 		
 		y = 0;
-		for(Entry<CookingPattern, Integer> entry : this.patternExps.entrySet()) {
+		for(Entry<CookingPattern, Integer> entry : this.container.getPatternExps().entrySet()) {
 			this.drawString(this.font, entry.getKey().getName() + String.valueOf(entry.getValue()), 50, y, PATTERN_COLORS.get(entry.getKey()));
 			y += 20;
 		}
