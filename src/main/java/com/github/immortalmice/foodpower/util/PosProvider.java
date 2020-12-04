@@ -11,6 +11,10 @@ public class PosProvider{
 	public static final int SLOT_SIZE = 18;
 
 	public static List<Position2D> CIRCLE(Position2D center, int radius, int count){
+		return PosProvider.CIRCLE(center, radius, count, true);
+	}
+	
+	public static List<Position2D> CIRCLE(Position2D center, int radius, int count, boolean doSlotTranslate){
 		List<Position2D> result = new ArrayList<>();
 
 		if(count > 0){
@@ -20,13 +24,17 @@ public class PosProvider{
 					(int)(center.x + radius * Math.cos((angle * i - 90) * Math.PI / 180)),
 					(int)(center.y + radius * Math.sin((angle * i - 90) * Math.PI / 180))
 				);
-				result.add(pos.translateToLeftTop());
+				result.add(doSlotTranslate ? pos.translateToLeftTop() : pos);
 			}
 		}
 		return result;
 	}
 
 	public static List<Position2D> DICE(Position2D origin, int width, int height, int count){
+		return PosProvider.DICE(origin, width, height, count, true);
+	}
+
+	public static List<Position2D> DICE(Position2D origin, int width, int height, int count, boolean doSlotTranslate){
 		Position2D center = new Position2D(
 			(int)(origin.x + width / 2),
 			(int)(origin.y + height / 2)
@@ -62,13 +70,14 @@ public class PosProvider{
 				result.addAll(centerBetween.stream().map(pos -> pos.translate(0, oneThirdGap)).collect(Collectors.toList()));
 			}
 
-			return result.stream().map(pos -> pos.translateToLeftTop()).collect(Collectors.toList());
+			return result.stream().map(pos -> doSlotTranslate ? pos.translateToLeftTop() : pos).collect(Collectors.toList());
 		}
 		// Use circle shape when count is not in [1, 6]
 		return PosProvider.CIRCLE(
 			center,
 			Math.min(width, height) - PosProvider.SLOT_SIZE,
-			count
+			count,
+			doSlotTranslate
 		);
 	}
 
