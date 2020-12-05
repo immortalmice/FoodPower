@@ -10,7 +10,10 @@ import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
 import com.github.immortalmice.foodpower.types.FlavorType;
 
+import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class ChefCardScreen extends ScreenBase<ChefCardContainer> {
@@ -36,16 +39,26 @@ public class ChefCardScreen extends ScreenBase<ChefCardContainer> {
 		PATTERN_COLORS.put(CookingPatterns.JUICE, 0x55FFFF);
 	}
 	
+	private ResourceLocation skinLocation;
+	
 	public ChefCardScreen(ChefCardContainer containerIn, PlayerInventory inventoryIn, ITextComponent textIn) {
 		super(containerIn, inventoryIn, textIn);
 		
 		this.textureFileName = "chef_card";
 		this.xSize = 256;
 		this.ySize = 128;
+
+		if(this.playerInventory.player instanceof ClientPlayerEntity) {
+			skinLocation = ((ClientPlayerEntity) this.playerInventory.player).getLocationSkin();
+		}
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+		
+		this.minecraft.getTextureManager().bindTexture(this.skinLocation);
+		AbstractGui.blit(16, 40, 48, 48, 48, 48, 384, 384);
+		
 		int y = 0;
 		for(Entry<FlavorType, Integer> entry : this.container.getFlavorExp().entrySet()) {
 			this.drawString(this.font, entry.getKey().getName() + String.valueOf(entry.getValue()), 0, y, FLAVOR_COLORS.get(entry.getKey()));
