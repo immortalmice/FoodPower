@@ -2,7 +2,9 @@ package com.github.immortalmice.foodpower.boss.entities;
 
 import com.github.immortalmice.foodpower.baseclass.BossBase;
 
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,5 +29,11 @@ public class SourBoss extends BossBase {
 		super.registerGoals();
 		
 		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+	}
+
+
+	@Override
+	public EntitySize getSize(Pose poseIn) {
+		return EntitySize.fixed(1.5f, 1.0f);
 	}
 }
