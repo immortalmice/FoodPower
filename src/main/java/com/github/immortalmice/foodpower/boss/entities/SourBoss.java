@@ -1,19 +1,20 @@
 package com.github.immortalmice.foodpower.boss.entities;
 
+import com.github.immortalmice.foodpower.baseclass.BossBase;
+
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 
-public class SourBoss extends MobEntity {
+public class SourBoss extends BossBase {
 	public SourBoss(EntityType<? extends SourBoss> type, World worldIn) {
-		super(type, worldIn);
-		
-		this.registerGoals();
+		super(type, worldIn, BossInfo.Color.GREEN);
 	}
 	
+
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
