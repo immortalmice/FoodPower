@@ -56,10 +56,9 @@ public class SourBossRenderer extends MobRenderer<SourBoss, SourBossRenderer.Sou
 		}
 	
 		@Override
-		public void setRotationAngles(SourBoss entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-				float netHeadYaw, float headPitch) {
-			// TODO Auto-generated method stub
-			
+		public void setRotationAngles(SourBoss entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		      this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
+		      this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
 		}
 	}
 }
