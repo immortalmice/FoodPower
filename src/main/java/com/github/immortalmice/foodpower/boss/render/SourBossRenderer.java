@@ -28,6 +28,7 @@ public class SourBossRenderer extends MobRenderer<SourBoss, SourBossRenderer.Sou
 		private final ModelRenderer body2;
 		private final ModelRenderer body3;
 		private final ModelRenderer body4;
+		private final ModelRenderer crown;
 
 		public SourBossModel() {
 			textureWidth = 256;
@@ -52,6 +53,19 @@ public class SourBossRenderer extends MobRenderer<SourBoss, SourBossRenderer.Sou
 			body4 = new ModelRenderer(this);
 			body4.setRotationPoint(0.0F, 18.5F, 43.0F);
 			body4.setTextureOffset(0, 32).addBox(-5.0F, -5.5F, -5.0F, 10.0F, 11.0F, 10.0F, 0.0F, false);
+
+			crown = new ModelRenderer(this);
+			crown.setRotationPoint(0.0F, 8.0F, -4.5F);
+			setRotationAngle(crown, -0.4363F, 0.0F, 0.0F);
+			crown.setTextureOffset(0, 52).addBox(-1.0F, -5.0F, -0.5F, 2.0F, 5.0F, 1.0F, 0.0F, false);
+			crown.setTextureOffset(6, 52).addBox(-2.0F, -4.0F, -0.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+			crown.setTextureOffset(6, 52).addBox(1.0F, -4.0F, -0.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+			crown.setTextureOffset(6, 52).addBox(2.0F, -2.0F, -0.5F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+			crown.setTextureOffset(6, 52).addBox(-3.0F, -2.0F, -0.5F, 1.0F, 2.0F, 1.0F, 0.0F, false);
+			crown.setTextureOffset(6, 52).addBox(-4.0F, -4.0F, -0.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+			crown.setTextureOffset(6, 52).addBox(3.0F, -4.0F, -0.5F, 1.0F, 4.0F, 1.0F, 0.0F, false);
+			crown.setTextureOffset(6, 52).addBox(4.0F, -1.0F, -0.5F, 1.0F, 1.0F, 1.0F, 0.0F, false);
+			crown.setTextureOffset(6, 53).addBox(-5.0F, -1.0F, -0.5F, 1.0F, 1.0F, 1.0F, 0.0F, false);
 		}
 	
 		@Override
@@ -61,6 +75,7 @@ public class SourBossRenderer extends MobRenderer<SourBoss, SourBossRenderer.Sou
 			body2.render(matrixStack, buffer, packedLight, packedOverlay);
 			body3.render(matrixStack, buffer, packedLight, packedOverlay);
 			body4.render(matrixStack, buffer, packedLight, packedOverlay);
+			crown.render(matrixStack, buffer, packedLight, packedOverlay);
 		}
 	
 		public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
