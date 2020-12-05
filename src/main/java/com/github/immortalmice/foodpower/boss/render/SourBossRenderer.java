@@ -24,29 +24,43 @@ public class SourBossRenderer extends MobRenderer<SourBoss, SourBossRenderer.Sou
 
 	public static class SourBossModel extends EntityModel<SourBoss> {
 		private final ModelRenderer head;
-		private final ModelRenderer body;
-	
+		private final ModelRenderer body1;
+		private final ModelRenderer body2;
+		private final ModelRenderer body3;
+		private final ModelRenderer body4;
+
 		public SourBossModel() {
-			textureWidth = 64;
-			textureHeight = 64;
-	
+			textureWidth = 256;
+			textureHeight = 256;
+
 			head = new ModelRenderer(this);
-			head.setRotationPoint(-3.0F, 24.0F, -7.0F);
-			head.setTextureOffset(0, 0).addBox(-1.0F, -8.0F, 3.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
-	
-			body = new ModelRenderer(this);
-			body.setRotationPoint(0.0F, 24.0F, 0.0F);
-			body.setTextureOffset(0, 16).addBox(-3.0F, -6.0F, 4.0F, 6.0F, 6.0F, 6.0F, 0.0F, false);
-			body.setTextureOffset(0, 16).addBox(-3.0F, -6.0F, 10.0F, 6.0F, 6.0F, 6.0F, 0.0F, false);
-			body.setTextureOffset(0, 16).addBox(-3.0F, -6.0F, 16.0F, 6.0F, 6.0F, 6.0F, 0.0F, false);
-			body.setTextureOffset(0, 16).addBox(-3.0F, -6.0F, 22.0F, 6.0F, 6.0F, 6.0F, 0.0F, false);
-			body.setTextureOffset(0, 16).addBox(-3.0F, -6.0F, 28.0F, 6.0F, 6.0F, 6.0F, 0.0F, false);
+			head.setRotationPoint(0.0F, 16.0F, 8.0F);
+			head.setTextureOffset(0, 0).addBox(-8.0F, -8.0F, -16.0F, 16.0F, 16.0F, 16.0F, 0.0F, false);
+
+			body1 = new ModelRenderer(this);
+			body1.setRotationPoint(0.0F, 18.5F, 13.0F);
+			body1.setTextureOffset(0, 32).addBox(-5.0F, -5.5F, -5.0F, 10.0F, 11.0F, 10.0F, 0.0F, false);
+
+			body2 = new ModelRenderer(this);
+			body2.setRotationPoint(0.0F, 18.5F, 23.0F);
+			body2.setTextureOffset(0, 32).addBox(-5.0F, -5.5F, -5.0F, 10.0F, 11.0F, 10.0F, 0.0F, false);
+
+			body3 = new ModelRenderer(this);
+			body3.setRotationPoint(0.0F, 18.5F, 33.0F);
+			body3.setTextureOffset(0, 32).addBox(-5.0F, -5.5F, -5.0F, 10.0F, 11.0F, 10.0F, 0.0F, false);
+
+			body4 = new ModelRenderer(this);
+			body4.setRotationPoint(0.0F, 18.5F, 43.0F);
+			body4.setTextureOffset(0, 32).addBox(-5.0F, -5.5F, -5.0F, 10.0F, 11.0F, 10.0F, 0.0F, false);
 		}
 	
 		@Override
 		public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 			head.render(matrixStack, buffer, packedLight, packedOverlay);
-			body.render(matrixStack, buffer, packedLight, packedOverlay);
+			body1.render(matrixStack, buffer, packedLight, packedOverlay);
+			body2.render(matrixStack, buffer, packedLight, packedOverlay);
+			body3.render(matrixStack, buffer, packedLight, packedOverlay);
+			body4.render(matrixStack, buffer, packedLight, packedOverlay);
 		}
 	
 		public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
