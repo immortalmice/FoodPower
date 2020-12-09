@@ -40,6 +40,7 @@ public class FPWorldSavedData extends WorldSavedData {
 	
 	@Nullable
 	public FlavorType triggerWaste(UUID player, long time, ItemStack stack) {
+		// TODO check flavor exp
 		FlavorType summoned = null;
 		Map<String, Integer> exps = Meal.getFlavorExp(stack);
 		Optional<WasteData> optional = this.wasteList.stream().filter(wasteData -> {
