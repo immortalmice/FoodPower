@@ -15,7 +15,12 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 
 import com.github.immortalmice.foodpower.baseclass.ItemFoodBase;
+import com.github.immortalmice.foodpower.boss.entities.BitterBoss;
+import com.github.immortalmice.foodpower.boss.entities.EnderBoss;
+import com.github.immortalmice.foodpower.boss.entities.NetherBoss;
+import com.github.immortalmice.foodpower.boss.entities.SaltyBoss;
 import com.github.immortalmice.foodpower.boss.entities.SourBoss;
+import com.github.immortalmice.foodpower.boss.entities.SweetBoss;
 import com.github.immortalmice.foodpower.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.cooking.CookingRecipe.StepRequest;
 import com.github.immortalmice.foodpower.lists.Bosses;
@@ -72,8 +77,18 @@ public class CookedFood extends ItemFoodBase implements ICookingElement{
                         FPWorldSavedData data = world.getSavedData().getOrCreate(FPWorldSavedData::new, "foodpower");
                         FlavorType type = data.triggerWaste(entityItem.getThrowerId(), entityItem.world.getGameTime(), stack);
                         MobEntity bossEntity = null;
-                        if(type == FlavorTypes.SOUR) {
+                        if(type == FlavorTypes.SWEET) {
+                        	bossEntity = new SweetBoss(Bosses.EntityTypes.SWEET_BOSS, world);
+                        }else if(type == FlavorTypes.BITTER){
+                        	bossEntity = new BitterBoss(Bosses.EntityTypes.BITTER_BOSS, world);
+                        }else if(type == FlavorTypes.SOUR) {
                         	bossEntity = new SourBoss(Bosses.EntityTypes.SOUR_BOSS, world);
+                        }else if(type == FlavorTypes.SALTY) {
+                        	bossEntity = new SaltyBoss(Bosses.EntityTypes.SALTY_BOSS, world);
+                        }else if(type == FlavorTypes.NETHER) {
+                        	bossEntity = new NetherBoss(Bosses.EntityTypes.NETHER_BOSS, world);
+                        }else if(type == FlavorTypes.ENDER) {
+                        	bossEntity = new EnderBoss(Bosses.EntityTypes.ENDER_BOSS, world);
                         }
                         if(bossEntity != null) {
                         	bossEntity.setPosition(entityItem.getPosX(), entityItem.getPosY(), entityItem.getPosZ());

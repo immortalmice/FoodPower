@@ -115,7 +115,12 @@
     "_comment": "=======================實體=======================",
 
     "_comment": "Boss",
+    "entity.foodpower.sweet_boss": "甜王",
+    "entity.foodpower.bitter_boss": "苦王",
     "entity.foodpower.sour_boss": "酸王",
+    "entity.foodpower.salty_boss": "鹹王",
+    "entity.foodpower.nether_boss": "地獄王",
+    "entity.foodpower.ender_boss": "終界王",
 
     "_comment": "其他實體",
     "entity.foodpower.papaya_seed": "木瓜子",

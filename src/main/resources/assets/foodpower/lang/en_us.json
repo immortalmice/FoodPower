@@ -115,7 +115,12 @@
     "_comment": "=======================ENTITY=======================",
 
     "_comment": "Boss",
+    "entity.foodpower.sweet_boss": "Sweet Boss",
+    "entity.foodpower.bitter_boss": "Bitter Boss",
     "entity.foodpower.sour_boss": "Sour Boss",
+    "entity.foodpower.salty_boss": "Salty Boss",
+    "entity.foodpower.nether_boss": "Nether Boss",
+    "entity.foodpower.ender_boss": "Ender Boss",
 
     "_comment": "Other Entity",
     "entity.foodpower.papaya_seed": "Papaya Seed",
