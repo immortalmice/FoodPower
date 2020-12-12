@@ -116,12 +116,12 @@
     "_comment": "=======================實體=======================",
 
     "_comment": "Boss",
-    "entity.foodpower.sweet_boss": "甜王",
-    "entity.foodpower.bitter_boss": "苦王",
-    "entity.foodpower.sour_boss": "酸王",
-    "entity.foodpower.salty_boss": "鹹王",
-    "entity.foodpower.nether_boss": "地獄王",
-    "entity.foodpower.ender_boss": "終界王",
+    "entity.foodpower.sweet_boss": "甜心少女",
+    "entity.foodpower.bitter_boss": "苯甲地那銨",
+    "entity.foodpower.sour_boss": "臭酸南瓜蛇",
+    "entity.foodpower.salty_boss": "鹽烤山豬",
+    "entity.foodpower.nether_boss": "可魯貝洛斯",
+    "entity.foodpower.ender_boss": "終焉之東方龍",
 
     "_comment": "其他實體",
     "entity.foodpower.papaya_seed": "木瓜子",
