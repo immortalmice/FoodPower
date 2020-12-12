@@ -69,6 +69,7 @@
     "item.foodpower.papaya_seed": "木瓜子",
     "item.foodpower.cream_shield": "鮮奶油盾牌",
     "item.foodpower.chef_card": "廚師名片",
+    "item.foodpower.venom": "毒液",
 
     "_comment": "=======================方塊=======================",
 
@@ -124,6 +125,7 @@
 
     "_comment": "其他實體",
     "entity.foodpower.papaya_seed": "木瓜子",
+    "entity.foodpower.venom": "毒液",
 
     "_comment": "=======================效果=======================",
 

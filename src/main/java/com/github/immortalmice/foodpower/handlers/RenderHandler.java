@@ -40,6 +40,7 @@ public class RenderHandler{
 
 	private static void registEntityRenderer(){
 		RenderingRegistry.registerEntityRenderingHandler(OtherEntitys.EntityTypes.PAPAYA_SEED, RenderHandler.getSpriteIRenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(OtherEntitys.EntityTypes.VENOM, RenderHandler.getSpriteIRenderFactory());
 	}
 
 	private static IRenderFactory<Entity> getSpriteIRenderFactory(){

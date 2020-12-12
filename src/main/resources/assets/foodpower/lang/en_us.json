@@ -69,6 +69,7 @@
     "item.foodpower.papaya_seed": "PapayaSeed",
     "item.foodpower.cream_shield": "Cream Shield",
     "item.foodpower.chef_card": "Chef Card",
+    "item.foodpower.venom": "Venom",
 
     "_comment": "=======================BLOCK=======================",
 
@@ -124,6 +125,7 @@
 
     "_comment": "Other Entity",
     "entity.foodpower.papaya_seed": "Papaya Seed",
+    "entity.foodpower.venom": "Venom",
 
     "_comment": "=======================EFFECT=======================",
 
