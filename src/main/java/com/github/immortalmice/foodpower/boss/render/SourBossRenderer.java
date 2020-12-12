@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 
 public class SourBossRenderer extends MobRenderer<SourBoss, SourBossRenderer.SourBossModel> {
 	public SourBossRenderer(EntityRendererManager renderManagerIn) {
@@ -82,6 +83,10 @@ public class SourBossRenderer extends MobRenderer<SourBoss, SourBossRenderer.Sou
 		public void setRotationAngles(SourBoss entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		      this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
 		      this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
+		      this.body1.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		      this.body2.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+		      this.body3.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		      this.body4.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
 		}
 	}
 }
