@@ -52,6 +52,7 @@ public class SweetBossRenderer extends MobRenderer<SweetBoss, SweetBossRenderer.
 			right_hand = new ModelRenderer(this);
 			right_hand.setRotationPoint(-4.0F, -3.0F, 0.0F);
 			right_hand.setTextureOffset(26, 13).addBox(-4.0F, 0.0F, -2.0F, 4.0F, 10.0F, 4.0F, 0.0F, false);
+			right_hand.setTextureOffset(16, 32).addBox(-2.0F, 9.0F, -10.0F, 1.0F, 1.0F, 16.0F, 0.0F, false);
 
 			head = new ModelRenderer(this);
 			head.setRotationPoint(0.5F, -3.0F, 0.875F);
