@@ -44,6 +44,9 @@ public class VenomEntity extends ProjectileItemEntity {
 
 				target.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 5.0f);
 				if(target instanceof LivingEntity) {
+					if(((LivingEntity) target).isPotionActive(Effects.BLINDNESS) && this.getThrower() != null) {
+						this.getThrower().heal(5.0f);
+					}
 					((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.BLINDNESS, 60));
 				}
 			}
