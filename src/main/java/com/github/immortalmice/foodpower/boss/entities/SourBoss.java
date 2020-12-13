@@ -22,7 +22,6 @@ public class SourBoss extends BossBase implements IRangedAttackMob {
 	public SourBoss(EntityType<? extends SourBoss> type, World worldIn) {
 		super(type, worldIn, BossInfo.Color.GREEN);
 	}
-	
 
 	@Override
 	protected void registerAttributes() {
@@ -41,12 +40,10 @@ public class SourBoss extends BossBase implements IRangedAttackMob {
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 	}
 
-
 	@Override
 	public EntitySize getSize(Pose poseIn) {
 		return EntitySize.fixed(1.5f, 1.0f);
 	}
-
 
 	@Override
 	public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
