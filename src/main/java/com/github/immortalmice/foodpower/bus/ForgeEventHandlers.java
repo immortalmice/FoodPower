@@ -408,15 +408,15 @@ public class ForgeEventHandlers{
 				int level = targetEntity.getActivePotionEffect(FoodEffects.SWEET_BERRIES_POWER).getAmplifier();
 				if(level == 0) {
 					if(immediateSourceEntity instanceof LivingEntity && targetEntity.world.rand.nextFloat() <= 0.15f) {
-						((LivingEntity) immediateSourceEntity).setHealth(((LivingEntity) immediateSourceEntity).getHealth() - 1);;
+						((LivingEntity) immediateSourceEntity).setHealth(((LivingEntity) immediateSourceEntity).getHealth() - 1);
 					}
 				}else if(level == 1) {
 					if(immediateSourceEntity instanceof LivingEntity && targetEntity.world.rand.nextFloat() <= 0.35f) {
-						((LivingEntity) immediateSourceEntity).setHealth(((LivingEntity) immediateSourceEntity).getHealth() - 2);;
+						((LivingEntity) immediateSourceEntity).setHealth(((LivingEntity) immediateSourceEntity).getHealth() - 2);
 					}
 				}else if(level >= 2) {
 					if(trueSourceEntity instanceof LivingEntity && targetEntity.world.rand.nextFloat() <= 0.7f) {
-						((LivingEntity) trueSourceEntity).setHealth(((LivingEntity) trueSourceEntity).getHealth() - 3);;
+						((LivingEntity) trueSourceEntity).setHealth(((LivingEntity) trueSourceEntity).getHealth() - 3);
 					}
 				}
 			}
@@ -538,6 +538,7 @@ public class ForgeEventHandlers{
 	}
 	
 	@SubscribeEvent
+
 	public static void onXPPickUp(PlayerXpEvent.XpChange event) {
 		PlayerEntity player = event.getPlayer();
 		if(!player.world.isRemote && player.isPotionActive(FoodEffects.EXPERIENCE_BOTTLE_POWER)) {
