@@ -264,19 +264,20 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(Effects.JUMP_BOOST, level);
 		});
 		Ingredients.Items.SWEET_BERRIES.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.SWEET_BERRIES_POWER, level);
 		});
 		Ingredients.Items.MAGMA_CREAM.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			float probability = (new float[]{0.1f, 0.3f, 0.6f})[Math.min(level, 3) - 1];
+			effectContainer.addNotConsumMealChance(probability);
 		});
 		Ingredients.Items.GHAST_TEAR.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(Effects.REGENERATION, level);
 		});
 		Ingredients.Items.DRAGON_BREATH.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.DRAGON_BREATH_POWER, level);
 		});
 		Ingredients.Items.EXPERIENCE_BOTTLE.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.EXPERIENCE_BOTTLE_POWER, level);
 		});
 	}
 

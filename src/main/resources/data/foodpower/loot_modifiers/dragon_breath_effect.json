@@ -1,0 +1,17 @@
+{
+    "type": "foodpower:dragon_breath_effect",
+    "conditions": [{
+        "condition": "entity_properties",
+        "entity": "KILLER_PLAYER",
+        "predicate": {
+            "effects": {
+                "foodpower:dragon_breath_power": {
+                    "amplifier": {
+                        "min": 0
+                    }
+                }
+            }
+        }   
+    }],
+    "probabilities": [0.1, 0.2, 0.5]
+}

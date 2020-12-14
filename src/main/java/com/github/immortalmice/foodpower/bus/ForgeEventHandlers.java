@@ -60,6 +60,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -390,19 +391,35 @@ public class ForgeEventHandlers{
 	
 	@SubscribeEvent
 	public static void onLivingDamaged(LivingDamageEvent event){
-		Entity sourceEntity = event.getSource().getTrueSource();
+		Entity trueSourceEntity = event.getSource().getTrueSource();
+		Entity immediateSourceEntity = event.getSource().getImmediateSource();
+		LivingEntity targetEntity = event.getEntityLiving();
 		
-		if(sourceEntity instanceof PlayerEntity
-			&& !sourceEntity.world.isRemote
-			&& ((PlayerEntity) sourceEntity).isPotionActive(FoodEffects.CHILI_POWER)){
-			
-			int level = ((PlayerEntity) sourceEntity).getActivePotionEffect(FoodEffects.CHILI_POWER).getAmplifier();
-			boolean isApproved = false;
-			if(level >= 2 || sourceEntity == event.getSource().getImmediateSource()){
-				isApproved = true;
+		if(!targetEntity.world.isRemote) {
+			if(trueSourceEntity instanceof PlayerEntity && ((PlayerEntity) trueSourceEntity).isPotionActive(FoodEffects.CHILI_POWER)) {
+				int level = ((PlayerEntity) trueSourceEntity).getActivePotionEffect(FoodEffects.CHILI_POWER).getAmplifier();
+				boolean isApproved = false;
+				if(level >= 2 || trueSourceEntity == immediateSourceEntity){
+					isApproved = true;
+				}
+				
+				if(isApproved) event.setAmount(event.getAmount() + (level + 1) * 2);
+			}else if(targetEntity.isPotionActive(FoodEffects.SWEET_BERRIES_POWER)) {
+				int level = targetEntity.getActivePotionEffect(FoodEffects.SWEET_BERRIES_POWER).getAmplifier();
+				if(level == 0) {
+					if(immediateSourceEntity instanceof LivingEntity && targetEntity.world.rand.nextFloat() <= 0.15f) {
+						((LivingEntity) immediateSourceEntity).setHealth(((LivingEntity) immediateSourceEntity).getHealth() - 1);
+					}
+				}else if(level == 1) {
+					if(immediateSourceEntity instanceof LivingEntity && targetEntity.world.rand.nextFloat() <= 0.35f) {
+						((LivingEntity) immediateSourceEntity).setHealth(((LivingEntity) immediateSourceEntity).getHealth() - 2);
+					}
+				}else if(level >= 2) {
+					if(trueSourceEntity instanceof LivingEntity && targetEntity.world.rand.nextFloat() <= 0.7f) {
+						((LivingEntity) trueSourceEntity).setHealth(((LivingEntity) trueSourceEntity).getHealth() - 3);
+					}
+				}
 			}
-			
-			if(isApproved) event.setAmount(event.getAmount() + (level + 1) * 2);
 		}
 	}
 
@@ -517,6 +534,17 @@ public class ForgeEventHandlers{
 				}
 				
 			}
+		}
+	}
+	
+	@SubscribeEvent
+
+	public static void onXPPickUp(PlayerXpEvent.XpChange event) {
+		PlayerEntity player = event.getPlayer();
+		if(!player.world.isRemote && player.isPotionActive(FoodEffects.EXPERIENCE_BOTTLE_POWER)) {
+			int level = player.getActivePotionEffect(FoodEffects.EXPERIENCE_BOTTLE_POWER).getAmplifier();
+			float factor = (new float[]{1.2f, 2f, 3f})[Math.min(level, 2)];
+			event.setAmount((int)(event.getAmount() * factor));
 		}
 	}
 }
