@@ -267,7 +267,8 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.SWEET_BERRIES_POWER, level);
 		});
 		Ingredients.Items.MAGMA_CREAM.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			float probability = (new float[]{0.1f, 0.3f, 0.6f})[Math.min(level, 3) - 1];
+			effectContainer.addNotConsumMealChance(probability);
 		});
 		Ingredients.Items.GHAST_TEAR.setMealEffectBiConsumer((effectContainer, level) -> {
 
