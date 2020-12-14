@@ -45,7 +45,7 @@ public class DragonBreathEffectModifier extends LootModifier {
 			&& !generatedLoot.stream().filter(stack -> stack.getItem() == skull).findFirst().isPresent()
 			&& player instanceof PlayerEntity) {
 			
-			int level = ((PlayerEntity) entity).getActivePotionEffect(Effects.FoodEffects.DRAGON_BREATH_POWER).getAmplifier();
+			int level = ((PlayerEntity) player).getActivePotionEffect(Effects.FoodEffects.DRAGON_BREATH_POWER).getAmplifier();
 			if(entity.world.rand.nextFloat() <= this.probabilities.get(level > 2 ? 2 : level)) {
 				generatedLoot.add(new ItemStack(skull));
 			}
