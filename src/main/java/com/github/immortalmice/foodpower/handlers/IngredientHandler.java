@@ -271,7 +271,7 @@ public class IngredientHandler{
 			effectContainer.addNotConsumMealChance(probability);
 		});
 		Ingredients.Items.GHAST_TEAR.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(Effects.REGENERATION, level);
 		});
 		Ingredients.Items.DRAGON_BREATH.setMealEffectBiConsumer((effectContainer, level) -> {
 
