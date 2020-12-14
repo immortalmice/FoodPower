@@ -395,7 +395,7 @@ public class ForgeEventHandlers{
 		Entity immediateSourceEntity = event.getSource().getImmediateSource();
 		LivingEntity targetEntity = event.getEntityLiving();
 		
-		if(!trueSourceEntity.world.isRemote) {
+		if(!targetEntity.world.isRemote) {
 			if(trueSourceEntity instanceof PlayerEntity && ((PlayerEntity) trueSourceEntity).isPotionActive(FoodEffects.CHILI_POWER)) {
 				int level = ((PlayerEntity) trueSourceEntity).getActivePotionEffect(FoodEffects.CHILI_POWER).getAmplifier();
 				boolean isApproved = false;
