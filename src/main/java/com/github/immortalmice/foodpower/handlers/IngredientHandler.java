@@ -264,7 +264,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(Effects.JUMP_BOOST, level);
 		});
 		Ingredients.Items.SWEET_BERRIES.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.SWEET_BERRIES_POWER, level);
 		});
 		Ingredients.Items.MAGMA_CREAM.setMealEffectBiConsumer((effectContainer, level) -> {
 
