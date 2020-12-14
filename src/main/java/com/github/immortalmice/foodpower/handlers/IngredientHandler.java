@@ -277,7 +277,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.DRAGON_BREATH_POWER, level);
 		});
 		Ingredients.Items.EXPERIENCE_BOTTLE.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.EXPERIENCE_BOTTLE_POWER, level);
 		});
 	}
 

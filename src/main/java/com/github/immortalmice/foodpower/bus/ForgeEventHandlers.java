@@ -60,6 +60,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -533,6 +534,16 @@ public class ForgeEventHandlers{
 				}
 				
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onXPPickUp(PlayerXpEvent.XpChange event) {
+		PlayerEntity player = event.getPlayer();
+		if(!player.world.isRemote && player.isPotionActive(FoodEffects.EXPERIENCE_BOTTLE_POWER)) {
+			int level = player.getActivePotionEffect(FoodEffects.EXPERIENCE_BOTTLE_POWER).getAmplifier();
+			float factor = (new float[]{1.2f, 2f, 3f})[Math.min(level, 2)];
+			event.setAmount((int)(event.getAmount() * factor));
 		}
 	}
 }
