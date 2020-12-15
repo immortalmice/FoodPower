@@ -11,7 +11,7 @@ import com.github.immortalmice.foodpower.message.KitchenApplianceMessage;
 import com.github.immortalmice.foodpower.tileentity.KitchenApplianceTileEntity;
 import com.github.immortalmice.foodpower.util.TooltipUtil;
 import com.github.immortalmice.foodpower.util.PosProvider.KitchenApplianceSlotPos;
-import com.github.immortalmice.foodpower.util.PosProvider.Position2D;
+import com.github.immortalmice.foodpower.util.Position2D;
 
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
