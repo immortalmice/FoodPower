@@ -12,6 +12,7 @@ import com.github.immortalmice.foodpower.types.FlavorType;
 
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -19,6 +20,7 @@ import net.minecraft.util.text.ITextComponent;
 public class ChefCardScreen extends ScreenBase<ChefCardContainer> {
 	private static final Map<FlavorType, Integer> FLAVOR_COLORS = new HashMap<>();
 	private static final Map<CookingPattern, Integer> PATTERN_COLORS = new HashMap<>();
+	private static final int TEXTURE_HEIGHT = 128;
 	
 	static {
 		FLAVOR_COLORS.put(FlavorTypes.SWEET, 0xFF55FF);
@@ -59,16 +61,20 @@ public class ChefCardScreen extends ScreenBase<ChefCardContainer> {
 		this.minecraft.getTextureManager().bindTexture(this.skinLocation);
 		AbstractGui.blit(16, 40, 48, 48, 48, 48, 384, 384);
 		
-		int y = 0;
+		int flavorSize = this.container.getFlavorExp().size();
+		int flavorGap = (ChefCardScreen.TEXTURE_HEIGHT - flavorSize * 8) / (flavorSize + 1);
+		int y = flavorGap;
 		for(Entry<FlavorType, Integer> entry : this.container.getFlavorExp().entrySet()) {
-			this.drawString(this.font, entry.getKey().getName() + String.valueOf(entry.getValue()), 0, y, FLAVOR_COLORS.get(entry.getKey()));
-			y += 20;
+			this.drawString(this.font, I18n.format("flavor_type.foodpower." + entry.getKey().getName()) + " Lv." + String.valueOf(entry.getValue()), 90, y, FLAVOR_COLORS.get(entry.getKey()));
+			y += flavorGap + 8;
 		}
 		
-		y = 0;
+		int patternSize = this.container.getPatternExps().size();
+		int patternGap = (ChefCardScreen.TEXTURE_HEIGHT - patternSize * 8) / (patternSize + 1);
+		y = patternGap;
 		for(Entry<CookingPattern, Integer> entry : this.container.getPatternExps().entrySet()) {
-			this.drawString(this.font, entry.getKey().getName() + String.valueOf(entry.getValue()), 50, y, PATTERN_COLORS.get(entry.getKey()));
-			y += 20;
+			this.drawString(this.font, I18n.format("pattern.foodpower." + entry.getKey().getName()) + " Lv." + String.valueOf(entry.getValue()), 160, y, PATTERN_COLORS.get(entry.getKey()));
+			y += patternGap + 8;
 		}
 	}
 }
