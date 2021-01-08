@@ -24,8 +24,8 @@ import com.github.immortalmice.foodpower.lists.Containers;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.message.RecipeTableMessage;
 import com.github.immortalmice.foodpower.specialclass.RecipeScroll;
-import com.github.immortalmice.foodpower.util.PosProvider.Position2D;
 import com.github.immortalmice.foodpower.util.PosProvider.RecipeTableSlotPos;
+import com.github.immortalmice.foodpower.util.Position2D;
 
 public class RecipeTableContainer extends ContainerBase{
 
