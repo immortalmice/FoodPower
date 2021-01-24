@@ -11,7 +11,10 @@
 			"type": "meat", 
 			"textures": {
 				"minecraft:porkchop": "foodpower:meals/pizza/pizza_pork",
-				"minecraft:beef": "foodpower:meals/pizza/pizza_beef"
+				"minecraft:beef": "foodpower:meals/pizza/pizza_beef",
+				"minecraft:chicken": "foodpower:meals/pizza/pizza_chicken",
+				"minecraft:mutton": "foodpower:meals/pizza/pizza_mutton",
+				"minecraft:rabbit": "foodpower:meals/pizza/pizza_rabbit"
 			}
 		}, {
 			"type": "vegetable", 
