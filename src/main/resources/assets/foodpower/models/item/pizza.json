@@ -10,7 +10,8 @@
 		"parts": [{
 			"type": "meat", 
 			"textures": {
-				"minecraft:porkchop": "foodpower:meals/pizza/pizza_pork"
+				"minecraft:porkchop": "foodpower:meals/pizza/pizza_pork",
+				"minecraft:beef": "foodpower:meals/pizza/pizza_beef"
 			}
 		}, {
 			"type": "vegetable", 
