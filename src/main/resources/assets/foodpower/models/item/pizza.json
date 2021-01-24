@@ -7,6 +7,16 @@
 	"ingredients": {
 		"base": "foodpower:meals/pizza/pizza_base",
 
-		"parts": []
+		"parts": [{
+			"type": "meat", 
+			"textures": {
+				"minecraft:porkchop": "foodpower:meals/pizza/pizza_pork"
+			}
+		}, {
+			"type": "vegetable", 
+			"textures": {
+				"foodpower:spinach": "foodpower:meals/pizza/pizza_spinach"
+			}
+		}]
 	}
 }
