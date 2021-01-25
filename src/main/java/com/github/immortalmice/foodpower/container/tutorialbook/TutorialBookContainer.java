@@ -2,8 +2,11 @@ package com.github.immortalmice.foodpower.container.tutorialbook;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.lists.Containers.ContainerTypes;
+import com.github.immortalmice.foodpower.specialclass.TutorialBook;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IntReferenceHolder;
 
@@ -37,5 +40,16 @@ public class TutorialBookContainer extends ContainerBase {
 	
 	public int getPage() {
 		return this.pageIndex;
+	}
+
+
+	@Override
+	public void onContainerClosed(PlayerEntity playerIn) {
+		super.onContainerClosed(playerIn);
+		
+		ItemStack stack = playerIn.inventory.getCurrentItem();
+		if(stack.getItem() instanceof TutorialBook && stack.hasTag()) {
+			stack.getTag().putInt("page", this.pageIndex);
+		}
 	}
 }
