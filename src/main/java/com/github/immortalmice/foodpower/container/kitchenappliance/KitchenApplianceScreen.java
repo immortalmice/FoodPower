@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
-import com.github.immortalmice.foodpower.container.util.FPButton;
+import com.github.immortalmice.foodpower.container.util.IconButton;
 import com.github.immortalmice.foodpower.message.KitchenApplianceMessage;
 import com.github.immortalmice.foodpower.tileentity.KitchenApplianceTileEntity;
 import com.github.immortalmice.foodpower.util.TooltipUtil;
@@ -129,7 +129,7 @@ public class KitchenApplianceScreen extends ScreenBase<KitchenApplianceContainer
 		super.init();
 		
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		this.addButton(new FPButton(offsetX + 70, offsetY + 118, FPButton.ButtonType.SWITCH, (button) -> {
+		this.addButton(new IconButton(offsetX + 70, offsetY + 118, IconButton.ButtonType.SWITCH, (button) -> {
 			if(!this.container.getItemHandler().isIngredientsEmpty()) return;
 			FoodPower.NETWORK.sendToServer(new KitchenApplianceMessage(this.container.windowId, this.container.getTileEntity().getPos(), "rollRequestIndex"));
 		}));

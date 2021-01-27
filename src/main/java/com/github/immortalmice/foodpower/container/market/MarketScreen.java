@@ -7,7 +7,7 @@ import net.minecraft.entity.player.PlayerInventory;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
-import com.github.immortalmice.foodpower.container.util.FPButton;
+import com.github.immortalmice.foodpower.container.util.IconButton;
 import com.github.immortalmice.foodpower.message.MarketMessage;
 
 public class MarketScreen extends ScreenBase<MarketContainer>{
@@ -46,13 +46,13 @@ public class MarketScreen extends ScreenBase<MarketContainer>{
 		super.init();
 
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		this.addButton(new FPButton(offsetX + 35, offsetY + 35, FPButton.ButtonType.WOOD_LEFT, (button) -> {
+		this.addButton(new IconButton(offsetX + 35, offsetY + 35, IconButton.ButtonType.WOOD_LEFT, (button) -> {
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new MarketMessage(this.getContainer().getWindowId(), "Decrease Index")
 			);
 		}));
-		this.addButton(new FPButton(offsetX + 90, offsetY + 35, FPButton.ButtonType.WOOD_RIGHT, (button) -> {
+		this.addButton(new IconButton(offsetX + 90, offsetY + 35, IconButton.ButtonType.WOOD_RIGHT, (button) -> {
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new MarketMessage(this.getContainer().getWindowId(), "Increase Index")

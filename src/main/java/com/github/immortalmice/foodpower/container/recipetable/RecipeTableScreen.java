@@ -14,7 +14,7 @@ import net.minecraft.util.text.ITextComponent;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
-import com.github.immortalmice.foodpower.container.util.FPButton;
+import com.github.immortalmice.foodpower.container.util.IconButton;
 import com.github.immortalmice.foodpower.cooking.ICookingElement;
 import com.github.immortalmice.foodpower.lists.CookingPatterns;
 import com.github.immortalmice.foodpower.lists.FoodTypes;
@@ -101,14 +101,14 @@ public class RecipeTableScreen extends ScreenBase<RecipeTableContainer>{
 		super.init();
 
 		int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-		this.addButton(new FPButton(offsetX + 20, offsetY + 15, FPButton.ButtonType.WOOD_LEFT, (button) ->{
+		this.addButton(new IconButton(offsetX + 20, offsetY + 15, IconButton.ButtonType.WOOD_LEFT, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeTableMessage(this.container.getWindowId()
 					, "Set Index"
 					, "Decrease"));
 		}));
-		this.addButton(new FPButton(offsetX + this.xSize - 30, offsetY + 15, FPButton.ButtonType.WOOD_RIGHT, (button) ->{
+		this.addButton(new IconButton(offsetX + this.xSize - 30, offsetY + 15, IconButton.ButtonType.WOOD_RIGHT, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeTableMessage(this.container.getWindowId()
