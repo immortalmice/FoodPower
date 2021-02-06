@@ -1,6 +1,7 @@
 package com.github.immortalmice.foodpower.container.tutorialbook;
 
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
+import com.github.immortalmice.foodpower.util.Position2D;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
@@ -26,7 +27,10 @@ public class TutorialBookScreen extends ScreenBase<TutorialBookContainer> {
 			this.pageIndexCache = this.container.navigator.getPage();
 			
 			if(this.pageIndexCache >= 0 && this.pageIndexCache <= TutorialBookContainer.PAGES.size() - 1) {
-				TutorialBookContainer.PAGES.get(this.pageIndexCache).init(this::addButton, this.container.navigator);
+				TutorialBookContainer.PAGES.get(this.pageIndexCache).init(this::addButton, this.container.navigator, new Position2D(
+					(this.width - this.xSize) / 2,
+					(this.height - this.ySize) / 2
+				));
 			}
 		}
 		
