@@ -3,6 +3,7 @@
 	"group": "foopower:ingredients",
 	"result": {"item": "foodpower:cheese"},
 	"ingredients": [
-        {"item": "minecraft:milk_bucket"}
+        {"item": "minecraft:milk_bucket"},
+        {"item": "foodpower:salt"}
     ]
 }

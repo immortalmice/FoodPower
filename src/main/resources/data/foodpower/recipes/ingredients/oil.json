@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "foopower:ingredients",
+	"result": {"item": "foodpower:oil"},
+	"ingredients": [
+        {"item": "minecraft:wheat_seeds"},
+        {"item": "minecraft:glass_bottle"}
+    ]
+}

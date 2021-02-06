@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "foopower:ingredients",
+	"result": {"item": "foodpower:sauce"},
+	"ingredients": [
+        {"item": "minecraft:nether_wart"},
+        {"item": "minecraft:glass_bottle"}
+    ]
+}

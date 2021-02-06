@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.baseclass.ScreenBase;
-import com.github.immortalmice.foodpower.container.util.FPButton;
+import com.github.immortalmice.foodpower.container.util.IconButton;
 import com.github.immortalmice.foodpower.cooking.CookingRecipe.ItemStackRequest;
 import com.github.immortalmice.foodpower.cooking.CookingRecipe.StepRequest;
 import com.github.immortalmice.foodpower.message.RecipeScrollMessage;
@@ -77,37 +77,37 @@ public class RecipeScrollScreen extends ScreenBase<RecipeScrollContainer>{
 	public void init(){
 		super.init();
 
-		FPButton.ButtonType buttonTypeLeft, buttonTypeRight;
+		IconButton.ButtonType buttonTypeLeft, buttonTypeRight;
 		switch(this.container.getRarity()){
 			case 1:
-				buttonTypeLeft = FPButton.ButtonType.IRON_LEFT;
-				buttonTypeRight = FPButton.ButtonType.IRON_RIGHT;
+				buttonTypeLeft = IconButton.ButtonType.IRON_LEFT;
+				buttonTypeRight = IconButton.ButtonType.IRON_RIGHT;
 				break;
 			case 2:
-				buttonTypeLeft = FPButton.ButtonType.GOLD_LEFT;
-				buttonTypeRight = FPButton.ButtonType.GOLD_RIGHT;
+				buttonTypeLeft = IconButton.ButtonType.GOLD_LEFT;
+				buttonTypeRight = IconButton.ButtonType.GOLD_RIGHT;
 				break;
 			case 3:
-				buttonTypeLeft = FPButton.ButtonType.DIAMOND_LEFT;
-				buttonTypeRight = FPButton.ButtonType.DIAMOND_RIGHT;
+				buttonTypeLeft = IconButton.ButtonType.DIAMOND_LEFT;
+				buttonTypeRight = IconButton.ButtonType.DIAMOND_RIGHT;
 				break;
 			case 0:
 			default:
-				buttonTypeLeft = FPButton.ButtonType.WOOD_LEFT;
-				buttonTypeRight = FPButton.ButtonType.WOOD_RIGHT;
+				buttonTypeLeft = IconButton.ButtonType.WOOD_LEFT;
+				buttonTypeRight = IconButton.ButtonType.WOOD_RIGHT;
 				break;
 		}
 
 		int offsetX = (this.width - this.xSize) / 2;
 		int offsetY = (this.height - this.ySize) / 2;
-		this.addButton(new FPButton(offsetX + 40, offsetY + 210, buttonTypeLeft, (button) ->{
+		this.addButton(new IconButton(offsetX + 40, offsetY + 210, buttonTypeLeft, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()
 					, "Set Amount Minus"));
 		}));
 
-		this.addButton(new FPButton(offsetX + 90, offsetY + 210, buttonTypeRight, (button) ->{
+		this.addButton(new IconButton(offsetX + 90, offsetY + 210, buttonTypeRight, (button) ->{
 			/* Send Message To server on clicked */
 			FoodPower.NETWORK.sendToServer(
 				new RecipeScrollMessage(this.container.getWindowId()

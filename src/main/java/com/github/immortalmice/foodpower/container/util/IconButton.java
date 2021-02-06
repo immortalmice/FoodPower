@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import com.github.immortalmice.foodpower.FoodPower;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-public class FPButton extends Button{
+public class IconButton extends Button{
 	public enum ButtonType{
 		WOOD_UP (18, 10, 20, 0, 20, 12),
 		WOOD_DOWN (18, 10, 0, 0, 0, 12),
@@ -50,14 +50,14 @@ public class FPButton extends Button{
 		}
 	};
 
-	private final FPButton.ButtonType buttonType;
+	private final IconButton.ButtonType buttonType;
 	private static final ResourceLocation BUTTONS_TEXTURE_LOCATION = new ResourceLocation(FoodPower.MODID + ":textures/gui/container/button.png");
 
-	public FPButton(int x, int y, Button.IPressable onPress){
-		this(x, y, FPButton.ButtonType.WOOD_LEFT, onPress);
+	public IconButton(int x, int y, Button.IPressable onPress){
+		this(x, y, IconButton.ButtonType.WOOD_LEFT, onPress);
 	}
 
-	public FPButton(int x, int y, FPButton.ButtonType buttonTypeIn, Button.IPressable onPress){
+	public IconButton(int x, int y, IconButton.ButtonType buttonTypeIn, Button.IPressable onPress){
 		super(x, y, buttonTypeIn.width, buttonTypeIn.height, "", onPress);
 
 		this.buttonType = buttonTypeIn;
@@ -67,7 +67,7 @@ public class FPButton extends Button{
 	public void renderButton(int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_){
 		if(this.visible){
 			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-			Minecraft.getInstance().getTextureManager().bindTexture(FPButton.BUTTONS_TEXTURE_LOCATION);
+			Minecraft.getInstance().getTextureManager().bindTexture(IconButton.BUTTONS_TEXTURE_LOCATION);
 
 			if(this.isHovered()){
 				this.blit(this.x, this.y, this.buttonType.hoverTextrureOffsetX, this.buttonType.hoverTextrureOffsetY, this.width, this.height);
