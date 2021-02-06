@@ -1,0 +1,8 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "foopower:ingredients",
+	"result": {"item": "foodpower:butter"},
+	"ingredients": [
+        {"item": "foodpower:cream"}
+    ]
+}

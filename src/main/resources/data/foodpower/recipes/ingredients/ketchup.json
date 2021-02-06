@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "foopower:ingredients",
+	"result": {"item": "foodpower:ketchup"},
+	"ingredients": [
+        {"item": "foodpower:tomato"},
+        {"item": "minecraft:glass_bottle"}
+    ]
+}
