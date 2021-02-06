@@ -23,7 +23,8 @@
 				"foodpower:corn": "foodpower:meals/pizza/pizza_corn",
 				"minecraft:pumpkin": "foodpower:meals/pizza/pizza_pumpkin",
 				"minecraft:potato": "foodpower:meals/pizza/pizza_potato",
-				"minecraft:beetroot": "foodpower:meals/pizza/pizza_beetroot"
+				"minecraft:beetroot": "foodpower:meals/pizza/pizza_beetroot",
+				"minecraft:carrot": "foodpower:meals/pizza/pizza_carrot"
 			}
 		}]
 	}
