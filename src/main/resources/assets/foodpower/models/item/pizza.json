@@ -20,7 +20,8 @@
 			"type": "vegetable", 
 			"textures": {
 				"foodpower:spinach": "foodpower:meals/pizza/pizza_spinach",
-				"foodpower:corn": "foodpower:meals/pizza/pizza_corn"
+				"foodpower:corn": "foodpower:meals/pizza/pizza_corn",
+				"minecraft:pumpkin": "foodpower:meals/pizza/pizza_pumpkin"
 			}
 		}]
 	}
