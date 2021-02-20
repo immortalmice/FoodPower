@@ -28,7 +28,8 @@
 				"foodpower:cabbage": "foodpower:meals/pizza/pizza_cabbage",
 				"foodpower:tomato": "foodpower:meals/pizza/pizza_tomato",
 				"minecraft:kelp": "foodpower:meals/pizza/pizza_kelp",
-				"minecraft:brown_mushroom": "foodpower:meals/pizza/pizza_brown_mushroom"
+				"minecraft:brown_mushroom": "foodpower:meals/pizza/pizza_brown_mushroom",
+				"minecraft:red_mushroom": "foodpower:meals/pizza/pizza_red_mushroom"
 			}
 		}]
 	}
