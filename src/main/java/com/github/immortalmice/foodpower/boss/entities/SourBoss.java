@@ -10,9 +10,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BossInfo;
@@ -33,11 +35,13 @@ public class SourBoss extends BossBase implements IRangedAttackMob {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		
+
 		this.goalSelector.addGoal(0, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+		this.goalSelector.addGoal(1, new SwimGoal(this));
 		this.goalSelector.addGoal(4, new RangedAttackGoal(this, 1.0d, 20, 20));
 		this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, PlayerEntity.class, 6.0f, 1.0d, 1.2d));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 
 	@Override
