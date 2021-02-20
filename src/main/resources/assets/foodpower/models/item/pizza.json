@@ -30,7 +30,8 @@
 				"minecraft:kelp": "foodpower:meals/pizza/pizza_kelp",
 				"minecraft:brown_mushroom": "foodpower:meals/pizza/pizza_brown_mushroom",
 				"minecraft:red_mushroom": "foodpower:meals/pizza/pizza_red_mushroom",
-				"minecraft:nether_wart": "foodpower:meals/pizza/pizza_nether_wart"
+				"minecraft:nether_wart": "foodpower:meals/pizza/pizza_nether_wart",
+				"foodpower:chili": "foodpower:meals/pizza/pizza_chili"
 			}
 		}]
 	}
