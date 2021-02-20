@@ -25,7 +25,8 @@
 				"minecraft:potato": "foodpower:meals/pizza/pizza_potato",
 				"minecraft:beetroot": "foodpower:meals/pizza/pizza_beetroot",
 				"minecraft:carrot": "foodpower:meals/pizza/pizza_carrot",
-				"foodpower:cabbage": "foodpower:meals/pizza/pizza_cabbage"
+				"foodpower:cabbage": "foodpower:meals/pizza/pizza_cabbage",
+				"foodpower:tomato": "foodpower:meals/pizza/pizza_tomato"
 			}
 		}]
 	}
