@@ -7,6 +7,16 @@
 	"ingredients": {
 		"base": "foodpower:meals/cake/cake_base",
 
-		"parts": []
+		"parts": [{
+			"type": "sweet", 
+			"textures": {
+				"minecraft:cocoa_beans": "foodpower:meals/cake/cake_cocoa_beans"
+			}
+		}, {
+			"type": "fruit", 
+			"textures": {
+				"foodpower:kiwi": "foodpower:meals/cake/cake_kiwi"
+			}
+		}]
 	}
 }
