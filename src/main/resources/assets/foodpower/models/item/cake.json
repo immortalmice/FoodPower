@@ -12,7 +12,8 @@
 			"textures": {
 				"minecraft:cocoa_beans": "foodpower:meals/cake/cake_cocoa_beans",
 				"minecraft:sweet_berries": "foodpower:meals/cake/cake_sweet_berries",
-				"foodpower:mint": "foodpower:meals/cake/cake_mint"
+				"foodpower:mint": "foodpower:meals/cake/cake_mint",
+				"minecraft:magma_cream": "foodpower:meals/cake/cake_magma_cream"
 			}
 		}, {
 			"type": "fruit", 
