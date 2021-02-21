@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 
 public class SweetBossRenderer extends MobRenderer<SweetBoss, SweetBossRenderer.SweetBossModel> {
 	public SweetBossRenderer(EntityRendererManager renderManagerIn) {
@@ -69,10 +70,36 @@ public class SweetBossRenderer extends MobRenderer<SweetBoss, SweetBossRenderer.
 		}
 
 		@Override
-		public void setRotationAngles(SweetBoss entityIn, float limbSwing, float limbSwingAmount, float ageInTicks,
-				float netHeadYaw, float headPitch) {
-
-
+		public void setRotationAngles(SweetBoss entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+			this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
+			this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
+			
+			this.body.rotateAngleY = 0.0F;
+			this.right_hand.rotationPointZ = 0.0F;
+			this.right_hand.rotationPointX = -5.0F;
+			this.left_hand.rotationPointZ = 0.0F;
+			this.left_hand.rotationPointX = 5.0F;
+			
+			this.right_hand.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 2.0F * limbSwingAmount * 0.5F / 1.0F;
+			this.left_hand.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / 1.0F;
+			this.right_hand.rotateAngleZ = 0.0F;
+			this.left_hand.rotateAngleZ = 0.0F;
+			this.right_foot.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / 1.0F;
+			this.left_foot.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount / 1.0F;
+			this.right_foot.rotateAngleY = 0.0F;
+			this.left_foot.rotateAngleY = 0.0F;
+			this.right_foot.rotateAngleZ = 0.0F;
+			this.left_foot.rotateAngleZ = 0.0F;
+			
+			this.right_hand.rotateAngleY = 0.0F;
+			this.right_hand.rotateAngleZ = 0.0F;
+			
+			this.body.rotateAngleX = 0.0F;
+			
+			this.right_hand.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+			this.left_hand.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+			this.right_hand.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+			this.left_hand.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
 		}
 
 		@Override
