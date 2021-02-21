@@ -13,7 +13,8 @@
 				"minecraft:cocoa_beans": "foodpower:meals/cake/cake_cocoa_beans",
 				"minecraft:sweet_berries": "foodpower:meals/cake/cake_sweet_berries",
 				"foodpower:mint": "foodpower:meals/cake/cake_mint",
-				"minecraft:magma_cream": "foodpower:meals/cake/cake_magma_cream"
+				"minecraft:magma_cream": "foodpower:meals/cake/cake_magma_cream",
+				"foodpower:fermented_endereye": "foodpower:meals/cake/cake_fermented_endereye"
 			}
 		}, {
 			"type": "fruit", 
