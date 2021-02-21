@@ -27,7 +27,7 @@ public class SweetBoss extends BossBase {
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(4.0);
-		this.getAttribute(LivingEntity.SWIM_SPEED).setBaseValue(4.0);
+		this.getAttribute(LivingEntity.SWIM_SPEED).setBaseValue(8.0);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48.0);
 	}
 	
