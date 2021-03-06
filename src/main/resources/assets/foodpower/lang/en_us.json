@@ -221,5 +221,6 @@
     "message.foodpower.tooltip_recipe_table_operations": "§7§o(Left Click To Increase Level, Right To Decrease)",
 
     "_comment": "Tutorial Book",
-    "tutorial_book.foodpower.main_page.title": "Tutorial Main Page"
+    "tutorial_book.foodpower.main_page.title": "Tutorial Main Page",
+    "tutorial_book.foodpower.ingredient_main_page.title": "Ingredients"
 }

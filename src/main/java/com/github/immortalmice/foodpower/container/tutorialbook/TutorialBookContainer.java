@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.IPage;
+import com.github.immortalmice.foodpower.container.tutorialbook.page.IngredientsPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.MainPage;
 import com.github.immortalmice.foodpower.lists.Containers.ContainerTypes;
 import com.github.immortalmice.foodpower.specialclass.TutorialBook;
@@ -22,9 +23,14 @@ public class TutorialBookContainer extends ContainerBase {
 	static {
 		TutorialBookContainer.PAGES.add(new MainPage());
 		Navigator.HOME_PAGE = TutorialBookContainer.PAGES.size() - 1;
+		
 		Navigator.TUTORIAL_PAGE = TutorialBookContainer.PAGES.size() - 1;
+		
+		TutorialBookContainer.PAGES.add(new IngredientsPage());
 		Navigator.INGREDIENTS_PAGE = TutorialBookContainer.PAGES.size() - 1;
+		
 		Navigator.PATTERNS_PAGE = TutorialBookContainer.PAGES.size() - 1;
+		
 		Navigator.BOSSES_PAGE = TutorialBookContainer.PAGES.size() - 1;
 	}
 

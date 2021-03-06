@@ -257,5 +257,6 @@
     "recipe_scroll.foodpower.juice.step3": "4. 拿出玻璃杯，將§c§l%d份的%s§r和切片過後的§c§l%d份%s§r在§1萬用台§r上組合，順口又不油膩的§2§l%d份果汁§r就做好了。",
 
     "_comment": "教學書",
-    "tutorial_book.foodpower.main_page.title": "教學主頁"
+    "tutorial_book.foodpower.main_page.title": "教學主頁",
+    "tutorial_book.foodpower.ingredient_main_page.title": "食材"
 }
