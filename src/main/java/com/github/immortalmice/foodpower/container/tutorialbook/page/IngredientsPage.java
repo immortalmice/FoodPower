@@ -9,7 +9,7 @@ import com.github.immortalmice.foodpower.util.Position2D;
 
 import net.minecraft.client.gui.widget.Widget;
 
-public class IngredientsPage extends AbstractLayoutPage {
+public class IngredientsPage extends AbstractHomeablePage {
 	public IngredientsPage() {
 		super("tutorial_book.foodpower.ingredient_main_page.title");
 	}
