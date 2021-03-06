@@ -20,7 +20,8 @@
 			"type": "fruit", 
 			"textures": {
 				"foodpower:kiwi": "foodpower:meals/cake/cake_kiwi",
-				"foodpower:papaya": "foodpower:meals/cake/cake_papaya"
+				"foodpower:papaya": "foodpower:meals/cake/cake_papaya",
+				"foodpower:mango": "foodpower:meals/cake/cake_mango"
 			}
 		}]
 	}
