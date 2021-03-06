@@ -76,7 +76,7 @@ public class TutorialBookContainer extends ContainerBase {
 		}
 		
 		public void nextPage() {
-			this.setPage(Math.min(this.pageIndex + 1, TutorialBookContainer.PAGES.size()));
+			this.setPage(Math.min(this.pageIndex + 1, TutorialBookContainer.PAGES.size() - 1));
 		}
 		
 		public void previousPage() {
