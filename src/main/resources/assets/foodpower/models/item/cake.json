@@ -19,7 +19,8 @@
 		}, {
 			"type": "fruit", 
 			"textures": {
-				"foodpower:kiwi": "foodpower:meals/cake/cake_kiwi"
+				"foodpower:kiwi": "foodpower:meals/cake/cake_kiwi",
+				"foodpower:papaya": "foodpower:meals/cake/cake_papaya"
 			}
 		}]
 	}
