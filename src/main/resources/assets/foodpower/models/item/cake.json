@@ -22,7 +22,8 @@
 				"foodpower:kiwi": "foodpower:meals/cake/cake_kiwi",
 				"foodpower:papaya": "foodpower:meals/cake/cake_papaya",
 				"foodpower:mango": "foodpower:meals/cake/cake_mango",
-				"minecraft:melon": "foodpower:meals/cake/cake_melon"
+				"minecraft:melon": "foodpower:meals/cake/cake_melon",
+				"foodpower:orange": "foodpower:meals/cake/cake_orange"
 			}
 		}]
 	}
