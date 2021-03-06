@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.IPage;
+import com.github.immortalmice.foodpower.container.tutorialbook.page.IngredientPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.IngredientsPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.MainPage;
 import com.github.immortalmice.foodpower.lists.Containers.ContainerTypes;
+import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.specialclass.TutorialBook;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,6 +30,9 @@ public class TutorialBookContainer extends ContainerBase {
 		
 		TutorialBookContainer.PAGES.add(new IngredientsPage());
 		Navigator.INGREDIENTS_PAGE = TutorialBookContainer.PAGES.size() - 1;
+		Ingredients.list.forEach(ingredient -> {
+			TutorialBookContainer.PAGES.add(new IngredientPage(ingredient));
+		});
 		
 		Navigator.PATTERNS_PAGE = TutorialBookContainer.PAGES.size() - 1;
 		
