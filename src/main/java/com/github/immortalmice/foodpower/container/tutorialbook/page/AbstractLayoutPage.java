@@ -20,7 +20,7 @@ public abstract class AbstractLayoutPage extends AbstractHomeablePage {
 		add.accept(new IconButton(offset.x + 105, offset.y + 220, ButtonType.WOOD_LEFT, button -> {
 			navigator.previousPage();
 		}));
-		add.accept(new IconButton(offset.x + 144, offset.y + 220, ButtonType.WOOD_RIGHT, button -> {
+		add.accept(new IconButton(offset.x + 143, offset.y + 220, ButtonType.WOOD_RIGHT, button -> {
 			navigator.nextPage();
 		}));
 	}

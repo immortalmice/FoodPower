@@ -16,7 +16,7 @@ public class AbstractHomeablePage extends AbstractTitlePage {
 	
 	@Override
 	public void init(Consumer<Widget> add, Navigator navigator, Position2D offset) {
-		add.accept(new IconButton(offset.x + 120, offset.y + 220, ButtonType.SWITCH, button -> {
+		add.accept(new IconButton(offset.x + 120, offset.y + 221, ButtonType.HOME, button -> {
 			navigator.homePage();
 		}));
 	}
