@@ -19,13 +19,13 @@ public class MainPage extends AbstractTitlePage {
 		add.accept(new IconButton(offset.x + 42, offset.y + 60, ButtonType.TUTORIAL, button -> {
 			navigator.tutorialPage();
 		}));
-		add.accept(new IconButton(offset.x + 148, offset.y + 60, ButtonType.SWITCH, button -> {
+		add.accept(new IconButton(offset.x + 148, offset.y + 60, ButtonType.INGREDIENT, button -> {
 			navigator.ingredientsPage();
 		}));
-		add.accept(new IconButton(offset.x + 42, offset.y + 168, ButtonType.SWITCH, button -> {
+		add.accept(new IconButton(offset.x + 42, offset.y + 148, ButtonType.MEAL, button -> {
 			navigator.patternsPage();
 		}));
-		add.accept(new IconButton(offset.x + 148, offset.y + 168, ButtonType.SWITCH, button -> {
+		add.accept(new IconButton(offset.x + 148, offset.y + 148, ButtonType.BOSS, button -> {
 			navigator.bossesPage();
 		}));
 	}

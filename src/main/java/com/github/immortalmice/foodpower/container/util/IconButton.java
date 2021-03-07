@@ -31,7 +31,10 @@ public class IconButton extends Button{
 		
 		SWITCH(19, 18, 0, 32, 0, 52),
 		HOME(18, 18, 0, 72, 20, 72),
-		TUTORIAL(64, 64, 0, 96, 64, 96);
+		TUTORIAL(64, 64, 0, 96, 64, 96),
+		INGREDIENT(64, 64, 128, 96, 192, 96),
+		MEAL(64, 64, 0, 160, 64, 160),
+		BOSS(64, 64, 128, 160, 192, 160);
 
 		public final int width, height;
 		public final int textureOffsetX, textureOffsetY;
