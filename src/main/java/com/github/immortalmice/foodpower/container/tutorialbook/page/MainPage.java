@@ -16,7 +16,7 @@ public class MainPage extends AbstractTitlePage {
 
 	@Override
 	public void init(Consumer<Widget> add, Navigator navigator, Position2D offset) {
-		add.accept(new IconButton(offset.x + 42, offset.y + 60, ButtonType.SWITCH, button -> {
+		add.accept(new IconButton(offset.x + 42, offset.y + 60, ButtonType.TUTORIAL, button -> {
 			navigator.tutorialPage();
 		}));
 		add.accept(new IconButton(offset.x + 148, offset.y + 60, ButtonType.SWITCH, button -> {

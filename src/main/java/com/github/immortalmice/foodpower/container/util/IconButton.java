@@ -30,7 +30,8 @@ public class IconButton extends Button{
 		DIAMOND_LEFT (10, 18, 232, 20, 244, 20),
 		
 		SWITCH(19, 18, 0, 32, 0, 52),
-		HOME(18, 18, 0, 72, 20, 72);
+		HOME(18, 18, 0, 72, 20, 72),
+		TUTORIAL(64, 64, 0, 96, 64, 96);
 
 		public final int width, height;
 		public final int textureOffsetX, textureOffsetY;
