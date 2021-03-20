@@ -220,6 +220,20 @@
     "message.foodpower.tooltip_required": "§8§o(Required： %d / %d)§r",
     "message.foodpower.tooltip_recipe_table_operations": "§7§o(Left Click To Increase Level, Right To Decrease)",
 
+    "_comment": "Recipe Scroll",
+    "recipe_scroll.foodpower.cake.step0": "1. First, sieve §c§l%d %s§r, then mix with §c§l%d %s§r, §c§l%d %s§r, §c§l%d %s§r, §c§l%d %s§r on the §1universal_station§r. After stirring it sufficiently, you will get a bowl of batter.",
+    "recipe_scroll.foodpower.cake.step1": "2. Put §c§l%d %s§r into a preheated §1oven§r, bake it at 150 degrees Celsius by 50 minutes. After baking, you will get a whole cake base.",
+    "recipe_scroll.foodpower.cake.step2": "3. Finally, put §c§l%d %s§r on the §1revolving cake stand§r, decorate your cake with §c§l%d %s§r and §c§l%d %s§r. Congrats, you successfully baked §2§l%d cake§r!",
+
+    "recipe_scroll.foodpower.pizza.step0": "1. Use your hard buddy rolling pin to roll §c§l%d %s§r into flat dough on the §1chopping board§r",
+    "recipe_scroll.foodpower.pizza.step1": "2. Then put the §c§l%d %s§r onto the §1universal_station§r. Put §c§l%d %s§r on it, and smear §c§l%d %s§r and §c§l%d piece of %s§r. Don't forget §c§l%d %s§r that you might dislike. Finally you will get raw pizza",
+    "recipe_scroll.foodpower.pizza.step2": "3. Put §c§l%d %s§r into the §1oven§r, bake it at 200 degrees Celsius until the dough become golden. Bake it about 10 minutes, and you will get cooked pizza.",
+    "recipe_scroll.foodpower.pizza.step3": "4. Put §c§l%d %s§r on the §1chopping board§r and cut it with your knife. Cut your pizza into §2§l%d piece(s) which are convenient to eat§r!",
+
+    "recipe_scroll.foodpower.sandwich.step0": "Stuff §c§l%d %s§r that you made with effort into an iron box, then put them into §1oven§r, bake it at 210 degrees Celsius by 40 minutes. You will get a loaf of toast with the color of Shiba dog.",
+    "recipe_scroll.foodpower.sandwich.step1": "Then put the Shiba dog, oh wait, I mean §c§l%d %s§r on §1chopping board§r and cut it into triangular toast slices. Remember to cut the edge of toast off so that you won't confuse it with Shiba dog.",
+    "recipe_scroll.foodpower.sandwich.step2": "Finally, put §c§l%d %s§r, §c§l%d %s§r, §c§l%d %s§r, §c§l%d %s§r together perfectly on the §1universal_station§r, and you will get §2§l%d serving of sandwich§r.",
+
     "_comment": "Tutorial Book",
     "tutorial_book.foodpower.main_page.title": "Tutorial Main Page",
     "tutorial_book.foodpower.main_page.tutorial": "Tutorial",
