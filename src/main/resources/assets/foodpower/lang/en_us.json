@@ -242,6 +242,13 @@
     "recipe_scroll.foodpower.fried_rice.step0": "1. Put §c§l%d %s§r and §c§l%d buckets of %s§r into the §1electric pot§r. You can take a nap after you turn it on. After you wake up, open the electric pot and wait the steam to vanish. Then you will get a bowl of grainy rice.",
     "recipe_scroll.foodpower.fried_rice.step1": "2. Put §c§l%d %s§r and §c§l%d pieces of %s§r into the §1frying pan§r. After the ingredients are cooked, put §c§l%d %s§r, §c§l%d %s§r and §c§l%d %s§r as seasoning. After stirring them until the color become smooth, put §c§l%d %s§r in. Wait all ingredients become cooked and you can turn off the gas, then you will get §2§l%d fried rice§r.",
     
+    "recipe_scroll.foodpower.noodle_soup.step0": "1. Prepare §c§l%d %s§r, put it on the §1chopping board§r and knock it with the back of knife. Then you will get flat dough.",
+    "recipe_scroll.foodpower.noodle_soup.step1": "2. Again, on the §1chopping board§r, cut the §c§l%d %s§r you just made with knife and you will get noodles. Um, every strip is single strip, so nice.",
+    "recipe_scroll.foodpower.noodle_soup.step2": "3. Now, stand at the §1stockpot§r, put all of the §c§l%d %s§r, §c§l%d buckets of %s§r, §c§l%d %s§r, §c§l%d %s§r, §c§l%d pieces of %s§r, §c§l%d %s§r into the stockpot and stir them. After you start to smell some good smelling, you get §2§l%dnoodle soup§r.",
+
+    "recipe_scroll.foodpower.honey_toast.step0": "1. Take out §c§l%d %s§r you prepared into the toast mould and put it into §1oven§r, bake it at 210 degrees Celsius by 40 minutes. You will get a loaf of hot golden toast. Um, smell so good.",
+    "recipe_scroll.foodpower.honey_toast.step1": "2. Next, go to the §1universal_station§r and put the §c§l%d %s§r you just baked on it. Smear §c§l%d cans of %s§r and §c§l%d %s§r on the top of the toast. Put §c§l%d %s§r and §c§l%d %s§r on it. Congrats, you made §2§l%d loaves of sweet sweet honey toast§r.",
+
     "_comment": "Tutorial Book",
     "tutorial_book.foodpower.main_page.title": "Tutorial Main Page",
     "tutorial_book.foodpower.main_page.tutorial": "Tutorials",
