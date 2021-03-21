@@ -10,13 +10,9 @@ import com.github.immortalmice.foodpower.container.tutorialbook.page.Ingredients
 import com.github.immortalmice.foodpower.container.tutorialbook.page.MainPage;
 import com.github.immortalmice.foodpower.lists.Containers.ContainerTypes;
 import com.github.immortalmice.foodpower.lists.Ingredients;
-import com.github.immortalmice.foodpower.specialclass.TutorialBook;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.IntReferenceHolder;
 
 public class TutorialBookContainer extends ContainerBase {
 	public final Navigator navigator;
@@ -47,27 +43,6 @@ public class TutorialBookContainer extends ContainerBase {
 		super(ContainerTypes.TUTORIAL_BOOK, windowIdIn, new int[] { -1, -1 }, inventoryIn);
 		
 		this.navigator = new Navigator(pageIndexIn);
-		
-		this.trackInt(new IntReferenceHolder() {	
-			@Override
-			public void set(int index) {
-				TutorialBookContainer.this.navigator.setPage(index);
-			}
-			@Override
-			public int get() {
-				return TutorialBookContainer.this.navigator.getPage();
-			}
-		});
-	}
-
-	@Override
-	public void onContainerClosed(PlayerEntity playerIn) {
-		super.onContainerClosed(playerIn);
-		
-		ItemStack stack = playerIn.inventory.getCurrentItem();
-		if(stack.getItem() instanceof TutorialBook && stack.hasTag()) {
-			stack.getTag().putInt("page", this.navigator.getPage());
-		}
 	}
 	
 	public static class Navigator {
