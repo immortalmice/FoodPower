@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.immortalmice.foodpower.baseclass.ContainerBase;
+import com.github.immortalmice.foodpower.container.tutorialbook.page.BossesPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.IPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.IngredientPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.IngredientsPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.MainPage;
+import com.github.immortalmice.foodpower.container.tutorialbook.page.PatternsPage;
+import com.github.immortalmice.foodpower.container.tutorialbook.page.TutorialsPage;
 import com.github.immortalmice.foodpower.lists.Containers.ContainerTypes;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 
@@ -22,6 +25,7 @@ public class TutorialBookContainer extends ContainerBase {
 		TutorialBookContainer.PAGES.add(new MainPage());
 		Navigator.HOME_PAGE = TutorialBookContainer.PAGES.size() - 1;
 		
+		TutorialBookContainer.PAGES.add(new TutorialsPage());
 		Navigator.TUTORIAL_PAGE = TutorialBookContainer.PAGES.size() - 1;
 		
 		TutorialBookContainer.PAGES.add(new IngredientsPage());
@@ -30,8 +34,10 @@ public class TutorialBookContainer extends ContainerBase {
 			TutorialBookContainer.PAGES.add(new IngredientPage(ingredient));
 		});
 		
+		TutorialBookContainer.PAGES.add(new PatternsPage());
 		Navigator.PATTERNS_PAGE = TutorialBookContainer.PAGES.size() - 1;
 		
+		TutorialBookContainer.PAGES.add(new BossesPage());
 		Navigator.BOSSES_PAGE = TutorialBookContainer.PAGES.size() - 1;
 	}
 

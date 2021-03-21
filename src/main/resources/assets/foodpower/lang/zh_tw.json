@@ -262,7 +262,10 @@
     "tutorial_book.foodpower.main_page.ingredient": "食材",
     "tutorial_book.foodpower.main_page.meal": "料理",
     "tutorial_book.foodpower.main_page.boss": "王怪",
+    "tutorial_book.foodpower.tutorial_main_page.title": "教學",
     "tutorial_book.foodpower.ingredient_main_page.title": "食材",
+    "tutorial_book.foodpower.pattern_main_page.title": "料理",
+    "tutorial_book.foodpower.boss_main_page.title": "王怪",
     "tutorial_book.foodpower.ingredients.butter.level1": "可以用料理繁殖雞。",
     "tutorial_book.foodpower.ingredients.butter.level2": "等級一效果以及可以用料理繁殖牛、羊、豬。",
     "tutorial_book.foodpower.ingredients.butter.level3": "可以用料理繁殖所有可繁殖的動物。"

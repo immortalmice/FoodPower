@@ -236,9 +236,12 @@
 
     "_comment": "Tutorial Book",
     "tutorial_book.foodpower.main_page.title": "Tutorial Main Page",
-    "tutorial_book.foodpower.main_page.tutorial": "Tutorial",
+    "tutorial_book.foodpower.main_page.tutorial": "Tutorials",
     "tutorial_book.foodpower.main_page.ingredient": "Ingredients",
     "tutorial_book.foodpower.main_page.meal": "Meals",
     "tutorial_book.foodpower.main_page.boss": "Bosses",
-    "tutorial_book.foodpower.ingredient_main_page.title": "Ingredients"
+    "tutorial_book.foodpower.tutorial_main_page.title": "Tutorials",
+    "tutorial_book.foodpower.ingredient_main_page.title": "Ingredients",
+    "tutorial_book.foodpower.pattern_main_page.title": "Meals",
+    "tutorial_book.foodpower.boss_main_page.title": "Bosses"
 }
