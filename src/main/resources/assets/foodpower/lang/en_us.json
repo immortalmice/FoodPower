@@ -265,5 +265,7 @@
     "tutorial_book.foodpower.tutorial_main_page.title": "Tutorials",
     "tutorial_book.foodpower.ingredient_main_page.title": "Ingredients",
     "tutorial_book.foodpower.pattern_main_page.title": "Meals",
-    "tutorial_book.foodpower.boss_main_page.title": "Bosses"
+    "tutorial_book.foodpower.boss_main_page.title": "Bosses",
+
+    "tutorial_book.foodpower.ingredients.sauce.comment": "Sauce, So Useless.",
 }
