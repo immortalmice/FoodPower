@@ -23,7 +23,7 @@ public class IngredientPage extends AbstractLayoutPage {
 		font.drawString(I18n.format("general.foodpower.food_type") + ": " + I18n.format("food_type.foodpower." + this.ingredient.getFoodType().getName()), 40, 54, 0);
 		font.drawString(I18n.format("general.foodpower.flavor_type") + ": " + I18n.format("flavor_type.foodpower." + this.ingredient.getFlavorType().getName()), 40, 68, 0);
 		
-		int y = 98;
+		int y = 88;
 		for(int i = 1; i <= 3; i ++) {
 			String str = I18n.format("general.foodpower.level");
 			str += String.valueOf(i) + ": ";
@@ -31,12 +31,12 @@ public class IngredientPage extends AbstractLayoutPage {
 			
 			y += 14;
 			str = I18n.format("tutorial_book.foodpower.ingredients." + ingredient.asItem().getRegistryName().getPath() + ".level" + String.valueOf(i));
-			font.drawSplitString(str, 50, y, 170, 0);
+			font.drawSplitString(str, 50, y, 170, 0x404040);
 			
 			y += font.getWordWrappedHeight(str, 160) + 4;
 		}
 		
 		String str = I18n.format("tutorial_book.foodpower.ingredients." + ingredient.asItem().getRegistryName().getPath() + ".comment");
-		font.drawString(str, (256 - font.getStringWidth(str)) / 2, 220, 0x404040);
+		font.drawString(str, (256 - font.getStringWidth(str)) / 2, 198, 0x642100);
 	}
 }
