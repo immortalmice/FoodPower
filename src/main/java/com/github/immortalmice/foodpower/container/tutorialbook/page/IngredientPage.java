@@ -35,5 +35,8 @@ public class IngredientPage extends AbstractLayoutPage {
 			
 			y += font.getWordWrappedHeight(str, 160) + 4;
 		}
+		
+		String str = I18n.format("tutorial_book.foodpower.ingredients." + ingredient.asItem().getRegistryName().getPath() + ".comment");
+		font.drawString(str, (256 - font.getStringWidth(str)) / 2, 220, 0x404040);
 	}
 }
