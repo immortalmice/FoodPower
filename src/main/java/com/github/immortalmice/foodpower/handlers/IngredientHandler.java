@@ -7,7 +7,6 @@ import com.github.immortalmice.foodpower.message.ShootEnderPearlMessage;
 import com.github.immortalmice.foodpower.message.ShootPapayaSeedMessage;
 import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.lists.Ingredients;
-import com.github.immortalmice.foodpower.lists.OtherEntitys.EntityTypes;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 import net.minecraft.block.Block;
