@@ -20,10 +20,10 @@ public class IngredientPage extends AbstractLayoutPage {
 	public void render(int mouseX, int mouseY, Screen screen, FontRenderer font, ItemRenderer itemRenderer) {
 		super.render(mouseX, mouseY, screen, font, itemRenderer);
 
-		font.drawString(I18n.format("general.foodpower.food_type") + ": " + I18n.format("food_type.foodpower." + this.ingredient.getFoodType().getName()), 40, 54, 0);
-		font.drawString(I18n.format("general.foodpower.flavor_type") + ": " + I18n.format("flavor_type.foodpower." + this.ingredient.getFlavorType().getName()), 40, 68, 0);
+		font.drawString(I18n.format("general.foodpower.food_type") + ": " + I18n.format("food_type.foodpower." + this.ingredient.getFoodType().getName()), 40, 38, 0);
+		font.drawString(I18n.format("general.foodpower.flavor_type") + ": " + I18n.format("flavor_type.foodpower." + this.ingredient.getFlavorType().getName()), 40, 50, 0);
 		
-		int y = 88;
+		int y = 64;
 		for(int i = 1; i <= 3; i ++) {
 			String str = I18n.format("general.foodpower.level");
 			str += String.valueOf(i) + ": ";
@@ -37,6 +37,6 @@ public class IngredientPage extends AbstractLayoutPage {
 		}
 		
 		String str = I18n.format("tutorial_book.foodpower.ingredients." + ingredient.asItem().getRegistryName().getPath() + ".comment");
-		font.drawString(str, (256 - font.getStringWidth(str)) / 2, 198, 0x642100);
+		font.drawString(str, (256 - font.getStringWidth(str)) / 2, 204, 0x642100);
 	}
 }
