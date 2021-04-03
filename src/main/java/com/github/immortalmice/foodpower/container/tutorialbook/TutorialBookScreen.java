@@ -12,7 +12,7 @@ public class TutorialBookScreen extends ScreenBase<TutorialBookContainer> {
 	public TutorialBookScreen(TutorialBookContainer containerIn, PlayerInventory inventoryIn, ITextComponent textIn) {
 		super(containerIn, inventoryIn, textIn);
 		
-		this.textureFileName = "recipe_scroll_wood";
+		this.textureFileName = "tutorial_book";
 		this.xSize = 256;
 		this.ySize = 256;
 	}
