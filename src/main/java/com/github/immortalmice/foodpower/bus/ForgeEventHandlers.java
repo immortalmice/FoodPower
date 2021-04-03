@@ -23,6 +23,7 @@ import net.minecraft.entity.projectile.EggEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.MerchantContainer;
+import net.minecraft.item.GlassBottleItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -190,6 +191,17 @@ public class ForgeEventHandlers{
 							}
 						}
 					}
+				}
+			}else if(player.isPotionActive(FoodEffects.OIL_POWER)) {
+				int level = player.getActivePotionEffect(FoodEffects.OIL_POWER).getAmplifier();
+				float probability = (new float[]{0.05f, 0.15f, 0.35f})[Math.min(level, 2)];
+				if(player.world.canBlockSeeSky(player.getPosition())
+					&& player.world.getWorldInfo().isRaining()
+					&& player.getHeldItemMainhand().getItem() instanceof GlassBottleItem
+					&& player.world.rand.nextFloat() <= probability) {
+					
+					player.getHeldItemMainhand().shrink(1);
+					player.addItemStackToInventory(new ItemStack(com.github.immortalmice.foodpower.lists.Ingredients.Items.OIL));
 				}
 			}
 		}

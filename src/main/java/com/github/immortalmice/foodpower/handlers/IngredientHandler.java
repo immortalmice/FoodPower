@@ -140,7 +140,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.SALT_POWER, level);
 		});
 		Ingredients.Items.OIL.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.OIL_POWER, level);
 		});
 		Ingredients.Items.RICE.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addDefaultEffectInstance(FoodEffects.RICE_POWER, level);
