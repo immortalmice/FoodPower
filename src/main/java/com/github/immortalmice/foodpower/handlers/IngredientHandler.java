@@ -7,13 +7,17 @@ import com.github.immortalmice.foodpower.message.ShootEnderPearlMessage;
 import com.github.immortalmice.foodpower.message.ShootPapayaSeedMessage;
 import com.github.immortalmice.foodpower.specialclass.KitchenAppliance;
 import com.github.immortalmice.foodpower.lists.Ingredients;
+import com.github.immortalmice.foodpower.lists.OtherEntitys.EntityTypes;
 import com.github.immortalmice.foodpower.lists.OtherItems.Items;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.passive.TameableEntity;
@@ -23,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -225,8 +230,27 @@ public class IngredientHandler{
 		Ingredients.Items.PORKCHOP.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addDefaultEffectInstance(FoodEffects.PORKCHOP_POWER, level);
 		});
-		Ingredients.Items.BEEF.setMealEffectBiConsumer((effectContainer, level) -> {
-
+		Ingredients.Items.BEEF.setInteractEffectBiConsumer((rawEvent, level) -> {
+			PlayerEntity player = rawEvent.getPlayer();
+			if(rawEvent instanceof PlayerInteractEvent.EntityInteract && !player.world.isRemote) {
+				PlayerInteractEvent.EntityInteract event = (PlayerInteractEvent.EntityInteract) rawEvent;
+				Entity living = event.getTarget();
+				if(living.getType() == EntityType.COW
+					&& (player.isPotionActive(FoodEffects.RED_MUSHROOM_POWER) || player.isPotionActive(FoodEffects.BROWN_MUSHROOM_POWER))) {
+				
+					float probability = (new float[]{0.2f, 0.4f, 0.8f})[Math.min(level, 2)];
+					if(player.world.rand.nextFloat() <= probability) {
+						BlockPos pos = living.getPosition();
+						MooshroomEntity mooshroom = new MooshroomEntity(EntityType.MOOSHROOM, player.world);
+						mooshroom.setPosition(pos.getX(), pos.getY(), pos.getZ());
+						
+						living.remove();
+						player.world.addEntity(mooshroom);
+						event.setCanceled(true);
+					}
+					player.getHeldItemMainhand().shrink(1);
+				}
+			}
 		});
 		Ingredients.Items.CHICKEN.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addDefaultEffectInstance(FoodEffects.CHICKEN_POWER, level);
