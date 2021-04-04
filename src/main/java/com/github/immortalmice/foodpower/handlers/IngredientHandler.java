@@ -255,7 +255,7 @@ public class IngredientHandler{
 			effectContainer.addDefaultEffectInstance(FoodEffects.CHICKEN_POWER, level);
 		});
 		Ingredients.Items.MUTTON.setMealEffectBiConsumer((effectContainer, level) -> {
-
+			effectContainer.addDefaultEffectInstance(FoodEffects.MUTTON_POWER, level);
 		});
 		Ingredients.Items.CHORUS_FRUIT.setMealEffectBiConsumer((effectContainer, level) -> {
 			effectContainer.addDefaultEffectInstance(FoodEffects.CHORUS_FRUIT_POWER, level);

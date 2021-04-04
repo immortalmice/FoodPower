@@ -2,6 +2,7 @@ package com.github.immortalmice.foodpower.bus;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.enchantment.FrostWalkerEnchantment;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.EndermanEntity;
+import net.minecraft.entity.monster.SkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.entity.passive.ChickenEntity;
@@ -416,7 +418,8 @@ public class ForgeEventHandlers{
 				}
 				
 				if(isApproved) event.setAmount(event.getAmount() + (level + 1) * 2);
-			}else if(targetEntity.isPotionActive(FoodEffects.SWEET_BERRIES_POWER)) {
+			}
+			if(targetEntity.isPotionActive(FoodEffects.SWEET_BERRIES_POWER)) {
 				int level = targetEntity.getActivePotionEffect(FoodEffects.SWEET_BERRIES_POWER).getAmplifier();
 				if(level == 0) {
 					if(immediateSourceEntity instanceof LivingEntity && targetEntity.world.rand.nextFloat() <= 0.15f) {
@@ -429,6 +432,49 @@ public class ForgeEventHandlers{
 				}else if(level >= 2) {
 					if(trueSourceEntity instanceof LivingEntity && targetEntity.world.rand.nextFloat() <= 0.7f) {
 						((LivingEntity) trueSourceEntity).setHealth(((LivingEntity) trueSourceEntity).getHealth() - 3);
+					}
+				}
+			}
+			if(trueSourceEntity instanceof SkeletonEntity && targetEntity.isPotionActive(FoodEffects.MUTTON_POWER)) {
+				int level = targetEntity.getActivePotionEffect(FoodEffects.MUTTON_POWER).getAmplifier();
+				CompoundNBT nbt = trueSourceEntity.getPersistentData();
+				boolean isSet = nbt.getBoolean("fp_wool_set");
+				if(!isSet) {
+					World world = trueSourceEntity.world;
+					@SuppressWarnings("deprecation")
+					Consumer<BlockPos> trySetWool = pos -> {
+						BlockPos newPos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ());
+						if(world.getBlockState(newPos).isAir()){
+							world.setBlockState(newPos, Blocks.WHITE_WOOL.getDefaultState());
+						}
+					};
+					switch(level){
+						case 0:
+							if(world.rand.nextFloat() <= 0.05f){
+								trySetWool.accept(trueSourceEntity.getPosition());
+								nbt.putBoolean("fp_wool_set", true);
+							}
+							break;
+						case 1:
+							if(world.rand.nextFloat() <= 0.15f){
+								trySetWool.accept(trueSourceEntity.getPosition());
+								nbt.putBoolean("fp_wool_set", true);
+							}
+							break;
+						case 2:
+							if(world.rand.nextFloat() <= 0.35f){
+								int i = -1, j = -1;
+								while(i <= 1){
+									BlockPos pos = trueSourceEntity.getPosition().add(i, 0, j);
+									trySetWool.accept(pos);
+									j ++;
+									if(j > 1){
+										i ++;
+										j = -1;
+									}
+								}
+								nbt.putBoolean("fp_wool_set", true);
+							}
 					}
 				}
 			}
