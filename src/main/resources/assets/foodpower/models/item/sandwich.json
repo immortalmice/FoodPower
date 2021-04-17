@@ -7,6 +7,12 @@
 	"ingredients": {
 		"base": "foodpower:meals/sandwich/sandwich_base",
 
-		"parts": []
+		"parts": [{
+            "type": "meat",
+            "textures": {
+                "minecraft:porkchop": "foodpower:meals/sandwich/sandwich_pork",
+                "minecraft:beef": "foodpower:meals/sandwich/sandwich_beef"
+            }
+        }]
 	}
 }
