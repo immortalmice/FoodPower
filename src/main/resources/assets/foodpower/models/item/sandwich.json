@@ -16,6 +16,11 @@
                 "minecraft:mutton": "foodpower:meals/sandwich/sandwich_mutton",
                 "minecraft:rabbit": "foodpower:meals/sandwich/sandwich_rabbit"
             }
+        }, {
+            "type": "vegetable",
+            "textures": {
+                "foodpower:corn": "foodpower:meals/sandwich/sandwich_corn"
+            }
         }]
 	}
 }
