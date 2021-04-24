@@ -30,7 +30,8 @@
                 "minecraft:kelp": "foodpower:meals/sandwich/sandwich_kelp",
                 "minecraft:brown_mushroom": "foodpower:meals/sandwich/sandwich_brown_mushroom",
                 "minecraft:red_mushroom": "foodpower:meals/sandwich/sandwich_red_mushroom",
-                "minecraft:nether_wart": "foodpower:meals/sandwich/sandwich_nether_wart"
+                "minecraft:nether_wart": "foodpower:meals/sandwich/sandwich_nether_wart",
+                "foodpower:chili": "foodpower:meals/sandwich/sandwich_chili"
             }
         }]
 	}
