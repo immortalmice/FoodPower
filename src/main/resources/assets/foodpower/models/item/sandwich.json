@@ -11,7 +11,10 @@
             "type": "meat",
             "textures": {
                 "minecraft:porkchop": "foodpower:meals/sandwich/sandwich_pork",
-                "minecraft:beef": "foodpower:meals/sandwich/sandwich_beef"
+                "minecraft:beef": "foodpower:meals/sandwich/sandwich_beef",
+                "minecraft:chicken": "foodpower:meals/sandwich/sandwich_chicken",
+                "minecraft:mutton": "foodpower:meals/sandwich/sandwich_mutton",
+                "minecraft:rabbit": "foodpower:meals/sandwich/sandwich_rabbit"
             }
         }]
 	}
