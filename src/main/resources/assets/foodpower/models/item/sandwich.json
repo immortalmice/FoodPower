@@ -20,7 +20,8 @@
             "type": "vegetable",
             "textures": {
                 "foodpower:corn": "foodpower:meals/sandwich/sandwich_corn",
-                "minecraft:pumpkin": "foodpower:meals/sandwich/sandwich_pumpkin"
+                "minecraft:pumpkin": "foodpower:meals/sandwich/sandwich_pumpkin",
+                "minecraft:potato": "foodpower:meals/sandwich/sandwich_potato"
             }
         }]
 	}
