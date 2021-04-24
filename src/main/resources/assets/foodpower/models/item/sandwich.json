@@ -27,7 +27,8 @@
                 "foodpower:spinach": "foodpower:meals/sandwich/sandwich_spinach",
                 "foodpower:cabbage": "foodpower:meals/sandwich/sandwich_cabbage",
                 "foodpower:tomato": "foodpower:meals/sandwich/sandwich_tomato",
-                "minecraft:kelp": "foodpower:meals/sandwich/sandwich_kelp"
+                "minecraft:kelp": "foodpower:meals/sandwich/sandwich_kelp",
+                "minecraft:brown_mushroom": "foodpower:meals/sandwich/sandwich_brown_mushroom"
             }
         }]
 	}
