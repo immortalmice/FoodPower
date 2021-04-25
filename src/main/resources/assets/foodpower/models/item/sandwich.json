@@ -33,6 +33,11 @@
                 "minecraft:nether_wart": "foodpower:meals/sandwich/sandwich_nether_wart",
                 "foodpower:chili": "foodpower:meals/sandwich/sandwich_chili"
             }
+        }, {
+            "type": "fruit",
+            "textures" : {
+                "foodpower:kiwi": "foodpower:meals/sandwich/sandwich_kiwi"
+            }
         }]
 	}
 }
