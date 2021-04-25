@@ -41,7 +41,9 @@
                 "foodpower:mango": "foodpower:meals/sandwich/sandwich_mango",
                 "minecraft:melon": "foodpower:meals/sandwich/sandwich_melon",
                 "foodpower:orange": "foodpower:meals/sandwich/sandwich_orange",
-                "foodpower:lemon": "foodpower:meals/sandwich/sandwich_lemon"
+                "foodpower:lemon": "foodpower:meals/sandwich/sandwich_lemon",
+                "minecraft:apple": "foodpower:meals/sandwich/sandwich_apple",
+                "minecraft:chorus_fruit": "foodpower:meals/sandwich/sandwich_chorus_fruit"
             }
         }]
 	}
