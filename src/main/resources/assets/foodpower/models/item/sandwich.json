@@ -37,7 +37,10 @@
             "type": "fruit",
             "textures" : {
                 "foodpower:kiwi": "foodpower:meals/sandwich/sandwich_kiwi",
-                "foodpower:papaya": "foodpower:meals/sandwich/sandwich_papaya"
+                "foodpower:papaya": "foodpower:meals/sandwich/sandwich_papaya",
+                "foodpower:mango": "foodpower:meals/sandwich/sandwich_mango",
+                "minecraft:melon": "foodpower:meals/sandwich/sandwich_melon",
+                "foodpower:orange": "foodpower:meals/sandwich/sandwich_orange"
             }
         }]
 	}
