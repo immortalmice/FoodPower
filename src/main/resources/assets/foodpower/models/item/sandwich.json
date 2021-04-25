@@ -36,7 +36,8 @@
         }, {
             "type": "fruit",
             "textures" : {
-                "foodpower:kiwi": "foodpower:meals/sandwich/sandwich_kiwi"
+                "foodpower:kiwi": "foodpower:meals/sandwich/sandwich_kiwi",
+                "foodpower:papaya": "foodpower:meals/sandwich/sandwich_papaya"
             }
         }]
 	}
