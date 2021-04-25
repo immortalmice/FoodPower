@@ -21,9 +21,9 @@ public class TextButton extends Button {
 			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 			if(this.isHovered()){
-				this.drawString(this.fontRenderer, this.getMessage(), this.x, this.y, 0x000040);
+				this.fontRenderer.drawString(this.getMessage(), this.x, this.y, 0x0000FF);
 			}else{
-				this.drawString(this.fontRenderer, this.getMessage(), this.x, this.y, 0x404040);
+				this.fontRenderer.drawString(this.getMessage(), this.x, this.y, 0x404040);
 			}
 		}
 	}
