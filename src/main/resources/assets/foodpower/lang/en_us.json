@@ -267,6 +267,16 @@
     "tutorial_book.foodpower.pattern_main_page.title": "Meals",
     "tutorial_book.foodpower.boss_main_page.title": "Bosses",
 
+    "tutorial_book.foodpower.tutorials.how_to_be_a_good_chef": "§n§oHow to be a good chef",
+    "tutorial_book.foodpower.tutorials.how_to_make_meals": "§n§oHow to make meals",
+    "tutorial_book.foodpower.tutorials.your_experience": "§n§oYour experience",
+    "tutorial_book.foodpower.tutorials.how_to_summon_boss": "§n§oHow to summon boss",
+
+    "tutorial_book.foodpower.tutorials.how_to_be_a_good_chef.content": "",
+    "tutorial_book.foodpower.tutorials.how_to_make_meals.content": "",
+    "tutorial_book.foodpower.tutorials.your_experience.content": "",
+    "tutorial_book.foodpower.tutorials.how_to_summon_boss.content": "",
+    
     "tutorial_book.foodpower.ingredients.butter.level1": "Able to breed chicken by cooked food.",
     "tutorial_book.foodpower.ingredients.butter.level2": "Able to breed cow, sheep, pig, chicken by cooked food.",
     "tutorial_book.foodpower.ingredients.butter.level3": "Able to breed all animals that can be bred.",

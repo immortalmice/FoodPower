@@ -10,6 +10,7 @@ import com.github.immortalmice.foodpower.container.tutorialbook.page.IngredientP
 import com.github.immortalmice.foodpower.container.tutorialbook.page.IngredientsPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.MainPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.PatternsPage;
+import com.github.immortalmice.foodpower.container.tutorialbook.page.TutorialPage;
 import com.github.immortalmice.foodpower.container.tutorialbook.page.TutorialsPage;
 import com.github.immortalmice.foodpower.lists.Containers.ContainerTypes;
 import com.github.immortalmice.foodpower.lists.Ingredients;
@@ -27,6 +28,10 @@ public class TutorialBookContainer extends ContainerBase {
 		
 		TutorialBookContainer.PAGES.add(new TutorialsPage());
 		Navigator.TUTORIAL_PAGE = TutorialBookContainer.PAGES.size() - 1;
+		TutorialBookContainer.PAGES.add(new TutorialPage("how_to_be_a_good_chef"));
+		TutorialBookContainer.PAGES.add(new TutorialPage("how_to_make_meals"));
+		TutorialBookContainer.PAGES.add(new TutorialPage("your_experience"));
+		TutorialBookContainer.PAGES.add(new TutorialPage("how_to_summon_boss"));
 		
 		TutorialBookContainer.PAGES.add(new IngredientsPage());
 		Navigator.INGREDIENTS_PAGE = TutorialBookContainer.PAGES.size() - 1;
