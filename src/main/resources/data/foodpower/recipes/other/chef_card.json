@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "foopower:other",
+	"result": {"item": "foodpower:chef_card"},
+	"ingredients": [
+        {"item": "foodpower:butter"},
+        {"item": "minecraft:paper"}
+    ]
+}

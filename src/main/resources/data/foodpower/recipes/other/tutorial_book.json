@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "foopower:other",
+	"result": {"item": "foodpower:tutorial_book"},
+	"ingredients": [
+        {"item": "foodpower:butter"},
+        {"item": "minecraft:book"}
+    ]
+}
