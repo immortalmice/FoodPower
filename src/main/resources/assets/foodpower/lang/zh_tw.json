@@ -272,10 +272,10 @@
     "tutorial_book.foodpower.tutorials.your_experience": "§n§o你的廚師經驗值",
     "tutorial_book.foodpower.tutorials.how_to_summon_boss": "§n§o如何召喚王怪",
 
-	"tutorial_book.foodpower.tutorials.how_to_be_a_good_chef.content": "",
-    "tutorial_book.foodpower.tutorials.how_to_make_meals.content": "",
-    "tutorial_book.foodpower.tutorials.your_experience.content": "",
-    "tutorial_book.foodpower.tutorials.how_to_summon_boss.content": "",
+	"tutorial_book.foodpower.tutorials.how_to_be_a_good_chef.content": "身為廚師，你有必要了解一件事。 那就是千萬別讓你煮過的食物掉到地上。 就算不小心掉到了地上，請記得三秒原則，過了三秒......噁！",
+    "tutorial_book.foodpower.tutorials.how_to_make_meals.content": "首先，你必須製作出一個食譜桌，然後將一本書與羽毛筆放入。 腦袋中想著你要製作的料理模板，每個模板都包含一些固定和可選的食材。 根據你的喜好，將符合食物種類的食材放進食譜桌，你同時可以選擇該食材的比重。 比重越高，該食材的效果便越好，但相對的製作一份料理所需的食材會指數成長。 決定後便可以將食譜從食譜桌上拿出，之後就照著食譜將料理製作出來囉！",
+    "tutorial_book.foodpower.tutorials.your_experience.content": "經過吃下你所製作的食物，你可以獲得兩種經驗值。 一種是樣板經驗值，這可以幫助你在製作食譜的時候有機率獲得更高稀有度的食譜。 高稀有度的食譜代表著你可以用更少的用料製作出相同分量的料理。 另一種經驗值是風味經驗值，不同的風味可以為你帶來不同的特殊正面和負面效果。 別忘了風味是兩兩成對且互斥的，而到達該風味的頂尖，似乎就可以移除該風味的負面效果。",
+    "tutorial_book.foodpower.tutorials.how_to_summon_boss.content": "在風味經驗值峰頂的路上卡住了？是時候該來打打風味王怪了。 要如何召喚他們其實很容易，短時間連續浪費擁有該風味的料理到達一定程度的話......",
 
     "tutorial_book.foodpower.ingredients.butter.level1": "可以用料理繁殖雞。",
     "tutorial_book.foodpower.ingredients.butter.level2": "等級一效果以及可以用料理繁殖牛、羊、豬。",
