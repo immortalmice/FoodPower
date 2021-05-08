@@ -272,10 +272,10 @@
     "tutorial_book.foodpower.tutorials.your_experience": "§n§oYour experience",
     "tutorial_book.foodpower.tutorials.how_to_summon_boss": "§n§oHow to summon boss",
 
-    "tutorial_book.foodpower.tutorials.how_to_be_a_good_chef.content": "",
-    "tutorial_book.foodpower.tutorials.how_to_make_meals.content": "",
-    "tutorial_book.foodpower.tutorials.your_experience.content": "",
-    "tutorial_book.foodpower.tutorials.how_to_summon_boss.content": "",
+    "tutorial_book.foodpower.tutorials.how_to_be_a_good_chef.content": "As a chef, you need to realize that never drop any food you cooked on the ground. Even though you drop food carelessly, remember the rule of three seconds. If the food stay on the ground over three seconds... Gross!",
+    "tutorial_book.foodpower.tutorials.how_to_make_meals.content": "First, you need to make a recipe table. Then put a book and quill onto it. Thinking of the cook pattern of the food you want to cook, every pattern contains some specified and optional ingredients. You can put the ingredients corresponding to the food type onto the recipe table as you like. Also you can choose the weight of a certain ingredient. The higher the weight, the better the effect of the ingredient. But the number of ingredient you need to cook will grow exponentially. After you decide everything, you can take the recipe from the recipe table, and cook the food according to the recipe!",
+    "tutorial_book.foodpower.tutorials.your_experience.content": "Through the food you ate, you will get two kinds of experience. One is pattern experience which will help you to get rarer recipes when you make recipes. The rarer the recipe, the fewer ingredients you need to cook the same amounts of food. The other one is flavor experience. Different flavor will give you different positive and negative effect. Don't forget the flavor forms pairs and mutually exclusive. When you reach the top of a certain flavor, you may get rid of the negative effect of the flavor.",
+    "tutorial_book.foodpower.tutorials.how_to_summon_boss.content": "Get stocked on the road to the top of the flavor experience? Time to fight the bosses of flavor. Summoning the bosses is easy, you only need to waste the cooked food with the certain flavor to specific extend in a short time...",
     
     "tutorial_book.foodpower.ingredients.butter.level1": "Able to breed chicken by cooked food.",
     "tutorial_book.foodpower.ingredients.butter.level2": "Able to breed cow, sheep, pig, chicken by cooked food.",
