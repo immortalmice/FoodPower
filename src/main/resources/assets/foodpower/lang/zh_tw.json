@@ -167,6 +167,14 @@
     "effect.foodpower.dragon_breath_power": "龍息拋瓦",
     "effect.foodpower.experience_bottle_power": "經驗瓶拋瓦",
 
+    "_comment": "風味效果",
+    "effect.foodpower.sweet_effect": "甜之力",
+    "effect.foodpower.bitter_effect": "苦之力",
+    "effect.foodpower.sour_effect": "酸之力",
+    "effect.foodpower.salty_effect": "鹹之力",
+    "effect.foodpower.nether_effect": "地獄之力",
+    "effect.foodpower.ender_effect": "終界之力",
+
     "_comment": "=======================特殊=======================",
 
     "_comment": "全域名字",

@@ -11,11 +11,19 @@ import net.minecraft.potion.Effect;
 import net.minecraftforge.fml.RegistryObject;
 
 import com.github.immortalmice.foodpower.FoodPower;
+import com.github.immortalmice.foodpower.effect.FlavorEffect;
 import com.github.immortalmice.foodpower.effect.FoodEffect;
+import com.github.immortalmice.foodpower.effect.flavor.BitterEffect;
+import com.github.immortalmice.foodpower.effect.flavor.EnderEffect;
+import com.github.immortalmice.foodpower.effect.flavor.NetherEffect;
+import com.github.immortalmice.foodpower.effect.flavor.SaltyEffect;
+import com.github.immortalmice.foodpower.effect.flavor.SourEffect;
+import com.github.immortalmice.foodpower.effect.flavor.SweetEffect;
 import com.github.immortalmice.foodpower.util.ReflectList;
 
 public class Effects{
 	public static final ReflectList<FoodEffect, FoodEffects> list = new ReflectList<FoodEffect, FoodEffects>(FoodEffect.class, FoodEffects.class);
+	public static final ReflectList<FlavorEffect, FlavorEffects> flavorList = new ReflectList<>(FlavorEffect.class, FlavorEffects.class, true);
 
 	@ObjectHolder(FoodPower.MODID)
 	public static class FoodEffects{
@@ -55,6 +63,16 @@ public class Effects{
 		public static final FoodEffect SWEET_BERRIES_POWER = null; 
 		public static final FoodEffect DRAGON_BREATH_POWER = null; 
 		public static final FoodEffect EXPERIENCE_BOTTLE_POWER = null; 
+	}
+	
+	@ObjectHolder(FoodPower.MODID)
+	public static class FlavorEffects{
+		public static final SweetEffect SWEET_EFFECT = null;
+		public static final BitterEffect BITTER_EFFECT = null;
+		public static final SourEffect SOUR_EFFECT = null;
+		public static final SaltyEffect SALTY_EFFECT = null;
+		public static final NetherEffect NETHER_EFFECT = null;
+		public static final EnderEffect ENDER_EFFECT = null;
 	}
 
 	public static DeferredRegister<Effect> getRegister(){
@@ -101,8 +119,19 @@ class EffectRegistry{
 	public static final RegistryObject<Effect> OBJ_SWEET_BERRIES_POWER = EffectRegistry.foodEffectRegister("sweet_berries_power", () -> new FoodEffect(0xF00078));; 
 	public static final RegistryObject<Effect> OBJ_DRAGON_BREATH_POWER = EffectRegistry.foodEffectRegister("dragon_breath_power", () -> new FoodEffect(0x9955FF));
 	public static final RegistryObject<Effect> OBJ_EXPERIENCE_BOTTLE_POWER = EffectRegistry.foodEffectRegister("experience_bottle_power", () -> new FoodEffect(0xBBFF00));
+	
+	public static final RegistryObject<Effect> OBJ_SWEET_EFFECT = EffectRegistry.flavorEffectRegiter("sweet_effect", () -> new SweetEffect());
+	public static final RegistryObject<Effect> OBJ_BITTER_EFFECT = EffectRegistry.flavorEffectRegiter("bitter_effect", () -> new BitterEffect());
+	public static final RegistryObject<Effect> OBJ_SOUR_EFFECT = EffectRegistry.flavorEffectRegiter("sour_effect", () -> new SourEffect());
+	public static final RegistryObject<Effect> OBJ_SALTY_EFFECT = EffectRegistry.flavorEffectRegiter("salty_effect", () -> new SaltyEffect());
+	public static final RegistryObject<Effect> OBJ_NETHER_EFFECT = EffectRegistry.flavorEffectRegiter("nether_effect", () -> new NetherEffect());
+	public static final RegistryObject<Effect> OBJ_ENDER_EFFECT = EffectRegistry.flavorEffectRegiter("ender_effect", () -> new EnderEffect());
 
 	private static RegistryObject<Effect> foodEffectRegister(String str, Supplier<Effect> sup){
+		return EffectRegistry.REGISTER.register(str, sup);
+	}
+	
+	private static RegistryObject<Effect> flavorEffectRegiter(String str, Supplier<Effect> sup){
 		return EffectRegistry.REGISTER.register(str, sup);
 	}
 }

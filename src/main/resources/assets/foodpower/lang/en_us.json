@@ -167,6 +167,14 @@
     "effect.foodpower.dragon_breath_power": "Dragon Breath Power",
     "effect.foodpower.experience_bottle_power": "Bottle o' Enchanting Power",
 
+    "_comment": "風味效果",
+    "effect.foodpower.sweet_effect": "Effect Of Sweet",
+    "effect.foodpower.bitter_effect": "Effect Of Bitter",
+    "effect.foodpower.sour_effect": "Effect Of Sour",
+    "effect.foodpower.salty_effect": "Effect Of Salty",
+    "effect.foodpower.nether_effect": "Effect Of Nether",
+    "effect.foodpower.ender_effect": "Effect Of Ender",
+
     "_comment": "=======================Custom=======================",
 
     "_comment": "General",
