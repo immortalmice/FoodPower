@@ -10,7 +10,8 @@
 		"parts": [{
             "type": "seasoning",
             "textures": {
-                "minecraft:honey_bottle": "foodpower:meals/fried_rice/fried_rice_honey"
+                "minecraft:honey_bottle": "foodpower:meals/fried_rice/fried_rice_honey",
+                "minecraft:experience_bottle": "foodpower:meals/fried_rice/fried_rice_experience_bottle"
             }
         }]
 	}
