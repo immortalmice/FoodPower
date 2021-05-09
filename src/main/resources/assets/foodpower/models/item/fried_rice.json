@@ -7,6 +7,11 @@
 	"ingredients": {
 		"base": "foodpower:meals/fried_rice/fried_rice_base",
 
-		"parts": []
+		"parts": [{
+            "type": "seasoning",
+            "textures": {
+                "minecraft:honey_bottle": "foodpower:meals/fried_rice/fried_rice_honey"
+            }
+        }]
 	}
 }
