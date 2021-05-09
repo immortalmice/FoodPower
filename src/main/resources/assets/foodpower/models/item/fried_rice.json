@@ -11,7 +11,10 @@
             "type": "seasoning",
             "textures": {
                 "minecraft:honey_bottle": "foodpower:meals/fried_rice/fried_rice_honey",
-                "minecraft:experience_bottle": "foodpower:meals/fried_rice/fried_rice_experience_bottle"
+                "minecraft:experience_bottle": "foodpower:meals/fried_rice/fried_rice_experience_bottle",
+                "foodpower:ketchup": "foodpower:meals/fried_rice/fried_rice_ketchup",
+                "foodpower:sauce": "foodpower:meals/fried_rice/fried_rice_sauce",
+                "minecraft:ghast_tear": "foodpower:meals/fried_rice/fried_rice_ghast_tear"
             }
         }]
 	}
