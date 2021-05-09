@@ -44,15 +44,24 @@ public class ConfigHandler {
 		public boolean doShowFoodEffectBubble;
 		public final BooleanValue doShowFoodEffectBubbleValue;
 		
+		public boolean doShowFlavorEffect;
+		public final BooleanValue doShowFlavorEffectValue;
+		
 		public ClientConfig(ForgeConfigSpec.Builder builder) {
 			this.doShowFoodEffectBubbleValue = builder
 				.comment("Do food effect show bubbles animation when applied to player.")
 				.translation(FoodPower.MODID + ".config.do_show_food_effect_bubble")
 				.define("doShowFoodEffectBubble", true);
+			
+			this.doShowFlavorEffectValue = builder
+				.comment("Do flavor effect show in player's inventory & HUD.")
+				.translation(FoodPower.MODID + ".config.do_show_flavor_effect")
+				.define("doShowFlavorEffect", false);
 		}
 		
 		public void bake() {
 			this.doShowFoodEffectBubble = this.doShowFoodEffectBubbleValue.get();
+			this.doShowFlavorEffect = this.doShowFlavorEffectValue.get();
 		}
 	}
 	
