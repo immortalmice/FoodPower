@@ -10,7 +10,11 @@
 		"parts": [{
             "type": "meat",
             "textures": {
-                "minecraft:porkchop": "foodpower:meals/fried_rice/fried_rice_pork"
+                "minecraft:porkchop": "foodpower:meals/fried_rice/fried_rice_pork",
+                "minecraft:beef": "foodpower:meals/fried_rice/fried_rice_beef",
+                "minecraft:chicken": "foodpower:meals/fried_rice/fried_rice_chicken",
+                "minecraft:mutton": "foodpower:meals/fried_rice/fried_rice_mutton",
+                "minecraft:rabbit": "foodpower:meals/fried_rice/fried_rice_rabbit"
             }
         }, {
             "type": "seasoning",
