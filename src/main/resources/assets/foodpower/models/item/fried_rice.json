@@ -33,7 +33,9 @@
                 "foodpower:corn": "foodpower:meals/fried_rice/fried_rice_corn",
                 "minecraft:pumpkin": "foodpower:meals/fried_rice/fried_rice_pumpkin",
                 "minecraft:potato": "foodpower:meals/fried_rice/fried_rice_potato",
-                "minecraft:beetroot": "foodpower:meals/fried_rice/fried_rice_beetroot"
+                "minecraft:beetroot": "foodpower:meals/fried_rice/fried_rice_beetroot",
+                "minecraft:carrot": "foodpower:meals/fried_rice/fried_rice_carrot",
+                "foodpower:cabbage": "foodpower:meals/fried_rice/fried_rice_cabbage"
             }
         }]
 	}
