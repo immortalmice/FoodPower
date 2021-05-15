@@ -71,7 +71,7 @@ public class CookingPatterns{
 			Ingredients.Items.RICE, Ingredients.Items.WATER_BUCKET
 		}),
 		new CookingStep(Blocks.FRYING_PAN, Meals.Items.FRIED_RICE, new ICookingElement[]{
-			Ingredients.Items.OIL, FoodTypes.MEAT, CookedFoods.Items.COOKED_RICE, Ingredients.Items.SALT, FoodTypes.SEASONING, FoodTypes.VEGETABLE
+			Ingredients.Items.OIL, CookedFoods.Items.COOKED_RICE, Ingredients.Items.SALT, FoodTypes.SEASONING, FoodTypes.VEGETABLE, FoodTypes.MEAT
 		})
 	});
 	
