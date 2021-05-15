@@ -56,6 +56,8 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 		if(level < FPFlavorExpCapability.MIN_LEVEL) level = FPFlavorExpCapability.MIN_LEVEL;
 
 		this.flavorExp.put(flavor, LevelPointConverter.FLAVOR_CONVERTER.levelToPoint(level, 0));
+		
+		this.markDirty(true);
 	}
 
 	@Override
