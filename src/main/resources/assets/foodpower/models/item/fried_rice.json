@@ -8,6 +8,11 @@
 		"base": "foodpower:meals/fried_rice/fried_rice_base",
 
 		"parts": [{
+            "type": "meat",
+            "textures": {
+                "minecraft:porkchop": "foodpower:meals/fried_rice/fried_rice_pork"
+            }
+        }, {
             "type": "seasoning",
             "textures": {
                 "minecraft:honey_bottle": "foodpower:meals/fried_rice/fried_rice_honey",
@@ -16,6 +21,11 @@
                 "foodpower:sauce": "foodpower:meals/fried_rice/fried_rice_sauce",
                 "minecraft:ghast_tear": "foodpower:meals/fried_rice/fried_rice_ghast_tear",
                 "minecraft:dragon_breath": "foodpower:meals/fried_rice/fried_rice_dragon_breath"
+            }
+        }, {
+            "type": "vegetable",
+            "textures": {
+                "foodpower:spinach": "foodpower:meals/fried_rice/fried_rice_spinach"
             }
         }]
 	}
