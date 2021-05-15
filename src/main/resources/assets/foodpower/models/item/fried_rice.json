@@ -29,7 +29,8 @@
         }, {
             "type": "vegetable",
             "textures": {
-                "foodpower:spinach": "foodpower:meals/fried_rice/fried_rice_spinach"
+                "foodpower:spinach": "foodpower:meals/fried_rice/fried_rice_spinach",
+                "foodpower:corn": "foodpower:meals/fried_rice/fried_rice_corn"
             }
         }]
 	}
