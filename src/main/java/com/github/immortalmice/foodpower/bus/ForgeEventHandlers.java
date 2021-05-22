@@ -59,6 +59,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
+import net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
@@ -630,6 +631,13 @@ public class ForgeEventHandlers{
 				
 				event.setResult(Result.DENY);
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onPotionRemove(PotionRemoveEvent event) {
+		if(event.getPotion() instanceof FlavorEffect) {
+			((FlavorEffect)event.getPotion()).onRemoveEffect(event.getEntity(), event.getPotionEffect().getAmplifier());
 		}
 	}
 	

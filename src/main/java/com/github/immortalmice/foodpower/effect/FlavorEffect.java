@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
@@ -25,4 +27,6 @@ public class FlavorEffect extends Effect {
 	
 	@Override
 	public List<ItemStack> getCurativeItems() { return new ArrayList<>(); }
+	
+	public void onRemoveEffect(Entity entityLivingBaseIn, int amplifier) {}
 }
