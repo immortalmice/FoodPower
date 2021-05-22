@@ -1,5 +1,8 @@
 package com.github.immortalmice.foodpower.effect;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 
 import net.minecraft.potion.Effect;
@@ -19,4 +22,7 @@ public class FlavorEffect extends Effect {
 	
 	@Override
 	public boolean shouldRenderHUD(EffectInstance effect) { return ConfigHandler.CLIENT.doShowFlavorEffect; }
+	
+	@Override
+	public List<ItemStack> getCurativeItems() { return new ArrayList<>(); }
 }
