@@ -7,6 +7,11 @@
 	"ingredients": {
 		"base": "foodpower:meals/noodle_soup/noodle_soup_base",
 
-		"parts": []
+		"parts": [{
+            "type": "meat",
+            "textures": {
+                "minecraft:porkchop": "foodpower:meals/noodle_soup/noodle_soup_pork"
+            }
+        }]
 	}
 }
