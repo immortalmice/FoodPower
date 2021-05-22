@@ -37,7 +37,11 @@
                 "minecraft:carrot": "foodpower:meals/fried_rice/fried_rice_carrot",
                 "foodpower:cabbage": "foodpower:meals/fried_rice/fried_rice_cabbage",
                 "foodpower:tomato": "foodpower:meals/fried_rice/fried_rice_tomato",
-                "minecraft:kelp": "foodpower:meals/fried_rice/fried_rice_kelp"
+                "minecraft:kelp": "foodpower:meals/fried_rice/fried_rice_kelp",
+                "minecraft:brown_mushroom": "foodpower:meals/fried_rice/fried_rice_brown_mushroom",
+                "minecraft:red_mushroom": "foodpower:meals/fried_rice/fried_rice_red_mushroom",
+                "minecraft:nether_wart": "foodpower:meals/fried_rice/fried_rice_nether_wart",
+                "foodpower:chili": "foodpower:meals/fried_rice/fried_rice_chili"
             }
         }]
 	}
