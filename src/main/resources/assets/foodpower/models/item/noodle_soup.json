@@ -12,7 +12,9 @@
             "textures": {
                 "minecraft:porkchop": "foodpower:meals/noodle_soup/noodle_soup_pork",
                 "minecraft:beef": "foodpower:meals/noodle_soup/noodle_soup_beef",
-                "minecraft:mutton": "foodpower:meals/noodle_soup/noodle_soup_mutton"
+                "minecraft:mutton": "foodpower:meals/noodle_soup/noodle_soup_mutton",
+                "minecraft:chicken": "foodpower:meals/noodle_soup/noodle_soup_chicken",
+                "minecraft:rabbit": "foodpower:meals/noodle_soup/noodle_soup_rabbit"
             }
         }]
 	}
