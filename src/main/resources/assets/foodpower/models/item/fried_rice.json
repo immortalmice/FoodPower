@@ -36,7 +36,8 @@
                 "minecraft:beetroot": "foodpower:meals/fried_rice/fried_rice_beetroot",
                 "minecraft:carrot": "foodpower:meals/fried_rice/fried_rice_carrot",
                 "foodpower:cabbage": "foodpower:meals/fried_rice/fried_rice_cabbage",
-                "foodpower:tomato": "foodpower:meals/fried_rice/fried_rice_tomato"
+                "foodpower:tomato": "foodpower:meals/fried_rice/fried_rice_tomato",
+                "minecraft:kelp": "foodpower:meals/fried_rice/fried_rice_kelp"
             }
         }]
 	}
