@@ -10,7 +10,9 @@
 		"parts": [{
             "type": "meat",
             "textures": {
-                "minecraft:porkchop": "foodpower:meals/noodle_soup/noodle_soup_pork"
+                "minecraft:porkchop": "foodpower:meals/noodle_soup/noodle_soup_pork",
+                "minecraft:beef": "foodpower:meals/noodle_soup/noodle_soup_beef",
+                "minecraft:mutton": "foodpower:meals/noodle_soup/noodle_soup_mutton"
             }
         }]
 	}
