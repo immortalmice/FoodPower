@@ -16,6 +16,11 @@
                 "minecraft:chicken": "foodpower:meals/noodle_soup/noodle_soup_chicken",
                 "minecraft:rabbit": "foodpower:meals/noodle_soup/noodle_soup_rabbit"
             }
+        }, {
+            "type": "vegetable",
+            "textures": {
+                "foodpower:corn": "foodpower:meals/noodle_soup/noodle_soup_corn"
+            }
         }]
 	}
 }
