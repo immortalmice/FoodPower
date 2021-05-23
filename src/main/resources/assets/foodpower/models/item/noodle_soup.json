@@ -19,7 +19,9 @@
         }, {
             "type": "vegetable",
             "textures": {
-                "foodpower:corn": "foodpower:meals/noodle_soup/noodle_soup_corn"
+                "foodpower:corn": "foodpower:meals/noodle_soup/noodle_soup_corn",
+                "minecraft:pumpkin": "foodpower:meals/noodle_soup/noodle_soup_pumpkin",
+                "minecraft:potato": "foodpower:meals/noodle_soup/noodle_soup_potato"
             }
         }]
 	}
