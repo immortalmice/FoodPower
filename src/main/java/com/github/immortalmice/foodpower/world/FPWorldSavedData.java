@@ -18,6 +18,7 @@ import com.github.immortalmice.foodpower.boss.entities.SourBoss;
 import com.github.immortalmice.foodpower.boss.entities.SweetBoss;
 import com.github.immortalmice.foodpower.capability.implement.FPFlavorExpCapability;
 import com.github.immortalmice.foodpower.food.Meal;
+import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 import com.github.immortalmice.foodpower.lists.Bosses;
 import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
@@ -104,7 +105,7 @@ public class FPWorldSavedData extends WorldSavedData {
             }else if(summoned == FlavorTypes.ENDER) {
             	bossEntity = new EnderBoss(Bosses.EntityTypes.ENDER_BOSS, world);
             }
-            if(bossEntity != null) {
+            if(bossEntity != null && ConfigHandler.SERVER.canSummonBoss) {
             	bossEntity.setPosition(entityItem.getPosX(), entityItem.getPosY(), entityItem.getPosZ());
             	world.addEntity(bossEntity);
             }

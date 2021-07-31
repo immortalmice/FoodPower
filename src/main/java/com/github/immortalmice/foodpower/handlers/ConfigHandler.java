@@ -83,6 +83,9 @@ public class ConfigHandler {
 		public IntValue flavorExpBaseValue;
 		public DoubleValue flavorExpFactorValue;
 		
+		public boolean canSummonBoss;
+		public BooleanValue canSummonBossValue;
+		
 		public ServerConfig(ForgeConfigSpec.Builder builder) {
 			builder.push("Capability levels");
 			this.patternExpBaseValue = builder
@@ -108,6 +111,12 @@ public class ConfigHandler {
 				);
 			});
 			builder.pop();
+			
+			builder.push("Other");
+			this.canSummonBossValue = builder
+				.comment("Can player summon bosses.")
+				.define("canSummonBoss", true);
+			builder.pop();
 		}
 		
 		public void bake() {
@@ -122,6 +131,8 @@ public class ConfigHandler {
 			this.flavorExpBase = this.flavorExpBaseValue.get();
 			this.flavorExpFactor = this.flavorExpFactorValue.get();
 			LevelPointConverter.FLAVOR_CONVERTER = new LevelPointConverter(this.flavorExpBase, (float) this.flavorExpFactor);
+			
+			this.canSummonBoss = this.canSummonBossValue.get();
 		}
 	}
 }
