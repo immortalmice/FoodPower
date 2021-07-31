@@ -85,7 +85,7 @@ public class FPWorldSavedData extends WorldSavedData {
 			data.lastWasteTime = time;
 			
 			for(Entry<FlavorType, Integer> entry : data.wasteCounter.entrySet()) {
-				if(entry.getValue() >= 5000) {
+				if(entry.getValue() >= 6000) {
 					summoned = entry.getKey();
 					entry.setValue(0);
 				}
