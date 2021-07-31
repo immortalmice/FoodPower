@@ -10,13 +10,26 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import com.github.immortalmice.foodpower.boss.entities.BitterBoss;
+import com.github.immortalmice.foodpower.boss.entities.EnderBoss;
+import com.github.immortalmice.foodpower.boss.entities.NetherBoss;
+import com.github.immortalmice.foodpower.boss.entities.SaltyBoss;
+import com.github.immortalmice.foodpower.boss.entities.SourBoss;
+import com.github.immortalmice.foodpower.boss.entities.SweetBoss;
+import com.github.immortalmice.foodpower.capability.implement.FPFlavorExpCapability;
 import com.github.immortalmice.foodpower.food.Meal;
+import com.github.immortalmice.foodpower.lists.Bosses;
+import com.github.immortalmice.foodpower.lists.Capabilities;
 import com.github.immortalmice.foodpower.lists.FlavorTypes;
 import com.github.immortalmice.foodpower.types.FlavorType;
 
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
 
 public class FPWorldSavedData extends WorldSavedData {
@@ -39,43 +52,63 @@ public class FPWorldSavedData extends WorldSavedData {
 	}
 	
 	@Nullable
-	public FlavorType triggerWaste(UUID player, long time, ItemStack stack) {
-		// TODO check flavor exp
-		FlavorType summoned = null;
-		Map<String, Integer> exps = Meal.getFlavorExp(stack);
-		Optional<WasteData> optional = this.wasteList.stream().filter(wasteData -> {
-			return wasteData.id.equals(player);
-		}).findFirst();
-		
-		WasteData data = null;
-		if(!optional.isPresent()) {
-			data = new WasteData(player);
-			this.wasteList.add(data);
-		} else {
-			data = optional.get();
-		}
-		
-		if(time - data.lastWasteTime > 200) {
-			data.wasteCounter.clear();
-		}
-		
-		for(Entry<String, Integer> entry : exps.entrySet()) {
-			FlavorType type = FlavorTypes.getFlavorByName(entry.getKey());
-			if(type != null) {
-				Integer value = data.wasteCounter.getOrDefault(type, 0);
-				data.wasteCounter.put(type, entry.getValue() * stack.getCount() + value);
+	public void triggerWaste(ServerPlayerEntity player, ItemEntity entityItem, ItemStack stack) {
+		player.getCapability(Capabilities.FLAVOR_EXP_CAPABILITY, null).ifPresent(cap -> {
+			World world = entityItem.world;
+			long time = world.getGameTime();
+			FlavorType summoned = null;
+			Map<String, Integer> exps = Meal.getFlavorExp(stack);
+			Optional<WasteData> optional = this.wasteList.stream().filter(wasteData -> {
+				return wasteData.id.equals(player.getGameProfile().getId());
+			}).findFirst();
+			
+			WasteData data = null;
+			if(!optional.isPresent()) {
+				data = new WasteData(player.getGameProfile().getId());
+				this.wasteList.add(data);
+			} else {
+				data = optional.get();
 			}
-		}
-		data.lastWasteTime = time;
-		
-		for(Entry<FlavorType, Integer> entry : data.wasteCounter.entrySet()) {
-			if(entry.getValue() >= 5000) {
-				summoned = entry.getKey();
-				entry.setValue(0);
+			
+			if(time - data.lastWasteTime > 200) {
+				data.wasteCounter.clear();
 			}
-		}
-		
-		return summoned;
+			
+			for(Entry<String, Integer> entry : exps.entrySet()) {
+				FlavorType type = FlavorTypes.getFlavorByName(entry.getKey());
+				if(type != null && cap.getExpLevel(type) >= FPFlavorExpCapability.CEIL_LEVEL) {
+					Integer value = data.wasteCounter.getOrDefault(type, 0);
+					data.wasteCounter.put(type, entry.getValue() * stack.getCount() + value);
+				}
+			}
+			data.lastWasteTime = time;
+			
+			for(Entry<FlavorType, Integer> entry : data.wasteCounter.entrySet()) {
+				if(entry.getValue() >= 5000) {
+					summoned = entry.getKey();
+					entry.setValue(0);
+				}
+			}
+			
+			MobEntity bossEntity = null;
+            if(summoned == FlavorTypes.SWEET) {
+            	bossEntity = new SweetBoss(Bosses.EntityTypes.SWEET_BOSS, world);
+            }else if(summoned == FlavorTypes.BITTER){
+            	bossEntity = new BitterBoss(Bosses.EntityTypes.BITTER_BOSS, world);
+            }else if(summoned == FlavorTypes.SOUR) {
+            	bossEntity = new SourBoss(Bosses.EntityTypes.SOUR_BOSS, world);
+            }else if(summoned == FlavorTypes.SALTY) {
+            	bossEntity = new SaltyBoss(Bosses.EntityTypes.SALTY_BOSS, world);
+            }else if(summoned == FlavorTypes.NETHER) {
+            	bossEntity = new NetherBoss(Bosses.EntityTypes.NETHER_BOSS, world);
+            }else if(summoned == FlavorTypes.ENDER) {
+            	bossEntity = new EnderBoss(Bosses.EntityTypes.ENDER_BOSS, world);
+            }
+            if(bossEntity != null) {
+            	bossEntity.setPosition(entityItem.getPosX(), entityItem.getPosY(), entityItem.getPosZ());
+            	world.addEntity(bossEntity);
+            }
+		});
 	}
 	
 	private static class WasteData {
