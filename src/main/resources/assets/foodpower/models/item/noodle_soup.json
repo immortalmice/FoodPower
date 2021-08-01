@@ -30,7 +30,8 @@
                 "minecraft:kelp": "foodpower:meals/noodle_soup/noodle_soup_kelp",
                 "minecraft:brown_mushroom": "foodpower:meals/noodle_soup/noodle_soup_brown_mushroom",
                 "minecraft:red_mushroom": "foodpower:meals/noodle_soup/noodle_soup_red_mushroom",
-                "minecraft:nether_wart": "foodpower:meals/noodle_soup/noodle_soup_nether_wart"
+                "minecraft:nether_wart": "foodpower:meals/noodle_soup/noodle_soup_nether_wart",
+                "foodpower:chili": "foodpower:meals/noodle_soup/noodle_soup_chili"
             }
         }]
 	}
