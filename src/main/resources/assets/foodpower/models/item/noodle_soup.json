@@ -23,7 +23,9 @@
                 "minecraft:pumpkin": "foodpower:meals/noodle_soup/noodle_soup_pumpkin",
                 "minecraft:potato": "foodpower:meals/noodle_soup/noodle_soup_potato",
                 "minecraft:beetroot": "foodpower:meals/noodle_soup/noodle_soup_beetroot",
-                "minecraft:carrot": "foodpower:meals/noodle_soup/noodle_soup_carrot"
+                "minecraft:carrot": "foodpower:meals/noodle_soup/noodle_soup_carrot",
+                "foodpower:spinach": "foodpower:meals/noodle_soup/noodle_soup_spinach",
+                "foodpower:cabbage": "foodpower:meals/noodle_soup/noodle_soup_cabbage"
             }
         }]
 	}
