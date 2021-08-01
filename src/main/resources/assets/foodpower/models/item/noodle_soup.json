@@ -27,7 +27,8 @@
                 "foodpower:spinach": "foodpower:meals/noodle_soup/noodle_soup_spinach",
                 "foodpower:cabbage": "foodpower:meals/noodle_soup/noodle_soup_cabbage",
                 "foodpower:tomato": "foodpower:meals/noodle_soup/noodle_soup_tomato",
-                "minecraft:kelp": "foodpower:meals/noodle_soup/noodle_soup_kelp"
+                "minecraft:kelp": "foodpower:meals/noodle_soup/noodle_soup_kelp",
+                "minecraft:brown_mushroom": "foodpower:meals/noodle_soup/noodle_soup_brown_mushroom"
             }
         }]
 	}
