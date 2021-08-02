@@ -51,7 +51,7 @@ public class RecipeScroll extends ItemBase{
     public static final String NBT_KEY_RECIPE = "recipe";
 
 	public RecipeScroll(){
-		super(new Item.Properties().maxStackSize(1));
+		super(new Item.Properties());
 
         this.addPropertyOverride(new ResourceLocation(FoodPower.MODID, "scroll_property"), RecipeScroll.RARITY_GETTER);
 	}
