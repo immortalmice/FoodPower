@@ -111,7 +111,9 @@ public class RecipeScroll extends ItemBase{
         if(stack.hasTag()){
             nbt = stack.getTag();
         }
-        nbt.put(NBT_KEY_RECIPE, recipe.write());
+        if(recipe != null) {
+        	nbt.put(NBT_KEY_RECIPE, recipe.write());
+        }
         stack.setTag(nbt);
     }
 
