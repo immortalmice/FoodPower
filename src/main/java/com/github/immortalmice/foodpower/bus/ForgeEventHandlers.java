@@ -98,6 +98,8 @@ import com.github.immortalmice.foodpower.lists.FlavorTypes;
 import com.github.immortalmice.foodpower.types.FlavorType;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.OtherBlocks;
+import com.github.immortalmice.foodpower.lists.OtherItems;
+import com.github.immortalmice.foodpower.specialclass.RecipeScroll;
 
 
 public class ForgeEventHandlers{
@@ -331,21 +333,46 @@ public class ForgeEventHandlers{
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onItemCrafted(ItemCraftedEvent event){
 		PlayerEntity player = event.getPlayer();
-		if(!player.world.isRemote && player.isPotionActive(FoodEffects.COCOA_BEANS_POWER)){
-			int level = player.getActivePotionEffect(FoodEffects.COCOA_BEANS_POWER).getAmplifier();
-			float probability = player.world.rand.nextFloat();
+		if(!player.world.isRemote) {
 			IInventory inventory = event.getInventory();
-			for(int i = 0; i <= inventory.getSizeInventory()-1; i ++){
-				ItemStack stack = inventory.getStackInSlot(i);
-				if(stack.getItem() == Items.BROWN_DYE){
-					if((level == 0 && probability <= 0.1)
-						|| (level == 1 && probability <= 0.3)
-						|| (level >= 2 && probability <= 0.6)){
+			if(player.isPotionActive(FoodEffects.COCOA_BEANS_POWER)){
+				int level = player.getActivePotionEffect(FoodEffects.COCOA_BEANS_POWER).getAmplifier();
+				float probability = player.world.rand.nextFloat();
+				for(int i = 0; i <= inventory.getSizeInventory()-1; i ++){
+					ItemStack stack = inventory.getStackInSlot(i);
+					if(stack.getItem() == Items.BROWN_DYE){
+						if((level == 0 && probability <= 0.1)
+							|| (level == 1 && probability <= 0.3)
+							|| (level >= 2 && probability <= 0.6)){
 
-						player.inventory.placeItemBackInInventory(player.world, new ItemStack(Items.BROWN_DYE));
-						player.openContainer.detectAndSendChanges();
-						break;
+							player.inventory.placeItemBackInInventory(player.world, new ItemStack(Items.BROWN_DYE));
+							player.openContainer.detectAndSendChanges();
+							break;
+						}
 					}
+				}
+			}
+			if(event.getCrafting().getItem() == OtherItems.Items.RECIPE_SCROLL) {
+				boolean hasScroll = false;
+				boolean hasBook = false;
+				ItemStack scroll = null;
+				for(int i = 0; i <= inventory.getSizeInventory()-1; i ++) {
+					ItemStack stack = inventory.getStackInSlot(i);
+					if(stack.getItem() == OtherItems.Items.RECIPE_SCROLL) {
+						hasScroll = true;
+						scroll = stack;
+					}
+					if(stack.getItem() == Items.WRITABLE_BOOK)
+						hasBook = true;
+				}
+				if(hasScroll && hasBook) {
+					CompoundNBT nbt = new CompoundNBT();
+			        if(scroll.hasTag()){
+			            nbt = scroll.getTag();
+			        }
+			        CompoundNBT recipe = RecipeScroll.getRecipeTag(scroll).copy();
+			        nbt.put(RecipeScroll.NBT_KEY_RECIPE, recipe);
+			        event.getCrafting().setTag(nbt);
 				}
 			}
 		}

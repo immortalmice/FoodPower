@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "foopower:other",
+    "result": {
+        "item": "foodpower:recipe_scroll",
+        "count": 2
+    },
+    "ingredients": [
+        {"item": "foodpower:recipe_scroll"},
+        {"item": "minecraft:writable_book"}
+    ]
+}
