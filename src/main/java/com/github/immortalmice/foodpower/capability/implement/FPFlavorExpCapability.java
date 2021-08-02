@@ -19,7 +19,6 @@ import com.github.immortalmice.foodpower.util.LevelPointConverter;
 
 public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 	private Map<FlavorType, Integer> flavorExp = new HashMap<>();
-	private boolean dirty = true;
 
 	public static final int MAX_LEVEL = 99;
 	public static final int CEIL_LEVEL = 95;
@@ -56,8 +55,6 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 		if(level < FPFlavorExpCapability.MIN_LEVEL) level = FPFlavorExpCapability.MIN_LEVEL;
 
 		this.flavorExp.put(flavor, LevelPointConverter.FLAVOR_CONVERTER.levelToPoint(level, 0));
-		
-		this.markDirty(true);
 	}
 
 	@Override
@@ -76,19 +73,10 @@ public class FPFlavorExpCapability implements IFPFlavorExpCapability{
 
 		if(LevelPointConverter.FLAVOR_CONVERTER.pointToLevel(this.flavorExp.get(flavorIn)) <= FPFlavorExpCapability.MIN_LEVEL)
 			this.setExpLevel(flavorIn, FPFlavorExpCapability.MIN_LEVEL);
-
-		this.markDirty(true);
 		
 		return this.flavorExp.get(flavorIn) - oldPoint;
 	}
-	
-	public void markDirty(boolean dirtyIn) {
-		this.dirty = dirtyIn;
-	}
-	
-	public boolean isDirty() {
-		return this.dirty;
-	}
+
 
 	public static class Provider implements ICapabilitySerializable<CompoundNBT>{
 		private LazyOptional<IFPFlavorExpCapability> instance = LazyOptional.of(Capabilities.FLAVOR_EXP_CAPABILITY::getDefaultInstance);

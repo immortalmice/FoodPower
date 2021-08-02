@@ -49,7 +49,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
@@ -59,7 +58,6 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
-import net.minecraftforge.event.entity.living.PotionEvent.PotionRemoveEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
@@ -73,18 +71,13 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.github.immortalmice.foodpower.FoodPower;
 import com.github.immortalmice.foodpower.capability.implement.FPFlavorExpCapability;
 import com.github.immortalmice.foodpower.capability.implement.FPPatternExpCapability;
-import com.github.immortalmice.foodpower.capability.interfaces.IFPFlavorExpCapability;
-import com.github.immortalmice.foodpower.effect.FlavorEffect;
 import com.github.immortalmice.foodpower.food.Ingredient;
 import com.github.immortalmice.foodpower.food.Meal;
 import com.github.immortalmice.foodpower.handlers.CapabilityHandler;
@@ -92,10 +85,7 @@ import com.github.immortalmice.foodpower.handlers.CommandHandler;
 import com.github.immortalmice.foodpower.handlers.ConfigHandler;
 import com.github.immortalmice.foodpower.handlers.LootTableHandler;
 import com.github.immortalmice.foodpower.lists.Capabilities;
-import com.github.immortalmice.foodpower.lists.Effects.FlavorEffects;
 import com.github.immortalmice.foodpower.lists.Effects.FoodEffects;
-import com.github.immortalmice.foodpower.lists.FlavorTypes;
-import com.github.immortalmice.foodpower.types.FlavorType;
 import com.github.immortalmice.foodpower.lists.Ingredients;
 import com.github.immortalmice.foodpower.lists.OtherBlocks;
 import com.github.immortalmice.foodpower.lists.OtherItems;
@@ -218,65 +208,6 @@ public class ForgeEventHandlers{
 					player.addItemStackToInventory(new ItemStack(com.github.immortalmice.foodpower.lists.Ingredients.Items.OIL));
 				}
 			}
-			
-			LazyOptional<IFPFlavorExpCapability> optional = player.getCapability(Capabilities.FLAVOR_EXP_CAPABILITY);
-			optional.ifPresent(cap -> {
-				if(!cap.isDirty()) return;
-				
-				Collection<EffectInstance> effects = player.getActivePotionEffects();
-				List<Effect> removes = new ArrayList<>();
-				effects.forEach(instance -> {
-					Effect effect = instance.getPotion();
-					if(effect instanceof FlavorEffect) {
-						removes.add(effect);
-					}
-				});
-				removes.forEach(effect -> {
-					player.removeActivePotionEffect(effect);
-				});
-				
-				Map<FlavorType, Integer> map = cap.getAllExpLevel();
-				map.entrySet().forEach(entry -> {
-					FlavorType flavor = entry.getKey();
-					int level = entry.getValue();
-					if(level > map.get(flavor.getOppositeFlavor())) {
-						int amplifier;
-						if(level >= 99) {
-							amplifier = 5;
-						}else if(level >= 90) {
-							amplifier = 4;
-						}else if(level >= 75) {
-							amplifier = 3;
-						}else if(level >= 50) {
-							amplifier = 2;
-						}else if(level >= 25) {
-							amplifier = 1;
-						}else{
-							amplifier = 0;
-						}
-						
-						EffectInstance instance = null;
-						if(flavor == FlavorTypes.SWEET) {
-							instance = new EffectInstance(FlavorEffects.SWEET_EFFECT, 999999999, amplifier);
-						}else if(flavor == FlavorTypes.BITTER) {
-							instance = new EffectInstance(FlavorEffects.BITTER_EFFECT, 999999999, amplifier);
-						}else if(flavor == FlavorTypes.SOUR) {
-							instance = new EffectInstance(FlavorEffects.SOUR_EFFECT, 999999999, amplifier);
-						}else if(flavor == FlavorTypes.SALTY) {
-							instance = new EffectInstance(FlavorEffects.SALTY_EFFECT, 999999999, amplifier);
-						}else if(flavor == FlavorTypes.NETHER) {
-							instance = new EffectInstance(FlavorEffects.NETHER_EFFECT, 999999999, amplifier);
-						}else if(flavor == FlavorTypes.ENDER) {
-							instance = new EffectInstance(FlavorEffects.ENDER_EFFECT, 999999999, amplifier);
-						}
-						
-						if(instance != null) {
-							player.addPotionEffect(instance);
-						}
-					}
-					cap.markDirty(false);
-				});
-			});
 		}
 	}
 	
@@ -658,13 +589,6 @@ public class ForgeEventHandlers{
 				
 				event.setResult(Result.DENY);
 			}
-		}
-	}
-	
-	@SubscribeEvent
-	public static void onPotionRemove(PotionRemoveEvent event) {
-		if(event.getPotion() instanceof FlavorEffect) {
-			((FlavorEffect)event.getPotion()).onRemoveEffect(event.getEntity(), event.getPotionEffect().getAmplifier());
 		}
 	}
 	
